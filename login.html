@@ -22,17 +22,17 @@
     </header>
     <div id="container">
         <div id="content">
-
+   
             <div id="input-box">
                 <input type="text" id="username" placeholder="아이디를 입력해 주세요.">
                 <input type="password" id="password" placeholder="비밀번호를 입력해 주세요.">
 
             <div class="alert alert-danger" style="font-size:15px" id="alert-danger"></div>
             <div id="buttons">
-                <button class="button login">회원가입</button>
+                <button class="button login" onclick="Login()">로그인</button>
                 <div id="find">
-                    <button>아이디 찾기</button>
-                    <button>비밀번호 찾기</button>
+                    <button onclick="to_find_username()">아이디 찾기</button>
+                    <button onclick="to_find_password()">비밀번호 찾기</button>
                 </div>
                 <a class="button kakao" onclick="kakaoLogin()"><img src="./images/icon/kakao_log.svg">카카오</a>
             </div>
