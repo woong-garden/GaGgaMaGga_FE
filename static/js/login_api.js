@@ -77,3 +77,14 @@ async function kakaoLoginApi(kakaoUserData) {
         alert(response_json['error'])
 }}
 
+function to_signup(){
+    location.href = "signup.html"
+}
+
+function to_find_username(){
+    location.href = "find_username.html"
+}
+
+function to_find_password(){
+    location.href = "find_password.html"
+}
