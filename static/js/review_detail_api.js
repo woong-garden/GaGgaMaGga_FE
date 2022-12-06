@@ -24,7 +24,7 @@ async function postComment() {
     // 후에 만들어질 html에서 덧글 등록 input 태그의 class가 .input_comment라고 가정하고 만들었습니다.
     const review_id = 1 // 마찬가지로 추후 연동시켜야 합니다.
     console.log(content)
-  
+
     await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/`, {
         headers:{
             'content-type':'application/json',
@@ -36,4 +36,4 @@ async function postComment() {
         })
     })
     alert("덧글 등록")
-  }
+}

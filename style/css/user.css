@@ -64,6 +64,11 @@ body{
     margin:0 0 0 6%;
 }
 
+#input-box h5{
+    text-align: left;
+    margin:0 0 0 6%;
+}
+
 #input-box input{
     width:90%;
     height : 7vh;
