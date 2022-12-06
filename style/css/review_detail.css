@@ -1,0 +1,243 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif; /*폰트*/
+}
+html{
+    overflow: hidden;
+}
+
+body{
+    position: relative;
+    background-color: #FFFAE7;
+    margin:auto;
+}
+
+.root {
+position:relative;
+/* height: 93vh; */
+height: 100vh;
+width: 100%;
+left:50%;
+background-color:white;
+transform: translate(-50%, 0%);
+overflow: auto;
+box-shadow: 0 0 20px rgb(0 0 0 / 5%);
+}
+
+/*스크롤 스타일*/
+.root::-webkit-scrollbar {
+    width: 4px;
+}
+.root::-webkit-scrollbar-thumb {
+    background-color: rgb(131, 131, 131);
+    border-radius: 10px;
+}
+.root::-webkit-scrollbar-track {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+
+
+
+.header{ 
+    width: 100%;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index: 1;
+}
+
+.header > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+    background-color: transparent;
+    padding: 0px 14px 0px 2px;
+    box-sizing: border-box;
+}
+.header > div > div {
+    cursor: pointer;
+}
+
+.header-logo{
+    margin-right: 10px;
+}
+.header > div > form {
+    position:relative; 
+    flex:1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 18px;
+    background-color: rgb(239, 239, 239);
+}
+.header > div > form > input {
+    background: transparent; 
+    height: 30px;
+    border:none;
+    outline: none;
+    width: 100%;
+    padding-top: 3px;
+}
+
+/*메인시작*/
+/* 브라우저 마진과 패딩 리셋 */
+* {margin:0;padding:0;}
+
+/* INPUT 가리기 */
+.section [id*="slide"] {display:none;}
+
+/* 슬라이드 영역 - max-width 크기를 조절해주면 됩니다*/
+.section .slidewrap {max-width:1200px; max-height:260px; margin:0 auto;overflow:hidden;position:relative;}
+.section .slidelist {white-space:nowrap;font-size:0;}
+.section .slidelist > li {display:inline-block;vertical-align:top;width:100%;transition:all .5s;}
+.section .slidelist > li > a {display:block;position:relative;}
+
+/* 좌우로 넘기는 LABEL버튼에 대한 스타일 */
+.section .slide-control {position:absolute;top:0;left:0;z-index:10;width:100%;height:100%;}
+.section .slide-control label {position:absolute;z-index:1;top:50%;transform:translateY(-50%);padding:50px;cursor:pointer;}
+.section .slide-control .left {left:-20px;background:url('/images/icon/left.png') center center / 50% no-repeat;}
+.section .slide-control .right {right:-20px;background:url('/images/icon/right.png') center center / 50% no-repeat;}
+.section .slide-control [class*="control"] {display:none;}
+
+/* INPUT이 체크되면 변화값이 li까지 전달되는 스타일 */
+.section [id="slide01"]:checked ~ .slidewrap .slidelist > li {transform:translateX(0%);}
+.section [id="slide02"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-100%);}
+.section [id="slide03"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-200%);}
+
+/*  INPUT이 체크되면 변화값이 좌우 슬라이드 버튼을 담고 있는 div 까지 전달되는 스타일 */
+.section [id="slide01"]:checked ~ .slidewrap .control01 {display:block;}
+.section [id="slide02"]:checked ~ .slidewrap .control02 {display:block;}
+.section [id="slide03"]:checked ~ .slidewrap .control03 {display:block;}
+    
+
+.review-detail-box{
+    padding: 0 20px; 
+    margin-top: 20px;
+}
+.review-detail-box > :first-child {
+    font-size: 14px
+}
+.review-detail-box > :nth-child(2) {
+    padding-top:10px; display: flex; 
+    justify-content: space-between;
+}
+
+.comment-wrap{
+    display:flex; 
+    padding: 0 20px; 
+    justify-content: space-between; 
+    padding-top:12px;
+}
+.comment-cnt{
+    text-align:right; 
+    padding: 0 20px; 
+    margin-top: 5px; 
+    font-size: 12px; 
+    align-items: flex-start;
+}
+.comment-box{
+    display: flex;
+}
+.comment-user-img{
+    width:40px; 
+    height:40px; 
+    border-radius: 20px;;
+}
+.comment-user-name{
+    font-size:12px; 
+    font-weight: 700;
+}
+.comment-user-comment{
+    font-size:12px;
+}
+.comment-heart-style{
+    cursor:pointer; 
+    margin-left:20px;
+}
+summary{
+    font-size:10px; 
+    border:none; 
+    background-color: transparent; 
+    cursor:pointer; 
+    color:gray;
+}
+summary::marker {
+display: none;
+content: "";
+}
+.comment-2{
+    display:flex; 
+    justify-content: space-between;
+}
+.comment-2 > input {
+    border:none;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    width:100%;
+    border-bottom-width: 1px;outline:none;
+}
+.comment-2 > button {
+    border-radius: 20px;
+    min-width: 50px;
+    height: 24px;
+    border: none;
+    color: #fff;
+    background: #c8c8c8;
+}
+
+.nav-wrap{
+    position: fixed;
+    /* height: 7vh; */
+    width:100%;
+    bottom: 0;
+    left: 0;
+}
+.nav-bar{
+    background-color: white;
+    height: 48px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 20px rgb(0 0 0 / 5%);
+    border-top: 1px solid #e8e8e8;
+
+}
+.nav-bar > form{
+    width: 100%;
+}
+.nav-input-wrap{
+    display:flex; 
+    align-items: center;
+    padding:20px;
+}
+.nav-input-wrap > input{
+    width: 100%; 
+    border:none; 
+    outline:none;
+}
+.nav-input-wrap > button{
+    background: #c8c8c8; 
+    border-radius: 32px; 
+    text-align: center; 
+    color: #fff;
+    min-width: 80px;
+    height: 32px; 
+    border:none; 
+    cursor: pointer;
+}
+
+@media (min-width: 768px) { /*반응형*/
+    .root {
+        width: 400px;
+    }
+    .nav-wrap > div {
+        max-width: 400px;
+        margin:0 auto;
+    }
+    .header > div {
+        max-width: 400px;
+        margin:0 auto;
+    }
+}
