@@ -37,69 +37,54 @@ async function Login() {
         alert_danger.innerText = "아이디와 비밀번호를 확인해주세요"
     }}
 
-Kakao.init("f53d03593266672440d8e9324c61e5ff");
-function kakaoLogin() {
-    window.Kakao.Auth.login({
-        scope: 'profile_nickname, account_email, profile_image',
-        success: function (authObj) {
-            window.Kakao.API.request({
-                url: '/v2/user/me',
-                success: res => {
-                    kakaoAccount = res.kakao_account;
-                    kakaoUserData = {
-                        'email': kakaoAccount['email'],
-                        'nickname': kakaoAccount['profile']['nickname'],
-                        'profile_image':kakaoAccount['profile']['profile_image_url'],
-                    }
-                    console.log(kakaoUserData)
-                    kakaoLoginApi(kakaoUserData)
-                }
-            });
-        }
-    });
+
+function kakao_login_code(){
+    const kakao_id ='d7803b6c144bfb2dc3ce3e1dc7028d8a'
+    const redirect_uri = 'http://127.0.0.1:5500/login.html'
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao_id}&redirect_uri=${redirect_uri}&response_type=code`
+    const kakao_code = location.href.split('=')[1]
+    kakaoLoginApi(kakao_code)
 }
 
-// 소셜 유저 회원가입위해 카카오 유저 정보(이메일, 닉네임) 백엔드로 보내주기
 async function kakaoLoginApi(kakaoUserData) {
-
-    const response = await fetch(`${backEndBaseUrl}/users/kakao/kakao/`, {
+    console.log(kakaoUserData)
+    const response = await fetch(`http://127.0.0.1:8000/users/kakao/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken,
         },
-        body: JSON.stringify(kakaoUserData),
-    }
-    )
+        body: JSON.stringify({"code":kakaoUserData}),
+    })
     response_json = await response.json()
+    console.log(response_json)
 
-    if (response.status == 200) {
-        setLocalStorageItems()
-        window.location.reload()
+    if (response.status === 200) {
+        localStorage.setItem("access", response_json.access); 
+        localStorage.setItem("refresh", response_json.refresh);
 
-    }
+        const base64Url = response_json.access.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(
+            atob(base64).split('').map(function (c) {
+                return '%' + (
+                    '00' + c.charCodeAt(0).toString(16)
+                ).slice(-2);
+            }).join('')
+        );
+        localStorage.setItem("payload", jsonPayload);
+        location.replace('index.html')
+    }else {
+        alert(response_json['error'])
+}}
+
+function to_signup(){
+    location.href = "signup.html"
 }
 
+function to_find_username(){
+    location.href = "find_username.html"
+}
 
-// const callKakaoLoginHandler = () => {
-//         router.push({
-//         pathname: "https://kauth.kakao.com/oauth/authorize",
-//         query: {
-//             "response_type": "code",
-//             "client_id": "f53d03593266672440d8e9324c61e5ff",
-//             "redirect_uri": "http://localhost:5000/callback/kakao"
-//         }
-//         })
-//     }
-// Kakao.init("f53d03593266672440d8e9324c61e5ff")
-
-// function loginWithKakao() {
-//     Kakao.Auth.login({
-//     success: function(authObj) {
-//         alert(JSON.stringify(authObj))
-//     },
-//     fail: function(err) {
-//         alert(JSON.stringify(err))
-//     },
-//     })
-// }
+function to_find_password(){
+    location.href = "find_password.html"
+}
