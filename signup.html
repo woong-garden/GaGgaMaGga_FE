@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 페이지</title>
+    <title>회원가입 페이지</title>
     <link rel="stylesheet" href="style/css/login.css">
 </head>
 
@@ -19,12 +19,18 @@
     <div id="container">
         <div id="content">
         <div id="input-box">
-        <input type="text" id="username" placeholder="아이디를 입력해 주세요.">
-        <input type="password" id="password" placeholder="비밀번호를 입력해 주세요.">
+        <h4>아이디</h4>
+        <input type="text" id="username" placeholder="아이디를 입력">
+        <h4>비밀번호</h4>
+        <input type="password" id="password" placeholder="비밀번호 입력">
+        <input type="password" id="repassword" placeholder="비밀번호 확인">
+        <h4>닉네임</h4>
+        <input type="text" id="nickname" placeholder="닉네임 입력">
+        <h4>휴대폰 번호</h4>
+        <input type="text" id="phone_number" placeholder="휴대폰 번호 입력">
         <div class="alert alert-danger" style="font-size:15px" id="alert-danger"></div>
         <div id="buttons">
-            <button class="button login">회원가입</button>
-            <a class="button kakao" onclick="kakaoLogin()"><img src="./images/icon/kakao_log.svg">카카오</a>
+            <button class="button login" onclick="Login()">로그인</button>
         </div></div>
     </div>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
