@@ -1,42 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/css/user.css">
     <title>회원가입 페이지</title>
-    <link rel="stylesheet" href="style/css/login.css">
+    
+    <style>
+    html{
+        overflow: hidden;
+    }
+
+    body{
+        position: relative;
+        background-color: rgb(232, 225, 216);
+        margin:auto;
+    }
+    
+    .root {
+    position:relative;
+    height: 100vh;
+    width: 100%;
+    left:50%;
+    background-color: rgb(248, 243, 235);
+    transform: translate(-50%, 0%);
+    overflow: auto;
+    border: solid 1px rgba(219, 219, 219, 1);
+    }
+    .root_block{
+        margin-top:48px;
+    }
+
+    .header{ 
+        width: 100%;
+        position:fixed;
+        top:0;
+        left:0;
+        z-index: 1;
+    }
+    .header > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 48px;
+        background-color: rgb(248, 243, 235);
+        padding: 0px 14px 0px 2px;
+        box-sizing: border-box;
+    }
+    .header > div > div {
+        cursor: pointer;
+    }
+    .header-logo{
+        margin-right: 10px;
+    }
+    .header > div > form {
+        position:relative; 
+        flex:1;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border-radius: 18px;
+        background-color: rgb(239, 239, 239);
+    }
+    .header > div > form > input {
+        background: transparent; 
+        height: 30px;
+        border:none;
+        outline: none;
+        width: 100%;
+        padding-top: 3px;
+    }
+
+    .nav-wrap{
+        position: fixed;
+        width:100%;
+        bottom: 0;
+        left: 0;
+    }
+    .nav-bar{
+        background-color: #FDA171;
+        height: 48px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+    }
+    .nav-bar > a {
+        flex:1;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    @media (min-width: 768px) { /*반응형*/
+        .root {
+            width: 400px;
+        }
+        .nav-wrap > div {
+            max-width: 400px;
+            margin:0 auto;
+        }
+        .header > div {
+            max-width: 400px;
+            margin:0 auto;
+        }
+        .test {
+            margin-top: 48px;
+        }
+    }
+    </style>
+
 </head>
-
 <body>
-    <header id="top-bar">
+    <!--헤더 시작-->
+    <div class="header">
         <div>
-                <img id="back" src="https://cdn-icons-png.flaticon.com/512/545/545680.png">
-        </div>
-        <h2>회원가입</h2>
-        <div> </div>
-    </header>
-    <div id="container">
-        <div id="content">
-            <div id="input-box">
-                <h4>아이디</h4>
-                <input type="text" id="username" placeholder="아이디를 입력">
-                <h4>비밀번호</h4>
-                <input type="password" id="password" placeholder="비밀번호 입력">
-                <input type="password" id="repassword" placeholder="비밀번호 확인">
-                <h4>닉네임</h4>
-                <input type="text" id="nickname" placeholder="닉네임 입력">
-                <h4>휴대폰 번호</h4>
-                <input type="text" id="phone_number" placeholder="휴대폰 번호 입력">
-                <div class="alert alert-danger" style="font-size:15px" id="alert-danger"></div>
-                <div id="buttons">
-                    <button class="button login">회원가입</button>
-                </div>
+            <div>
+                <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
             </div>
-        </div>
-        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-        <script src="static/js/base_api.js"></script>
-</body>
+                <div>
+                    <h3>회원가입</h3>
+                </div>
+            <div> 
+            </div> 
+        </div>          
+    </div>
+    <!--헤더 끝-->
 
+    <!--메인 시작-->
+    <div class="root">
+        <div class="root_block"></div>
+        <div id="input-box">
+            <h5>아이디</h5>
+            <input type="text" id="username" placeholder="6자이상 20자이하의 영문 대/소문자, 숫자">
+
+            <h5>이메일</h5>
+            <input type="email" id="email" placeholder="이메일를 입력해주세요.">
+
+            <h5>비밀번호</h5>
+            <input type="password" id="password" placeholder="8자이상 16이하의 영문 대/소문자, 숫자, 특수문자">
+            <input type="password" id="repassword" placeholder="비밀번호 재확인을 입력해주세요">
+
+            <h5>휴대폰 번호 (선택사항)</h5>
+            <input type="tel" id="phone_number" placeholder="휴대폰 번호 입력해주세요">
+            
+            <input type="checkbox" id="term_check">
+            <div class="alert alert-danger" style="font-size:15px" id="alert-danger"></div>
+
+            <div id="buttons">
+                <button onclick="Sign_Up()" class="button login">회원가입</button>
+            </div>
+            <a  onclick="to_login()" style="color: rgb(149, 145, 140);">이미 회원이신가요? <strong style="color:black;">로그인</strong><img src="./images/icon/small_arrow.svg"></a>
+        </div>
+    </div>
+    <!--메인 끝-->  
+    <script src="static/js/base_api.js"></script>
+    <script src="static/js/signup_api.js"></script>
+</body>
 </html>

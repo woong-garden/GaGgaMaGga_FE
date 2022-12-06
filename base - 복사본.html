@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/css/user.css">
-    <title>비밀번호 찾기</title>
+    <title>아이디 찾기</title>
     
     <style>
     html{
@@ -116,9 +116,9 @@
         <div>
             <div>
                 <a><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
-            </div>
+            </div> 
             <div>
-                <h3>비밀번호 찾기</h3>
+                <h3>아이디 찾기</h3>
             </div>
             <div> 
             </div> 
@@ -129,22 +129,25 @@
     <!--메인 시작-->
     <div class="root">
         <div class="root_block"></div>
-        <!--여기사용하시면 됩니다~-->
         <div id="input-box">
-            <input type="email" id="username" placeholder="이메일을 입력해 주세요.">
+            <div id="authentication">
+                <input type="text" id="username" placeholder="전화번호를 입력해 주세요.">
+                <button class="button">인증번호 발송</button>
+            </div>
+            <input type="password" id="password" placeholder="인증번호를 입력해 주세요.">
 
             <div class="alert alert-danger" style="font-size:15px" id="alert-danger"></div>
             <div id="buttons">
-                <button class="button login">이메일 발송하기</button>
+                <button class="button login">아이디 찾기</button>
                 <div id="find">
                     <a style="font-size:15px;" onclick="to_signup()">회원가입하러 가기<img src="./images/icon/small_arrow.svg"></a>
                     <a style="font-size:15px;" onclick="to_login()">로그인하러 가기<img src="./images/icon/small_arrow.svg"></a>
                 </div>
             </div>
-        </div>
+            </div>
+        
+        
     </div>
     <!--메인 끝-->  
-    <script src="static/js/base_api.js"></script>
-    <script src="static/js/find_password_api.js"></script>
 </body>
 </html>
