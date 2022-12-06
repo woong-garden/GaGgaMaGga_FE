@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 페이지</title>
+    <title>아이디 찾기 페이지</title>
     <link rel="stylesheet" href="style/css/login.css">
 </head>
 
@@ -14,23 +14,25 @@
         <div>
             <img id="back" src="https://cdn-icons-png.flaticon.com/512/545/545680.png">
         </div>
-        <h2>로그인</h2>
+        <h2>아이디 찾기</h2>
         <div> </div>
     </header>
     <div id="container">
         <div id="content">
             <div id="input-box">
-                <input type="text" id="username" placeholder="아이디를 입력해 주세요.">
-                <input type="password" id="password" placeholder="비밀번호를 입력해 주세요.">
+                <div id="authentication">
+                    <input type="text" id="username" placeholder="전화번호를 입력해 주세요.">
+                    <button class="button">인증번호 발송</button>
+                </div>
+                <input type="password" id="password" placeholder="인증번호를 입력해 주세요.">
 
                 <div class="alert alert-danger" style="font-size:15px" id="alert-danger"></div>
                 <div id="buttons">
-                    <button class="button login">회원가입</button>
+                    <button class="button login">아이디 찾기</button>
                     <div id="find">
-                        <button>아이디 찾기</button>
-                        <button>비밀번호 찾기</button>
+                        <button>회원가입하러 가기</button>
+                        <button>로그인하러 가기</button>
                     </div>
-                    <a class="button kakao" onclick="kakaoLogin()"><img src="./images/icon/kakao_log.svg">카카오</a>
                 </div>
                 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
                 <script src="static/js/base_api.js"></script>

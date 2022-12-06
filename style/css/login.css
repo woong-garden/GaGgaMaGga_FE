@@ -84,7 +84,7 @@ body{
     margin-top : 10px;
 }
 
-.login{
+.button{
     width : 90%;
     height: 7vh;
     margin: 20px auto;
@@ -121,11 +121,18 @@ body{
     margin : auto;
 }
 
-.google{
+#find{
+    display: flex;
+    justify-content: space-between;
+    width : 90%;
+    margin : auto;
+}
+
+#find button{
     width : 48%;
-    height: 9vh;
-    background: white;
-    border-color: white;
+    height: 7vh;
+    background:  rgb(255, 155, 37);
+    border-color:  rgb(255, 155, 37);
     color: black;
     border-radius: 25px;
     border-style: solid;
@@ -136,6 +143,8 @@ body{
     outline: none;
     padding: 0;
     cursor: pointer;
+    margin : 0 0 20px 0;
+    color:white;
 }
 
 @media (max-width: 768px) { /*반응형*/
@@ -152,4 +161,20 @@ body{
     color: #FF7878;
     background-color: rgb(248, 243, 235);
     display: none;
+}
+
+#authentication{
+    display: flex;
+    margin : auto;
+    justify-content: space-between;
+    width : 90%;
+}
+
+#authentication input{
+    width : 68%;
+    margin: auto;
+}
+
+#authentication button{
+    width : 28%;
 }
