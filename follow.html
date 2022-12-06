@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!--css-->
+    <link rel="stylesheet" href="./style/css/follow.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <title>Follow</title>
+
+</head>
+<body>
+    <!--헤더 시작-->
+    <div class="header">
+        <div>
+            <div>
+                <a><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
+            </div> 
+            <div> 
+                <a><img style="margin-left:8px;" src="/images/icon/bell.svg"></a>
+            </div> 
+        </div>          
+    </div>
+    <!--헤더 끝-->
+
+    <!--메인 시작-->
+    <div class="root">
+        <div class="root_block"></div>
+        <!--여기사용하시면 됩니다~-->
+        <div>
+            <div style="text-align:center; margin: 50px 7px 10px 0">NICKNAME</div>
+            <div class="div-follow">
+                <button class="btn-follow" onclick="followershow()">팔로워</button>
+                <button class="btn-follow" onclick="followingshow()">팔로잉</button>
+            </div>
+        </div>
+
+        <!-- followers -->
+        <div id='follower' style="display: block;">
+            <div class="profile">
+                <div class = "img">
+                    <img id="porfile-img" src ="/images/default_profile_pic.jpg" alt="프로필 사진" >
+                </div>
+                <div style="width: 77%;">
+                    <a>follower NICKNAME</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- following -->
+        <div id='following' style="display: none;">
+            <div class="profile">
+                <div class = "img">
+                    <img id="porfile-img" src ="/images/default_profile_pic.jpg" alt="프로필 사진" >
+                </div>
+                <div style="width: 77%;">
+                    <a>following NICKNAME</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!--메인 끝-->  
+
+    <!--네비바-->
+    <div class="nav-wrap"> 
+        <div>     
+            <nav class="nav-bar">
+                <a><img src="/images/icon/home.svg"></a>
+                <a><img src="/images/icon/nav_search.svg"></a>
+                <a><img src="/images/icon/bookmark.svg"></a>
+                <a><img style="width:35px; height: 38px;" src="/images/icon/heart.svg"></a>
+                <a><img src="/images/icon/profile.svg"></a>
+            </nav>
+        </div>  
+    </div>
+    <!--네비바 끝-->
+    <script>
+        function followershow(){
+            $('#follower').show();
+            $('#following').hide();
+        }
+        function followingshow(){
+            $('#follower').hide();
+            $('#following').show();
+        }
+    </script>
+</body>
+</html>
