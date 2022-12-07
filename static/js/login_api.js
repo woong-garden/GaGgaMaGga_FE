@@ -21,7 +21,6 @@ async function Login() {
     )
     const response_json = await response.json()
     
-    console.log(response_json)
     if (response.status === 200) {
         localStorage.setItem("access", response_json.access); 
         localStorage.setItem("refresh", response_json.refresh);
