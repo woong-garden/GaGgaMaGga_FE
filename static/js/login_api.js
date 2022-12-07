@@ -21,6 +21,7 @@ async function Login() {
     )
     const response_json = await response.json()
     
+    console.log(response_json)
     if (response.status === 200) {
         localStorage.setItem("access", response_json.access); 
         localStorage.setItem("refresh", response_json.refresh);
@@ -36,7 +37,12 @@ async function Login() {
         );
         localStorage.setItem("payload", jsonPayload);
         location.replace('index.html')
-    } else {
+    } else if(response_json['non_field_errors']){
+        document.getElementById('alert-danger').style.display ="block"
+        const alert_danger = document.getElementById('alert-danger')
+        alert_danger.innerText = `${response_json['non_field_errors']}`
+    }
+    else {
         document.getElementById('alert-danger').style.display ="block"
         const alert_danger = document.getElementById('alert-danger')
         alert_danger.innerText = "아이디와 비밀번호를 확인해주세요"
