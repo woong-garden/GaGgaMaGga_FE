@@ -1,17 +1,17 @@
 if (localStorage.getItem("kakao")){
-} else {
+} else if (location.href.split('=')[1]){
     const kakao_code = location.href.split('=')[1]
     kakaoLoginApi(kakao_code)
 }
 
 //카카오 로그인 back으로 전달
-async function kakaoLoginApi(kakaoUserData) {
+async function kakaoLoginApi(kakao_code) {
     const response = await fetch(`http://127.0.0.1:8000/users/kakao/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({"code":kakaoUserData}),
+        body: JSON.stringify({"code":kakao_code}),
     })
     response_json = await response.json()
     console.log(response_json)
