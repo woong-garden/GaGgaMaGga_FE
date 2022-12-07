@@ -11,6 +11,10 @@ body{
     margin:auto;
 }
 
+#back{
+    width:38px; height:38px; margin-top:2%;
+}
+
 .root {
 position:relative;
 /* height: 93vh; */
@@ -116,41 +120,55 @@ box-shadow: 0 0 20px rgb(0 0 0 / 5%);
     padding: 0 20px; 
     margin-top: 20px;
 }
-.review-detail-box > :first-child {
-    font-size: 14px
+.review-detail-box > p {
+    font-size: 15px
 }
-.review-detail-box > :nth-child(2) {
+.review-detail-box div {
     padding-top:10px; display: flex; 
     justify-content: space-between;
 }
 
-.comment-wrap{
-    display:flex; 
-    padding: 0 20px; 
-    justify-content: space-between; 
-    padding-top:12px;
+.review-detail-box div p {
+    font-size : 13px;
 }
-.comment-cnt{
-    text-align:right; 
-    padding: 0 20px; 
-    margin-top: 5px; 
-    font-size: 12px; 
-    align-items: flex-start;
-}
-.comment-box{
+.user{
     display: flex;
+    width : 90%;
+    justify-content : left;
+    margin : auto;
+}
+
+
+.nickname,.time{
+    margin:auto 1.5vw;
+}
+.comment-wrap{
+    display: flex;
+    width : 84%;
+    justify-content: center;
+    text-align: right;
+    float : right;
+}
+
+.comment-content{
+    width : 100%;
+    text-align: left;
+    font-size: 14.5px;
+}
+
+.comment-cnt{
+    width : 25%;
+    text-align: right;
+    font-size: 12px;
+    color : gray;
+    margin : auto 0 auto 75%;
+    display: block;
 }
 .comment-user-img{
-    width:40px; 
-    height:40px; 
-    border-radius: 20px;;
-}
-.comment-user-name{
-    font-size:12px; 
-    font-weight: 700;
-}
-.comment-user-comment{
-    font-size:12px;
+    width : 10%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    margin-right : auto 2vw auto 0;
 }
 .comment-heart-style{
     cursor:pointer; 
@@ -226,6 +244,11 @@ content: "";
     height: 32px; 
     border:none; 
     cursor: pointer;
+}
+
+.nav-input-wrap button:hover{
+    background-color : #fcdbab;
+    color : black;
 }
 
 @media (min-width: 768px) { /*반응형*/
