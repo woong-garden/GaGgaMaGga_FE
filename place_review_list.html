@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style/css/place_review_list.css">
+    <title>Document</title>
+
+
+</head>
+<body>
+    <!--헤더 시작-->
+    <div class="header">
+        <div>
+            <div>
+                <a><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
+            </div> 
+            <div> 
+                <a><img style="margin-left:8px;" src="/images/icon/bell.svg"></a>
+            </div> 
+        </div>          
+    </div>
+    <!--헤더 끝-->
+
+    <!--메인 시작-->
+    <div class="root">
+        <div class="root_block"></div>
+        <div>
+            <div class="place-name">OO카페 후기</div>
+            <div class="review-botton-wrap"><button class="review-create-botton">후기 작성하기</button></div>
+        </div>
+        <div style="height: 10px; width: 100%; background-color: #f9f9f9; margin-top:14px;"></div>
+        
+        <div class="review-list-box">
+            <div class="review-list-header">
+                <div>
+                    리뷰 (50)
+                </div>
+                <div>
+                    <div>
+                        <button id="test" style="color:#FF792A;" class="button-style" onclick="like_rank_show()">좋아요순</button>
+                    </div>
+                    <div>
+                        |
+                    </div>
+                    <div>
+                        <button id="test2" class="button-style" onclick="recent_rank_show()">최신순</button>
+                    </div>
+                    <div>
+                        |
+                    </div>
+                    <div>
+                        <button id="test3" class="button-style" onclick="views_rank_show()">조회순</button>
+                    </div>
+                </div>    
+            </div>
+
+            <!--좋아요순 시작-->
+            <div id="like-rank" style="display:block;">
+                <a class="review-list">
+                    <div class="review-item-user">
+                        <div>
+                            <img style="width:40px;height:40px; border-radius: 20px;" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
+                        </div>
+                        <div>
+                            admin
+                        </div>
+                    </div>
+                    <div>
+                        <div class="review-item-date">
+                            2022-12-12
+                        </div>
+                        <div class="review-item-title">
+                            맛이 좋아요~
+                        </div>
+                        <div class="review-item-content">
+                            좋아요순
+                        </div>
+                    </div>
+                </a>   
+            </div>
+            <!--좋아요순 끝-->
+
+            <!--최신순 시작-->
+            <div id="recent-rank" style="display:none;"">
+                <a class="review-list">
+                    <div class="review-item-user">
+                        <div>
+                            <img style="width:40px;height:40px; border-radius: 20px;" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
+                        </div>
+                        <div>
+                            admin
+                        </div>
+                    </div>
+                    <div>
+                        <div class="review-item-date">
+                            2022-12-12
+                        </div>
+                        <div class="review-item-title">
+                            맛이 좋아요~
+                        </div>
+                        <div class="review-item-content">
+                            최신순
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium, omnis laboriosam! Assumenda, harum! Iste earum animi quos? Laudantium et officiis esse omnis eos ad, at nulla dolorum porro corporis adipisci!
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis, minima iste! Aliquid, corporis impedit sit quas amet libero pariatur beatae! Eveniet assumenda dolorum fugit molestiae sit repellat magni ut accusamus.
+                        </div>
+                    </div>
+                </a>
+                <a class="review-list">
+                    <div class="review-item-user">
+                        <div>
+                            <img style="width:40px;height:40px; border-radius: 20px;" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
+                        </div>
+                        <div>
+                            admin
+                        </div>
+                    </div>
+                    <div>
+                        <div class="review-item-date">
+                            2022-12-12
+                        </div>
+                        <div class="review-item-title">
+                            맛이 좋아요~
+                        </div>
+                        <div class="review-item-content">
+                            최신순
+                        </div>
+                    </div>
+                </a>
+                <a class="review-list">
+                    <div class="review-item-user">
+                        <div>
+                            <img style="width:40px;height:40px; border-radius: 20px;" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
+                        </div>
+                        <div>
+                            admin
+                        </div>
+                    </div>
+                    <div>
+                        <div class="review-item-date">
+                            2022-12-12
+                        </div>
+                        <div class="review-item-title">
+                            맛이 좋아요~
+                        </div>
+                        <div class="review-item-content">
+                            최신순
+                        </div>
+                    </div>
+                </a>
+                <a class="review-list">
+                    <div class="review-item-user">
+                        <div>
+                            <img style="width:40px;height:40px; border-radius: 20px;" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
+                        </div>
+                        <div>
+                            admin
+                        </div>
+                    </div>
+                    <div>
+                        <div class="review-item-date">
+                            2022-12-12
+                        </div>
+                        <div class="review-item-title">
+                            맛이 좋아요~
+                        </div>
+                        <div class="review-item-content">
+                            최신순
+                        </div>
+                    </div>
+                </a>
+                <a class="review-list">
+                    <div class="review-item-user">
+                        <div>
+                            <img style="width:40px;height:40px; border-radius: 20px;" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
+                        </div>
+                        <div>
+                            admin
+                        </div>
+                    </div>
+                    <div>
+                        <div class="review-item-date">
+                            2022-12-12
+                        </div>
+                        <div class="review-item-title">
+                            맛이 좋아요~
+                        </div>
+                        <div class="review-item-content">
+                            최신순
+                        </div>
+                    </div>
+                </a>   
+            </div>
+            <!--최신순 끝-->
+
+            <!--리뷰순 시작-->
+            <div id="views-rank" style="display:none;">
+                <a class="review-list">
+                    <div class="review-item-user">
+                        <div>
+                            <img style="width:40px;height:40px; border-radius: 20px;" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
+                        </div>
+                        <div>
+                            admin
+                        </div>
+                    </div>
+                    <div>
+                        <div class="review-item-date">
+                            2022-12-12
+                        </div>
+                        <div class="review-item-title">
+                            맛이 좋아요~
+                        </div>
+                        <div class="review-item-content">
+                            조회순 
+                        </div>
+                    </div>
+                </a>   
+
+                <a class="review-list">
+                    <div class="review-item-user">
+                        <div>
+                            <img style="width:40px;height:40px; border-radius: 20px;" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
+                        </div>
+                        <div>
+                            admin
+                        </div>
+                    </div>
+                    <div>
+                        <div class="review-item-date">
+                            2022-12-12
+                        </div>
+                        <div class="review-item-title">
+                            맛이 좋아요~
+                        </div>
+                        <div class="review-item-content">
+                            조회순 
+                        </div>
+                    </div>
+                </a>   
+            </div>
+            <!--리뷰순 끝-->
+        </div>
+    </div>
+    <!--메인 끝-->  
+
+    <!--네비바-->
+    <div class="nav-wrap"> 
+        <div>     
+            <nav class="nav-bar">
+                <a><img src="/images/icon/home.svg"></a>
+                <a><img src="/images/icon/nav_search.svg"></a>
+                <a><img src="/images/icon/bookmark.svg"></a>
+                <a><img style="width:35px; height: 38px;" src="/images/icon/heart.svg"></a>
+                <a><img src="/images/icon/profile.svg"></a>
+            </nav>
+        </div>  
+    </div>
+    <!--네비바 끝-->
+
+    <script>
+        //좋아요순, 최신순, 조회순 토글
+        function like_rank_show(){
+            document.getElementById("like-rank").style.display ='block';
+            document.getElementById("recent-rank").style.display ='none';
+            document.getElementById("views-rank").style.display ='none';
+
+            document.getElementById("test").style.color = "#FF792A";
+            document.getElementById("test2").style.color = "#9b9b9b";
+            document.getElementById("test3").style.color = "#9b9b9b";
+        }
+        function recent_rank_show(){
+            document.getElementById("like-rank").style.display ='none';
+            document.getElementById("recent-rank").style.display ='block';
+            document.getElementById("views-rank").style.display ='none';
+
+            document.getElementById("test").style.color = "#9b9b9b";
+            document.getElementById("test2").style.color = "#FF792A";
+            document.getElementById("test3").style.color = "#9b9b9b";
+        }
+        function views_rank_show(){
+            document.getElementById("like-rank").style.display ='none';
+            document.getElementById("recent-rank").style.display ='none';
+            document.getElementById("views-rank").style.display ='block';
+
+            document.getElementById("test").style.color = "#9b9b9b";
+            document.getElementById("test2").style.color = "#9b9b9b";
+            document.getElementById("test3").style.color = "#FF792A";
+        }
+    </script>
+</body>
+</html>
