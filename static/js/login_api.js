@@ -41,21 +41,6 @@ async function Login() {
         alert_danger.innerText = "아이디와 비밀번호를 확인해주세요"
     }}
 
-//카카오로그인 call back
-//카카오 로그인 back으로 전달
-async function kakaoLoginApi(kakaoUserData) {
-    const response = await fetch(`http://127.0.0.1:8000/users/kakao/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({"code":kakaoUserData}),
-    })
-    response_json = await response.json()
-    console.log(response_json)
-}
-
-
 //카카오로그인
 function kakao_login_code(){
     const kakao_id ='d7803b6c144bfb2dc3ce3e1dc7028d8a'
