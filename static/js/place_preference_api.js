@@ -1,7 +1,8 @@
 
 window.onload = function(){
     console.log("연결완료")
-    PlaceSelectView(13)
+    const cate_id = location.href.split('=')[1].split('/')[0]
+    PlaceSelectView(cate_id)
     }
 
 
