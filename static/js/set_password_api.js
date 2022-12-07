@@ -1,4 +1,4 @@
-if (localStorage.getItem("kakao") || localStorage.getItem("playload")){
+if (localStorage.getItem("kakao") || localStorage.getItem("payload")){
     location.replace(history.back())
     alert("이미 로그인이 되어있습니다.")
 } else {}
@@ -56,4 +56,12 @@ async function Set_Password() {
         const alert_danger = document.getElementById('alert-danger')
         alert_danger.innerText = `${result['password']}`
     }
+}
+
+function to_signup(){
+    location.href = "signup.html"
+}
+
+function to_login(){
+    location.href = "login.html"
 }
