@@ -5,6 +5,33 @@ window.onload = () => {
 
 }
 
+// 모달창 열기
+function openModal(){
+    const modalBox = document.querySelector('#modal-box')
+    const header = document.querySelector('.header')
+    const main = document.querySelector('.root')
+    const nav = document.querySelector('.nav-wrap')
+
+    modalBox.style.display = "block"
+    header.style.display = "none"
+    main.style.display = "none"
+    nav.style.display = "none"
+}
+
+
+// 모달창 닫기
+function closeModal(){
+    const modalBox = document.querySelector('#modal-box')
+    const header = document.querySelector('.header')
+    const main = document.querySelector('.root')
+    const nav = document.querySelector('.nav-wrap')
+
+    modalBox.style.display = "none"
+    header.style.display = "block"
+    main.style.display = "block"
+    nav.style.display = "block"
+}
+
 
 // 전체 코멘트랑 같이 상세 페이지 데이터 불러오기
 async function getData() {
