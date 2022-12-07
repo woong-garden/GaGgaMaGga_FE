@@ -1,7 +1,8 @@
-if (localStorage.getItem("kakao") || localStorage.getItem("playload")){
+if (localStorage.getItem("kakao") || localStorage.getItem("payload")){
     location.replace(history.back())
     alert("이미 로그인이 되어있습니다.")
-} else {}
+} else {
+}
 
 //로그인
 async function Login() {
@@ -40,21 +41,6 @@ async function Login() {
         const alert_danger = document.getElementById('alert-danger')
         alert_danger.innerText = "아이디와 비밀번호를 확인해주세요"
     }}
-
-//카카오로그인 call back
-//카카오 로그인 back으로 전달
-async function kakaoLoginApi(kakaoUserData) {
-    const response = await fetch(`http://127.0.0.1:8000/users/kakao/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({"code":kakaoUserData}),
-    })
-    response_json = await response.json()
-    console.log(response_json)
-}
-
 
 //카카오로그인
 function kakao_login_code(){
