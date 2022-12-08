@@ -10,8 +10,6 @@
     <!--css-->
     <link rel="stylesheet" href="./style/css/search.css">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
     <title>Search</title>
     
 
@@ -22,7 +20,11 @@
         <div>
             <div>
                 <a><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
-            </div> 
+            </div>
+            <form>
+                <img style="padding-left:14px; width: 20px; height: 20px;" src="./images/icon/search_empty.svg">
+                <input class="search_input" type="text" placeholder="지역, 카페, 맛집명 검색">
+            </form>     
             <div> 
                 <a><img style="margin-left:8px;" src="/images/icon/bell.svg"></a>
             </div> 
@@ -33,66 +35,115 @@
     <!--메인 시작-->
     <div class="root">
         <div class="root_block"></div>
-        <div class="title">
-            <h3>검색결과</h3>
+        <div class="place-name">검색 결과</div>
+        <div style="height: 10px; width: 100%; background-color: #f9f9f9; margin-top:14px;"></div>
+
+        <div class="review-list-box">
+            <div class="review-list-header">
+                <div>
+                    순위 (50)
+                </div> 
+            </div>
+            
+            <!--검색결과시작-->
+            <div>
+                <div class="review-list">
+                    <a class="place-item">
+                        <div>
+                            <div style="width:100px;height:100px;"">
+                                <img style="width:100%;height:100%;" src="https://image.toast.com/aaaaaqx/catchtable/shopinfo/s3703/3703_2211011285806715_thumbMenuImage.png?small180">
+                            </div>
+                        </div>
+                        <div class="place-item-content-box">
+                            <div>봉쥬르 와인살롱</div>
+                            <div class="place-item-content">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste commodi nisi aliquam, aliquid est illo quaerat maxime aspernatur eveniet beatae molestias nam exercitationem ut incidunt unde libero placeat sapiente! Quisquam!
+                            </div>
+                            <div class="rating">
+                                <img src="/images/icon/star.svg" alt="">
+                                <div>4.5</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div>
+                        <button class="btn-bookmark">북마크</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="review-list">
+                    <a class="place-item">
+                        <div>
+                            <div style="width:100px;height:100px;"">
+                                <img style="width:100%;height:100%;" src="https://image.toast.com/aaaaaqx/catchtable/shopinfo/s3703/3703_2211011285806715_thumbMenuImage.png?small180">
+                            </div>
+                        </div>
+                        <div class="place-item-content-box">
+                            <div>봉쥬르 와인살롱</div>
+                            <div class="place-item-content">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste commodi nisi aliquam, aliquid est illo quaerat maxime aspernatur eveniet beatae molestias nam exercitationem ut incidunt unde libero placeat sapiente! Quisquam!
+                            </div>
+                            <div class="rating">
+                                <img src="/images/icon/star.svg" alt="">
+                                <div>4.5</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div>
+                        <button class="btn-bookmark">북마크</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="review-list">
+                    <a class="place-item">
+                        <div>
+                            <div style="width:100px;height:100px;"">
+                                <img style="width:100%;height:100%;" src="https://image.toast.com/aaaaaqx/catchtable/shopinfo/s3703/3703_2211011285806715_thumbMenuImage.png?small180">
+                            </div>
+                        </div>
+                        <div class="place-item-content-box">
+                            <div>봉쥬르 와인살롱</div>
+                            <div class="place-item-content">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste commodi nisi aliquam, aliquid est illo quaerat maxime aspernatur eveniet beatae molestias nam exercitationem ut incidunt unde libero placeat sapiente! Quisquam!
+                            </div>
+                            <div class="rating">
+                                <img src="/images/icon/star.svg" alt="">
+                                <div>4.5</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div>
+                        <button class="btn-bookmark">북마크</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="review-list">
+                    <a class="place-item">
+                        <div>
+                            <div style="width:100px;height:100px;"">
+                                <img style="width:100%;height:100%;" src="https://image.toast.com/aaaaaqx/catchtable/shopinfo/s3703/3703_2211011285806715_thumbMenuImage.png?small180">
+                            </div>
+                        </div>
+                        <div class="place-item-content-box">
+                            <div>봉쥬르 와인살롱</div>
+                            <div class="place-item-content">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste commodi nisi aliquam, aliquid est illo quaerat maxime aspernatur eveniet beatae molestias nam exercitationem ut incidunt unde libero placeat sapiente! Quisquam!
+                            </div>
+                            <div class="rating">
+                                <img src="/images/icon/star.svg" alt="">
+                                <div>4.5</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div>
+                        <button class="btn-bookmark">북마크</button>
+                    </div>
+                </div>
+            </div>
+            <!--검색결과끝-->
         </div>
-        <div class="search-content">
-            <hr>
-            <div class="place-box">
-                <div class="left-box">
-                    <div>
-                        <img src ="/images/swiss.jpg" alt="장소 사진">
-                    </div>
-                </div>
-                <div class="right-box">
-                    <div>
-                        <span>봉쥬르 와인살롱<br>
-                        잠실 와인바 와인한잔 하고싶을때 감성술집<br>
-                        별점 4.48/5</span>
-                    </div>
-                </div>
-                <div class="btn-bookmark">
-                    <button>북마크</button>
-                </div>
-            </div>
-            <div class="place-box">
-                <div class="left-box">
-                    <div>
-                        <!-- <a>1</a> -->
-                        <img src ="/images/swiss.jpg" alt="장소 사진">
-                    </div>
-                </div>
-                <div class="right-box">
-                    <div>
-                        <span>봉쥬르 와인살롱<br>
-                        잠실 와인바 와인한잔 하고싶을때 감성술집<br>
-                        별점 4.48/5</span>
-                    </div>
-                </div>
-                <div class="btn-bookmark">
-                    <button>북마크</button>
-                </div>
-            </div>
-            <div class="place-box">
-                <div class="left-box">
-                    <div>
-                        <!-- <a>1</a> -->
-                        <img src ="/images/swiss.jpg" alt="장소 사진">
-                    </div>
-                </div>
-                <div class="right-box">
-                    <div>
-                        <span>봉쥬르 와인살롱<br>
-                        잠실 와인바 와인한잔 하고싶을때 감성술집<br>
-                        별점 4.48/5</span>
-                    </div>
-                </div>
-                <div class="btn-bookmark">
-                    <button>북마크</button>
-                </div>
-            </div>
-        </div>    
-        
     </div>
     <!--메인 끝-->  
 
