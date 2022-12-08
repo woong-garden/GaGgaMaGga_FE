@@ -3,13 +3,13 @@ const review_id = location.href.split('=')[1]
 console.log(review_id)
 window.onload = () => {
     getData()
-    // openModal()
-    // closeModal()
 
 }
 
+
+
 // 모달창 열기
-function openModal(){
+function openModal() {
     const modalBox = document.querySelector('#modal-box')
     const header = document.querySelector('.header')
     const main = document.querySelector('.root')
@@ -23,7 +23,7 @@ function openModal(){
 
 
 // 모달창 닫기
-function closeModal(){
+function closeModal() {
     const modalBox = document.querySelector('#modal-box')
     const header = document.querySelector('.header')
     const main = document.querySelector('.root')
@@ -61,8 +61,9 @@ async function getData() {
     const likeCount = document.querySelector('#like-count')
     likeCount.innerText = response.review_like.length
 
-
     response.review_comments.forEach(cmt => {
+
+
         const comments = document.querySelector('.comments')
 
         const eachComment = document.createElement("div")
@@ -71,7 +72,7 @@ async function getData() {
 
         const profileImg = document.createElement('img')
         profileImg.classList.add('comment-user-img')
-        profileImg.src = "http://127.0.0.1:8000"+ cmt.profile_image
+        profileImg.src = "http://127.0.0.1:8000" + cmt.profile_image
         eachComment.appendChild(profileImg)
 
         const commentContent = document.createElement("div")
@@ -96,7 +97,7 @@ async function getData() {
         dots.src = "/images/icon/dot.svg"
         commentHead.appendChild(dots)
 
-        const commentText= document.createElement("p")
+        const commentText = document.createElement("p")
         commentText.innerText = cmt.content
         commentContent.appendChild(commentText)
 
@@ -112,15 +113,43 @@ async function getData() {
         commentLikeCount.innerText = cmt.comment_like_count
         commentUnder.appendChild(commentLikeCount)
 
-        const commentDetail = document.createElement("detail")
-        commentUnder.appendChild(commentDetail)
-        
+        const recomment = document.createElement("div")
+        recomment.classList.add('recomment')
+        recomment.style.justifyContent = "space-between"
+        recomment.style.margin = "1vh 1.5vw"
+        commentContent.appendChild(recomment)
+
+        const insertRecomment = document.createElement('button')
+        var txt = document.createTextNode('답글 달기')
+        insertRecomment.appendChild(txt)
+        insertRecomment.classList.add('cmt-btn')
+        commentUnder.appendChild(insertRecomment)
+        insertRecomment.onclick = function () {
+            recomment.classList.toggle('show-recomment')
+        }
+
+
+
+
+        const recommentImg = document.createElement('img')
+        recommentImg.src = "http://127.0.0.1:8000" + response.profile_image
+        recomment.appendChild(recommentImg)
+
+        const recommentInput = document.createElement('input')
+        recommentInput.placeholder = "답글 달기"
+        recommentInput.type = "text"
+        recomment.appendChild(recommentInput)
+
+        const recommentButton = document.createElement('button')
+        var text = document.createTextNode('등록')
+        recommentButton.appendChild(text)
+        recomment.appendChild(recommentButton)
+
     });
 
 
 
 }
-
 
 //코멘트 등록, 나중에 페이지 생성시 덧글 등록 버튼에 onclick으로 이 함수를 달아주면 됩니다.
 function postComment() {
@@ -141,7 +170,7 @@ function postComment() {
     alert("덧글 등록")
 }
 
-// 알람
+// // 알람
 // function alarm(){
 //     const user_id = 1
 //     const notificationSocket = new WebSocket(

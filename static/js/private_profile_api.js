@@ -23,15 +23,16 @@ async function private_profile(){
     h6_profile_nickname.innerText = `닉네임: ${response_json.nickname}`
     h6_profile_username.innerText = `아이디: ${response_json.username}`
     h6_profile_email.innerText = `이메일: ${response_json.email}`
-
-    console.log(response_json.profile_image.slice('/')[3])
-    console.log(response_json.profile_image)
-    if(localStorage.getItem("kakao")){
-        document.getElementById("porfile-img").src = `${backendBaseUrl}${response_json.profile_image}`
-    } else {
-        document.getElementById("porfile-img").src = `${backendBaseUrl}${response_json.profile_image}`}
+    document.getElementById("porfile-img").src = `${backendBaseUrl}${response_json.profile_image}`
 }
-
+//회원정보 수정 카카오 로그인은 접근 불허
+function confirm_kakao_user_edit() {
+    if (localStorage.getItem("kakao")){
+        alert("카카오 회원은 회원정보 수정을 할 수 없습니다. ")}
+    else{
+        location.href("user_edit.html")
+        }
+}
 
 // 이메일 재인증
 async function resend_email() {
@@ -95,7 +96,9 @@ async function withdrawal() {
 
 //로그아웃
 async function logout(){
-    const response = await fetch(`${backendBaseUrl}/users/logout/`, {
+    var delConfirm = confirm("로그아웃을 하시겠습니까?")
+    if (delConfirm) {
+        const response = await fetch(`${backendBaseUrl}/users/logout/`, {
 
         method: 'POST',
         headers: {
@@ -121,4 +124,4 @@ async function logout(){
         } else if (response.status === 403) {
         alert("접근 권한이 없습니다.")
         }
-}
+}}
