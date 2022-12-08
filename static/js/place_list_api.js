@@ -60,8 +60,20 @@ async function NewUserPlaceListView(place_id, category) {
             
             <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
             <div class="modal-wrap" id="modal-wrap${item.id}">
-                <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
-                <button class="modal-close" onClick="javascript:popClose(${item.id});">닫기</button>
+                
+                
+                <div class="modal_contents">
+                    <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
+                    <a href="#"><div class="modal_close" onClick="javascript:popClose(${item.id});">Close</div></a>
+                    <hr>
+                    
+                    <img src="${item.place_img}" style='width:300px;height:180px;')>
+                    <p style="font-size:15px;">주소 : ${item.place_address}</p>
+                    <p style="font-size:15px;">전화번호 : ☎ ${item.place_address}</p>
+                    <p style="font-size:15px;">영업시간 : ${item.place_time}</p>
+                </div>
+                <div class="modal_map"></div>
+                
             </div>
             `
         )

@@ -313,13 +313,30 @@ td {
 .modal-wrap {
     display:none;
     position:absolute;
-    top:50%;
+    top:45%;
     left:50%;
     transform:translate(-50%,-50%);
     width:350px;
-    height:500px;
+    height:600px;
     background:rgba(250, 243, 181, 0.8);
     border-radius: 15px;
     z-index:1000;
 
+}
+.modal_map {
+    width:300px;
+    height:150px;
+    border-style: solid;
+    margin:10px auto;
+}
+.modal_contents {
+    width:300px;
+    margin:10px auto;
+}
+.modal_close {
+    display:inline-block;
+    margin:10px;
+    background-color: #FFCD48;
+    border-radius: 10px;
+    padding:4px;
 }
