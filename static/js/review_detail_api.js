@@ -1,5 +1,10 @@
+const review_id = location.href.split('=')[1].split('&')[0]
+const place_id = location.href.split('=')[2]
+
+console.log(review_id)
+console.log(place_id)
 window.onload = () => {
-    getData()
+    getData(review_id,place_id)
 
 }
 
@@ -34,10 +39,10 @@ function closeModal() {
 
 
 // 전체 코멘트랑 같이 상세 페이지 데이터 불러오기
-async function getData() {
-    const review_id = 1 //추후 후기의 id 연동해야 합니다.
+async function getData(review_id, place_id) {
+    // const review_id = 1 //추후 후기의 id 연동해야 합니다.
 
-    const response = await fetch(`http://127.0.0.1:8000/reviews/details/${review_id}/`, {
+    const response = await fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
