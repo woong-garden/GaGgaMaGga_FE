@@ -21,7 +21,7 @@ async function BestLikeSort(){
             <div class="review-list">
                 <div class="place-item">
                     <div>
-                    <a style="cursor: pointer;" onclick="move_review_detail_page(${item.id})">
+                    <a style="cursor: pointer;" onclick="move_review_detail_page(${item.id},${item.place_id})">
                         <img style="width:100px;height:100px;" src="${backendBaseUrl}${item.review_image_one}">
                     </a>
                     </div>
@@ -37,7 +37,7 @@ async function BestLikeSort(){
                         </div>
                     </div>
                 </div>
-                <a href="public_profile.html$id=${item.nickname}/" class="review-item-user">
+                <a style="cursor: pointer;" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
                     <div>
                         <img style="width:40px;height:40px; border-radius: 20px;" src="${backendBaseUrl}${item.profile_image}">
                     </div>
@@ -73,7 +73,7 @@ async function recentSort(){
             <div class="review-list">
                 <div class="place-item">
                     <div>
-                        <a onclick="move_review_detail_page(${item.id})">
+                        <a style="cursor: pointer;" onclick="move_review_detail_page(${item.id},${item.place_id})">
                             <img style="width:100px;height:100px;" src="${backendBaseUrl}${item.review_image_one}">
                         </a>
                     </div>
@@ -89,7 +89,7 @@ async function recentSort(){
                         </div>
                     </div>
                 </div>
-                <a onclick="move_public_profile_page(${item.nickname})" class="review-item-user">
+                <a style="cursor: pointer;" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
                     <div>
                         <img style="width:40px;height:40px; border-radius: 20px;" src="${backendBaseUrl}${item.profile_image}">
                     </div>
@@ -106,8 +106,9 @@ async function recentSort(){
 recentSort()
 
 
-function move_review_detail_page(review_id){
-    window.location.href = `/review_detail.html?id=${review_id}`
+function move_review_detail_page(review_id,place_id){
+    window.location.href = `/review_detail.html?id=${review_id}&place=${place_id}`
+
 }
 
 function move_public_profile_page(nickname){
