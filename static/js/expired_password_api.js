@@ -1,6 +1,6 @@
-if (JSON.parse(localStorage.getItem("payload") ).password_expired == true){
+if (JSON.parse(localStorage.getItem("payload")).password_expired == true){
 } else {
-    location.replace(history.back())
+    location.replace("index.html")
 }
 
 //비밀번호 인증 만료시 변경

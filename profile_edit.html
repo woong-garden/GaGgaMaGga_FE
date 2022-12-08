@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/css/user_base.css">
+    <link rel="stylesheet" href="style/css/user.css">
+    <title>프로필 편집</title>
+</head>
+<body>
+    <!--헤더 시작-->
+    <div class="header">
+        <div>
+            <div>
+                <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
+            </div>
+            <div>
+                <h3>프로필 편집</h3>
+            </div>
+            <div> 
+            </div> 
+        </div>          
+    </div>
+    <!--헤더 끝-->
+
+    <!--메인 시작-->
+    <div class="root">
+        <div class="root_block"></div>
+        <!--여기사용하시면 됩니다~-->
+        <div id="input-box">
+            <h5>프로필 편집</h5>
+            <input type="file" id="profile_image">
+            <input type="text" id="nickname" placeholder="3자이상 10자이하로 닉네임을 입력해주세요.">
+            <textarea id="intro" cols="50" rows="5" placeholder="자기소개를 입력해주세요."></textarea>
+            <div class="alert alert-danger" style="font-size:15px" id="alert-danger"></div>
+
+            <div id="buttons">                
+                <button onclick="profile_edit()" class="button login">편집하기</button>
+            </div>
+        </div>
+    </div>
+    <!--메인 끝-->  
+    <div class="nav-wrap"> 
+        <div>     
+            <nav class="nav-bar">
+                <a><img src="/images/icon/home.svg"></a>
+                <a><img src="/images/icon/nav_search.svg"></a>
+                <a><img src="/images/icon/bookmark.svg"></a>
+                <a><img style="width:35px; height: 38px;" src="/images/icon/heart.svg"></a>
+                <a><img src="/images/icon/profile.svg"></a>
+            </nav>
+        </div>  
+    </div>
+    <script src="static/js/base_api.js"></script>
+    <script src="static/js/profile_edit_api.js"></script>
+</body>
+</html>

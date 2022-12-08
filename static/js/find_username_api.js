@@ -18,7 +18,6 @@ async function phone_number_send() {
     })
 
     const result = await response.json()
-    console.log(result)
     
     if (response.status === 200) {
         alert("인증번호가 발송되었습니다. 확인부탁드립니다.")
@@ -48,11 +47,10 @@ async function auth_number_confirm() {
     })
 
     const result = await response.json()
-    console.log(result)
     
     if (response.status === 200) {
         alert(result['message'])
-
+        
     } else if (response.status === 400) {
         document.getElementById('alert-danger_2').style.display ="block"
         const alert_danger_2 = document.getElementById('alert-danger_2')

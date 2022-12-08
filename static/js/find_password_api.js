@@ -26,7 +26,6 @@ async function password_find() {
         document.getElementById('alert-danger').style.display ="block"
         const key = Object.keys(result)[0];
         makeAlert(key, result[key][0]);
-        
     }
 }
 
@@ -43,7 +42,6 @@ function makeAlert(key, errorText){
     const signup_button = signup_form.childNodes[8];
     signup_form.insertBefore(alert_div, signup_button); }
 }
-
 
 function to_signup(){
     location.href = "signup.html"
