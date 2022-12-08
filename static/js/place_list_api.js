@@ -27,7 +27,7 @@ async function NewUserPlaceListView(place_id, category){
                         <tr>
                             <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
                             <td width="70%">
-                                <div style="font-size:15px;">${item.place_name}</div>
+                                <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
                                 <div>${item.place_address}  ☎${item.place_number}</div>
                                 <div></div>
                                 <div>${item.place_time}</div>

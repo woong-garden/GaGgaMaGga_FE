@@ -12,7 +12,6 @@ async function PlaceSelectView(choice_no){
         method: 'GET',
         headers: {
             "Content-type": "application/json",
-            'Authorization': "Bearer " + localStorage.getItem("access")
         }
     })
     response_json = await response.json()
