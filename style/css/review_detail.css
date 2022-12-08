@@ -18,7 +18,9 @@ body{
 
 .root {
 position:relative;
-height: 100vh;
+height: 88vh;
+margin-top: 6vh;
+margin-bottom: 6vh;
 width: 100%;
 left:50%;
 background-color:white;
@@ -45,9 +47,10 @@ box-shadow: 0 0 20px rgb(0 0 0 / 5%);
 
 .header{ 
     width: 100%;
+    background-color: rgb(248, 243, 235);;
+    height: 6vh;
     position:fixed;
     top:0;
-    left:0;
     z-index: 1;
 }
 
@@ -120,9 +123,11 @@ box-shadow: 0 0 20px rgb(0 0 0 / 5%);
 .section [id="slide03"]:checked ~ .slidewrap .control03 {display:block;}
     
 
-.review-detail-box{
-    padding: 0 20px; 
-    margin-top: 20px;
+.cmt-btn{
+    border: 0;
+    background-color: transparent;
+    color : gray;
+    cursor:pointer;
 }
 .review-detail-box > p {
     font-size: 15px
@@ -160,10 +165,7 @@ box-shadow: 0 0 20px rgb(0 0 0 / 5%);
 }
 .comment-under p{
     font-size: 12px;
-    margin : auto 0;
-}
-.comment-under details{
-    margin : auto 0;
+    margin : auto 2vw auto 0.3vw;
 }
 .comment-cnt{
     width : 25%;
@@ -185,17 +187,7 @@ box-shadow: 0 0 20px rgb(0 0 0 / 5%);
     cursor:pointer;
     margin: auto 0;
 }
-summary{
-    font-size:10px; 
-    border:none; 
-    background-color: transparent; 
-    cursor:pointer; 
-    color:gray;
-}
-summary::marker {
-display: none;
-content: "";
-}
+
 .comment-2{
     display:flex; 
     justify-content: space-between;
@@ -207,8 +199,9 @@ content: "";
     width:100%;
     border-bottom-width: 1px;outline:none;
 }
-.comment-2 > button {
+.comment-2 > button, .recomment button {
     border-radius: 20px;
+    width : 10%;
     min-width: 50px;
     height: 24px;
     border: none;
@@ -225,7 +218,7 @@ content: "";
 }
 .nav-bar{
     background-color: white;
-    height: 48px;
+    height: 6vh;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -256,8 +249,34 @@ content: "";
     border:none; 
     cursor: pointer;
 }
-
+ 
 .nav-input-wrap button:hover{
+    background-color : #fcdbab;
+    color : black;
+}
+.recomment{
+    display: flex;
+    justify-content: space-between;
+    margin: 1vh 1.5vw;
+    display: none;
+}
+
+.recomment img {
+    width : 5%;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    border-radius: 30px;
+}
+.recomment input{
+    margin : auto;
+    width : 78%;
+    border-left-width:0;
+    border-right-width:0;
+    border-top-width:0;
+    border-bottom-width:1;
+    outline: 0;
+}
+.recomment button:hover{
     background-color : #fcdbab;
     color : black;
 }
@@ -265,14 +284,17 @@ content: "";
 @media (min-width: 768px) { /*반응형*/
     .root {
         width: 400px;
+        height : 88vh;
+        margin-bottom: 6vh;
     }
     .nav-wrap > div {
         max-width: 400px;
         margin:0 auto;
     }
-    .header > div {
-        max-width: 400px;
-        margin:0 auto;
+    .header{
+        width : 400px;
+        left: 50%;
+        margin-left:-200px;
     }
 }
 
@@ -323,4 +345,12 @@ content: "";
     width : 10%;
     /* margin-right : auto 10px auto 0; */
     margin : auto;
+}
+
+.hide-recomment{
+    display: none;
+}
+
+.show-recomment{
+    display: block;
 }
