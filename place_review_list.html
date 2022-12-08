@@ -41,19 +41,19 @@
                 </div>
                 <div>
                     <div>
-                        <button id="test" style="color:#FF792A;" class="button-style" onclick="like_rank_show()">좋아요순</button>
+                        <button id="sort-like-button" style="color:#FF792A;" class="button-style" onclick="like_rank_show()">좋아요순</button>
                     </div>
                     <div>
                         |
                     </div>
                     <div>
-                        <button id="test2" class="button-style" onclick="recent_rank_show()">최신순</button>
+                        <button id="sort-recent-button" class="button-style" onclick="recent_rank_show()">최신순</button>
                     </div>
                     <div>
                         |
                     </div>
                     <div>
-                        <button id="test3" class="button-style" onclick="views_rank_show()">조회순</button>
+                        <button id="sort-view-button" class="button-style" onclick="views_rank_show()">조회순</button>
                     </div>
                 </div>    
             </div>
@@ -268,27 +268,27 @@
             document.getElementById("recent-rank").style.display ='none';
             document.getElementById("views-rank").style.display ='none';
 
-            document.getElementById("test").style.color = "#FF792A";
-            document.getElementById("test2").style.color = "#9b9b9b";
-            document.getElementById("test3").style.color = "#9b9b9b";
+            document.getElementById("sort-like-button").style.color = "#FF792A";
+            document.getElementById("sort-recent-button").style.color = "#9b9b9b";
+            document.getElementById("sort-view-button").style.color = "#9b9b9b";
         }
         function recent_rank_show(){
             document.getElementById("like-rank").style.display ='none';
             document.getElementById("recent-rank").style.display ='block';
             document.getElementById("views-rank").style.display ='none';
 
-            document.getElementById("test").style.color = "#9b9b9b";
-            document.getElementById("test2").style.color = "#FF792A";
-            document.getElementById("test3").style.color = "#9b9b9b";
+            document.getElementById("sort-like-button").style.color = "#9b9b9b";
+            document.getElementById("sort-recent-button").style.color = "#FF792A";
+            document.getElementById("sort-view-button").style.color = "#9b9b9b";
         }
         function views_rank_show(){
             document.getElementById("like-rank").style.display ='none';
             document.getElementById("recent-rank").style.display ='none';
             document.getElementById("views-rank").style.display ='block';
 
-            document.getElementById("test").style.color = "#9b9b9b";
-            document.getElementById("test2").style.color = "#9b9b9b";
-            document.getElementById("test3").style.color = "#FF792A";
+            document.getElementById("sort-like-button").style.color = "#9b9b9b";
+            document.getElementById("sort-recent-button").style.color = "#9b9b9b";
+            document.getElementById("sort-view-button").style.color = "#FF792A";
         }
     </script>
 </body>
