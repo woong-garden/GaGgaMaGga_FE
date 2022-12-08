@@ -1,12 +1,14 @@
 if(localStorage.getItem("access")){
-    private_profile()
+    if (JSON.parse(localStorage.getItem("payload")).nickname == null){
+    }else{
+    location.replace("index.html")}
 } else{
     alert("접근이 불가능합니다.")
-    location.replace("index.html")
+    location.replace("login.html")
 }
 
 //프로필 수정
-async function profile_edit() {
+async function first_profile_edit() {
 
     let image = document.querySelector("#profile_image")
     let nickname = document.getElementById("nickname").value
@@ -31,7 +33,7 @@ async function profile_edit() {
         )
     if (response.status === 200) {
         alert("회원정보 수정이 완료되었습니다.")
-        window.location.replace(`private_profile.html`)
+        window.location.replace(`index.html`)
         
     } else if (response.status === 400 && result['nickname']) {
         document.getElementById('alert-danger').style.display ="block"
@@ -42,30 +44,9 @@ async function profile_edit() {
         document.getElementById('alert-danger').style.display ="block"
         const alert_danger = document.getElementById('alert-danger')
         alert_danger.innerText = `이미지를 넣어주세요. `
-        
-    }  else if(response.status == 403) {
+    }
+    else if(response.status == 403) {
         alert("접근이 불가능합니다.")
         window.location.replace(`login.html`)
     }
-}
-
-//개인 프로필
-async function private_profile(){
-    
-    const response = await fetch(`${backendBaseUrl}/users/profiles/`, {
-        method: 'GET',
-        headers: {
-            Accept: "application/json",
-            "Content-type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem("access")
-            }
-        }
-    )
-    response_json = await response.json()
-
-    const nickname = document.getElementById("nickname")
-    const intro = document.getElementById("intro")
-
-    nickname.value = response_json.nickname
-    intro.innerText = response_json.intro
 }

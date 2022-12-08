@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!--css-->
+    <link rel="stylesheet" href="./style/css/private_profile.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <title>로그인 ip 접속 기록</title>
+</head>
+<body>
+    <!--헤더 시작-->
+    <div class="header">
+        <div>
+            <div>
+                <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
+            </div> 
+            <div> 
+                <a><img style="margin-left:8px;" src="/images/icon/bell.svg"></a>
+            </div> 
+        </div>          
+    </div>
+    <!--헤더 끝-->
+
+    <!--메인 시작-->
+    <div class="root">
+        <div class="root_block"></div>
+        <!-- profile 정보 -->
+        <div class="profile">
+            <div class="card mb-3" style="max-width: 540px; border-radius: 0;">
+                <div class="row g-0" style="align-items: center;">
+                    <div class="col-md-8">
+                        최근 접속 ip 10건만 보여줍니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id='my-review' style="display: block;">
+        </div>
+    <!--메인 끝-->  
+    </div>
+    <!--네비바-->
+    <div class="nav-wrap"> 
+        <div>     
+            <nav class="nav-bar">
+                <a><img src="/images/icon/home.svg"></a>
+                <a><img src="/images/icon/nav_search.svg"></a>
+                <a><img src="/images/icon/bookmark.svg"></a>
+                <a><img style="width:35px; height: 38px;" src="/images/icon/heart.svg"></a>
+                <a><img src="/images/icon/profile.svg"></a>
+            </nav>
+        </div>  
+    </div>
+    <script src="static/js/base_api.js"></script>
+    <script src="static/js/user_ip_log_api.js"></script>
+    <!--네비바 끝-->
+
+</body>
+
+</html>
