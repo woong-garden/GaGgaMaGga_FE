@@ -7,12 +7,42 @@
     display: none;
 }
 
+fieldset{
+    display: inline-block;
+    direction: rtl;
+    border: 0;
+    width : 100%;
+    text-align: center;
+}
+input[type=radio]{
+    display: none;
+}
+label{
+    font-size : 2em;
+    color : transparent;
+    text-shadow : 0 0 0 #cccccc;
+}
+
+label:hover{
+    text-shadow : 0 0 0 #fcdbab;
+}
+label:hover ~ label{
+    text-shadow : 0 0 0 #fcdbab;
+}
+input[type=radio]:checked ~ label{
+    text-shadow : 0 0 0 #fcdbab;
+}
+
 textarea {
     width: 90%;
     height: 30vh;
     margin: 25px auto;
     display: block;
     border-radius: 10px;
+}
+#star{
+    width : 90%;
+    margin : 25px auto 0 auto;
 }
 
 .buttons {
