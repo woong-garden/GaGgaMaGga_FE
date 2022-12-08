@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--폰트-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
 
     <!--css-->
     <link rel="stylesheet" href="./style/css/review_create.css">
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="static/js/review_create.js"></script>
 
     <title>Document</title>
 
 
 </head>
+
 <body>
     <!--헤더 시작-->
     <div class="header">
         <div>
             <div>
                 <a><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
-            </div> 
-            <div> 
+            </div>
+            <div>
                 <a><img style="margin-left:8px;" src="/images/icon/bell.svg"></a>
-            </div> 
-        </div>          
+            </div>
+        </div>
     </div>
     <!--헤더 끝-->
 
@@ -36,9 +42,8 @@
         <div class="root_block"></div>
         <!-- 사진 업로드 -->
         <input type="file" class="real-upload" accept="image/*" required multiple>
-        <div class="upload"></div>
-        <ul class="image-preview"></ul> 
-        
+        <ul class="image-preview"></ul>
+
         <!--슬라이드 시작-->
         <div class="section">
             <input type="radio" name="slide" id="slide01" checked>
@@ -47,22 +52,16 @@
             <div class="slidewrap">
                 <ul class="slidelist">
                     <li>
-                        <a>
-                            <img style="width:100%; height:260px; object-fit: cover;"
-                                src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAxMThfMTg2%2FMDAxNjQyNTA2MTAyMjIy.BZH4UiV2JoYibQ4iAoiBlZMrz0vOGHfZhDKR6koVlTMg.sxo36kuCYy2xO_anaFiQiMtOw7vd1KAEaFy1BPuGnYgg.JPEG.seog36%2FIMG_4137.jpg&type=a340">
-                        </a>
+                        <img class="first-img"
+                            src="https://htmlcolorcodes.com/assets/images/colors/light-gray-color-solid-background-1920x1080.png">
                     </li>
                     <li>
-                        <a>
-                            <img style="width:100%; height:260px;object-fit: cover;"
-                                src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAzMjJfNDYg%2FMDAxNjQ3ODc5NDU0MzAx.LN1oIgXQUxm3ZksDyI9oI6OXhlhnrwS37UIVIVZhoBkg.z7-80JOaVIhfSYgZcX9OH5T67MRO0a9nWTtUtYeJ6DYg.JPEG.leemy0707%2FIMG_2276.jpg&type=a340">
-                        </a>
+                        <img class="second-img"
+                            src="https://htmlcolorcodes.com/assets/images/colors/light-gray-color-solid-background-1920x1080.png">
                     </li>
                     <li>
-                        <a>
-                            <img style="width:100%; height:260px;object-fit: cover;"
-                                src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA1MDhfMTYx%2FMDAxNjUyMDAwMTE1NTA1.IfOaCa1-DdxA0U6GnGBZfZxhq6v_MCSvfldZbU2iTpwg.tmQq3_ZSzVrPGejIW5TCnSzYepULuWfPHFjW189WHHgg.JPEG.yje1019%2FC3CE5684-FB01-4B01-AD1B-8628CF6655D8.jpeg&type=a340">
-                        </a>
+                        <img class="third-img"
+                            src="https://htmlcolorcodes.com/assets/images/colors/light-gray-color-solid-background-1920x1080.png">
                     </li>
                 </ul>
 
@@ -86,74 +85,40 @@
 
         <!-- 후기 내용 -->
         <div>
-            <textarea style="width: 100%; height: 400px;" type="text" placeholder="후기를 써주세요" name="inputValue"></textarea>
-            <button>작성하기</button>
+            <!-- 별점 시작 -->
+            <div id="star">
+                <fieldset>
+                    <legend>별점을 선택해 주세요</legend>
+                    <input id="rate5" value="5" type="radio" name="rating5" ><label for="rate5">⭐️</label>
+                    <input id="rate4" value="4" type="radio" name="rating4" ><label for="rate4">⭐️</label>
+                    <input id="rate3" value="3" type="radio" name="rating3" ><label for="rate3">⭐️</label>
+                    <input id="rate2" value="2" type="radio" name="rating2" ><label for="rate2">⭐️</label>
+                    <input id="rate1" value="1" type="radio" name="rating1" ><label for="rate1">⭐️</label>
+                </fieldset>
+            </div>
+            <!-- 별점 끝 -->
+            <textarea></textarea>
+            <div class="buttons">
+                <button class="upload">IMAGE</button>
+                <button onclick="uploadReview()">UPLOAD</button>
+            </div>
         </div>
     </div>
-    <!--메인 끝--> 
+    <!--메인 끝-->
 
     <!--네비바-->
-    <div class="nav-wrap"> 
-        <div>     
+    <div class="nav-wrap">
+        <div>
             <nav class="nav-bar">
-                <a><img src="/images/icon/home.svg"></a>
-                <a><img src="/images/icon/nav_search.svg"></a>
-                <a><img src="/images/icon/bookmark.svg"></a>
-                <a><img style="width:35px; height: 38px;" src="/images/icon/heart.svg"></a>
-                <a><img src="/images/icon/profile.svg"></a>
+                <a href="index.html"><img src="/images/icon/home.svg"></a>
+                <a href="search.html"><img src="/images/icon/nav_search.svg"></a>
+                <a href="public_profile.html"><img src="/images/icon/bookmark.svg"></a>
+                <a href="place_list.html"><img style="width:27px; aspect-ratio: 1/1;" src="https://cdn-icons-png.flaticon.com/512/126/126473.png"></a>
+                <a href="private_profile.html"><img src="/images/icon/profile.svg"></a>
             </nav>
-        </div>  
+        </div>
     </div>
     <!--네비바 끝-->
-
-    <script>
-        function getImageFiles(e) {
-          const uploadFiles = [];
-          const files = e.currentTarget.files;
-          const imagePreview = document.querySelector('.image-preview');
-          const docFrag = new DocumentFragment();
-    
-          if ([...files].length >= 4) {
-            alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
-            return;
-          }
-    
-          // 파일 타입 검사
-          [...files].forEach(file => {
-            if (!file.type.match("image/.*")) {
-              alert('이미지 파일만 업로드가 가능합니다.');
-              return
-            }
-    
-            // 파일 갯수 검사
-            if ([...files].length < 4) {
-              uploadFiles.push(file);
-              const reader = new FileReader();
-              reader.onload = (e) => {
-                const preview = createElement(e, file);
-                imagePreview.appendChild(preview);
-              };
-              reader.readAsDataURL(file);
-            }
-          });
-        }
-    
-        function createElement(e, file) {
-          const li = document.createElement('div');
-          const img = document.createElement('img');
-
-          img.setAttribute('src', e.target.result);
-          img.setAttribute('data-file', file.name);
-          li.appendChild(img);
-          return li;
-        }
-    
-        const realUpload = document.querySelector('.real-upload');
-        const upload = document.querySelector('.upload');
-    
-        upload.addEventListener('click', () => realUpload.click());
-    
-        realUpload.addEventListener('change', getImageFiles);
-    </script>
 </body>
+
 </html>
