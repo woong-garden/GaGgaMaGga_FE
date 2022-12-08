@@ -20,9 +20,9 @@ async function PlaceSelectView(choice_no){
         response_json.forEach(item => {
             $('#select-box').append(
                 `
-                <button class="select_box" style="background-image:url(${item.place_img});" onclick=move_list_page("${item.category}",${item.id})>
+                <a href="#"><div class="select_box" style="background-image:url(${item.place_img});" onclick=move_list_page("${item.category}",${item.id})>
                     <p class="p_name">${item.category}</p>
-                </button>
+                </div></a>
                 `
             )
         });
@@ -31,9 +31,9 @@ async function PlaceSelectView(choice_no){
         response_json.forEach(item => {
             $('#select-box').append(
                 `
-                <button class="select_box" style="background-image:url(${item.place_img});" onclick=move_list_page("${item.category}",${item.id})>
+                <a href="#"><div class="select_box" style="background-image:url(${item.place_img});" onclick=move_list_page("${item.category}",${item.id})>
                     <p class="p_name">${item.place_name}</p>
-                </button>
+                </div></a>
                 `
             )
         });
