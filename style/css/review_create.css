@@ -175,7 +175,8 @@ body {
     cursor: pointer;
 }
 
-@media (min-width: 570px) {
+/* @media (min-width: 575px) { */
+@media (min-width: 768px) {
     .root {
         width: 400px;
     }
