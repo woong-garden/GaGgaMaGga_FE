@@ -58,49 +58,59 @@ async function getData() {
     const likeCount = document.querySelector('#like-count')
     likeCount.innerText = response.review_like.length
 
-    // const nickname = document.querySelector('.nickname')
-    // const time = document.querySelector('.time')
-    // const profileImg = document.querySelector('.comment-user-img')
-    // const commentContent = document.querySelector('.comment-content')
 
     response.review_comments.forEach(cmt => {
         const comments = document.querySelector('.comments')
+
         const eachComment = document.createElement("div")
+        eachComment.classList.add("each-comment")
         comments.appendChild(eachComment)
-
-        const user = document.createElement("div")
-        user.classList.add("user")
-        eachComment.appendChild(user)
-
 
         const profileImg = document.createElement('img')
         profileImg.classList.add('comment-user-img')
         profileImg.src = "http://127.0.0.1:8000"+ cmt.profile_image
-        user.appendChild(profileImg)
+        eachComment.appendChild(profileImg)
+
+        const commentContent = document.createElement("div")
+        commentContent.classList.add('comment-content')
+        eachComment.appendChild(commentContent)
+
+        const commentHead = document.createElement("div")
+        commentHead.classList.add("comment-head")
+        commentContent.appendChild(commentHead)
 
         const nickname = document.createElement('p')
         nickname.classList.add('nickname')
         nickname.innerText = cmt.nickname
-        user.appendChild(nickname)
+        commentHead.appendChild(nickname)
 
         const time = document.createElement('p')
         time.classList.add('time')
         time.innerText = cmt.created_at
-        user.appendChild(time)
+        commentHead.appendChild(time)
 
         const dots = document.createElement('img')
         dots.src = "/images/icon/dot.svg"
-        user.appendChild(dots)
+        commentHead.appendChild(dots)
 
-        const commentWrap = document.createElement("div")
-        commentWrap.classList.add("comment-wrap")
-        eachComment.appendChild(commentWrap)
+        const commentText= document.createElement("p")
+        commentText.innerText = cmt.content
+        commentContent.appendChild(commentText)
 
-        const contentBox = document.createElement("div")
-        commentWrap.appendChild(contentBox)
+        const commentUnder = document.createElement("div")
+        commentUnder.classList.add("comment-under")
+        commentContent.appendChild(commentUnder)
 
-        const like = document.createElement("div")
-        commentWrap.appendChild(like)
+        const commentLike = document.createElement("img")
+        commentLike.src = "/images/icon/review_et_heart.svg"
+        commentUnder.appendChild(commentLike)
+
+        const commentLikeCount = document.createElement("p")
+        commentLikeCount.innerText = cmt.comment_like_count
+        commentUnder.appendChild(commentLikeCount)
+
+        const commentDetail = document.createElement("detail")
+        commentUnder.appendChild(commentDetail)
         
     });
 
@@ -112,7 +122,6 @@ async function getData() {
 //코멘트 등록, 나중에 페이지 생성시 덧글 등록 버튼에 onclick으로 이 함수를 달아주면 됩니다.
 function postComment() {
     const content = document.querySelector(".nav-input-wrap input").value
-    // 후에 만들어질 html에서 덧글 등록 input 태그의 class가 .input_comment라고 가정하고 만들었습니다.
     const review_id = 1 // 마찬가지로 추후 연동시켜야 합니다.
     console.log(content)
 
@@ -128,3 +137,35 @@ function postComment() {
     })
     alert("덧글 등록")
 }
+
+// 알람
+// function alarm(){
+//     const user_id = 1
+//     const notificationSocket = new WebSocket(
+//         'ws://'
+//         // + window.location.host
+//         +"127.0.0.1:8000"
+//         + "/ws/notification/"
+//         + user_id
+//         + '/'
+//     );
+
+
+//     notificationSocket.onmessage = function (e) {
+//         const data = JSON.parse(e.data);
+//         const alarmBox = document.querySelector('.alarm')
+//         const alarmContent = document.createElement('p')
+//         alarmContent.classList.add('alarm-content')
+//         alarmContent.innerHTML = data.message;
+//         alarmBox.appendChild(alarmContent);
+//     };
+//     notificationSocket.onclose = function (e) {
+//         console.error('소켓이 닫혔어요 ㅜㅜ');
+//     };
+//     document.querySelector('#comment-button').onclick = function (e) {
+//         const message = "게시물에 덧글이 달렸습니다."
+//         notificationSocket.send(JSON.stringify({
+//             'message': message
+//         }))
+//     }
+// }

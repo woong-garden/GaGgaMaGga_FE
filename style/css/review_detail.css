@@ -135,31 +135,36 @@ box-shadow: 0 0 20px rgb(0 0 0 / 5%);
 .review-detail-box div p {
     font-size : 13px;
 }
-.user{
-    display: flex;
-    width : 90%;
-    justify-content : left;
-    margin : auto;
-}
-
-
 .nickname,.time{
-    margin:auto 1.5vw;
+    margin:auto 1vw;
 }
-.comment-wrap{
+.each-comment{
     display: flex;
-    width : 84%;
     justify-content: center;
-    text-align: right;
-    float : right;
+    margin : 3vh auto;
 }
-
+.comment-head{
+    display: flex;
+}
 .comment-content{
-    width : 100%;
-    text-align: left;
-    font-size: 14.5px;
+    width : 88%;
+    display: flex;
+    flex-direction: column;
 }
-
+.comment-content > p {
+    margin-left : 1vw;
+}
+.comment-under{
+    display: flex;
+    margin-left: 1vw;
+}
+.comment-under p{
+    font-size: 12px;
+    margin : auto 0;
+}
+.comment-under details{
+    margin : auto 0;
+}
 .comment-cnt{
     width : 25%;
     text-align: right;
@@ -169,15 +174,16 @@ box-shadow: 0 0 20px rgb(0 0 0 / 5%);
     display: block;
 }
 .comment-user-img{
-    width : 10%;
+    width : 7%;
+    height : 7%;
     aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 50%;
     margin-right : auto 2vw auto 0;
 }
 .comment-heart-style{
-    cursor:pointer; 
-    margin-left:20px;
+    cursor:pointer;
+    margin: auto 0;
 }
 summary{
     font-size:10px; 
