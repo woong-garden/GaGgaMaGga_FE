@@ -1,3 +1,6 @@
+const review_id = location.href.split('=')[1]
+
+console.log(review_id)
 window.onload = () => {
     getData()
     // openModal()
