@@ -30,6 +30,25 @@ function popClose(id) {
 
 
 
+//지도 API
+var mapOptions = {
+    center: new naver.maps.LatLng(37.3595704, 127.105399),
+    zoom: 10
+}
+
+var map = new naver.maps.Map('map', {
+    center: new naver.maps.LatLng(37.3595704, 127.105399),
+    zoom: 10
+});
+
+var map = null;
+function initMap() {
+    map = new naver.maps.Map('map', {
+        center: new naver.maps.LatLng(37.3595704, 127.105399),
+        zoom: 10
+    });
+}
+
 
 //select
 async function NewUserPlaceListView(place_id, category) {
@@ -72,7 +91,8 @@ async function NewUserPlaceListView(place_id, category) {
                     <p style="font-size:15px;">전화번호 : ☎ ${item.place_address}</p>
                     <p style="font-size:15px;">영업시간 : ${item.place_time}</p>
                 </div>
-                <div class="modal_map"></div>
+                    <div class="modal_map" id="map">
+                </div>
                 
             </div>
             `
