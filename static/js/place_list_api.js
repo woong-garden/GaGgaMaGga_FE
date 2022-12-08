@@ -15,39 +15,22 @@ window.onload = function () {
 
 // modal
 function popOpen(id) {
-    var modalPop = $('#modal-wrap'+String(id));
-    var modalBg = $('#modal-bg'+String(id));
+    var modalPop = $('#modal-wrap' + String(id));
+    var modalBg = $('#modal-bg' + String(id));
     $(modalPop).show();
     $(modalBg).show();
 }
 
 function popClose(id) {
-    var modalPop = $('#modal-wrap'+String(id));
-    var modalBg = $('#modal-bg'+String(id));
+    var modalPop = $('#modal-wrap' + String(id));
+    var modalBg = $('#modal-bg' + String(id));
     $(modalPop).hide();
     $(modalBg).hide();
 }
 
 
 
-//지도 API
-var mapOptions = {
-    center: new naver.maps.LatLng(37.3595704, 127.105399),
-    zoom: 10
-}
 
-var map = new naver.maps.Map('map', {
-    center: new naver.maps.LatLng(37.3595704, 127.105399),
-    zoom: 10
-});
-
-var map = null;
-function initMap() {
-    map = new naver.maps.Map('map', {
-        center: new naver.maps.LatLng(37.3595704, 127.105399),
-        zoom: 10
-    });
-}
 
 
 //select
@@ -59,7 +42,7 @@ async function NewUserPlaceListView(place_id, category) {
         }
     })
     response_json = await response.json()
-
+    console.log(response_json)
     $('#place-list').empty()
     response_json.forEach(item => {
         $('#place-list').append(
@@ -91,14 +74,31 @@ async function NewUserPlaceListView(place_id, category) {
                     <p style="font-size:15px;">전화번호 : ☎ ${item.place_address}</p>
                     <p style="font-size:15px;">영업시간 : ${item.place_time}</p>
                 </div>
-                    <div class="modal_map" id="map">
+                    <div class="modal_map" id="map${item.id}">
                 </div>
                 
             </div>
+
             `
         )
-
-    });
+        //지도 API
+        var mapOptions = {
+            center: new naver.maps.LatLng(37.3595704, 127.105399),
+            zoom: 14
+        }
+        console.log(`map${item.id}`)
+        var map = new naver.maps.Map(`map${item.id}`, mapOptions);
+        var defaultMarker = new naver.maps.Marker({
+            title: "title",
+            position: new naver.maps.LatLng(37.3606904, 127.1061625),
+            map: map,
+            icon: {
+                content: '<img src="./images/icon/map_marker.png" alt="" class="marker_style" style="-webkit-user-select: none;">',
+                size: new naver.maps.Size(22, 35),
+                anchor: new naver.maps.Point(11, 35)
+            }
+        });
+    })
 }
 
 function move_list_page(cate_id) {
