@@ -20,7 +20,7 @@ async function searchParam(){
         })
         response_json = await response.json()
 
-        // if(response_json.hits.length){
+        if(response_json.hits.length){
             response_json.hits.forEach(item => {
                 console.log(response_json.hits)
                 $('#search-list').append(
@@ -50,29 +50,23 @@ async function searchParam(){
                     `
                 )
             });
-        // }
+        }else{
+            alert(`${decodeResult} 검색내용이 없습니다!`);
+        }
+    }else{
+        alert(`검색내용을 입력해주세요!`);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function enterkey(e) {
     if (window.event.keyCode == 13){
         sendSearchKeyword().then();
     }
+}
+
+
+function move_detail_page(click_id){ 
+    console.log(click_id)
+
 }
