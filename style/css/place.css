@@ -318,7 +318,7 @@ td {
     transform:translate(-50%,-50%);
     width:350px;
     height:500px;
-    background:rgba(250, 243, 181, 0.253);
+    background:rgba(250, 243, 181, 0.8);
     border-radius: 15px;
     z-index:1000;
 

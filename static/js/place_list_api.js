@@ -14,16 +14,16 @@ window.onload = function () {
 
 
 // modal
-function popOpen() {
-    var modalPop = $('.modal-wrap');
-    var modalBg = $('.modal-bg');
+function popOpen(id) {
+    var modalPop = $('#modal-wrap'+String(id));
+    var modalBg = $('#modal-bg'+String(id));
     $(modalPop).show();
     $(modalBg).show();
 }
 
-function popClose() {
-    var modalPop = $('.modal-wrap');
-    var modalBg = $('.modal-bg');
+function popClose(id) {
+    var modalPop = $('#modal-wrap'+String(id));
+    var modalBg = $('#modal-bg'+String(id));
     $(modalPop).hide();
     $(modalBg).hide();
 }
@@ -52,16 +52,16 @@ async function NewUserPlaceListView(place_id, category) {
                     <div>${item.place_address}  ☎${item.place_number}</div>
                     <div></div>
                     <div>${item.place_time}</div>
-                    <a href="#" class="btn-open" onClick="javascript:popOpen();"><div class="market_detail_button btn-box">상세보기</div></a>
+                    <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">상세보기</div></a>
                     <a href="#"><div class="market_detail_button">리뷰쓰기</div></a>
                 </td>
                 <td width="10%">${item.rating}</td>
             </table>
             
-            <div class="modal-bg" onClick="javascript:popClose();"></div>
-            <div class="modal-wrap">
-                modal sample
-                <button class="modal-close" onClick="javascript:popClose();">닫기</button>
+            <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
+            <div class="modal-wrap" id="modal-wrap${item.id}">
+                <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
+                <button class="modal-close" onClick="javascript:popClose(${item.id});">닫기</button>
             </div>
             `
         )
@@ -108,7 +108,7 @@ async function UserPlaceListView(cate_id) {
                 </table>
                 <div class="modal-bg" onClick="javascript:popClose();"></div>
                 <div class="modal-wrap">
-                    modal sample
+                    <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
                     <button class="modal-close" onClick="javascript:popClose();">닫기</button>
                 </div>
                 
