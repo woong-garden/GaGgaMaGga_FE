@@ -19,10 +19,21 @@
 </head>
 
 <body>
+    <div id="modal-box">
+        <div id="modal-body">
+            <div class="alarm">
+                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon">
+                <p class="alarm-content">실제 알람 내용</p>
+            </div>
+            <button id="close-modal" onclick="closeModal()">닫기</button>
+        </div>
+    </div>
     <!--헤더 시작-->
     <div class="header">
         <div>
             <a><img id="back" src="/images/icon/back.svg"></a>
+            <button onclick="openModal()"><img class="modal-icon"
+                    src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png"></button>
         </div>
     </div>
     <!--헤더 끝-->
@@ -86,39 +97,40 @@
         <!--내용 끝-->
         <!--댓글시작-->
         <div class="comments">
-            <div>
-                <div class="user">
-                    <img class="comment-user-img"
-                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
-
-                    <p class="nickname">닉네임</p>
-                    <p class="time">시간</p>
-                    <img src="/images/icon/dot.svg">
-                </div>
-                <div class="comment-wrap">
-                    <div>
-                        <p class="comment-content">코멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트
-                            내용
-                        </p>
+            <div class="each-comment">
+                <img class="comment-user-img"
+                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
+                <div class="comment-content">
+                    <div class="comment-head">
+                        <p class="nickname">닉네임</p>
+                        <p class="time">시간</p>
+                        <img src="/images/icon/dot.svg">
+                    </div>
+                    <p>코멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트
+                        내용멘트
+                        내용
+                    </p>
+                    <div class="comment-under">
+                        <img src="/images/icon/review_et_heart.svg">
+                        <p>1234</p>
                         <details>
                             <summary>
-                                댓글달기
+                                답글 달기
                             </summary>
                             <form>
                                 <div class="comment-2">
                                     <input type="text" placeholder="답글 달기">
-                                    <button onclick="postComment()">등록</button>
+                                    <button id="comment-button">답글 등록</button>
                                 </div>
                             </form>
                         </details>
-                    </div>
-                    <div style="font-size:12px;">
-                        <div class="comment-heart-style"><img src="/images/icon/review_et_heart.svg"></div>
-                        <div style="margin-left:20px; text-align:center;">1234</div>
+                       
                     </div>
                 </div>
             </div>
+
         </div>
+
         <!--댓글 끝-->
     </div>
     <!--메인 끝-->
@@ -130,7 +142,7 @@
                 <form>
                     <div class="nav-input-wrap">
                         <input type="text" placeholder="댓글 달기">
-                        <button onclick="postComment()">등록</button>
+                        <button onclick="postComment();">등록</button>
                     </div>
                 </form>
             </nav>
