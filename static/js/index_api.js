@@ -57,3 +57,8 @@ async function expired_password_confirm() {
         location.replace('expired_password.html')
     } 
 }
+
+
+function move_select_page(cate_id){ 
+    window.location.href = `/place_preference.html?$id=${cate_id}/`
+}
