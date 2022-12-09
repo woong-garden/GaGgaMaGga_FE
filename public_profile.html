@@ -27,7 +27,7 @@
     <div class="header">
         <div>
             <div>
-                <a><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
+                <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
             </div> 
             <div> 
                 <a><img style="margin-left:8px;" src="/images/icon/bell.svg"></a>
@@ -52,32 +52,36 @@
                         <div class="card-body">
                             <h6 class="card-title" id="profile_nickname"></h6>
                             <p class="card-text" id="profile_intro"></p>
-                            <span class="card-text">팔로워&nbsp;</span><span class="card-text" id="profile_followers"></span>
-                            <span class="card-text">&nbsp;&nbsp; 팔로잉&nbsp;</span><span class="card-text" id="profile_followings"></span>
+                            <button id="follower_move" class="card-text" value="follower" onclick="move_follow_page(user_nickname)">팔로워</button>
+                            <span class="card-text" id="profile_followers"></span>
+                            <span>&nbsp;&nbsp;&nbsp;</span>                          
+                            <button id="following_move" class="card-text" value="following" onclick="move_following_page(user_nickname)">팔로잉</button>
+                            <span>&nbsp;</span>
+                            <span class="card-text" id="profile_followings"></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="container" style="margin-bottom: 10px; ">
+        <div class="container" style="margin-bottom: 10px;">
             <div class="row row-cols-2">
-                <div class="col">
-                    <button class="profile-button" onclick="reviewshow()">후기</button>
-                </div>
                 <div class="col">
                     <button class="profile-button" onclick="bookmarkshow()">북마크</button>
                 </div>
+                <div class="col">
+                    <button class="profile-button" onclick="reviewshow()">후기</button>
+                </div>
             </div>
         </div>
-
+        <!-- 북마크 -->
+        <div class="container" id='my-bookmark' style="display: block;">
+        </div>
         <!-- 후기 -->
-        <div class="container" id='my-review' style="display: block;">
+        <div class="container" id='my-review' style="display: none;">
         </div>
         
-        <!-- 북마크 -->
-        <div class="container" id='my-bookmark' style="display: none;">
-        </div>
+        
     </div>
     <!--메인 끝-->  
     
@@ -88,7 +92,7 @@
             <nav class="nav-bar">
                 <a href="index.html"><img src="/images/icon/home.svg"></a>
                 <a href="search.html"><img src="/images/icon/nav_search.svg"></a>
-                <a href="public_profile.html"><img src="/images/icon/bookmark.svg"></a>
+                <a onclick="move_profile_page()"><img src="/images/icon/bookmark.svg"></a>
                 <a href="place_list.html"><img style="width:27px; aspect-ratio: 1/1;" src="https://cdn-icons-png.flaticon.com/512/126/126473.png"></a>
                 <a href="private_profile.html"><img src="/images/icon/profile.svg"></a>
             </nav>
@@ -101,6 +105,7 @@
     </script>
     <script src="static/js/base_api.js"></script>
     <script src="static/js/public_profile_api.js"></script>
+    <script src="static/js/follow_api.js"></script>
 </body>
 
 </html>
