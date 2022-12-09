@@ -144,3 +144,16 @@ border: solid 1px rgba(219, 219, 219, 1);
     height: 100%;
     border: none;   
 }
+
+.box {
+    background-color: green;
+    opacity: 0; visibility: hidden;
+    transition-property: opacity, visibility;
+    transition-duration: 0.5s, 0s;
+    transition-delay: 0s, 0.5s;
+}
+.box.on {
+    opacity: 1; visibility: visible;
+    transition-property: visibility, opacity;
+    transition-duration: 0s, 0.5s;
+}
