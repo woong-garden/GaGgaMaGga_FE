@@ -25,6 +25,13 @@ async function private_profile(){
     h6_profile_email.innerText = `이메일: ${response_json.email}`
     document.getElementById("porfile-img").src = `${backendBaseUrl}${response_json.profile_image}`
 }
+
+// 내 프로필
+let profile_nickname = JSON.parse(localStorage.getItem(['payload'])).nickname
+function move_profile_page(){
+    window.location.href = `/public_profile.html?=${profile_nickname}`
+}
+
 //회원정보 수정 카카오 로그인은 접근 불허
 function confirm_kakao_user_edit() {
     if (localStorage.getItem("kakao")){

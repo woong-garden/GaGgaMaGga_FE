@@ -14,7 +14,7 @@ function followingshow(){
     $('#following').show();
 }
 
-// 공개프로필
+// 팔로우
 async function follow() {
     const response = await fetch(`${backendBaseUrl}/users/profiles/${user_nickname}/`, {
         method: 'GET',
