@@ -2,7 +2,7 @@ const review_id = location.href.split('=')[1].split('&')[0]
 const place_id = location.href.split('=')[2]
 
 window.onload = () => {
-    getData(review_id,place_id)
+    getData(review_id, place_id)
 
 }
 
@@ -38,9 +38,6 @@ function closeModal() {
 
 // 전체 코멘트랑 같이 상세 페이지 데이터 불러오기
 async function getData(review_id, place_id) {
-    // const review_id = 1 //추후 후기의 id 연동해야 합니다.
-    console.log(review_id)
-    console.log(place_id)
 
     const response = await fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
         headers: {
@@ -63,10 +60,21 @@ async function getData(review_id, place_id) {
     const likeCount = document.querySelector('#like-count')
     likeCount.innerText = response.review_like.length
 
+    const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
+    firstImage.src = "http://127.0.0.1:8000" + response.review_image_one
+    const secondImage = document.querySelector('.slidelist li:nth-child(2) img')
+    secondImage.src = "http://127.0.0.1:8000" + response.review_image_two
+    const thirdImage = document.querySelector('.slidelist li:nth-child(3) img')
+    thirdImage.src = "http://127.0.0.1:8000" + response.review_image_three
+
+    const title = document.querySelector('h3')
+    title.innerText = response.place_name
+
+    const comments = document.querySelector('.comments')
+    comments.innerHTML = ""
+
+
     response.review_comments.forEach(cmt => {
-
-
-        const comments = document.querySelector('.comments')
 
         const eachComment = document.createElement("div")
         eachComment.classList.add("each-comment")
@@ -147,59 +155,86 @@ async function getData(review_id, place_id) {
         recommentButton.appendChild(text)
         recomment.appendChild(recommentButton)
 
+
+
     });
+
 
 
 
 }
 
-//코멘트 등록, 나중에 페이지 생성시 덧글 등록 버튼에 onclick으로 이 함수를 달아주면 됩니다.
-function postComment() {
-    const content = document.querySelector(".nav-input-wrap input").value
-    const review_id = 1 // 마찬가지로 추후 연동시켜야 합니다.
-    console.log(content)
 
-    fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/`, {
+// 코멘트 등록
+async function postComment(review_id, content) {
+
+
+    const response = await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/`, {
         headers: {
             'content-type': 'application/json',
             "authorization": "Bearer " + localStorage.getItem("access")
         },
         method: 'POST',
-        body: JSON.stringify({
+        body: JSON.stringify({ // JS object is converted to string.
             "content": content,
         })
     })
-    alert("덧글 등록")
 }
 
-// 알람
-function alarm(){
-    const user_id = 1
-    const notificationSocket = new WebSocket(
-        'ws://'
-        // + window.location.host
-        +"127.0.0.1:8000"
-        + "/ws/notification/"
-        + user_id
-        + '/'
-    );
+
+async function writeComment() {
+    let content = document.querySelector(".nav-input-wrap input").value
+
+    await postComment(review_id, content)
+
+    getData(review_id, place_id)
+    content = ""
+}
+
+// 알람 
+const payload = localStorage.getItem("payload");
+const payload_parse = JSON.parse(payload);
+const user_id = payload_parse.user_id
+
+console.log("connect1")
+
+const notificationSocket = new WebSocket(
+    'ws://'
+    + "127.0.0.1:8000"
+    + '/ws/notification/'
+    + user_id
+    + '/'
+);
 
 
-    notificationSocket.onmessage = function (e) {
-        const data = JSON.parse(e.data);
-        const alarmBox = document.querySelector('.alarm')
-        const alarmContent = document.createElement('p')
-        alarmContent.classList.add('alarm-content')
-        alarmContent.innerHTML = data.message;
-        alarmBox.appendChild(alarmContent);
-    };
-    notificationSocket.onclose = function (e) {
-        console.error('소켓이 닫혔어요 ㅜㅜ');
-    };
-    document.querySelector('#comment-button').onclick = function (e) {
-        const message = "게시물에 덧글이 달렸습니다."
-        notificationSocket.send(JSON.stringify({
-            'message': message
-        }))
-    }
+
+notificationSocket.onmessage = function (e) {
+    console.log("connect2")
+    const data = JSON.parse(e.data);
+    const alarmBox = document.querySelector('.alarm')
+
+
+    const alarmContent = document.createElement('div')
+    alarmContent.innerHTML =`<div style="display:flex; height:10vh;">
+        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon">
+        <p class="alarm-content">${data.message}</p>
+    </div>`
+    alarmBox.appendChild(alarmContent)
+};
+
+
+notificationSocket.onclose = function (e) {
+    console.log("connect3")
+    console.error('소켓이 닫혔어요 ㅜㅜ');
+};
+
+
+document.querySelector('#button').onclick = function (e) {
+    console.log("connect4")
+    const message = "덧글이 달렸습니다."
+    notificationSocket.send(JSON.stringify({
+        'message': message
+
+    }))
+    console.log('send')
 }
