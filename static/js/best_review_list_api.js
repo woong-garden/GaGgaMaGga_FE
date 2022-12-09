@@ -16,13 +16,14 @@ async function BestLikeSort(){
     rank_cnt.innerText = response_json.like_count_review.length
 
     response_json.like_count_review.forEach(item => {
-        console.log(item)
         $('#like-rank').append(
             `
             <div class="review-list">
                 <div class="place-item">
                     <div>
-                        <img style="width:100px;height:100px; cursor: pointer;" onclick="move_review_detail_page(${item.id},${item.place.id})" src="${backendBaseUrl}${item.review_image_one}">
+                        <a style="cursor: pointer;" onclick="move_review_detail_page(${item.id},${item.place_id})">
+                            <img style="width:100px;height:100px;" src="${backendBaseUrl}${item.review_image_one}">
+                        </a>
                     </div>
                     <div class="place-item-content">
                         <div>${item.place_name}</div>
