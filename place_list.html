@@ -18,7 +18,6 @@
     <!--jquery-->
     <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-
     <title>Document</title>
 
 </head>
@@ -36,11 +35,12 @@
             </form>
             <img style="margin-left:8px;" src="./images/icon/bell.svg">
         </div>
+        
     </div>
     <!--헤더 끝-->
 
     <!--메인 시작-->
-    <div class="root" style="padding-top:50px;">
+    <div class="root" style="padding:50px 0px; ">
         <p class="sub_title">아래와 같이 추천해드립니다.</p>
         <div class="list_container">
             <div class="tbl-header">
@@ -57,7 +57,7 @@
             <div class="tbl-content">
                 <table id="place-list"></table>
             </div>
-
+            
         </div>
         <!--메인 끝-->
 
@@ -73,9 +73,14 @@
                 </nav>
             </div>
         </div>
+        <!--네비바 끝-->
         <!-- <script src="static/js/base_api.js"></script> -->
         <script src="static/js/place_list_api.js"></script>
-        <!--네비바 끝-->
+
+        <!--지도 API-->
+        <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=9em8elq2ms"></script>
+
+
 </body>
 
 </html>

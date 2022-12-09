@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--폰트-->
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style/css/place_review_list.css">
-
+    <link rel="stylesheet" href="/style/css/best_review_list.css">
     <!--제이쿼리문-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>   
     <title>Document</title>
 
 
@@ -31,16 +30,16 @@
     <!--메인 시작-->
     <div class="root">
         <div class="root_block"></div>
-        <div>
-            <div class="place-name">OO카페 후기</div>
-            <div class="review-botton-wrap"><button onclick="move_review_create_page()" class="review-create-botton">후기 작성하기</button></div>
-        </div>
+        <!--여기사용하시면 됩니다~-->
+
+        <div class="place-name">OO 지역 Best 후기</div>
+
         <div style="height: 10px; width: 100%; background-color: #f9f9f9; margin-top:14px;"></div>
         
         <div class="review-list-box">
             <div class="review-list-header">
                 <div>
-                    <span style="color:#9b9b9b; font-size: 14px;" id="place-review-cnt"></span> <span style="color:#9b9b9b; font-size: 14px;">개의 후기</span>
+                    <span style="color:#9b9b9b; font-size: 14px;" id="rank-cnt"></span> <span style="color:#9b9b9b; font-size: 14px;">개의 후기</span>
                 </div>
                 <div>
                     <div>
@@ -50,23 +49,22 @@
                         |
                     </div>
                     <div>
-                        <button id="sort-recent-button" class="button-style" onclick="recent_rank_show()">최신순</button>
+                        <button id="sort-recent-button" class="button-style" onclick="views_rank_show()">최신순</button>
                     </div>
                 </div>    
             </div>
 
             <!--좋아요순 시작-->
-            <div id="like-rank" style="display:block;">
-                
+            <div id="like-rank" style="display:block; ">
+
             </div>
             <!--좋아요순 끝-->
 
             <!--최신순 시작-->
-            <div id="recent-rank" style="display:none;"">
+            <div id="recent-rank" style="display:none;">
                 
             </div>
-            <!--최신순 끝-->
-
+            <!--조회순 끝-->
         </div>
     </div>
     <!--메인 끝-->  
@@ -86,7 +84,7 @@
     <!--네비바 끝-->
 
     <script>
-        //좋아요순, 최신순, 조회순 토글
+        //좋아요순,조회순 토글
         function like_rank_show(){
             document.getElementById("like-rank").style.display ='block';
             document.getElementById("recent-rank").style.display ='none';
@@ -94,7 +92,8 @@
             document.getElementById("sort-like-button").style.color = "#FF792A";
             document.getElementById("sort-recent-button").style.color = "#9b9b9b";
         }
-        function recent_rank_show(){
+
+        function views_rank_show(){
             document.getElementById("like-rank").style.display ='none';
             document.getElementById("recent-rank").style.display ='block';
 
@@ -102,8 +101,7 @@
             document.getElementById("sort-recent-button").style.color = "#FF792A";
         }
     </script>
-
-    <script src="/static/js/place_review_list_api.js"></script>
+    <script src="/static/js/best_review_list_api.js"></script>
     <script src="/static/js/base_api.js"></script>
 </body>
 </html>

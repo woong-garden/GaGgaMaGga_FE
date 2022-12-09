@@ -28,10 +28,10 @@
             <button id="close-modal" onclick="closeModal()">닫기</button>
         </div>
     </div>
-    <!--헤더 시작-->
+
     <div class="header">
         <div>
-            <a><img id="back" src="/images/icon/back.svg"></a>
+            <a href="javascript:history.back();"><img id="back" src="/images/icon/back.svg"></a>
             <button onclick="openModal()"><img class="modal-icon"
                     src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png"></button>
         </div>
@@ -97,38 +97,6 @@
         <!--내용 끝-->
         <!--댓글시작-->
         <div class="comments">
-            <div class="each-comment">
-                <img class="comment-user-img"
-                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
-                <div class="comment-content">
-                    <div class="comment-head">
-                        <p class="nickname">닉네임</p>
-                        <p class="time">시간</p>
-                        <img src="/images/icon/dot.svg">
-                    </div>
-                    <p>코멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트 내용멘트
-                        내용멘트
-                        내용
-                    </p>
-                    <div class="comment-under">
-                        <img src="/images/icon/review_et_heart.svg">
-                        <p>1234</p>
-                        <details>
-                            <summary>
-                                답글 달기
-                            </summary>
-                            <form>
-                                <div class="comment-2">
-                                    <input type="text" placeholder="답글 달기">
-                                    <button id="comment-button">답글 등록</button>
-                                </div>
-                            </form>
-                        </details>
-                       
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         <!--댓글 끝-->

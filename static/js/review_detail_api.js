@@ -1,12 +1,15 @@
+const review_id = location.href.split('=')[1].split('&')[0]
+const place_id = location.href.split('=')[2]
+
 window.onload = () => {
-    getData()
-    // openModal()
-    // closeModal()
+    getData(review_id,place_id)
 
 }
 
+
+
 // 모달창 열기
-function openModal(){
+function openModal() {
     const modalBox = document.querySelector('#modal-box')
     const header = document.querySelector('.header')
     const main = document.querySelector('.root')
@@ -20,7 +23,7 @@ function openModal(){
 
 
 // 모달창 닫기
-function closeModal(){
+function closeModal() {
     const modalBox = document.querySelector('#modal-box')
     const header = document.querySelector('.header')
     const main = document.querySelector('.root')
@@ -34,10 +37,12 @@ function closeModal(){
 
 
 // 전체 코멘트랑 같이 상세 페이지 데이터 불러오기
-async function getData() {
-    const review_id = 1 //추후 후기의 id 연동해야 합니다.
+async function getData(review_id, place_id) {
+    // const review_id = 1 //추후 후기의 id 연동해야 합니다.
+    console.log(review_id)
+    console.log(place_id)
 
-    const response = await fetch(`http://127.0.0.1:8000/reviews/details/${review_id}/`, {
+    const response = await fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
@@ -58,8 +63,9 @@ async function getData() {
     const likeCount = document.querySelector('#like-count')
     likeCount.innerText = response.review_like.length
 
-
     response.review_comments.forEach(cmt => {
+
+
         const comments = document.querySelector('.comments')
 
         const eachComment = document.createElement("div")
@@ -68,7 +74,7 @@ async function getData() {
 
         const profileImg = document.createElement('img')
         profileImg.classList.add('comment-user-img')
-        profileImg.src = "http://127.0.0.1:8000"+ cmt.profile_image
+        profileImg.src = "http://127.0.0.1:8000" + cmt.profile_image
         eachComment.appendChild(profileImg)
 
         const commentContent = document.createElement("div")
@@ -93,7 +99,7 @@ async function getData() {
         dots.src = "/images/icon/dot.svg"
         commentHead.appendChild(dots)
 
-        const commentText= document.createElement("p")
+        const commentText = document.createElement("p")
         commentText.innerText = cmt.content
         commentContent.appendChild(commentText)
 
@@ -109,15 +115,43 @@ async function getData() {
         commentLikeCount.innerText = cmt.comment_like_count
         commentUnder.appendChild(commentLikeCount)
 
-        const commentDetail = document.createElement("detail")
-        commentUnder.appendChild(commentDetail)
-        
+        const recomment = document.createElement("div")
+        recomment.classList.add('recomment')
+        recomment.style.justifyContent = "space-between"
+        recomment.style.margin = "1vh 1.5vw"
+        commentContent.appendChild(recomment)
+
+        const insertRecomment = document.createElement('button')
+        var txt = document.createTextNode('답글 달기')
+        insertRecomment.appendChild(txt)
+        insertRecomment.classList.add('cmt-btn')
+        commentUnder.appendChild(insertRecomment)
+        insertRecomment.onclick = function () {
+            recomment.classList.toggle('show-recomment')
+        }
+
+
+
+
+        const recommentImg = document.createElement('img')
+        recommentImg.src = "http://127.0.0.1:8000" + response.profile_image
+        recomment.appendChild(recommentImg)
+
+        const recommentInput = document.createElement('input')
+        recommentInput.placeholder = "답글 달기"
+        recommentInput.type = "text"
+        recomment.appendChild(recommentInput)
+
+        const recommentButton = document.createElement('button')
+        var text = document.createTextNode('등록')
+        recommentButton.appendChild(text)
+        recomment.appendChild(recommentButton)
+
     });
 
 
 
 }
-
 
 //코멘트 등록, 나중에 페이지 생성시 덧글 등록 버튼에 onclick으로 이 함수를 달아주면 됩니다.
 function postComment() {
@@ -139,33 +173,33 @@ function postComment() {
 }
 
 // 알람
-// function alarm(){
-//     const user_id = 1
-//     const notificationSocket = new WebSocket(
-//         'ws://'
-//         // + window.location.host
-//         +"127.0.0.1:8000"
-//         + "/ws/notification/"
-//         + user_id
-//         + '/'
-//     );
+function alarm(){
+    const user_id = 1
+    const notificationSocket = new WebSocket(
+        'ws://'
+        // + window.location.host
+        +"127.0.0.1:8000"
+        + "/ws/notification/"
+        + user_id
+        + '/'
+    );
 
 
-//     notificationSocket.onmessage = function (e) {
-//         const data = JSON.parse(e.data);
-//         const alarmBox = document.querySelector('.alarm')
-//         const alarmContent = document.createElement('p')
-//         alarmContent.classList.add('alarm-content')
-//         alarmContent.innerHTML = data.message;
-//         alarmBox.appendChild(alarmContent);
-//     };
-//     notificationSocket.onclose = function (e) {
-//         console.error('소켓이 닫혔어요 ㅜㅜ');
-//     };
-//     document.querySelector('#comment-button').onclick = function (e) {
-//         const message = "게시물에 덧글이 달렸습니다."
-//         notificationSocket.send(JSON.stringify({
-//             'message': message
-//         }))
-//     }
-// }
+    notificationSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        const alarmBox = document.querySelector('.alarm')
+        const alarmContent = document.createElement('p')
+        alarmContent.classList.add('alarm-content')
+        alarmContent.innerHTML = data.message;
+        alarmBox.appendChild(alarmContent);
+    };
+    notificationSocket.onclose = function (e) {
+        console.error('소켓이 닫혔어요 ㅜㅜ');
+    };
+    document.querySelector('#comment-button').onclick = function (e) {
+        const message = "게시물에 덧글이 달렸습니다."
+        notificationSocket.send(JSON.stringify({
+            'message': message
+        }))
+    }
+}
