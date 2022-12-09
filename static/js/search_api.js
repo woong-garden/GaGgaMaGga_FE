@@ -4,6 +4,7 @@ function sendSearchKeyword(){
 }
 
 
+
 async function searchParam(){
     let getLink = window.location.search;
     let getLink_Name = getLink.split('=');
@@ -12,7 +13,7 @@ async function searchParam(){
     console.log(decodeResult)
 
     if(decodeResult){
-        const response = await fetch(`http://127.0.0.1:8000/places/search/?q=${decodeResult}`,{
+        const response = await fetch(`http://127.0.0.1:8000/places/search/?keyword=${decodeResult}`,{
             headers:{
                 'content-type':'application/json'
             },
@@ -20,16 +21,16 @@ async function searchParam(){
         })
         response_json = await response.json()
 
-        // if(response_json.hits.length){
+        if(response_json.hits.length){
             response_json.hits.forEach(item => {
-                console.log(response_json.hits)
+                console.log(response_json)
                 $('#search-list').append(
                     `
                     <div class="review-list">
                         <a class="place-item">
                             <div>
                                 <div style="width:100px;height:100px;">
-                                    <img style="width:100%;height:100%;" src="${item.place_img}">
+                                    <img style="width:100%;height:100%; src="${item.place_img}">
                                 </div>
                             </div>
                             <div class="place-item-content-box">
@@ -50,29 +51,23 @@ async function searchParam(){
                     `
                 )
             });
-        // }
+        }else{
+            alert(`${decodeResult} 검색내용이 없습니다!`);
+        }
+    }else{
+        alert(`검색내용을 입력해주세요!`);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function enterkey(e) {
     if (window.event.keyCode == 13){
         sendSearchKeyword().then();
     }
+}
+
+
+function move_detail_page(click_id){ 
+    console.log(click_id)
+
 }

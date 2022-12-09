@@ -133,6 +133,20 @@
     }
     .review-item-date{
         font-size:11px;
+        padding-bottom:8px;
+    }
+    .rating{
+        display: flex; 
+        align-items: center;
+    }
+    .rating > :first-child{
+        width: 14px; 
+        height:14px; 
+        padding-right:2px;
+    }
+    .rating > :nth-child(2){
+        font-size:14px; 
+        font-weight:700
     }
     .review-item-title{
         font-size:12px; 
