@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
-    <title>Document</title>
+    <title>후기 상세 페이지</title>
     <link rel="stylesheet" href="/style/css/review_detail.css">
     <style>
 
@@ -22,10 +22,6 @@
     <div id="modal-box">
         <div id="modal-body">
             <div class="alarm">
-                <div style="display:flex; height: 10vh;">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon">
-                    <p class="alarm-content">실제 알람 내용</p>
-                </div>
             </div>
             <button id="close-modal" onclick="closeModal()">닫기</button>
         </div>
@@ -97,7 +93,7 @@
             <nav class="nav-bar">
                 <div class="nav-input-wrap">
                     <input type="text" placeholder="댓글 달기">
-                    <button id="button" onclick="writeComment();">등록</button>
+                    <button id="button" onclick="writeComment(); alarm()">등록</button>
                 </div>
             </nav>
         </div>
@@ -105,5 +101,6 @@
     <!--네비바 끝-->
 </body>
 <script src="static/js/review_detail_api.js"></script>
+<script src="static/js/notification_api.js"></script>
 
 </html>

@@ -136,6 +136,7 @@ body {
     display: inline-block;
     vertical-align: top;
     width: 100%;
+    height: 32vh;
     transition: all .5s;
 }
 
@@ -227,6 +228,7 @@ body {
 
 .nickname,
 .time {
+    font-size: 14px;
     margin: auto 1vw;
 }
 .each-comment {
@@ -343,9 +345,10 @@ body {
     outline: none;
 }
 
-.nav-input-wrap>button {
+.nav-input-wrap>button, .alarm div button {
     background: #c8c8c8;
     border-radius: 32px;
+    margin : auto 0;
     text-align: center;
     color: #fff;
     min-width: 80px;
@@ -358,7 +361,10 @@ body {
     background-color: #fcdbab;
     color: black;
 }
-
+.alarm div button:hover{
+    background-color: #fcdbab;
+    color: black;
+}
 .recomment {
     display: flex;
     justify-content: space-between;
@@ -444,13 +450,27 @@ body {
 }
 
 .alarm p {
-    width: 80%;
+    width: 60%;
     margin: auto;
     vertical-align: middle;
 }
 
 #close-modal {
-    margin: auto;
+    margin: 5vh auto;
+    background: #c8c8c8;
+    border-radius: 32px;
+    text-align: center;
+    color: #fff;
+    min-width: 80px;
+    height: 32px;
+    border: none;
+    cursor: pointer;
+
+}
+
+#close-modal:hover{
+    background-color: #fcdbab;
+    color: black;
 }
 
 .alarm {
@@ -475,5 +495,6 @@ body {
 }
 .slide-image {
     width: 100%;
+    height: 32vh;
     object-fit: cover;
 }

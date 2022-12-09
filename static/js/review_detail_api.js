@@ -1,5 +1,9 @@
-const review_id = location.href.split('=')[1].split('&')[0]
-const place_id = location.href.split('=')[2]
+const review_id = location.href.split('?')[1].split('&')[0].split('=')[1]
+const place_id = location.href.split('?')[1].split('&')[1].split('=')[1]
+const author_id = location.href.split('?')[1].split('&')[2].split('=')[1]
+
+const payload = localStorage.getItem("payload");
+const payload_parse = JSON.parse(payload);
 
 window.onload = () => {
     getData(review_id, place_id)
@@ -45,7 +49,7 @@ async function getData(review_id, place_id) {
         },
         method: 'GET'
     })
-        .then(response => response.json())
+    .then(response => response.json())
     console.log(response)
 
     const content = document.querySelector('.review-detail-box p')
@@ -183,33 +187,28 @@ async function postComment(review_id, content) {
 
 
 async function writeComment() {
-    let content = document.querySelector(".nav-input-wrap input").value
+    let content = document.querySelector(".nav-input-wrap input")
 
-    await postComment(review_id, content)
-
+    await postComment(review_id, content.value)
+    
     getData(review_id, place_id)
-    content = ""
+    content.value = null
 }
 
+
+
 // 알람 
-const payload = localStorage.getItem("payload");
-const payload_parse = JSON.parse(payload);
-const user_id = payload_parse.user_id
-
-console.log("connect1")
-
 const notificationSocket = new WebSocket(
     'ws://'
     + "127.0.0.1:8000"
     + '/ws/notification/'
-    + user_id
+    +  author_id
     + '/'
 );
 
 
 
 notificationSocket.onmessage = function (e) {
-    console.log("connect2")
     const data = JSON.parse(e.data);
     const alarmBox = document.querySelector('.alarm')
 
@@ -218,23 +217,23 @@ notificationSocket.onmessage = function (e) {
     alarmContent.innerHTML =`<div style="display:flex; height:10vh;">
         <img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon">
         <p class="alarm-content">${data.message}</p>
+        <button>확인</button>
     </div>`
     alarmBox.appendChild(alarmContent)
 };
 
 
 notificationSocket.onclose = function (e) {
-    console.log("connect3")
     console.error('소켓이 닫혔어요 ㅜㅜ');
 };
 
 
-document.querySelector('#button').onclick = function (e) {
-    console.log("connect4")
-    const message = "덧글이 달렸습니다."
+function alarm() {
+    const message = "게시글에 덧글이 달렸습니다."
     notificationSocket.send(JSON.stringify({
-        'message': message
+        'message': message,
+        "author" : author_id,
+        "user_id" : payload_parse.user_id
 
     }))
-    console.log('send')
 }
