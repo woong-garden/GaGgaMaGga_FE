@@ -1,6 +1,5 @@
-console.log("프로필 페이지!")
-
-const user_nickname = "admin"
+const getnickname = location.href.split('=')[1]
+const user_nickname = decodeURI(getnickname)
 
 // 공개프로필
 async function follow() {
@@ -23,20 +22,23 @@ async function follow() {
 
     // 팔로워
     response_json.followers.forEach(item => {
-        console.log(response_json.followers)
-        $('#follower').append(
-            `
-            <div class="profile">
-                <div class = "img">
-                    <img id="porfile-img" src ="${backendBaseUrl}${item.profile_image}" alt="프로필 사진" >
-                </div>
-                <div style="width: 77%;">
-                    <a>${item.nickname}</a>
-                </div>
+    console.log(response_json.followers)
+    $('#follower').append(
+        `
+        <div class="profile">
+            <div class = "img">
+                <img id="porfile-img" src ="${backendBaseUrl}${item.profile_image}" alt="프로필 사진" >
             </div>
-            `
-        )
+            <div style="width: 77%;">
+                <a>${item.nickname}</a>
+            </div>
+        </div>
+        `
+    )
     });
+ 
+    
+    
 
     // 팔로잉
     response_json.followings.forEach(item => {

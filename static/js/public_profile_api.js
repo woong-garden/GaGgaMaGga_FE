@@ -1,8 +1,5 @@
-console.log("프로필 페이지!")
 const getnickname = location.href.split('=')[1]
 const user_nickname = decodeURI(getnickname)
-
-// const user_nickname = "admin"
 
 // 공개프로필
 async function public_profile() {
@@ -58,10 +55,9 @@ async function public_profile() {
             `
         )
     });
-console.log(response_json.bookmark_place)
+
     // 북마크
     response_json.bookmark_place.forEach(item => {
-        
         $('#my-bookmark').append(
             `
             <div class="card">
@@ -83,11 +79,6 @@ console.log(response_json.bookmark_place)
             `
         )
     });
-
-
-    
-
-    
 }
 
 public_profile()
@@ -99,4 +90,9 @@ function reviewshow(){
 function bookmarkshow(){
     $('#my-review').hide();
     $('#my-bookmark').show();
+}
+
+function move_follow_page(user_nickname){
+    console.log(user_nickname)
+    window.location.href = `/follow.html?id=${user_nickname}`
 }

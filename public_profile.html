@@ -52,7 +52,7 @@
                         <div class="card-body">
                             <h6 class="card-title" id="profile_nickname"></h6>
                             <p class="card-text" id="profile_intro"></p>
-                            <span class="card-text">팔로워&nbsp;</span><span class="card-text" id="profile_followers"></span>
+                            <a class="card-text" onclick="move_follow_page(user_nickname)">팔로워&nbsp;</a><span class="card-text" id="profile_followers"></span>
                             <span class="card-text">&nbsp;&nbsp; 팔로잉&nbsp;</span><span class="card-text" id="profile_followings"></span>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <div class="container" style="margin-bottom: 10px; ">
+        <div class="container" style="margin-bottom: 10px;">
             <div class="row row-cols-2">
                 <div class="col">
                     <button class="profile-button" onclick="reviewshow()">후기</button>
