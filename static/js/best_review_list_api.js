@@ -73,7 +73,7 @@ async function recentSort(){
             <div class="review-list">
                 <div class="place-item">
                     <div>
-                        <a style="cursor: pointer;" onclick="move_review_detail_page(${item.id},${item.place_id})">
+                        <a style="cursor: pointer;" onclick="move_review_detail_page(${item.id},${item.place.id})">
                             <img style="width:100px;height:100px;" src="${backendBaseUrl}${item.review_image_one}">
                         </a>
                     </div>

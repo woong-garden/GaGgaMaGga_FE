@@ -40,14 +40,18 @@ async function public_profile() {
                 <div class="row">
                     <div class="col-md-4" >
                         <div class="content-img">
-                            <img alt="장소 사진" src="${backendBaseUrl}${item.review_image_one}" style="width: 100%; height:100%; aspect-ratio: 1/1;
+                            <a onclick="move_review_detail_page(${item.id},${item.place.id})">
+                            <img alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}" style="width: 100%; height:100%; aspect-ratio: 1/1;
                                     object-fit: cover;" >
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
                         <div class="card-body">
+                            <a onclick="move_review_detail_page(${item.id},${item.place.id})">
                             <h6>${item.place_name}</h6>
                             <p class="card-text">평점&nbsp; ${item.rating_cnt} / 5</p>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -93,6 +97,15 @@ function bookmarkshow(){
 }
 
 function move_follow_page(user_nickname){
-    console.log(user_nickname)
-    window.location.href = `/follow.html?id=${user_nickname}`
+    var value = document.getElementById('follower_move').value;
+    console.log(value)
+    window.location.href = `/follow.html?id=${user_nickname}?value=${value}`
+}
+function move_following_page(user_nickname){
+    var value = document.getElementById('following_move').value;
+    window.location.href = `/follow.html?id=${user_nickname}?value=${value}`
+}
+
+function move_review_detail_page(review_id,place_id){
+    window.location.href = `/review_detail.html?id=${review_id}&place=${place_id}`
 }
