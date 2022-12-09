@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이메일 인증확인</title>
+    <link rel="stylesheet" href="style/css/user_base.css">
+    <style>
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+    }
+    .content {
+        font-family: system-ui, serif;
+        font-size: 1rem;
+        text-align: center;
+        padding: 3rem;
+        width: 100%;
+        border-radius: 1rem;
+        background: rgb(255, 155, 37);;
+    }
+    </style>
+</head>
+
+
+<body>
+    <!--헤더 시작-->
+    <div class="header">
+        <div>
+            <div>
+                <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
+            </div> 
+            <div> 
+                <a><img style="margin-left:8px;" src="/images/icon/bell.svg"></a>
+            </div> 
+        </div>          
+    </div>
+    <!--헤더 끝-->
+
+    <!--메인 시작-->
+    <div class="root">
+        <div class="root_block"></div>
+        <!--여기사용하시면 됩니다~-->
+        <div class="wrapper">
+            <div class="content">이메일 인증이 완료되었습니다.</div>
+        </div>
+    </div>
+    <!--메인 끝-->  
+
+    <!--네비바-->
+    <div class="nav-wrap"> 
+        <div>     
+            <nav class="nav-bar">
+                <a><img src="/images/icon/home.svg"></a>
+                <a><img src="/images/icon/nav_search.svg"></a>
+                <a><img src="/images/icon/bookmark.svg"></a>
+                <a><img style="width:35px; height: 38px;" src="/images/icon/heart.svg"></a>
+                <a><img src="/images/icon/profile.svg"></a>
+            </nav>
+        </div>  
+    </div>
+    <!--네비바 끝-->
+    <script src="static/js/base_api.js"></script>
+    <script src="static/js/confirm_email_api.js"></script>
+</body>
+</html>

@@ -1,6 +1,8 @@
 console.log("프로필 페이지!")
+const getnickname = location.href.split('=')[1]
+const user_nickname = decodeURI(getnickname)
 
-const user_nickname = "admin"
+// const user_nickname = "admin"
 
 // 공개프로필
 async function public_profile() {

@@ -1,15 +1,113 @@
 
-window.onload = function(){
+window.onload = function () {
     console.log("연결완료")
-    const place_id = location.href.split('=')[1].split('&')[0]
-    const category = location.href.split('=')[2].split('/')[0]
-    NewUserPlaceListView(place_id, category)
+    const storage = localStorage.getItem("payload");
+    if (storage) {
+        const cate_id = location.href.split('=')[1].split('/')[0]
+        UserPlaceListView(cate_id)
+    } else {
+        const place_id = location.href.split('=')[1].split('&')[0]
+        const category = location.href.split('=')[2].split('/')[0]
+        NewUserPlaceListView(place_id, category)
     }
+}
+
+
+// modal
+function popOpen(id) {
+    var modalPop = $('#modal-wrap' + String(id));
+    var modalBg = $('#modal-bg' + String(id));
+    $(modalPop).show();
+    $(modalBg).show();
+}
+
+function popClose(id) {
+    var modalPop = $('#modal-wrap' + String(id));
+    var modalBg = $('#modal-bg' + String(id));
+    $(modalPop).hide();
+    $(modalBg).hide();
+}
+
+
+
+
 
 
 //select
-async function NewUserPlaceListView(place_id, category){
+async function NewUserPlaceListView(place_id, category) {
     const response = await fetch(`http://127.0.0.1:8000/places/new/${place_id}/${category}/`, {
+        method: 'GET',
+        headers: {
+            "Content-type": "application/json",
+        }
+    })
+    response_json = await response.json()
+    console.log(response_json)
+    $('#place-list').empty()
+    response_json.forEach(item => {
+        $('#place-list').append(
+            `
+            <table cellpadding="0" cellspacing="0" border="0">
+                <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
+                <td width="70%">
+                    <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
+                    <div>${item.place_address}  ☎${item.place_number}</div>
+                    <div></div>
+                    <div>${item.place_time}</div>
+                    <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">상세보기</div></a>
+                    <a href="#"><div class="market_detail_button">리뷰쓰기</div></a>
+                </td>
+                <td width="10%">${item.rating}</td>
+            </table>
+            
+            <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
+            <div class="modal-wrap" id="modal-wrap${item.id}">
+                
+                
+                <div class="modal_contents">
+                    <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
+                    <a href="#"><div class="modal_close" onClick="javascript:popClose(${item.id});">Close</div></a>
+                    <hr>
+                    
+                    <img src="${item.place_img}" style='width:300px;height:180px;')>
+                    <p style="font-size:15px;">주소 : ${item.place_address}</p>
+                    <p style="font-size:15px;">전화번호 : ☎ ${item.place_address}</p>
+                    <p style="font-size:15px;">영업시간 : ${item.place_time}</p>
+                </div>
+                    <div class="modal_map" id="map${item.id}">
+                </div>
+                
+            </div>
+
+            `
+        )
+        //지도 API
+        var mapOptions = {
+            center: new naver.maps.LatLng(37.3595704, 127.105399),
+            zoom: 14
+        }
+        console.log(`map${item.id}`)
+        var map = new naver.maps.Map(`map${item.id}`, mapOptions);
+        var defaultMarker = new naver.maps.Marker({
+            title: "title",
+            position: new naver.maps.LatLng(37.3606904, 127.1061625),
+            map: map,
+            icon: {
+                content: '<img src="./images/icon/map_marker.png" alt="" class="marker_style" style="-webkit-user-select: none;">',
+                size: new naver.maps.Size(22, 35),
+                anchor: new naver.maps.Point(11, 35)
+            }
+        });
+    })
+}
+
+function move_list_page(cate_id) {
+    window.location.href = `/place_list.html?$id=${cate_id}/`
+}
+
+
+async function UserPlaceListView(cate_id) {
+    const response = await fetch(`http://127.0.0.1:8000/places/${cate_id}/`, {
         method: 'GET',
         headers: {
             "Content-type": "application/json",
@@ -21,26 +119,34 @@ async function NewUserPlaceListView(place_id, category){
     $('#place-list').empty()
     response_json.forEach(item => {
         $('#place-list').append(
-            `
+            `<div class="modal">
+                <div class="modal_body">Modal</div>
+            </div>
             <table cellpadding="0" cellspacing="0" border="0">
                     <tbody>
                         <tr>
                             <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
                             <td width="70%">
-                                <div style="font-size:15px;">${item.place_name}</div>
+                                <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
                                 <div>${item.place_address}  ☎${item.place_number}</div>
                                 <div></div>
                                 <div>${item.place_time}</div>
+                                <a href="#" class="btn-open" onClick="javascript:popOpen();"><div class="market_detail_button btn-box">상세보기</div></a>
+                                <a href="#"><div class="market_detail_button">리뷰쓰기</div></a>
                             </td>
                             <td width="10%">${item.rating}</td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="modal-bg" onClick="javascript:popClose();"></div>
+                <div class="modal-wrap">
+                    <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
+                    <button class="modal-close" onClick="javascript:popClose();">닫기</button>
+                </div>
+                
             `
         )
     });
 }
 
-function move_list_page(cate_id){ 
-    window.location.href = `/place_list.html?$id=${cate_id}/`
-}
+
