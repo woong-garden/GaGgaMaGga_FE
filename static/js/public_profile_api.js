@@ -83,6 +83,15 @@ async function public_profile() {
             `
         )
     });
+    
+    // 본인 프로필에서 팔로우 버튼 숨김
+    let nickname = JSON.parse(localStorage.getItem(['payload'])).nickname
+    if (user_nickname == nickname){
+        alert("내프로필!")
+        document.getElementById('user_follow').style.display ="none"
+    } else {
+        
+    }
 }
 
 public_profile()
@@ -108,4 +117,31 @@ function move_following_page(user_nickname){
 
 function move_review_detail_page(review_id,place_id){
     window.location.href = `/review_detail.html?id=${review_id}&place=${place_id}`
+}
+
+
+
+
+// 팔로우
+async function follow() {
+    const response = await fetch(`${backendBaseUrl}/users/follow/${user_nickname}/`, {
+
+        method: 'POST',
+        headers: {
+            Accept:"application/json",
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("access")
+        },
+    }
+    )
+
+    response_json = await response.json
+
+    if (response.status == 200) {
+        alert("팔로우되었습니다.")
+    }else {
+        alert(response_json["msg"])
+    }
+
+    
 }
