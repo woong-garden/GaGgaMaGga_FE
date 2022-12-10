@@ -87,10 +87,20 @@ async function public_profile() {
     // 본인 프로필에서 팔로우 버튼 숨김
     let nickname = JSON.parse(localStorage.getItem(['payload'])).nickname
     if (user_nickname == nickname){
-        alert("내프로필!")
         document.getElementById('user_follow').style.display ="none"
-    } else {
-        
+    } 
+    else {
+        document.getElementById("user_follow").innerHTML = "팔로우"
+    }
+
+    // 팔로우 되어있을 때 버튼
+    let follow_list = response_json.followers
+    for (const item of follow_list){
+        console.log(item.nickname);
+        if (nickname==item.nickname){
+            document.getElementById("user_follow").innerHTML = "팔로우취소"
+            console.log("팔로우 되어있지롱")
+        }
     }
 }
 
@@ -134,14 +144,10 @@ async function follow() {
         },
     }
     )
-
     response_json = await response.json
 
-    if (response.status == 200) {
-        alert("팔로우되었습니다.")
-    }else {
-        alert(response_json["msg"])
-    }
-
+    // if (response.status == 200) {
+    //     alert(response_json['message'])
+    // }
     
 }
