@@ -1,8 +1,5 @@
-console.log("프로필 페이지!")
 const getnickname = location.href.split('=')[1]
 const user_nickname = decodeURI(getnickname)
-
-// const user_nickname = "admin"
 
 // 공개프로필
 async function public_profile() {
@@ -43,14 +40,18 @@ async function public_profile() {
                 <div class="row">
                     <div class="col-md-4" >
                         <div class="content-img">
-                            <img alt="장소 사진" src="${backendBaseUrl}${item.review_image_one}" style="width: 100%; height:100%; aspect-ratio: 1/1;
+                            <a onclick="move_review_detail_page(${item.id},${item.place.id})">
+                            <img alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}" style="width: 100%; height:100%; aspect-ratio: 1/1;
                                     object-fit: cover;" >
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
                         <div class="card-body">
+                            <a onclick="move_review_detail_page(${item.id},${item.place.id})">
                             <h6>${item.place_name}</h6>
                             <p class="card-text">평점&nbsp; ${item.rating_cnt} / 5</p>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -58,10 +59,9 @@ async function public_profile() {
             `
         )
     });
-console.log(response_json.bookmark_place)
+
     // 북마크
     response_json.bookmark_place.forEach(item => {
-        
         $('#my-bookmark').append(
             `
             <div class="card">
@@ -83,11 +83,15 @@ console.log(response_json.bookmark_place)
             `
         )
     });
-
-
     
-
-    
+    // 본인 프로필에서 팔로우 버튼 숨김
+    let nickname = JSON.parse(localStorage.getItem(['payload'])).nickname
+    if (user_nickname == nickname){
+        alert("내프로필!")
+        document.getElementById('user_follow').style.display ="none"
+    } else {
+        
+    }
 }
 
 public_profile()
@@ -99,4 +103,45 @@ function reviewshow(){
 function bookmarkshow(){
     $('#my-review').hide();
     $('#my-bookmark').show();
+}
+
+function move_follow_page(user_nickname){
+    var value = document.getElementById('follower_move').value;
+    console.log(value)
+    window.location.href = `/follow.html?id=${user_nickname}?value=${value}`
+}
+function move_following_page(user_nickname){
+    var value = document.getElementById('following_move').value;
+    window.location.href = `/follow.html?id=${user_nickname}?value=${value}`
+}
+
+function move_review_detail_page(review_id,place_id){
+    window.location.href = `/review_detail.html?id=${review_id}&place=${place_id}`
+}
+
+
+
+
+// 팔로우
+async function follow() {
+    const response = await fetch(`${backendBaseUrl}/users/follow/${user_nickname}/`, {
+
+        method: 'POST',
+        headers: {
+            Accept:"application/json",
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("access")
+        },
+    }
+    )
+
+    response_json = await response.json
+
+    if (response.status == 200) {
+        alert("팔로우되었습니다.")
+    }else {
+        alert(response_json["msg"])
+    }
+
+    
 }
