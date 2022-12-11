@@ -59,30 +59,32 @@ async function public_profile() {
             `
         )
     });
-
     // 북마크
-    response_json.bookmark_place.forEach(item => {
-        $('#my-bookmark').append(
-            `
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-4" >
-                        <div class="content-img">
-                            <img alt="장소 사진" src="${item.place_img}" style="width: 100%; height:100%; aspect-ratio: 1/1;
-                                    object-fit: cover;" >
+    if(response_json.bookmark_place.length){
+        response_json.bookmark_place.forEach(item => {
+                $('#my-bookmark').append(
+                    `
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-md-4" >
+                                <div class="content-img">
+                                    <img alt="장소 사진" src="${item.place_img}" style="width: 100%; height:100%; aspect-ratio: 1/1;
+                                            object-fit: cover;" >
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
+                                <div class="card-body">
+                                    <h6>${item.place_name}</h6>
+                                    <p class="card-text">평점&nbsp; ${item.rating} / 5</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                        <div class="card-body">
-                            <h6>${item.place_name}</h6>
-                            <p class="card-text">평점&nbsp; ${item.rating} / 5</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `
-        )
-    });
+                    `
+                )
+            });
+    }
+    
     
     // 본인 프로필에서 팔로우 버튼 숨김
     let nickname = JSON.parse(localStorage.getItem(['payload'])).nickname
