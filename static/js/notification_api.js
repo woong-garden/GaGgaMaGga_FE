@@ -13,10 +13,8 @@ async function getNotification() {
         method: 'GET'
     })
     .then(response => response.json())
-    console.log(response)
 
     response.forEach(notification => {
-        console.log(notification)
         const alarmBox = document.querySelector('.alarm')
 
 
@@ -27,24 +25,6 @@ async function getNotification() {
             <button onclick="read(${notification.id});">확인</button>
         </div>`
         alarmBox.appendChild(alarmContent)
-        // alarmContent.style.display = "flex"
-        // alarmContent.style.height = "10vh"
-        // alarmBox.appendChild(alarmContent)
-
-        // const alarmImage = document.createElement('img')
-        // alarmImage.classList.add('modal-icon')
-        // alarmImage.src = "https://cdn-icons-png.flaticon.com/512/1827/1827422.png"
-        // alarmBox.appendChild(alarmImage)
-
-        // const alarmMessage = document.createElement('p')
-        // alarmMessage.classList.add('alarm-content')
-        // alarmMessage.innerText = notification.content
-        // alarmBox.appendChild(alarmMessage)
-
-        // const readButton = document.createElement('button')
-        // var text = document.createTextNode('확인')
-        // readButton.appendChild(text)
-        // readButton.appendChild(alarmBox)
     })
 }
 
@@ -63,20 +43,3 @@ async function read(notification_id) {
 
 
 }
-
-
-
-// async function postComment(review_id, content) {
-
-
-//     const response = await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/`, {
-//         headers: {
-//             'content-type': 'application/json',
-//             "authorization": "Bearer " + localStorage.getItem("access")
-//         },
-//         method: 'POST',
-//         body: JSON.stringify({ // JS object is converted to string.
-//             "content": content,
-//         })
-//     })
-// }

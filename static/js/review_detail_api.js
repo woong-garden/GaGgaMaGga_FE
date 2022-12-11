@@ -7,10 +7,25 @@ const payload_parse = JSON.parse(payload);
 
 window.onload = () => {
     getData(review_id, place_id)
+    // async function private_profile() {
+    //     const userResponse = await fetch(`http://127.0.0.1:8000/users/profiles/`, {
+    //         method: 'GET',
+    //         headers: {
+    //             Accept: "application/json",
+    //             "Content-type": "application/json",
+    //             "Authorization": "Bearer " + localStorage.getItem("access")
+    //         }
+    //     }
+    //     )
+    //     userResponseJson = await userResponse.json()
+    //     console.log(userResponseJson)
+    // }
+    // private_profile()
+
+    // const userImage = userResponseJson.profile_image
+
 
 }
-
-
 
 // 모달창 열기
 function openModal() {
@@ -42,6 +57,7 @@ function closeModal() {
 
 // 전체 코멘트랑 같이 상세 페이지 데이터 불러오기
 async function getData(review_id, place_id) {
+    
 
     const response = await fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
         headers: {
@@ -50,13 +66,34 @@ async function getData(review_id, place_id) {
         method: 'GET'
     })
     .then(response => response.json())
+
     console.log(response)
+
+    const likeHeart = document.querySelector('.comment-cnt img')
+    if (response.review_like.includes(payload_parse.user_id)) {
+        likeHeart.src = "https://cdn-icons-png.flaticon.com/512/2107/2107845.png"
+    }
+    else {
+        likeHeart.src = "https://cdn-icons-png.flaticon.com/512/2107/2107952.png"
+    }
+    likeHeart.onclick = async function () {
+        await fetch(`http://127.0.0.1:8000/reviews/${review_id}/likes/`, {
+            headers: {
+                'content-type': 'application/json',
+                "authorization": "Bearer " + localStorage.getItem("access")
+            },
+            method: 'POST',
+        })
+        getData(review_id, place_id)
+    }
 
     const content = document.querySelector('.review-detail-box p')
     content.innerText = response.content
 
-    const date = document.querySelector('.review-detail-box div p')
-    date.innerText = response.created_at
+    const date = document.querySelector('.review-time p')
+    date.innerText = `작성 시간 : ${response.created_at}`
+    date.style.fontSize = "11px"
+    date.style.color = "gray"
 
     const commentCount = document.querySelector('#comment-count')
     commentCount.innerText = response.review_comments.length
@@ -79,6 +116,7 @@ async function getData(review_id, place_id) {
 
 
     response.review_comments.forEach(cmt => {
+        console.log(cmt)
 
         const eachComment = document.createElement("div")
         eachComment.classList.add("each-comment")
@@ -100,11 +138,14 @@ async function getData(review_id, place_id) {
         const nickname = document.createElement('p')
         nickname.classList.add('nickname')
         nickname.innerText = cmt.nickname
+        nickname.style.color = "#FDA171"
         commentHead.appendChild(nickname)
 
         const time = document.createElement('p')
         time.classList.add('time')
         time.innerText = cmt.created_at
+        time.style.fontSize = "11px"
+        time.style.color = "gray"
         commentHead.appendChild(time)
 
         const dots = document.createElement('img')
@@ -113,6 +154,7 @@ async function getData(review_id, place_id) {
 
         const commentText = document.createElement("p")
         commentText.innerText = cmt.content
+        commentText.classList.add(`p${cmt.id}`)
         commentContent.appendChild(commentText)
 
         const commentUnder = document.createElement("div")
@@ -120,47 +162,179 @@ async function getData(review_id, place_id) {
         commentContent.appendChild(commentUnder)
 
         const commentLike = document.createElement("img")
-        commentLike.src = "/images/icon/review_et_heart.svg"
+        commentLike.classList.add('comment-like-img')
         commentUnder.appendChild(commentLike)
 
         const commentLikeCount = document.createElement("p")
         commentLikeCount.innerText = cmt.comment_like_count
         commentUnder.appendChild(commentLikeCount)
 
+        const recommentContent = document.createElement("div")
+        recommentContent.classList.add("recomment-content")
+        commentContent.appendChild(recommentContent)
+
+        // 대댓글 모음
+        cmt.comment_recomments.forEach(recmt => {
+            const recommentBox = document.createElement("div")
+            recommentBox.style.display = "flex"
+            recommentContent.appendChild(recommentBox)
+
+            const recommentImage = document.createElement('img')
+            recommentImage.src = "http://127.0.0.1:8000" + recmt.profile_image
+            recommentImage.classList.add("comment-user-img")
+            recommentImage.style.margin = "1vh 0"
+            recommentBox.appendChild(recommentImage)
+
+            const recommentNickname = document.createElement('p')
+            recommentNickname.innerText = recmt.nickname
+            recommentNickname.style.fontSize = "13px"
+            recommentNickname.style.margin = "auto 1vw"
+            recommentNickname.style.color = "#FDA171"
+            recommentBox.appendChild(recommentNickname)
+
+            const recommentText = document.createElement("p")
+            recommentText.innerText = recmt.content
+            recommentText.style.fontSize = "13px"
+            recommentText.style.width = "70%"
+            recommentText.style.margin = "auto 0"
+            recommentBox.appendChild(recommentText)
+        })
+
+
         const recomment = document.createElement("div")
         recomment.classList.add('recomment')
         recomment.style.justifyContent = "space-between"
-        recomment.style.margin = "1vh 1.5vw"
         commentContent.appendChild(recomment)
 
+
+
+
+
+        const recommentInput = document.createElement('input')
+        recommentInput.placeholder = "답글 달기"
+        recommentInput.classList.add(`input-recomment${cmt.id}`)
+        recommentInput.type = "text"
+        recomment.appendChild(recommentInput)
+        
+
+        // 답글 달기 버튼
         const insertRecomment = document.createElement('button')
         var txt = document.createTextNode('답글 달기')
         insertRecomment.appendChild(txt)
         insertRecomment.classList.add('cmt-btn')
         commentUnder.appendChild(insertRecomment)
-        insertRecomment.onclick = function () {
+        insertRecomment.onclick = async function () {
             recomment.classList.toggle('show-recomment')
+            recommentContent.classList.toggle('show-recomment')
+            const userResponse = await fetch(`http://127.0.0.1:8000/users/profiles/`, {
+                method: 'GET',
+                headers: {
+                    Accept: "application/json",
+                    "Content-type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("access")
+                }
+            }
+            )
+            userResponseJson = await userResponse.json()
+
+            const recommentImg = document.createElement('img')
+            recommentImg.src = "http://127.0.0.1:8000" + userResponseJson.profile_image
+            recommentImg.style.verticalAlign = "middle"
+            recommentInput.parentNode.insertBefore(recommentImg, recommentInput)
         }
 
 
 
 
-        const recommentImg = document.createElement('img')
-        recommentImg.src = "http://127.0.0.1:8000" + response.profile_image
-        recomment.appendChild(recommentImg)
+        // 덧글 수정 버튼
+        const editComment = document.createElement('button')
+        var editText = document.createTextNode('덧글 수정')
+        editComment.appendChild(editText)
+        editComment.classList.add('cmt-btn')
+        commentUnder.appendChild(editComment)
+        editComment.onclick = function () {
+            const editCommentContent = document.querySelector(`.p${cmt.id}`)
 
-        const recommentInput = document.createElement('input')
-        recommentInput.placeholder = "답글 달기"
-        recommentInput.type = "text"
-        recomment.appendChild(recommentInput)
+            const editBox = document.createElement('div')
+            editBox.style.display = "flex"
+            editBox.style.width = "100%"
+            editCommentContent.parentNode.insertBefore(editBox, editCommentContent)
 
+            const editInput = document.createElement('input')
+            editInput.setAttribute("id", `edit-input${cmt.id}`)
+            editInput.style.width = "80%"
+            editBox.appendChild(editInput)
+            editInput.value = editCommentContent.innerText
+            console.log(editCommentContent.innerText)
+
+            editCommentContent.style.display = 'none'
+            editInput.style.borderLeftWidth = "0"
+            editInput.style.borderRightWidth = "0"
+            editInput.style.borderTopWidth = "0"
+            editInput.style.borderBottomWidth = "1"
+            editInput.style.outline = "0"
+            editInput.style.margin = "1vh 1vw"
+
+            const editButton = document.createElement('button')
+            editButton.classList.add("edit-button")
+            var editButtonText = document.createTextNode('수정')
+            editButton.appendChild(editButtonText)
+            editButton.style.width = "17%"
+            editBox.appendChild(editButton)
+            editButton.onclick = async function () {
+                await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${cmt.id}/`, {
+                    headers: {
+                        'content-type': 'application/json',
+                        "authorization": "Bearer " + localStorage.getItem("access")
+                    },
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        "content": editInput.value,
+                    })
+                })
+                getData(review_id, place_id)
+            }
+        }
+
+        // 덧글 삭제 버튼
+        const delComment = document.createElement('button')
+        var editText = document.createTextNode('덧글 삭제')
+        delComment.appendChild(editText)
+        delComment.classList.add('cmt-btn')
+        commentUnder.appendChild(delComment)
+        delComment.onclick = async function () {
+            await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${cmt.id}/`, {
+                headers: {
+                    "authorization": "Bearer " + localStorage.getItem("access")
+                },
+                method: 'DELETE',
+            })
+            getData(review_id, place_id)
+        }
+
+
+
+
+        //대댓글 등록
         const recommentButton = document.createElement('button')
         var text = document.createTextNode('등록')
         recommentButton.appendChild(text)
+        recommentButton.onclick = async function () {
+            const content = document.querySelector(`.input-recomment${cmt.id}`)
+            await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${cmt.id}/recomments/`, {
+                headers: {
+                    'content-type': 'application/json',
+                    "authorization": "Bearer " + localStorage.getItem("access")
+                },
+                method: 'POST',
+                body: JSON.stringify({ // JS object is converted to string.
+                    "content": content.value,
+                })
+            })
+            await getData(review_id, place_id)
+            recommentContent.innerHTML = ""
+        }
         recomment.appendChild(recommentButton)
-
-
-
     });
 
 
@@ -171,8 +345,6 @@ async function getData(review_id, place_id) {
 
 // 코멘트 등록
 async function postComment(review_id, content) {
-
-
     const response = await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/`, {
         headers: {
             'content-type': 'application/json',
@@ -190,7 +362,7 @@ async function writeComment() {
     let content = document.querySelector(".nav-input-wrap input")
 
     await postComment(review_id, content.value)
-    
+
     getData(review_id, place_id)
     content.value = null
 }
@@ -202,7 +374,7 @@ const notificationSocket = new WebSocket(
     'ws://'
     + "127.0.0.1:8000"
     + '/ws/notification/'
-    +  author_id
+    + author_id
     + '/'
 );
 
@@ -214,7 +386,7 @@ notificationSocket.onmessage = function (e) {
 
 
     const alarmContent = document.createElement('div')
-    alarmContent.innerHTML =`<div style="display:flex; height:10vh;">
+    alarmContent.innerHTML = `<div style="display:flex; height:10vh;">
         <img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon">
         <p class="alarm-content">${data.message}</p>
         <button>확인</button>
@@ -229,11 +401,13 @@ notificationSocket.onclose = function (e) {
 
 
 function alarm() {
-    const message = "게시글에 덧글이 달렸습니다."
-    notificationSocket.send(JSON.stringify({
-        'message': message,
-        "author" : author_id,
-        "user_id" : payload_parse.user_id
+    if (payload_parse.user_id != author_id) {
+        const message = "게시글에 덧글이 달렸습니다."
+        notificationSocket.send(JSON.stringify({
+            'message': message,
+            "author": author_id,
+            "user_id": payload_parse.user_id
 
-    }))
+        }))
+    }
 }

@@ -207,13 +207,17 @@ body {
 
 .cmt-btn {
     border: 0;
+    margin-right: 2vw;
     background-color: transparent;
     color: gray;
     cursor: pointer;
 }
-
+.review-time p{
+    width : 100%;
+    text-align: right;
+}
 .review-detail-box>p {
-    font-size: 15px
+    font-size: 14px
 }
 
 .review-detail-box div {
@@ -246,9 +250,19 @@ body {
     display: flex;
     flex-direction: column;
 }
+.comment-like-img{
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    content: url(https://cdn-icons-png.flaticon.com/512/2107/2107952.png);
+    width : 4%;
+}
+.comment-like-img:hover{
+    content: url(https://cdn-icons-png.flaticon.com/512/2107/2107845.png);
+}
 
 .comment-content>p {
     margin-left: 1vw;
+    font-size: 13px;
 }
 
 .comment-under {
@@ -298,15 +312,34 @@ body {
     outline: none;
 }
 
+.comment-cnt img{
+    width : 13%;
+    height: 13%;
+    margin : auto 0;
+    cursor: pointer;
+}
+
+.comment-cnt img:hover{
+    content: url(https://cdn-icons-png.flaticon.com/512/2107/2107845.png);
+}
+
 .comment-2>button,
-.recomment button {
+.recomment button,
+.edit-button{
     border-radius: 20px;
-    width: 10%;
+    width: 5%;
     min-width: 50px;
     height: 24px;
     border: none;
     color: #fff;
     background: #c8c8c8;
+    margin : auto 0;
+}
+.edit-button:hover{
+
+    background-color: #fcdbab;
+    color: black;
+    cursor: pointer;
 }
 
 .nav-wrap {
@@ -365,23 +398,27 @@ body {
     background-color: #fcdbab;
     color: black;
 }
+.recomment-content{
+    display: none;
+}
+
 .recomment {
     display: flex;
     justify-content: space-between;
-    margin: 1vh 1.5vw;
     display: none;
 }
 
 .recomment img {
-    width: 5%;
+    width: 7%;
     object-fit: cover;
     aspect-ratio: 1/1;
     border-radius: 30px;
 }
 
 .recomment input {
-    margin: auto;
-    width: 78%;
+    margin: auto 1vw;
+    padding-top : 1.5vh;
+    width: 70%;
     border-left-width: 0;
     border-right-width: 0;
     border-top-width: 0;
