@@ -1,6 +1,6 @@
-const getnickname = location.href.split('=')[1]
+const getnickname = location.href.split('=')[1].split('?')[0]
 const user_nickname = decodeURI(getnickname)
-
+console.log(user_nickname)
 const getvalue = location.href.split('=')[2]
 const follow_value = decodeURI(getvalue)
 
@@ -41,12 +41,12 @@ async function follow() {
             `
             <div class="profile">
                 <div class = "img">
-                    <a onclick="move_profile_page('${item.nickname}')">
+                    <a onclick="move_user_profile('${item.nickname}')">
                     <img id="porfile-img" src ="${backendBaseUrl}${item.profile_image}" alt="프로필 사진" >
                     </a>
                 </div>
                 <div style="width: 77%;">
-                    <a onclick="move_profile_page('${item.nickname}')">${item.nickname}</a>
+                    <a onclick="move_user_profile('${item.nickname}')">${item.nickname}</a>
                 </div>
             </div>
             `
@@ -59,12 +59,12 @@ async function follow() {
             `
             <div class="profile">
                 <div class = "img">
-                    <a onclick="move_profile_page('${item.nickname}')">
+                    <a onclick="move_user_profile('${item.nickname}')">
                     <img id="porfile-img" src ="${backendBaseUrl}${item.profile_image}" alt="프로필 사진" >
                     </a>
                 </div>
                 <div style="width: 77%;">
-                    <a onclick="move_profile_page('${item.nickname}')">${item.nickname}</a>
+                    <a onclick="move_user_profile('${item.nickname}')">${item.nickname}</a>
                 </div>
             </div>
             `
@@ -82,8 +82,13 @@ async function follow() {
 
 follow()
 
-function move_profile_page(click_nickname){
+function move_user_profile(click_nickname){
     console.log(click_nickname)
     window.location.href = `/public_profile.html?=${click_nickname}`
+}
+// 뒤로가기
+function back_profile_page(user_nickname){
+    console.log(user_nickname)
+    window.location.href = `/public_profile.html?=${user_nickname}`
 }
 

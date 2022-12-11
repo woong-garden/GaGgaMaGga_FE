@@ -109,9 +109,9 @@ async function public_profile() {
 public_profile()
 
 // 팔로우
-$('#user_follow').on('click', follow_count);
+$('#user_follow').on('click', follow);
 
-function follow_count(){
+function follow(){
     $.ajax({
         url : `${backendBaseUrl}/users/follow/${user_nickname}/`,
         type : 'POST',
