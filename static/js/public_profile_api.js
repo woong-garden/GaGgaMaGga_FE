@@ -91,6 +91,8 @@ async function public_profile() {
     } 
     else {
         document.getElementById("user_follow").innerHTML = "팔로우"
+        document.getElementById("profile_followers").value = "1"
+
     }
 
     // 팔로우 되어있을 때 버튼
@@ -99,13 +101,43 @@ async function public_profile() {
         console.log(item.nickname);
         if (nickname==item.nickname){
             document.getElementById("user_follow").innerHTML = "팔로우취소"
-            console.log("팔로우 되어있지롱")
+            document.getElementById("profile_followers").value = "0"
         }
     }
 }
 
 public_profile()
 
+// 팔로우
+$('#user_follow').on('click', follow_count);
+
+function follow_count(){
+    $.ajax({
+        url : `${backendBaseUrl}/users/follow/${user_nickname}/`,
+        type : 'POST',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Content-type","application/json");
+            xhr.setRequestHeader("Authorization","Bearer " + localStorage.getItem("access"));
+        },
+        success: function(res){
+            var profile_followers = document.getElementById("profile_followers").innerText;
+            var follower_value = document.getElementById("profile_followers").value;
+            console.log(follower_value)
+            if(follower_value == 1){
+                var rrr = parseInt(profile_followers) +1;
+                document.getElementById("profile_followers").innerText = rrr;
+                document.getElementById("profile_followers").value = 0;
+                document.getElementById("user_follow").innerHTML = "팔로우취소"
+            }else{
+                var rrr = parseInt(profile_followers) -1;
+                document.getElementById("profile_followers").innerText = rrr;
+                document.getElementById("profile_followers").value = 1;
+                document.getElementById("user_follow").innerHTML = "팔로우"
+            }
+        }
+    });
+}
+    
 function reviewshow(){
     $('#my-review').show();
     $('#my-bookmark').hide();
@@ -130,24 +162,3 @@ function move_review_detail_page(review_id,place_id){
 }
 
 
-
-
-// 팔로우
-async function follow() {
-    const response = await fetch(`${backendBaseUrl}/users/follow/${user_nickname}/`, {
-
-        method: 'POST',
-        headers: {
-            Accept:"application/json",
-            'Content-Type': 'application/json',
-            'Authorization': "Bearer " + localStorage.getItem("access")
-        },
-    }
-    )
-    response_json = await response.json
-
-    // if (response.status == 200) {
-    //     alert(response_json['message'])
-    // }
-    
-}
