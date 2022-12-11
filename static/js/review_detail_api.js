@@ -8,18 +8,14 @@ const payload_parse = JSON.parse(payload);
 window.onload = () => {
     getData(review_id, place_id)
 }
-
+const modalBox = document.querySelector('#modal-box')
+const header = document.querySelector('.header')
+const main = document.querySelector('.root')
+const nav = document.querySelector('.nav-wrap')
 // 모달창 열기
 function openModal() {
-    const modalBox = document.querySelector('#modal-box')
-    const header = document.querySelector('.header')
-    const main = document.querySelector('.root')
-    const nav = document.querySelector('.nav-wrap')
 
     modalBox.style.display = "block"
-    header.style.display = "none"
-    main.style.display = "none"
-    nav.style.display = "none"
 }
 
 
@@ -67,7 +63,7 @@ async function getData(review_id, place_id) {
         getData(review_id, place_id)
     }
 
-    
+
 
     const content = document.querySelector('.review-detail-box p')
     content.innerText = response.content
@@ -128,9 +124,20 @@ async function getData(review_id, place_id) {
         time.style.color = "gray"
         commentHead.appendChild(time)
 
+        // 신고 모달창 trigger
         const dots = document.createElement('img')
         dots.src = "/images/icon/dot.svg"
+        dots.style.cursor = "pointer"
         commentHead.appendChild(dots)
+        const reportModal = document.querySelector('#report-modal')
+        dots.onclick = function(){
+            reportModal.style.display = "block"
+
+        }
+        const closeReportModal = document.querySelector('#report-modal h4:nth-child(2)')
+        closeReportModal.onclick = function(){
+            reportModal.style.display = "none"
+        }
 
         const commentText = document.createElement("p")
         commentText.innerText = cmt.content
@@ -180,96 +187,143 @@ async function getData(review_id, place_id) {
         cmt.comment_recomments.forEach(recmt => {
             const recommentBox = document.createElement("div")
             recommentBox.style.display = "flex"
-            recommentBox.style.justifyContent = "space-between"
+            recommentBox.style.flexDirection = "column"
             recommentBox.style.width = "100%"
             recommentContent.appendChild(recommentBox)
+
+
+
+            const recmtContentBox = document.createElement('div')
+            recmtContentBox.style.display = "flex"
+            recmtContentBox.style.justifyContent = "space-between"
+            recommentBox.appendChild(recmtContentBox)
+
+
 
             const recommentImage = document.createElement('img')
             recommentImage.src = "http://127.0.0.1:8000" + recmt.profile_image
             recommentImage.classList.add("comment-user-img")
             recommentImage.style.margin = "1vh 0"
-            recommentBox.appendChild(recommentImage)
+            recmtContentBox.appendChild(recommentImage)
 
             const recommentNickname = document.createElement('p')
             recommentNickname.innerText = recmt.nickname
             recommentNickname.style.fontSize = "11px"
             recommentNickname.style.margin = "auto 0.5vw"
             recommentNickname.style.color = "#FDA171"
-            recommentBox.appendChild(recommentNickname)
+            recmtContentBox.appendChild(recommentNickname)
 
             const recommentText = document.createElement("p")
             recommentText.setAttribute("id", `recmt${recmt.id}`)
             recommentText.innerText = recmt.content
             recommentText.style.fontSize = "13px"
-            recommentText.style.width = "60%"
+            recommentText.style.width = "80%"
             recommentText.style.margin = "auto 0"
-            recommentBox.appendChild(recommentText)
+            recmtContentBox.appendChild(recommentText)
 
 
-            // 대댓글 수정 버튼 생성
-            const editRecomment = document.createElement('button')
-            const editRecommentText = document.createTextNode('수정')
-            editRecomment.appendChild(editRecommentText)
-            editRecomment.style.fontSize = "12px"
-            editRecomment.classList.add('cmt-btn')
-            editRecomment.setAttribute("id", `reEdit${recmt.id}`)
-            editRecomment.style.marginRight = "0"
-            recommentBox.appendChild(editRecomment)
+            // 대댓글 수정 삭제 버튼 박스
+            const recommentEditBox = document.createElement('div')
+            recommentEditBox.style.display = "flex"
+            recommentEditBox.style.justifyContent = "space-between"
+            recommentEditBox.style.width = "30%"
+            recommentEditBox.style.marginLeft = "1vw"
+            recommentBox.appendChild(recommentEditBox)
 
-            // 대댓글 수정 인풋 생성
-            const editRecommentContent = document.querySelector(`#recmt${recmt.id}`)
-            const editRecommentInput = document.createElement('input')
-            editRecommentInput.setAttribute("id", `edit-input${cmt.id}`)
-            editRecommentInput.style.width = "80%"
-            editRecommentContent.parentNode.insertBefore(editRecommentInput, editRecommentContent)
-            editRecommentInput.value = editRecommentContent.innerText
+            const recommentLike = document.createElement('img')
+            recommentLike.style.width = "13%"
+            recommentLike.style.objectFit = "contain"
+            recommentLike.src = "https://cdn-icons-png.flaticon.com/512/2107/2107952.png"
+            recommentEditBox.appendChild(recommentLike)
 
-            editRecommentInput.style.borderLeftWidth = "0"
-            editRecommentInput.style.borderRightWidth = "0"
-            editRecommentInput.style.borderTopWidth = "0"
-            editRecommentInput.style.borderBottomWidth = "0.2vh"
-            editRecommentInput.style.outline = "0"
-            editRecommentInput.style.margin = "1vh 1vw"
-            editRecommentInput.style.width = "60%"
-            editRecommentInput.style.display = "none"
+            // 대댓글 좋아요
+            recommentLike.onclick = async function () {
+                await fetch(`http://127.0.0.1:8000/reviews/recomments/${recmt.id}/likes/`, {
+                    headers: {
+                        'content-type': 'application/json',
+                        "authorization": "Bearer " + localStorage.getItem("access")
+                    },
+                    method: 'POST',
+                })
+                getData(review_id, place_id)
+            }
 
-            editRecomment.onclick = function (){
-                editRecommentContent.classList.toggle('recomment-content')
-                editRecommentInput.style.display = "block"
+            const recommentLikeCount = document.createElement('p')
+            recommentLikeCount.innerText = recmt.recomment_like.length
+            recommentLikeCount.style.fontSize = "11px"
+            recommentLikeCount.style.margin = "0"
+            recommentEditBox.appendChild(recommentLikeCount)
 
-                const updateButton = document.getElementById(`reEdit${recmt.id}`)
-                updateButton.onclick = async function () {
+
+
+            if (recmt.nickname == payload_parse.nickname) {
+
+                // 대댓글 수정 버튼 생성
+                const editRecomment = document.createElement('button')
+                const editRecommentText = document.createTextNode('수정')
+                editRecomment.appendChild(editRecommentText)
+                editRecomment.style.fontSize = "12px"
+                editRecomment.classList.add('cmt-btn')
+                editRecomment.setAttribute("id", `reEdit${recmt.id}`)
+                editRecomment.style.marginRight = "0"
+                recommentEditBox.appendChild(editRecomment)
+
+
+                // 대댓글 수정 인풋 생성
+                const editRecommentContent = document.querySelector(`#recmt${recmt.id}`)
+                const editRecommentInput = document.createElement('input')
+                editRecommentInput.setAttribute("id", `edit-input${cmt.id}`)
+                editRecommentInput.style.width = "80%"
+                editRecommentContent.parentNode.insertBefore(editRecommentInput, editRecommentContent)
+                editRecommentInput.value = editRecommentContent.innerText
+
+                editRecommentInput.style.borderLeftWidth = "0"
+                editRecommentInput.style.borderRightWidth = "0"
+                editRecommentInput.style.borderTopWidth = "0"
+                editRecommentInput.style.borderBottomWidth = "0.2vh"
+                editRecommentInput.style.outline = "0"
+                editRecommentInput.style.margin = "1vh 1vw"
+                editRecommentInput.style.width = "80%"
+                editRecommentInput.style.display = "none"
+
+                editRecomment.onclick = function () {
+                    editRecommentContent.classList.toggle('recomment-content')
+                    editRecommentInput.style.display = "block"
+
+                    const updateButton = document.getElementById(`reEdit${recmt.id}`)
+                    updateButton.onclick = async function () {
+                        await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${cmt.id}/recomments/${recmt.id}/`, {
+                            headers: {
+                                'content-type': 'application/json',
+                                "authorization": "Bearer " + localStorage.getItem("access")
+                            },
+                            method: 'PUT',
+                            body: JSON.stringify({
+                                "content": editRecommentInput.value,
+                            })
+                        })
+                        getData(review_id, place_id)
+                    }
+                }
+
+                // 대댓글 삭제
+                const delRecomment = document.createElement('button')
+                const delRecommentText = document.createTextNode('삭제')
+                delRecomment.appendChild(delRecommentText)
+                delRecomment.classList.add('cmt-btn')
+                delRecomment.style.fontSize = "12px"
+                delRecomment.style.marginRight = "0"
+                recommentEditBox.appendChild(delRecomment)
+
+                delRecomment.onclick = async function () {
                     await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${cmt.id}/recomments/${recmt.id}/`, {
                         headers: {
-                            'content-type': 'application/json',
                             "authorization": "Bearer " + localStorage.getItem("access")
                         },
-                        method: 'PUT',
-                        body: JSON.stringify({
-                            "content": editRecommentInput.value,
-                        })
+                        method: 'DELETE',
                     })
                     getData(review_id, place_id)
                 }
-            }
-
-            // 대댓글 삭제
-            const delRecomment = document.createElement('button')
-            const delRecommentText = document.createTextNode('삭제')
-            delRecomment.appendChild(delRecommentText)
-            delRecomment.classList.add('cmt-btn')
-            delRecomment.style.fontSize = "12px"
-            delRecomment.style.marginRight = "0"
-            recommentBox.appendChild(delRecomment)
-
-            delRecomment.onclick = async function () {
-                await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${cmt.id}/recomments/${recmt.id}/`, {
-                    headers: {
-                        "authorization": "Bearer " + localStorage.getItem("access")
-                    },
-                    method: 'DELETE',
-                })
-                getData(review_id, place_id)
             }
 
         })
@@ -311,7 +365,7 @@ async function getData(review_id, place_id) {
             // recomment.classList.add('show-recomment')
             // recommentContent.classList.add('show-recomment')
         }
-        
+
         recomment.appendChild(recommentButton)
 
         // 답글 달기 버튼
@@ -337,7 +391,7 @@ async function getData(review_id, place_id) {
             recommentImg.src = "http://127.0.0.1:8000" + userResponseJson.profile_image
             // getData(review_id, place_id)
         }
-        
+
 
 
 
