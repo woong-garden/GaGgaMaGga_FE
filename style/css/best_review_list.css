@@ -89,6 +89,47 @@
         text-align:center;
         font-size: 1.5em;
     }
+
+    .horizon{
+        height: 10px; 
+        width: 100%; 
+        background-color: #f9f9f9; 
+        margin-top:14px;
+    }
+
+    #rank-cnt{
+        color:#9b9b9b; 
+        font-size: 14px;
+    }
+    .rank-cnt-text-style{
+        color:#9b9b9b; 
+        font-size: 14px;
+    }
+    #sort-like-button{
+        color:#FF792A;
+    }
+    #like-rank{
+        display:block;
+    }
+    #recent-rank{
+        display:none;
+    }
+    .place-item-img{
+        object-fit:cover;
+        width:100px;
+        height:100px; 
+        cursor: pointer;
+    }
+    .place-item-user{
+        cursor: pointer;
+    }
+    .place-item-user-img{
+        object-fit:cover;
+        width:40px;
+        height:40px; 
+        border-radius: 20px;
+    }
+
     .button-style{
         border:none;
         background-color: transparent;
