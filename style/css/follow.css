@@ -152,3 +152,8 @@ border: solid 1px rgba(219, 219, 219, 1);
     padding-top:20px; 
     align-items: center;
 }
+
+#profile_nickname{
+    text-align:center; 
+    margin: 50px 7px 10px 0;
+}

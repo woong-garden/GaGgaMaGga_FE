@@ -116,10 +116,29 @@ margin-top: 6vh;
     .test {
         margin-top: 48px;
     }
+    .container {
+        max-width: 720px;
+    }
 }
 
 
 /* 프로필 이미지 */
+.profile {
+    margin-top: 15%;
+}
+
+.profile > div{
+    border-radius: 0; 
+    margin-bottom: 1rem!important; 
+    background-color: #fff;
+}
+
+.profile > div > div{
+    align-items: center; 
+    display: flex; 
+    margin-left: -15px;
+}
+
 .img {
     text-align: center;
     float: left;
@@ -155,7 +174,47 @@ margin-top: 6vh;
     transition-duration: 0s, 0.5s;
 }
 
-.update-review, #follower_move, #following_move{
+.review-box{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    margin-bottom:10px;
+}
+.review-img{
+    cursor:pointer;
+    width: 100%;
+    height:100%; 
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+*, ::after, ::before{
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.bar{
+    display: flex; 
+    flex-wrap: wrap; 
+    margin-right: -15px; 
+    margin-left: -15px;
+}
+
+
+.update-review, #follower_move, #following_move, #user_follow{
     margin : auto 15px auto 0;
     padding: 0;
     outline: 0;
@@ -172,7 +231,7 @@ margin-top: 6vh;
     cursor:  pointer;
 }
 
-.update-review:hover, #follower_move:hover, #following_move:hover{
+.update-review:hover, #follower_move:hover, #following_move:hover, #user_follow:hover{
     background-color: #fcdbab;
     color: black;
 }
