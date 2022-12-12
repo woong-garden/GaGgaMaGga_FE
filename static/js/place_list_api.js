@@ -51,8 +51,8 @@ async function NewUserPlaceListView(place_id, category) {
                     <div>${item.place_address}  ☎${item.place_number}</div>
                     <div></div>
                     <div>${item.place_time}</div>
-                    <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">상세보기</div></a>
-                    <a href="#"><div class="market_detail_button">리뷰쓰기</div></a>
+                    <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
+                    <a href="#"><div class="market_detail_button">상세보기</div></a>
                 </td>
                 <td width="10%">${item.rating}</td>
             </table>
@@ -147,30 +147,37 @@ async function UserPlaceListView(cate_id) {
     $('#place-list').empty()
     response_json.forEach(item => {
         $('#place-list').append(
-            `<div class="modal">
-                <div class="modal_body">Modal</div>
+            `<table cellpadding="0" cellspacing="0" border="0">
+            <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
+            <td width="70%">
+                <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
+                <div>${item.place_address}  ☎${item.place_number}</div>
+                <div></div>
+                <div>${item.place_time}</div>
+                <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
+                <a href="#"><div class="market_detail_button">상세보기</div></a>
+            </td>
+            <td width="10%">${item.rating}</td>
+        </table>
+        
+        <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
+        <div class="modal-wrap" id="modal-wrap${item.id}">
+            
+            
+            <div class="modal_contents">
+                <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
+                <a href="#"><div class="modal_close" onClick="javascript:popClose(${item.id});">Close</div></a>
+                <hr>
+                
+                <img src="${item.place_img}" style='width:300px;height:180px;')>
+                <p style="font-size:15px;">주소 : ${item.place_address}</p>
+                <p style="font-size:15px;">전화번호 : ☎ ${item.place_number}</p>
+                <p style="font-size:15px;">영업시간 : ${item.place_time}</p>
             </div>
-            <table cellpadding="0" cellspacing="0" border="0">
-                    <tbody>
-                        <tr>
-                            <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
-                            <td width="70%">
-                                <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
-                                <div>${item.place_address}  ☎${item.place_number}</div>
-                                <div></div>
-                                <div>${item.place_time}</div>
-                                <a href="#" class="btn-open" onClick="javascript:popOpen();"><div class="market_detail_button btn-box">상세보기</div></a>
-                                <a href="#"><div class="market_detail_button">리뷰쓰기</div></a>
-                            </td>
-                            <td width="10%">${item.rating}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="modal-bg" onClick="javascript:popClose();"></div>
-                <div class="modal-wrap">
-                    <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
-                    <button class="modal-close" onClick="javascript:popClose();">닫기</button>
-                </div>
+                <div class="modal_map" id="map${item.id}">
+            </div>
+            
+        </div>
                 
             `
         )
