@@ -350,8 +350,17 @@ td {
     max-width: none; 
     max-height: none; 
     position: absolute; 
-    width: 40px; 
+    width: 35px; 
     height: 40px; 
     left: 0px; 
     top: 0px;
+}
+
+/* infowindow */
+.iw_inner{
+    font-size: 10px;
+    background-color: beige;
+    padding:5px;
+    border-radius: 10px;
+    box-shadow: 2px 2px;
 }

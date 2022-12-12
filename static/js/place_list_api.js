@@ -87,13 +87,13 @@ async function NewUserPlaceListView(place_id, category) {
         
         var contentString = 
         `<div class="iw_inner">
-           <h3>${item.place_name}</h3>
-           <p>${item.place_address}<br>
-               ${item.place_number} | ${item.category}<br></p>
+            [${item.category}]  ${item.place_name}<br>
+            ${item.place_address}<br>
+            ☎${item.place_number}<br>
         </div>`
 
         var map = new naver.maps.Map(`map${item.id}`, mapOptions);
-        var defaultMarker = new naver.maps.Marker({
+        var marker = new naver.maps.Marker({
             title: "title",
             position: new naver.maps.LatLng(`${item.latitude}`, `${item.longitude}`),
             map: map,
@@ -104,16 +104,22 @@ async function NewUserPlaceListView(place_id, category) {
             }
         });
 
-
+        
+        let infoWindows = new Array();
+        // infowindow 내용
         var infowindow = new naver.maps.InfoWindow({
             content: contentString,
-            borderWidth: 1,
-            disableAnchor: true,
             backgroundColor: 'transparent',
-            pixelOffset: new naver.maps.Point(0, -28),
+            borderWidth: 0,
+            disableAnchor: true,
+            pixelOffset: new naver.maps.Point(0, -10),
         });
+
         
-        naver.maps.Event.addListener(map, "click", function(e) {
+        infoWindows.push(infowindow)
+
+        // infowindow 클릭
+        naver.maps.Event.addListener(marker, "click", function(e) {
             if (infowindow.getMap()) {
                 infowindow.close();
             } else {
