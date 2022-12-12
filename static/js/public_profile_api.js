@@ -57,7 +57,7 @@ async function public_profile() {
                             <h6 style="cursor:pointer;color:  #ffbf60;" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</h6>
                             <p>평점&nbsp; ${item.rating_cnt} / 5</p>
                             <div style="display:flex; width:50%;">`+
-                            (my_id == profile_id? '<button class="update-review" onclick=move_to_edit_page(${item.place_id}, ${item.id})>리뷰 수정</button> <button class="update-review">리뷰 삭제</button>':'')
+                            (my_id == profile_id? '<button class="update-review" onclick="move_to_edit_page(${item.place_id}, ${item.id})">리뷰 수정</button> <button class="update-review" onclick="delete_review(${item.place_id}, ${item.id})">리뷰 삭제</button>':'')
                         +`</div>
                     </div>
                 </div>
@@ -168,3 +168,13 @@ function move_to_edit_page(place_id, review_id){
     window.location.href = `/review_update.html?place_id=${place_id}&review_id=${review_id}`
 }
 
+function delete_review(place_id, review_id){
+    fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
+        headers: {
+            "authorization": "Bearer " + localStorage.getItem("access")
+        },
+        method: 'DELETE',
+    })
+    public_profile()
+    document.querySelector('.profile-button').click()
+}

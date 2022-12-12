@@ -31,7 +31,7 @@ function popClose(id) {
 
 //select
 async function NewUserPlaceListView(place_id, category) {
-    const response = await fetch(`http://127.0.0.1:8000/places/new/${place_id}/${category}/`, {
+    const response = await fetch(`http://127.0.0.1:8000/places/new/${place_id}/${category}/`, {    
         method: 'GET',
         headers: {
             "Content-type": "application/json",
@@ -153,7 +153,7 @@ async function UserPlaceListView(cate_id) {
                 <div></div>
                 <div>${item.place_time}</div>
                 <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
-                <a href="#"><div class="market_detail_button">상세보기</div></a>
+                <a onclick="move_place_detail_page(${item.id})"><div class="market_detail_button">상세보기</div></a>
             </td>
             <td width="10%">${item.rating}</td>
         </table>
@@ -230,3 +230,7 @@ async function UserPlaceListView(cate_id) {
 }
 
 
+function move_place_detail_page(place_id){
+    window.location.href = `/place_detail.html?id=${place_id}`
+
+}

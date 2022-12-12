@@ -22,7 +22,7 @@
                 <div>
                     <a class="back-wrap"><img src="/images/icon/back.svg"></a>
                 </div>
-                <div class="header-place-name">아웃백</div>
+                <div id="place-name" class="header-place-name"></div>
             </div> 
             <a class="header-bell">
                 <img src="/images/icon/bell.svg">
@@ -36,11 +36,16 @@
     <div class="root">
         <div class="root_block"></div>
         <!--여기사용하시면 됩니다~-->
-        <img class="main-place-img" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMjNfMTIy%2FMDAxNjY5MjAxODQ2Mzk0.5xUFwXnBgqDeVHRVTRW_Fyx99rIg9XHlLc985VJZ08sg.FHuAIxFeRFhrixM7ru9UbVX3dqPO4PjDwsdy5sJVKUog.JPEG.thgml071%2F20221120%25A3%25DF194230.jpg&type=sc960_832">
+        <img class="main-place-img" id="place_image" src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg">
         <div class="main-place-info">
-            <div>주소: 가나다라마바사</div>
-            <div>전화번호: 1234-1234</div>
-            <div>영업시간: 24:20</div>
+            <div id="div_place_address">주소: 가나다라마바사</div>
+            <div id="div_place_number">전화번호: 1234-1234</div>
+            <div class="review-botton-box">
+                <div id="div_place_time">영업시간: 24:20</div>
+                <div class="review-botton-wrap"><button onclick="move_review_create_page(place_id)" class="review-create-botton">후기 작성하기</button></div>
+            </div>
+            
+            
         </div>
         
         <div class="horizon"></div>
@@ -51,36 +56,16 @@
         </div>
             <!--메뉴리스트 시작-->
             <div id="menu-list">
-                <!-- <div class="menu-list-box">
-                    <div class="menu-list-content">
-                        <div class="menu-list-content-title">
-                            갈릭 립아이 커플
-                        </div>
-                        <div>
-                            79900원
-                        </div>
-                    </div>
-                        <img class="menu-list-content-img" src="https://ldb-phinf.pstatic.net/20221114_210/1668435518684QReuq_JPEG/%B3%D7%C0%CC%B9%F6%C7%C3%B7%B9%C0%CC%BD%BA_%C4%DA%BE%EE_1%281200x970%29.jpg">
-                </div> -->
-
-                <!-- <div class="menu-list-box">
-                    <div class="menu-list-content">
-                        <div class="menu-list-content-title">
-                            갈릭 립아이 커플
-                        </div>
-                        <div>
-                            79900원
-                        </div>
-                    </div>
-                        <img class="menu-list-content-img" src="https://ldb-phinf.pstatic.net/20221114_210/1668435518684QReuq_JPEG/%B3%D7%C0%CC%B9%F6%C7%C3%B7%B9%C0%CC%BD%BA_%C4%DA%BE%EE_1%281200x970%29.jpg">
-                </div> -->
+                
             </div>
             <!--메뉴리스트 끝-->
 
             <!--리뷰리스트 시작-->
             <div id="review-list">
                 <div class="tab-menu-wrap">
-                    <div>리뷰(3)</div>
+                    <div>
+                        <span id="place-review-cnt"></span><span class="place-review-cnt-style">개의 후기</span>
+                    </div>
                     <div class="tab-menu">
                         <div>
                             <button id="like-sort-botton" onclick="like_rank_show()">좋아요순</button>
@@ -96,71 +81,13 @@
 
                 <!--좋아요순 시작-->
                 <div id="like-rank">
-                    <a class="review-box-wrap">
-                        <div class="review-item-user">
-                            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
-                            <div>
-                                admin
-                            </div>
-                        </div>
-                        <div>
-                            <div class="review-item-date">
-                                2022-12-12
-                            </div>
-                            <div class="review-item-content">
-                                맛이 좋네요
-                            </div>
-                            <div class="rating">
-                                <img src="/images/icon/star.svg">
-                                <div>4</div>
-                            </div>
-                        </div>
-                    </a>
+
                 </div>
                 <!--좋아요순 끝-->
 
                 <!--최신순 시작-->
                 <div id="recent-rank">
-                    <a class="review-box-wrap">
-                        <div class="review-item-user">
-                            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
-                            <div>
-                                admin
-                            </div>
-                        </div>
-                        <div>
-                            <div class="review-item-date">
-                                2022-12-12
-                            </div>
-                            <div class="review-item-content">
-                                맛이 좋네요fffffff
-                            </div>
-                            <div class="rating">
-                                <img src="/images/icon/star.svg">
-                                <div>4</div>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="review-box-wrap">
-                        <div class="review-item-user">
-                            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
-                            <div>
-                                admin
-                            </div>
-                        </div>
-                        <div>
-                            <div class="review-item-date">
-                                2022-12-12
-                            </div>
-                            <div class="review-item-content">
-                                맛이 좋네요fffffff
-                            </div>
-                            <div class="rating">
-                                <img src="/images/icon/star.svg">
-                                <div>4</div>
-                            </div>
-                        </div>
-                    </a>
+                    
                 </div>
                 <!--최신순 끝-->
 
