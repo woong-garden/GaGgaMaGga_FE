@@ -1,6 +1,6 @@
 if (JSON.parse(localStorage.getItem("payload")).password_expired == true){
 } else {
-    location.replace("index.html")
+    window.location.replace("index.html")
 }
 
 //비밀번호 인증 만료시 변경
@@ -44,6 +44,6 @@ async function expired_password_next_change() {
     const result = await response.json()
     
     if (response.status === 200) {
-        location.replace('index.html')
+        window.location.replace('index.html')
     }
 }

@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+.content {
+    font-family: system-ui, serif;
+    font-size: 1rem;
+    text-align: center;
+    padding: 3rem;
+    width: 100%;
+    border-radius: 1rem;
+    background: rgb(255, 155, 37);;
+}

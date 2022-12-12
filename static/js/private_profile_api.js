@@ -1,6 +1,23 @@
+let active_user = document.getElementById("acctive_user")
+let deacctive_user = document.getElementById("deacctive_user")
+let profile_div = document.getElementById("profile_div")
+
 if(localStorage.getItem("access")){
     private_profile()
+    active_user.style = "display:block;"
+    deacctive_user.style = "display:none;"
+    profile_div.style = "display:block"
+    
+} else {
+    active_user.style = "display:none;"
+    deacctive_user.style= "display:block;"
+    profile_div.style = "display:none"
 }
+
+
+
+
+
 
 //개인 프로필
 async function private_profile(){
@@ -37,7 +54,16 @@ function confirm_kakao_user_edit() {
     if (localStorage.getItem("kakao")){
         alert("카카오 회원은 회원정보 수정을 할 수 없습니다. ")}
     else{
-        location.href("user_edit.html")
+        window.location.replace('user_edit.html')
+        }
+}
+
+//비밀번호 변경 카카오 로그인 접근 불허
+function confirm_kakao_change_password() {
+    if (localStorage.getItem("kakao")){
+        alert("카카오 회원은 비밀번호를 설정할 수 없습니다. ")}
+    else{
+        window.location.replace('change_password.html')
         }
 }
 
@@ -97,7 +123,7 @@ async function withdrawal() {
     localStorage.removeItem("payload")
     localStorage.removeItem("access")
     localStorage.removeItem("refresh")
-    location.replace('login.html')}
+    window.location.replace('login.html')}
     }
 }
 

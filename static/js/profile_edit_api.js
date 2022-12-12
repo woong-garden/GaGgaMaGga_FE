@@ -2,7 +2,7 @@ if(localStorage.getItem("access")){
     private_profile()
 } else{
     alert("접근이 불가능합니다.")
-    location.replace("index.html")
+    window.location.replace("index.html")
 }
 
 //프로필 수정
