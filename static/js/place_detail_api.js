@@ -87,7 +87,6 @@ async function review_like_sort(){
 
     const rank_cnt = document.getElementById("place-review-cnt")
     rank_cnt.innerText = response_json.like_count_review.length
-    
     response_json.like_count_review.forEach(item => {
         $('#like-rank').append(
             `
