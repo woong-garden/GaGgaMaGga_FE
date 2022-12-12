@@ -4,7 +4,7 @@
 }
 
 html {
-    overflow: hidden;
+    overflow: hidden; 
 }
 
 body {
@@ -279,11 +279,11 @@ body {
 }
 
 .comment-cnt {
-    width: 25%;
+    width: 40%;
     text-align: right;
     font-size: 12px;
     color: gray;
-    margin: auto 0 auto 75%;
+    margin: auto 0 auto 60%;
     display: block;
 }
 
@@ -463,11 +463,6 @@ body {
         margin-left: -250px;
 
     }
-
-    #report-modal{
-        width : 15vw;
-        margin-left: -7.5vw;
-    }
 }
 
 .review-detail-box {
@@ -555,20 +550,51 @@ body {
 #report-modal {
     position: absolute;
     background-color: white;
-    width: 20vw;
-    height: 10vh;
+    width: 23vw;
+    height: 30vh;
     display: none;
     border-radius: 25px;
     box-shadow: 4px 4px 4px rgb(199, 199, 199);
     left: 50%;
-    margin-left : -10vw;
+    margin-left : -11.5vw;
     top: 50%;
-    margin-top : -5vh;
+    margin-top : -15vh;
     z-index: 1;
 }
 
+#report-button-text{
+    color: rgb(237, 155, 83);
+    margin-right:1vw;
+}
+
+#review_report_category{
+    margin: 3vh auto;
+    display: block;
+    border-radius: 10px;
+    width : 90%;
+}
+
+textarea{
+    margin: auto;
+    display: block;
+    width : 80%;
+    border-radius: 10px;
+    padding: 10px;
+}
+
 #report-modal h4 {
-    height: 50%;
+    font-size: 15px;
     text-align: center;
-    cursor: pointer;
+    font-weight: 400;
+    margin: 3vh auto;
+}
+
+
+.report-buttons{
+    display: flex;
+    justify-content: center;
+}
+
+.report-buttons button{
+    margin : 3vh 2vw;
 }
