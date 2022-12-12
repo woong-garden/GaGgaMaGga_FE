@@ -77,7 +77,7 @@ async function review_like_sort(){
                 </div>
                 <div>
                     <div class="review-item-date">
-                        ${item.created_at}
+                    ${time2str(item.created_at)}
                     </div>
                     <div class="review-item-content">
                         ${item.content}
@@ -124,7 +124,7 @@ async function review_recent_sort(){
                 </div>
                 <div>
                     <div class="review-item-date">
-                        ${item.created_at}
+                        ${time2str(item.created_at)}
                     </div>
                     <div class="review-item-content">
                         ${item.content}
@@ -145,8 +145,30 @@ async function review_recent_sort(){
 }
 review_recent_sort()
 
+//시간 포맷팅
+function time2str(date_now) {
+    let today = new Date()
+    let before = new Date(date_now)
+    let time = (today - before) / 1000 / 60  // 분
+    if (time < 60) {
+        return parseInt(time) + "분 전"
+    }
+    time = time / 60  // 시간
+    if (time < 24) {
+        return parseInt(time) + "시간 전"
+    }
+    time = time / 24
+    if (time < 7) {
+        return parseInt(time) + "일 전"
+    }
+    return `${date_now.getFullYear()}년 ${date_now.getMonth() + 1}월 ${date_now.getDate()}일`
+};
+
 
 function move_review_detail_page(review_id,place_id){
     window.location.href = `/review_detail.html?id=${review_id}&place=${place_id}`
+}
 
+function move_review_create_page(place_id){
+    window.location.href = `/review_create.html?id=${place_id}`
 }

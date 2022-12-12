@@ -22,7 +22,7 @@
                 <div>
                     <a class="back-wrap"><img src="/images/icon/back.svg"></a>
                 </div>
-                <div id="place-name" class="header-place-name">아웃백</div>
+                <div id="place-name" class="header-place-name"></div>
             </div> 
             <a class="header-bell">
                 <img src="/images/icon/bell.svg">
@@ -40,7 +40,12 @@
         <div class="main-place-info">
             <div id="div_place_address">주소: 가나다라마바사</div>
             <div id="div_place_number">전화번호: 1234-1234</div>
-            <div id="div_place_time">영업시간: 24:20</div>
+            <div class="review-botton-box">
+                <div id="div_place_time">영업시간: 24:20</div>
+                <div class="review-botton-wrap"><button onclick="move_review_create_page(place_id)" class="review-create-botton">후기 작성하기</button></div>
+            </div>
+            
+            
         </div>
         
         <div class="horizon"></div>
