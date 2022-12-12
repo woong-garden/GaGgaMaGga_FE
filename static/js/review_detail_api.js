@@ -2,6 +2,8 @@ const review_id = location.href.split('?')[1].split('&')[0].split('=')[1]
 const place_id = location.href.split('?')[1].split('&')[1].split('=')[1]
 const author_id = location.href.split('?')[1].split('&')[2].split('=')[1]
 
+console.log(location.href.split('?')[1])
+
 console.log(author_id)
 
 const payload = localStorage.getItem("payload");

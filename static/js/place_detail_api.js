@@ -52,6 +52,7 @@ async function PlaceDetail(){
 
 
     menu_list.forEach(item => {
+        console.log(item.author_id)
         $('#menu-list').append(
             `
             <div class="menu-list-box">
@@ -87,9 +88,10 @@ async function review_like_sort(){
     const rank_cnt = document.getElementById("place-review-cnt")
     rank_cnt.innerText = response_json.like_count_review.length
     response_json.like_count_review.forEach(item => {
+        console.log(item.author_id)
         $('#like-rank').append(
             `
-            <a class="review-box-wrap" onclick="move_review_detail_page(${item.id},${item.place_id})">
+            <a class="review-box-wrap" onclick="move_review_detail_page(${item.id},${item.place_id},${item.author_id})">
                 <div class="review-item-user">
                     <img src="${backendBaseUrl}${item.profile_image}">
                     <div>
