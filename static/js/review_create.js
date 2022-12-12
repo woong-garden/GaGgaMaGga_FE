@@ -1,4 +1,6 @@
 const place_id = location.href.split('?')[1].split('=')[1]
+const payload = localStorage.getItem("payload");
+const payload_parse = JSON.parse(payload);
 
 
 window.onload = () => {
@@ -42,7 +44,7 @@ window.onload = () => {
     })
 }
 
-function uploadReview() {
+async function uploadReview() {
     const content = document.querySelector("textarea")
     const starOne = document.querySelector('#rate1')
     const starTwo = document.querySelector('#rate2')
@@ -79,7 +81,6 @@ function uploadReview() {
     cls = cls.toString()
     const images = document.querySelector('.real-upload');
 
-    const review_id = 1 // 마찬가지로 추후 연동시켜야 합니다.
 
     var formData = new FormData()
     formData.append("rating_cnt", cls)
@@ -88,7 +89,7 @@ function uploadReview() {
     formData.append("review_image_two", images.files[1])
     formData.append("review_image_three", images.files[2])
 
-    fetch(`http://127.0.0.1:8000/reviews/${review_id}/`, {
+    await fetch(`http://127.0.0.1:8000/reviews/${place_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
@@ -97,4 +98,19 @@ function uploadReview() {
         body: formData
     })
     alert("후기 등록 완료")
+    // const userResponse = await fetch(`http://127.0.0.1:8000/reviews/${place_id}/`, {
+    //     method: 'GET',
+    //     headers: {
+    //         Accept: "application/json",
+    //         "Content-type": "application/json",
+    //         "Authorization": "Bearer " + localStorage.getItem("access")
+    //     }
+    // })
+    // .then(userResponse => userResponse.json())
+    // review_id = userResponse.recent_review.length+1
+    // console.log(userResponse)
+    window.history.back()
+    // document.querySelector('#review-button').click()
+    // alert('리뷰 등록 성공!')
+    // window.location.href = `/review_detail.html?id=${review_id}&place=${place_id}&author=${payload_parse.user_id}`
 }
