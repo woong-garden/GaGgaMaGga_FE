@@ -36,16 +36,15 @@ async function public_profile() {
         console.log(item)
         $('#my-review').append(
             `
-            <div class="card" style="margin-bottom:10px;">
+            <div class="review-box">
                 <div class="row" style="margin:0;">
                     <div class="col-md-4" style="padding:0;">
-                            <img onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}" style="cursor:pointer;width: 100%;border-top-left-radius:5px;border-bottom-left-radius:5px; height:100%; aspect-ratio: 1/1;
-                                    object-fit: cover;" >
+                            <img class="review-img" onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
                     </div>
                     <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
                         <div class="card-body">
                             <h6 style="cursor:pointer;color:  #ffbf60;" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</h6>
-                            <p class="card-text">평점&nbsp; ${item.rating_cnt} / 5</p>
+                            <p>평점&nbsp; ${item.rating_cnt} / 5</p>
                             <div style="display:flex; width:50%;">
                             <button class="update-review" onclick=move_to_edit_page(${item.place_id}, ${item.id})>리뷰 수정</button>
                             <button class="update-review">리뷰 삭제</button>
@@ -63,18 +62,17 @@ async function public_profile() {
         response_json.bookmark_place.forEach(item => {
                 $('#my-bookmark').append(
                     `
-                    <div class="card">
-                        <div class="row">
-                            <div class="col-md-4" >
+                    <div class="review-box">
+                        <div class="row" style="margin:0;">
+                            <div class="col-md-4" style="padding:0;">
                                 <div class="content-img">
-                                    <img alt="장소 사진" src="${item.place_img}" style="width: 100%; height:100%; aspect-ratio: 1/1;
-                                            object-fit: cover;" >
+                                    <img class="review-img" alt="장소 사진" src="${item.place_img}">
                                 </div>
                             </div>
                             <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                                <div class="card-body">
-                                   <h6 style="color :  #ffbf60;">${item.place_name}</h6>
-                                    <p class="card-text">평점&nbsp; ${item.rating} / 5</p>
+                                <div style="padding: 1.25rem">
+                                    <h6 style="color :  #ffbf60;">${item.place_name}</h6>
+                                    <p>평점&nbsp; ${item.rating} / 5</p>
                                 </div>
                             </div>
                         </div>
