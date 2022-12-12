@@ -2,8 +2,14 @@ if(localStorage.getItem("access")){
     login_log()
 } else{
     alert("접근이 불가능합니다.")
-    location.replace("index.html")
+    window.location.replace("index.html")
 }
+
+function time2str(date) {
+    let date_time = new Date(date)
+
+    return `${date_time.getFullYear()}년 ${date_time.getMonth() + 1}월 ${date_time.getDate()}일 ${date_time.getHours()}시 ${date_time.getMinutes()}분`
+};
 
 async function login_log(){
     const response = await fetch(`${backendBaseUrl}/users/logs/`, {
@@ -18,6 +24,8 @@ async function login_log(){
 
     response_json = await response.json()
     response_json.forEach(item => {
+        const time_format = time2str(item.created_at)
+        console.log(item.created_at)
         $('#my-review').append(
             `
             <div class="card">
@@ -25,7 +33,7 @@ async function login_log(){
                 <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
                     <div class="card-body">
                         <h6 style="font-size:15px">접속 ip: ${item.update_ip}</h6></h6> 
-                        <h6 style="font-size:15px">접속 시간: ${item.created_at}</h6></h6>
+                        <h6 style="font-size:15px">접속 시간: ${time_format}</h6></h6>
                     </div>
                 </div>
             </div>

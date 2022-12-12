@@ -1,19 +1,26 @@
 if (localStorage.getItem("kakao") || localStorage.getItem("playload")){
-    location.replace(history.back())
+    window.location.replace(history.back())
     alert("이미 로그인이 되어있습니다.")
 } else {}
 
 //회원가입
 async function Sign_Up() {
+    let input_check = document.getElementById("term_check");
+    if (input_check.checked){
+        input_check = true
+    } else{
+        input_check = false
+    }
+
     const signupData = {
         username: document.getElementById("username").value,
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
         repassword: document.getElementById("repassword").value,
         phone_number: document.getElementById("phone_number").value,
-        term_check : document.getElementById("term_check").value,
+        term_check :input_check,
     }
-
+    console.log(input_check)
     const response = await fetch(`${backendBaseUrl}/users/`,{
         headers:{
             'Content-type':'application/json',
@@ -26,7 +33,7 @@ async function Sign_Up() {
     
     if (response.status === 201) {
         alert("회원가입이 되었습니다.")
-        location.replace('login.html')
+        window.location.replace('login.html')
 
     } else if (response.status === 400) {
         document.getElementById('alert-danger').style.display ="block"
