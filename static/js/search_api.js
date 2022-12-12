@@ -9,7 +9,6 @@ async function searchParam(){
     const getLink = window.location.search;
     const getLink_Name = getLink.split('=');
     const getLink_result = getLink_Name[1];
-    console.log(getLink_result)
     const decodeResult = decodeURI(getLink_result);
 
     if(decodeResult){

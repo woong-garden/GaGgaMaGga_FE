@@ -32,7 +32,8 @@
             </div>
             <form>
                 <img style="padding-left:14px; width: 20px; height: 20px;" src="./images/icon/search_empty.svg">
-                <input class="search_input" type="text" placeholder="지역, 카페, 맛집명 검색">
+                <input type="text" style="display:none;"/>
+                <input class="search_input" type="text" placeholder="지역, 카페, 맛집명 검색"id="search" onkeypress="enterkey()">
             </form>
             <img style="margin-left:8px;" src="./images/icon/bell.svg">
         </div>
@@ -73,6 +74,7 @@
     <!--네비바 끝-->
     <script src="static/js/base_api.js"></script>
     <script src="static/js/index_api.js"></script>
+    <script src="static/js/search_api.js"></script>
 </body>
 
 </html>
