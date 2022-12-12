@@ -1,10 +1,10 @@
 if(localStorage.getItem("access")){
     if (JSON.parse(localStorage.getItem("payload")).nickname == null){
     }else{
-    location.replace("index.html")}
+    window.location.replace("index.html")}
 } else{
     alert("접근이 불가능합니다.")
-    location.replace("login.html")
+    window.location.replace("login.html")
 }
 
 //프로필 수정
@@ -32,7 +32,6 @@ async function first_profile_edit() {
     console.log(result
         )
     if (response.status === 200) {
-        alert("회원정보 수정이 완료되었습니다.")
         window.location.replace(`index.html`)
         
     } else if (response.status === 400 && result['nickname']) {
