@@ -10,6 +10,7 @@ async function PlaceDetail(){
         }
     )
     response_json = [await response.json()]
+    console.log(response_json)
     
     const menu_list = response_json[0].menu.split('|')
     const place_name = response_json[0].place_name

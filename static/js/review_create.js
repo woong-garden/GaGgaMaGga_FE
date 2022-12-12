@@ -98,19 +98,5 @@ async function uploadReview() {
         body: formData
     })
     alert("후기 등록 완료")
-    // const userResponse = await fetch(`http://127.0.0.1:8000/reviews/${place_id}/`, {
-    //     method: 'GET',
-    //     headers: {
-    //         Accept: "application/json",
-    //         "Content-type": "application/json",
-    //         "Authorization": "Bearer " + localStorage.getItem("access")
-    //     }
-    // })
-    // .then(userResponse => userResponse.json())
-    // review_id = userResponse.recent_review.length+1
-    // console.log(userResponse)
     window.history.back()
-    // document.querySelector('#review-button').click()
-    // alert('리뷰 등록 성공!')
-    // window.location.href = `/review_detail.html?id=${review_id}&place=${place_id}&author=${payload_parse.user_id}`
 }
