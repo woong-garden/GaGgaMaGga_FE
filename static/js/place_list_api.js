@@ -141,7 +141,6 @@ async function UserPlaceListView(cate_id) {
         }
     })
     response_json = await response.json()
-    console.log(response_json)
     $('#place-list').empty()
     response_json.forEach(item => {
         $('#place-list').append(

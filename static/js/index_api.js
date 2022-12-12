@@ -100,11 +100,11 @@ async function IsUserOrNot(){
                     <div>장소를 선택해보세요</div>
                 </div>
                 <div>
-                    <a href="#"><div class="select_box2" onclick="move_list_page(13)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">제주시</p>
+                    <a href="#"><div class="select_box2" onclick="move_select_page(13)">
+                    <img class="index_img" src="./images/icon/foods/jeju.png">
                     </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_list_page(14)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">서귀포시</p>
+                    <a href="#"><div class="select_box2" onclick="move_select_page(14)">
+                    <img class="index_img" src="./images/icon/foods/sgp.png">
                     </div></a>
                 </div>
             </div>
@@ -145,10 +145,10 @@ async function IsUserOrNot(){
                 </div>
                 <div>
                     <a href="#"><div class="select_box2" onclick="move_select_page(13)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">제주시</p>
+                    <img class="index_img" src="./images/icon/foods/jeju.png">
                     </div></a>
                     <a href="#"><div class="select_box2" onclick="move_select_page(14)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">서귀포시</p>
+                    <img class="index_img" src="./images/icon/foods/sgp.png">
                     </div></a>
                 </div>
             </div>

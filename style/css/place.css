@@ -303,7 +303,11 @@ td {
     background:rgba(250, 243, 181, 0.8);
     border-radius: 15px;
     z-index:1000;
+    overflow:scroll;
+}
 
+.modal-wrap::-webkit-scrollbar {
+    width: 4px;
 }
 .modal_map {
     width:300px;
@@ -314,6 +318,7 @@ td {
 .modal_contents {
     width:300px;
     margin:10px auto;
+
 }
 .modal_close {
     display:inline-block;
@@ -345,4 +350,8 @@ td {
     padding:5px;
     border-radius: 10px;
     box-shadow: 2px 2px;
+}
+
+.place_table {
+    background-color: #FFCD48;
 }
