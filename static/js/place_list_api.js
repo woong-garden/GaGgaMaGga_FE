@@ -179,7 +179,54 @@ async function UserPlaceListView(cate_id) {
                 
             `
         )
-    });
+        //지도 API
+        var mapOptions = {
+            center: new naver.maps.LatLng(`${item.latitude}`, `${item.longitude}`),
+            zoom: 16
+        }
+        
+        var contentString = 
+        `<div class="iw_inner">
+            [${item.category}]  ${item.place_name}<br>
+            ${item.place_address}<br>
+            ☎${item.place_number}<br>
+        </div>`
+
+        var map = new naver.maps.Map(`map${item.id}`, mapOptions);
+        var marker = new naver.maps.Marker({
+            title: "title",
+            position: new naver.maps.LatLng(`${item.latitude}`, `${item.longitude}`),
+            map: map,
+            icon: {
+                content: '<img src="./images/icon/map_marker.png" alt="" class="marker_style" style="-webkit-user-select: none;">',
+                size: new naver.maps.Size(22, 35),
+                anchor: new naver.maps.Point(11, 35)
+            }
+        });
+
+        
+        let infoWindows = new Array();
+        // infowindow 내용
+        var infowindow = new naver.maps.InfoWindow({
+            content: contentString,
+            backgroundColor: 'transparent',
+            borderWidth: 0,
+            disableAnchor: true,
+            pixelOffset: new naver.maps.Point(0, -10),
+        });
+
+        
+        infoWindows.push(infowindow)
+
+        // infowindow 클릭
+        naver.maps.Event.addListener(marker, "click", function(e) {
+            if (infowindow.getMap()) {
+                infowindow.close();
+            } else {
+                infowindow.open(map, marker);
+            }
+        });
+    })
 }
 
 
