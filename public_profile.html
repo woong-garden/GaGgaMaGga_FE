@@ -38,17 +38,16 @@
 
     <!--메인 시작-->
     <div class="root">
-        <div class="root_block"></div>
         <!-- profile 정보 -->
-        <div class="profile">
+        <div>
             <div class="card mb-3" style="max-width: 540px; border-radius: 0;">
-                <div class="row g-0" style="align-items: center;">
+                <div class="row g-0" style="margin:auto;width:100%;align-items: center;">
                     <div class="col-md-4">
                         <div class = "img">
                             <img id="profile_image" alt="프로필 사진">
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8" style="padding:0">
                         <div class="card-body">
                             <h6 class="card-title" id="profile_nickname"></h6>
                             <p class="card-text" id="profile_intro"></p>
@@ -56,7 +55,6 @@
                             <span class="card-text" id="profile_followers"></span>
                             <span>&nbsp;&nbsp;&nbsp;</span>                          
                             <button id="following_move" class="card-text" value="following" onclick="move_following_page(user_nickname)">팔로잉</button>
-                            <span>&nbsp;</span>
                             <span class="card-text" id="profile_followings"></span>
                             <button id="user_follow"></button>
                         </div>
