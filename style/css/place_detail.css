@@ -80,6 +80,24 @@
         height:38px; 
         margin-top:2%;
     }
+    .review-botton-box{
+        display:flex; 
+        justify-content:space-between;
+    }
+    .review-botton-wrap{
+        text-align:right;
+        
+    }
+    .review-create-botton{
+        border-radius:20px; 
+        border:none; 
+        background-color: #FF792A; 
+        color:#ffffff; 
+        text-align: center;
+        padding: 8px 14px 8px;
+        font-weight: 700; 
+        cursor: pointer;
+    }
     
     #place-name{
         font-weight: 700;

@@ -1,3 +1,6 @@
+const place_id = location.href.split('?')[1].split('=')[1]
+
+
 window.onload = () => {
     const realUpload = document.querySelector('.real-upload');
     const upload = document.querySelector('.upload');
