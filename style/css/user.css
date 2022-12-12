@@ -2,10 +2,6 @@
     font-family: 'Noto Sans KR', sans-serif; /*폰트*/
 }
 
-body{
-    margin : 0;
-}
-
 #top-bar{
     display: flex;
     flex-direction: row;
@@ -34,7 +30,8 @@ body{
 
 
 body{
-    background-color: rgb(232, 225, 216);
+    background-color: #FFFAE7;
+    margin : 0;
 }
 
 #container{
