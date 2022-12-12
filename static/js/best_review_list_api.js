@@ -6,7 +6,7 @@ async function BestLikeSort(){
         headers: {
             Accept: "application/json",
             "Content-type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem("access")
+            // "Authorization": "Bearer " + localStorage.getItem("access")
             }
         }
     )
@@ -22,7 +22,7 @@ async function BestLikeSort(){
             <div class="review-list">
                 <div class="place-item">
                     <div>
-                        <img style="object-fit:cover;width:100px;height:100px; cursor: pointer;" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src="${backendBaseUrl}${item.review_image_one}">
+                        <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src="${backendBaseUrl}${item.review_image_one}">
 
                     </div>
                     <div class="place-item-content">
@@ -37,9 +37,9 @@ async function BestLikeSort(){
                         </div>
                     </div>
                 </div>
-                <a style="cursor: pointer;" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
+                <a class="place-item-user" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
                     <div>
-                        <img style="object-fit:cover;width:40px;height:40px; border-radius: 20px;" src="${backendBaseUrl}${item.profile_image}">
+                        <img class="place-item-user-img" src="${backendBaseUrl}${item.profile_image}">
                     </div>
                     <div>
                         ${item.nickname}
@@ -60,7 +60,7 @@ async function recentSort(){
         headers: {
             Accept: "application/json",
             "Content-type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem("access")
+            // "Authorization": "Bearer " + localStorage.getItem("access")
             }
         }
     )
@@ -72,8 +72,8 @@ async function recentSort(){
             <div class="review-list">
                 <div class="place-item">
                     <div>
-                        <a style="cursor: pointer;" onclick="move_review_detail_page(${item.id},${item.place.id})">
-                            <img style="width:100px;height:100px;" src="${backendBaseUrl}${item.review_image_one}">
+                        <a onclick="move_review_detail_page(${item.id},${item.place.id})">
+                            <img class="place-item-img" src="${backendBaseUrl}${item.review_image_one}">
                         </a>
                     </div>
                     <div class="place-item-content">
@@ -88,9 +88,9 @@ async function recentSort(){
                         </div>
                     </div>
                 </div>
-                <a style="cursor: pointer;" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
+                <a class="place-item-user" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
                     <div>
-                        <img style="width:40px;height:40px; border-radius: 20px;" src="${backendBaseUrl}${item.profile_image}">
+                        <img class="place-item-user-img" src="${backendBaseUrl}${item.profile_image}">
                     </div>
                     <div>
                         ${item.nickname}

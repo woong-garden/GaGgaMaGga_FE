@@ -57,42 +57,88 @@ async function public_profile() {
             `
         )
     });
-
     // 북마크
-    response_json.bookmark_place.forEach(item => {
-        $('#my-bookmark').append(
-            `
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-4" >
-                        <div class="content-img">
-                            <img alt="장소 사진" src="${item.place_img}" style="width: 100%; height:100%; aspect-ratio: 1/1;
-                                    object-fit: cover;" >
+
+    if(response_json.bookmark_place.length){
+        response_json.bookmark_place.forEach(item => {
+                $('#my-bookmark').append(
+                    `
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-md-4" >
+                                <div class="content-img">
+                                    <img alt="장소 사진" src="${item.place_img}" style="width: 100%; height:100%; aspect-ratio: 1/1;
+                                            object-fit: cover;" >
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
+                                <div class="card-body">
+                                   <h6 style="color :  #ffbf60;">${item.place_name}</h6>
+                                    <p class="card-text">평점&nbsp; ${item.rating} / 5</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                        <div class="card-body">
-                            <h6 style="color :  #ffbf60;">${item.place_name}</h6>
-                            <p class="card-text">평점&nbsp; ${item.rating} / 5</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `
-        )
-    });
+                    `
+                )
+            });
+    }
+    
     
     // 본인 프로필에서 팔로우 버튼 숨김
     let nickname = JSON.parse(localStorage.getItem(['payload'])).nickname
     if (user_nickname == nickname){
         document.getElementById('user_follow').style.display ="none"
-    } else {
-        
+    } 
+    else {
+        document.getElementById("user_follow").innerHTML = "팔로우"
+        document.getElementById("profile_followers").value = "1"
+
+    }
+
+    // 팔로우 되어있을 때 버튼
+    let follow_list = response_json.followers
+    for (const item of follow_list){
+        console.log(item.nickname);
+        if (nickname==item.nickname){
+            document.getElementById("user_follow").innerHTML = "팔로우취소"
+            document.getElementById("profile_followers").value = "0"
+        }
     }
 }
 
 public_profile()
 
+// 팔로우
+$('#user_follow').on('click', follow);
+
+function follow(){
+    $.ajax({
+        url : `${backendBaseUrl}/users/follow/${user_nickname}/`,
+        type : 'POST',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Content-type","application/json");
+            xhr.setRequestHeader("Authorization","Bearer " + localStorage.getItem("access"));
+        },
+        success: function(res){
+            var profile_followers = document.getElementById("profile_followers").innerText;
+            var follower_value = document.getElementById("profile_followers").value;
+            console.log(follower_value)
+            if(follower_value == 1){
+                var rrr = parseInt(profile_followers) +1;
+                document.getElementById("profile_followers").innerText = rrr;
+                document.getElementById("profile_followers").value = 0;
+                document.getElementById("user_follow").innerHTML = "팔로우취소"
+            }else{
+                var rrr = parseInt(profile_followers) -1;
+                document.getElementById("profile_followers").innerText = rrr;
+                document.getElementById("profile_followers").value = 1;
+                document.getElementById("user_follow").innerHTML = "팔로우"
+            }
+        }
+    });
+}
+    
 function reviewshow(){
     $('#my-review').show();
     $('#my-bookmark').hide();
@@ -120,28 +166,3 @@ function move_to_edit_page(place_id, review_id){
     window.location.href = `/review_update.html?place_id=${place_id}&review_id=${review_id}`
 }
 
-
-
-// 팔로우
-async function follow() {
-    const response = await fetch(`${backendBaseUrl}/users/follow/${user_nickname}/`, {
-
-        method: 'POST',
-        headers: {
-            Accept:"application/json",
-            'Content-Type': 'application/json',
-            'Authorization': "Bearer " + localStorage.getItem("access")
-        },
-    }
-    )
-
-    response_json = await response.json
-
-    if (response.status == 200) {
-        alert("팔로우되었습니다.")
-    }else {
-        alert(response_json["msg"])
-    }
-
-    
-}
