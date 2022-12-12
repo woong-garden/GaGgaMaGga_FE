@@ -34,7 +34,7 @@ function popClose(id) {
 
 //select
 async function NewUserPlaceListView(place_id, category) {
-    const response = await fetch(`http://127.0.0.1:8000/places/new/${place_id}/${category}/`, {
+    const response = await fetch(`http://127.0.0.1:8000/places/new/${place_id}/${category}/`, {    
         method: 'GET',
         headers: {
             "Content-type": "application/json",

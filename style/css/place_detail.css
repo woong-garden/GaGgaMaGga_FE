@@ -81,6 +81,9 @@
         margin-top:2%;
     }
     
+    #place-name{
+        font-weight: 700;
+    }
     .main-place-img{
         width:100%; 
         height:250px; 
@@ -88,6 +91,8 @@
     }
     .main-place-info{
         padding: 14px 14px 0px 14px;
+        font-size: 14px;
+        font-weight: 700;
     }
     .horizon{
         height: 10px; 
@@ -221,7 +226,33 @@
         font-size:14px; 
         font-weight:700
     }
-
+    #place-review-cnt{
+        color:#9b9b9b; 
+        font-size: 14px;
+    }
+    .place-review-cnt-style{
+        color:#9b9b9b; 
+        font-size: 14px;
+    }
+    .review-item-box{
+        display:flex; 
+        align-items:center; 
+        padding-left:6px;
+    }
+    .review-item-box >img {
+        width: 16px;
+        height: 16px;
+    }
+    .review-item-box >div {
+        font-size: 14px;
+        font-weight: 700;
+    }
+    #div_place_address{
+        padding-bottom:10px;
+    }
+    #div_place_number{
+        padding-bottom:10px;
+    }
 
     .nav-wrap{
         position: fixed;
