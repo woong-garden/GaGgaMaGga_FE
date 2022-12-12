@@ -201,24 +201,6 @@ body {
 
 }
 
-.select_box2 {
-    background-color: #DCFFDA;
-    width: 100px;
-    height: 50px;
-    margin: 10px 5px;
-    border-radius: 15px;
-    text-align: center;
-    display: inline-table;
-    background-size: cover;
-    font-weight: bold;
-    font-size: 15px;
-    border: 2px solid #dcdcdc;
-    word-break: keep-all;
-    color: black;
-    
-
-}
-
 .p_name {
     background-color: rgba(0, 0, 0, 0.5);
     display: table-cell; 

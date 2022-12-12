@@ -133,7 +133,7 @@ function move_list_page(cate_id) {
 
 
 async function UserPlaceListView(cate_id) {
-    const response = await fetch(`http://127.0.0.1:8000/places/${cate_id}/`, {
+    const response = await fetch(`http://127.0.0.1:8000/places/selection/${cate_id}/`, {
         method: 'GET',
         headers: {
             "Content-type": "application/json",
@@ -141,7 +141,7 @@ async function UserPlaceListView(cate_id) {
         }
     })
     response_json = await response.json()
-
+    console.log(response_json)
     $('#place-list').empty()
     response_json.forEach(item => {
         $('#place-list').append(
