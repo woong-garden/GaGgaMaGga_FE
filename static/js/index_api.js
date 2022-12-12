@@ -37,7 +37,6 @@ async function kakaoLoginApi(kakao_code) {
             }).join('')
         );
         localStorage.setItem("kakao", jsonPayload);
-        location.replace('expired_password.html')
     }else {
         alert(response_json['error'])
         window.history.back()
@@ -55,7 +54,7 @@ async function expired_password_confirm() {
     })
 
     const result = await response.json()
-    console.log(result)
+
     if (response.status === 200) {
         alert(result['message'])
         location.replace('expired_password.html')

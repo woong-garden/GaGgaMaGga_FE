@@ -1,6 +1,5 @@
 
 window.onload = function () {
-    console.log("연결완료")
     const storage = localStorage.getItem("payload");
     if (storage) {
         const cate_id = location.href.split('=')[1].split('/')[0]
@@ -39,7 +38,6 @@ async function NewUserPlaceListView(place_id, category) {
         }
     })
     response_json = await response.json()
-    console.log(response_json)
     $('#place-list').empty()
     response_json.forEach(item => {
         $('#place-list').append(

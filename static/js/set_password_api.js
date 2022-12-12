@@ -43,7 +43,7 @@ async function Set_Password() {
     })
 
     const result = await response.json()
-    console.log(result)
+
     if (response.status === 200) {
         alert(result["message"])
         location.replace('login.html')

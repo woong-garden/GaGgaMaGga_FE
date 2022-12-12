@@ -1,6 +1,12 @@
 *{
     font-family: 'Noto Sans KR', sans-serif; /*폰트*/
     }
+
+    a { text-decoration: none; color: black; }
+    a:visited { text-decoration: none; }
+    a:hover { text-decoration: none; }
+    a:focus { text-decoration: none; }
+
     html{
         overflow: hidden;
     }
@@ -83,20 +89,6 @@
         text-align:center;
         font-size: 1.5em;
     }
-    .review-botton-wrap{
-        text-align:right;
-        padding:0 14px;
-    }
-    .review-create-botton{
-        border-radius:20px; 
-        border:none; 
-        background-color: #FF792A; 
-        color:#ffffff; 
-        text-align: center;
-        padding: 8px 14px 8px;
-        font-weight: 700; 
-        cursor: pointer;
-    }
     .button-style{
         border:none;
         background-color: transparent;
@@ -120,33 +112,39 @@
         color:#9b9b9b;
         font-size:12px;
     }
+
     .review-list {
         display: flex; 
-        cursor: pointer;
         padding:20px 0 24px; 
-        border-bottom: 1px solid #DBDBDB
+        border-bottom: 1px solid #DBDBDB;
+        align-items: center;
+        justify-content: space-between;
     }
+    .place-item{
+        display:flex; 
+        align-items: center;
+    }
+    .place-item-content{
+        padding-left:12px;
+    }
+    .place-item-content > :first-child{
+        font-weight: 700;
+        font-size: 20px;
+    }
+    .place-item-content-cntsty{
+        display:flex; 
+        margin-top:10px
+    }
+    .place-item-content-cntsty > :first-child{
+        padding-right:10px;
+    }
+
     .review-item-user{
-        margin-right:14px; 
         font-size:12px; 
         text-align: center;
     }
     .review-item-date{
         font-size:11px;
-        padding-bottom:8px;
-    }
-    .rating{
-        display: flex; 
-        align-items: center;
-    }
-    .rating > :first-child{
-        width: 14px; 
-        height:14px; 
-        padding-right:2px;
-    }
-    .rating > :nth-child(2){
-        font-size:14px; 
-        font-weight:700
     }
     .review-item-title{
         font-size:12px; 

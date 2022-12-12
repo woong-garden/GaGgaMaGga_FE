@@ -21,7 +21,6 @@ async function Login() {
     )
     const response_json = await response.json()
     
-    console.log(response_json)
     if (response.status === 200) {
         localStorage.setItem("access", response_json.access); 
         localStorage.setItem("refresh", response_json.refresh);
@@ -36,7 +35,12 @@ async function Login() {
             }).join('')
         );
         localStorage.setItem("payload", jsonPayload);
-        location.replace('index.html')
+        console.log(localStorage.getItem("payload"))
+        if (JSON.parse(localStorage.getItem("payload")).nickname == null){
+            location.replace('first_profile_edit.html')
+        } else{
+            location.replace('index.html')
+        }
     } else if(response_json['non_field_errors']){
         document.getElementById('alert-danger').style.display ="block"
         const alert_danger = document.getElementById('alert-danger')
@@ -51,7 +55,7 @@ async function Login() {
 //카카오로그인
 function kakao_login_code(){
     const kakao_id ='d7803b6c144bfb2dc3ce3e1dc7028d8a'
-    const redirect_uri = 'http://127.0.0.1:5501'
+    const redirect_uri = 'http://127.0.0.1:5500'
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao_id}&redirect_uri=${redirect_uri}&response_type=code`
 }
 

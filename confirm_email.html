@@ -4,21 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이메일 인증확인</title>
     <link rel="stylesheet" href="style/css/user_base.css">
-    <link rel="stylesheet" href="style/css/user.css">
-    <title>비밀번호 만료 재설정</title>
+    <style>
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+    }
+    .content {
+        font-family: system-ui, serif;
+        font-size: 1rem;
+        text-align: center;
+        padding: 3rem;
+        width: 100%;
+        border-radius: 1rem;
+        background: rgb(255, 155, 37);;
+    }
+    </style>
 </head>
+
+
 <body>
     <!--헤더 시작-->
     <div class="header">
         <div>
             <div>
                 <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
-            </div>
-            <div>
-                <h3>비밀번호 만료 재설정</h3>
-            </div>
+            </div> 
             <div> 
+                <a><img style="margin-left:8px;" src="/images/icon/bell.svg"></a>
             </div> 
         </div>          
     </div>
@@ -28,21 +44,13 @@
     <div class="root">
         <div class="root_block"></div>
         <!--여기사용하시면 됩니다~-->
-        <div id="input-box">
-            <h5>비밀번호</h5>
-            <input type="password" id="password" placeholder="8자이상 16이하의 영문 대/소문자, 숫자, 특수문자">
-            <input type="password" id="repassword" placeholder="비밀번호 재확인을 입력해주세요">
-            <div class="alert alert-danger" style="font-size:15px" id="alert-danger"></div>
-
-            <div id="buttons">                
-                <div id="find">
-                    <button onclick="expired_password_next_change()" class="button login">다음에 변경하기</button>
-                    <button onclick="expired_password_change()" class="button login">변경하기</button>
-                </div>
-            </div>
+        <div class="wrapper">
+            <div class="content">이메일 인증이 완료되었습니다.</div>
         </div>
     </div>
     <!--메인 끝-->  
+
+    <!--네비바-->
     <div class="nav-wrap"> 
         <div>     
             <nav class="nav-bar">
@@ -54,7 +62,8 @@
             </nav>
         </div>  
     </div>
+    <!--네비바 끝-->
     <script src="static/js/base_api.js"></script>
-    <script src="static/js/expired_password_api.js"></script>
+    <script src="static/js/confirm_email_api.js"></script>
 </body>
 </html>

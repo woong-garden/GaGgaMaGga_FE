@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/css/user_base.css">
     <link rel="stylesheet" href="style/css/user.css">
-    <title>비밀번호 만료 재설정</title>
+    <title>회원정보 수정</title>
 </head>
 <body>
     <!--헤더 시작-->
@@ -16,7 +16,7 @@
                 <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
             </div>
             <div>
-                <h3>비밀번호 만료 재설정</h3>
+                <h3>회원정보 수정</h3>
             </div>
             <div> 
             </div> 
@@ -29,16 +29,13 @@
         <div class="root_block"></div>
         <!--여기사용하시면 됩니다~-->
         <div id="input-box">
-            <h5>비밀번호</h5>
-            <input type="password" id="password" placeholder="8자이상 16이하의 영문 대/소문자, 숫자, 특수문자">
-            <input type="password" id="repassword" placeholder="비밀번호 재확인을 입력해주세요">
+            <h5>회원정보 수정</h5>
+            <input type="text" id="email" placeholder="이메일을 입력해주세요.">
+            <input type="text" id="phone_number" placeholder="-를 제외한 휴대폰 번호 입력해주세요.">
             <div class="alert alert-danger" style="font-size:15px" id="alert-danger"></div>
 
             <div id="buttons">                
-                <div id="find">
-                    <button onclick="expired_password_next_change()" class="button login">다음에 변경하기</button>
-                    <button onclick="expired_password_change()" class="button login">변경하기</button>
-                </div>
+                <button onclick="user_edit()" class="button login">회원정보 변경하기</button>
             </div>
         </div>
     </div>
@@ -55,6 +52,6 @@
         </div>  
     </div>
     <script src="static/js/base_api.js"></script>
-    <script src="static/js/expired_password_api.js"></script>
+    <script src="static/js/user_edit_api.js"></script>
 </body>
 </html>
