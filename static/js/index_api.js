@@ -72,7 +72,7 @@ async function IsUserOrNot(){
             `<section class="select-place-wrap">
             <div>
                 <div>
-                    <div>음식을 추천해드립니다.</div>
+                    <div>음식으로 선택하기</div>
                 </div>
                 <div>
                     <a href="#"><div class="select_box2" onclick="move_list_page(3)">
@@ -97,7 +97,7 @@ async function IsUserOrNot(){
             </div>
             <div>
                 <div>
-                    <div>장소를 선택해보세요</div>
+                    <div>장소로 선택하기</div>
                 </div>
                 <div>
                     <a href="#"><div class="select_box2" onclick="move_select_page(13)">
@@ -116,7 +116,7 @@ async function IsUserOrNot(){
             `<section class="select-place-wrap">
             <div>
                 <div>
-                    <div>음식을 추천해드립니다.</div>
+                    <div>음식으로 검색하기</div>
                 </div>
                 <div>
                 <a href="#"><div class="select_box2" onclick="move_select_page(3)">
@@ -141,7 +141,7 @@ async function IsUserOrNot(){
             </div>
             <div>
                 <div>
-                    <div>장소를 선택해보세요</div>
+                    <div>장소로 선택하기</div>
                 </div>
                 <div>
                     <a href="#"><div class="select_box2" onclick="move_select_page(13)">

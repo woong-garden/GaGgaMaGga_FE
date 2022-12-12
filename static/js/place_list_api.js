@@ -28,7 +28,6 @@ function popClose(id) {
 }
 
 
-
 //select
 async function NewUserPlaceListView(place_id, category) {
     const response = await fetch(`http://127.0.0.1:8000/places/new/${place_id}/${category}/`, {
@@ -140,7 +139,10 @@ async function UserPlaceListView(cate_id) {
             'Authorization': "Bearer " + localStorage.getItem("access")
         }
     })
+
+
     response_json = await response.json()
+    console.log(response_json)
     $('#place-list').empty()
     response_json.forEach(item => {
         $('#place-list').append(
