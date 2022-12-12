@@ -5,6 +5,25 @@ const author_id = location.href.split('?')[1].split('&')[2].split('=')[1]
 const payload = localStorage.getItem("payload");
 const payload_parse = JSON.parse(payload);
 
+//시간 포맷팅
+function time2str(date_now) {
+    let today = new Date()
+    let before = new Date(date_now)
+    let time = (today - before) / 1000 / 60  // 분
+    if (time < 60) {
+        return parseInt(time) + "분 전"
+    }
+    time = time / 60  // 시간
+    if (time < 24) {
+        return parseInt(time) + "시간 전"
+    }
+    time = time / 24
+    if (time < 7) {
+        return parseInt(time) + "일 전"
+    }
+    return `${date_now.getFullYear()}년 ${date_now.getMonth() + 1}월 ${date_now.getDate()}일`
+};
+
 window.onload = () => {
     getData(review_id, place_id)
 }
@@ -69,7 +88,7 @@ async function getData(review_id, place_id) {
     content.innerText = response.content
 
     const date = document.querySelector('.review-time p')
-    date.innerText = `작성 시간 : ${response.created_at}`
+    date.innerText = `작성 시간 : ${time2str(response.created_at)}`
     date.style.fontSize = "11px"
     date.style.color = "gray"
 
@@ -119,7 +138,7 @@ async function getData(review_id, place_id) {
 
         const time = document.createElement('p')
         time.classList.add('time')
-        time.innerText = cmt.created_at
+        time.innerText = time2str(cmt.created_at)
         time.style.fontSize = "11px"
         time.style.color = "gray"
         commentHead.appendChild(time)
