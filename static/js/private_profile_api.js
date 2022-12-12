@@ -44,8 +44,9 @@ async function private_profile(){
 }
 
 // 내 프로필
-let profile_nickname = JSON.parse(localStorage.getItem(['payload'])).nickname
 function move_profile_page(){
+    var profile_nickname = document.getElementById("profile_nickname").innerText
+    profile_nickname = profile_nickname.split(' ')[1]
     window.location.href = `/public_profile.html?=${profile_nickname}`
 }
 

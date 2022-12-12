@@ -161,3 +161,21 @@ body{
         margin:0 auto;
     }
 }
+
+.select_box2 {
+    width: 100px;
+    height: 50px;
+    margin: 10px 5px;
+    border-radius: 15px;
+    text-align: center;
+    display: inline-table;
+    background-size: cover;
+    font-weight: bold;
+    font-size: 15px;
+    word-break: keep-all;
+    color: black;
+}
+
+.index_img {
+    width:70px;
+}

@@ -34,16 +34,16 @@
 
         <div class="place-name">OO 지역 Best 후기</div>
 
-        <div style="height: 10px; width: 100%; background-color: #f9f9f9; margin-top:14px;"></div>
+        <div class="horizon"></div>
         
         <div class="review-list-box">
             <div class="review-list-header">
                 <div>
-                    <span style="color:#9b9b9b; font-size: 14px;" id="rank-cnt"></span> <span style="color:#9b9b9b; font-size: 14px;">개의 후기</span>
+                    <span id="rank-cnt"></span> <span class="rank-cnt-text-style" >개의 후기</span>
                 </div>
                 <div>
                     <div>
-                        <button id="sort-like-button" style="color:#FF792A;" class="button-style" onclick="like_rank_show()">좋아요순</button>
+                        <button id="sort-like-button" class="button-style" onclick="like_rank_show()">좋아요순</button>
                     </div>
                     <div>
                         |
@@ -55,13 +55,13 @@
             </div>
 
             <!--좋아요순 시작-->
-            <div id="like-rank" style="display:block; ">
+            <div id="like-rank">
 
             </div>
             <!--좋아요순 끝-->
 
             <!--최신순 시작-->
-            <div id="recent-rank" style="display:none;">
+            <div id="recent-rank">
                 
             </div>
             <!--조회순 끝-->

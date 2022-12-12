@@ -77,22 +77,22 @@ async function IsUserOrNot(){
                 </div>
                 <div>
                     <a href="#"><div class="select_box2" onclick="move_list_page(3)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">한식/분식</p>
+                        <img class="index_img" src="./images/icon/foods/Korean.png">
                     </div></a>
                     <a href="#"><div class="select_box2" onclick="move_list_page(6)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">패스트푸드</p>
+                        <img class="index_img" src="./images/icon/foods/fastfoods.png">
                     </div></a>
                     <a href="#"><div class="select_box2" onclick="move_list_page(7)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">중식</p>
+                        <img class="index_img" src="./images/icon/foods/Chinese.png">
                     </div></a>
                     <a href="#"><div class="select_box2" onclick="move_list_page(8)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">일식</p>
+                        <img class="index_img" src="./images/icon/foods/Japanese.png">
                     </div></a>
                     <a href="#"><div class="select_box2" onclick="move_list_page(9)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">양식</p>
+                        <img class="index_img" src="./images/icon/foods/Western.png">
                     </div></a>
                     <a href="#"><div class="select_box2" onclick="move_list_page(12)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">아시아</p>
+                    <img class="index_img" src="./images/icon/foods/Asian.png">
                     </div></a>
                 </div>
             </div>
@@ -120,24 +120,24 @@ async function IsUserOrNot(){
                     <div>음식을 추천해드립니다.</div>
                 </div>
                 <div>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(3)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">한식/분식</p>
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(6)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">패스트푸드</p>
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(7)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">중식</p>
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(8)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">일식</p>
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(9)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">양식</p>
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(12)">
-                        <p class="p_name" style="background-color: rgba(0, 0, 0, 0);">아시아</p>
-                    </div></a>
+                <a href="#"><div class="select_box2" onclick="move_select_page(3)">
+                <img class="index_img" src="./images/icon/foods/Korean.png">
+            </div></a>
+            <a href="#"><div class="select_box2" onclick="move_select_page(6)">
+                <img class="index_img" src="./images/icon/foods/fastfoods.png">
+            </div></a>
+            <a href="#"><div class="select_box2" onclick="move_select_page(7)">
+                <img class="index_img" src="./images/icon/foods/Chinese.png">
+            </div></a>
+            <a href="#"><div class="select_box2" onclick="move_select_page(8)">
+                <img class="index_img" src="./images/icon/foods/Japanese.png">
+            </div></a>
+            <a href="#"><div class="select_box2" onclick="move_select_page(9)">
+                <img class="index_img" src="./images/icon/foods/Western.png">
+            </div></a>
+            <a href="#"><div class="select_box2" onclick="move_select_page(12)">
+            <img class="index_img" src="./images/icon/foods/Asian.png">
+            </div></a>
                 </div>
             </div>
             <div>
