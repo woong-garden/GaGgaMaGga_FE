@@ -16,6 +16,7 @@ async function BestLikeSort(){
     rank_cnt.innerText = response_json.like_count_review.length
 
     response_json.like_count_review.forEach(item => {
+        console.log(item)
         $('#like-rank').append(
             `
             <div class="review-list">
@@ -106,7 +107,6 @@ recentSort()
 
 function move_review_detail_page(review_id,place_id, author_id){
     window.location.href = `/review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}`
-
 }
 
 function move_public_profile_page(nickname){

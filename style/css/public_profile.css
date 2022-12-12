@@ -30,20 +30,19 @@ body{
 
 .root {
 position:relative;
-height: 100vh;
+height: 88vh;
 width: 100%;
 left:50%;
 background-color: rgb(248, 243, 235);
 transform: translate(-50%, 0%);
 overflow: auto;
 border: solid 1px rgba(219, 219, 219, 1);
-}
-.root_block{
-    margin-top:48px;
+margin-top: 6vh;
 }
 
 .header{ 
     width: 100%;
+    height: 6vh;
     position:fixed;
     top:0;
     left:0;
@@ -53,7 +52,7 @@ border: solid 1px rgba(219, 219, 219, 1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 48px;
+    height: 6vh;
     background-color: rgb(248, 243, 235);
     padding: 0px 14px 0px 2px;
     box-sizing: border-box;
@@ -85,6 +84,7 @@ border: solid 1px rgba(219, 219, 219, 1);
 .nav-wrap{
     position: fixed;
     width:100%;
+    height: 6vh;
     bottom: 0;
     left: 0;
 }
@@ -123,24 +123,16 @@ border: solid 1px rgba(219, 219, 219, 1);
 .profile {
     margin-top: 15%;
 }
-
-.profile > div{
-    border-radius: 0; 
-    margin-bottom: 1rem!important; 
-    background-color: #fff; 
-    border: 1px solid rgba(0,0,0,.125);
-}
-
 .img {
     text-align: center;
     float: left;
-    margin-left: 7%;
-    margin-right: 5%;
 }
 .img > img {
-    width: 140px;
-    height: 140px;
-    border: 1px solid #2B3856;
+    width: 90%;
+    height: 80%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border: none;
     border-radius: 70%
 }
 
@@ -168,4 +160,26 @@ border: solid 1px rgba(219, 219, 219, 1);
 
 *, ::after, ::before{
     box-sizing: border-box;
+}
+
+.update-review, #follower_move, #following_move{
+    margin : auto 15px auto 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    background-color: transparent;
+    border-radius: 20px;
+    width: 5%;
+    min-width: 70px;
+    height: 24px;
+    border: none;
+    color: #fff;
+    background: #c8c8c8;
+    font-size: 14px;
+    cursor:  pointer;
+}
+
+.update-review:hover, #follower_move:hover, #following_move:hover{
+    background-color: #fcdbab;
+    color: black;
 }
