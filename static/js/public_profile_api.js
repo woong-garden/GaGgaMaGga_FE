@@ -40,7 +40,8 @@ async function public_profile() {
     profile_image.setAttribute("src", `${backendBaseUrl}${image_url}`)
 
     var my_id = JSON.parse(localStorage.getItem(['payload'])).user_id
-    var profile_id = response_json.id
+    var profile_id = response_json.user_id
+
 
     // 후기
     if(response_json.review_set.length){
@@ -50,7 +51,7 @@ async function public_profile() {
             <div class="review-box">
                 <div class="row" style="margin:0;">
                     <div class="col-md-4" style="padding:0;">
-                            <img class="review-img" onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
+                        <img class="review-img" onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
                     </div>
                     <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
                         <div class="card-body">
@@ -93,7 +94,7 @@ async function public_profile() {
     }
     
     // 본인 프로필에서 팔로우 버튼 숨김
-    if (response_json.id == my_id){
+    if (profile_id == my_id){
         document.getElementById('user_follow').style.display ="none"
     }else{
         document.getElementById("user_follow").innerHTML = "팔로우"
@@ -102,7 +103,6 @@ async function public_profile() {
     // 팔로우 되어있을 때 버튼
     let follow_list = response_json.followers
     for (const item of follow_list){
-        console.log(item.id);
         if (my_id==item.id){
             document.getElementById("user_follow").innerHTML = "팔로우취소"
             document.getElementById("profile_followers").value = "0"
@@ -125,7 +125,6 @@ function follow(){
         success: function(res){
             var profile_followers = document.getElementById("profile_followers").innerText;
             var follower_value = document.getElementById("profile_followers").value;
-            console.log(follower_value)
             if(follower_value == 1){
                 var rrr = parseInt(profile_followers) +1;
                 document.getElementById("profile_followers").innerText = rrr;
@@ -152,7 +151,6 @@ function bookmarkshow(){
 
 function move_follow_page(user_nickname){
     var value = document.getElementById('follower_move').value;
-    console.log(value)
     window.location.href = `/follow.html?id=${user_nickname}?value=${value}`
 }
 function move_following_page(user_nickname){

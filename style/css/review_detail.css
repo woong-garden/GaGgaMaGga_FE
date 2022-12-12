@@ -356,7 +356,8 @@ body {
 }
 
 .nav-bar {
-    background-color: white;
+    background-color: #ffffff;
+    border-top: 0.1px solid rgb(196, 196, 196);
     height: 6vh;
     box-sizing: border-box;
     display: flex;
