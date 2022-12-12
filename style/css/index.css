@@ -151,14 +151,14 @@ body{
 
 @media (min-width: 768px) { /*반응형*/
     .root {
-        width: 400px;
+        width: 500px;
     }
     .nav-wrap > div {
-        max-width: 400px;
+        max-width: 500px;
         margin:0 auto;
     }
     .header > div {
-        max-width: 400px;
+        max-width: 500px;
         margin:0 auto;
     }
 }

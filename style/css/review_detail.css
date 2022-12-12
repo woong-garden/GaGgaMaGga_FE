@@ -441,26 +441,26 @@ body {
 
 @media (min-width: 760px) {
     .root {
-        width: 400px;
+        width: 500px;
         height: 88vh;
         margin-bottom: 6vh;
     }
 
     .nav-wrap>div {
-        max-width: 400px;
+        max-width: 500px;
         margin: 0 auto;
     }
 
     .header {
-        width: 400px;
+        width: 500px;
         left: 50%;
-        margin-left: -200px;
+        margin-left: -250px;
     }
 
     #modal-box {
-        width: 400px;
+        width: 500px;
         left: 50%;
-        margin-left: -200px;
+        margin-left: -250px;
 
     }
 
