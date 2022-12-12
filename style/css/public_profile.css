@@ -123,6 +123,14 @@ border: solid 1px rgba(219, 219, 219, 1);
 .profile {
     margin-top: 15%;
 }
+
+.profile > div{
+    border-radius: 0; 
+    margin-bottom: 1rem!important; 
+    background-color: #fff; 
+    border: 1px solid rgba(0,0,0,.125);
+}
+
 .img {
     text-align: center;
     float: left;
@@ -156,4 +164,8 @@ border: solid 1px rgba(219, 219, 219, 1);
     opacity: 1; visibility: visible;
     transition-property: visibility, opacity;
     transition-duration: 0s, 0.5s;
+}
+
+*, ::after, ::before{
+    box-sizing: border-box;
 }
