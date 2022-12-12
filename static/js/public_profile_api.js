@@ -37,14 +37,10 @@ async function public_profile() {
         $('#my-review').append(
             `
             <div class="card" style="margin-bottom:10px;">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="content-img">
-                            <a onclick="move_review_detail_page(${item.id},${item.place.id})">
-                            <img  alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}" style="width: 130%;border-top-left-radius:5px;border-bottom-left-radius:5px; height:100%; aspect-ratio: 1/1;
+                <div class="row" style="margin:0;">
+                    <div class="col-md-4" style="padding:0;">
+                            <img onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}" style="cursor:pointer;width: 100%;border-top-left-radius:5px;border-bottom-left-radius:5px; height:100%; aspect-ratio: 1/1;
                                     object-fit: cover;" >
-                            </a>
-                        </div>
                     </div>
                     <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
                         <div class="card-body">
