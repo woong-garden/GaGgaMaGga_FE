@@ -2,6 +2,8 @@ const review_id = location.href.split('?')[1].split('&')[0].split('=')[1]
 const place_id = location.href.split('?')[1].split('&')[1].split('=')[1]
 const author_id = location.href.split('?')[1].split('&')[2].split('=')[1]
 
+console.log(author_id)
+
 const payload = localStorage.getItem("payload");
 const payload_parse = JSON.parse(payload);
 
@@ -25,6 +27,14 @@ function time2str(date_now) {
 };
 
 window.onload = () => {
+
+    // 엔터로만 덧글 등록
+    document.querySelector(".nav-input-wrap input").focus();
+    document.querySelector(".nav-input-wrap input").onkeyup = function (e) {
+        if (e.keyCode === 13) {
+            document.querySelector('#button').click();
+        }
+    }
 
 
     // 후기 신고 모달창 trigger
@@ -162,7 +172,6 @@ async function getData(review_id, place_id) {
         dots.setAttribute("id", `dot${cmt.id}`)
         dots.style.cursor = "pointer"
         commentHead.appendChild(dots)
-        console.log(cmt)
 
         const commentReportModal = document.createElement('div')
         commentReportModal.classList.add(`cmt-report${cmt.id}`)

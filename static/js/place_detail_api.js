@@ -10,7 +10,6 @@ async function PlaceDetail(){
         }
     )
     response_json = [await response.json()]
-    console.log(response_json)
     
     const menu_list = response_json[0].menu.split('|')
     const place_name = response_json[0].place_name
@@ -70,12 +69,9 @@ async function review_like_sort(){
         }
     )
     response_json = await response.json()
-    console.log(response_json)
 
     const rank_cnt = document.getElementById("place-review-cnt")
     rank_cnt.innerText = response_json.like_count_review.length
-    
-    console.log(response_json)
     response_json.like_count_review.forEach(item => {
         $('#like-rank').append(
             `
@@ -121,7 +117,6 @@ async function review_recent_sort(){
         }
     )
     response_json = await response.json()
-    console.log(response_json)
 
     response_json.recent_review.forEach(item => {
         $('#recent-rank').append(
@@ -168,8 +163,6 @@ async function place_bookmarks() {
         },
     }
     ) 
-    
-    console.log(response)
 }
 
 //시간 포맷팅
