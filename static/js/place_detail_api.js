@@ -11,7 +11,6 @@ async function PlaceDetail(){
     )
     response_json = [await response.json()]
     
-
     const menu_list = response_json[0].menu.split('|')
     const place_name = response_json[0].place_name
 
@@ -20,9 +19,19 @@ async function PlaceDetail(){
     const div_place_number = document.getElementById("div_place_number")
     const div_place_time = document.getElementById("div_place_time")
     const place_image = document.getElementById("place_image")
+    const plcae_bookmarks = document.getElementById("plcae_bookmarks")
+    const review_createa_div = document.getElementById("review_createa_div")
 
+    if (localStorage.getItem("payload")){
+        plcae_bookmarks.style = "display:block;"
+        review_createa_div.style = "display:block;"
+     } else{
+        plcae_bookmarks.style = "display:none;"
+        review_createa_div.style = "display:none;"
+     }
+    
     place_image.src =  response_json[0].place_img
-    div_place_name.innerText = response_json[0].place_name
+    div_place_name.innerText = `${response_json[0].place_name}(${response_json[0].hit})`
     div_place_address.innerText = `주소: ${response_json[0].place_address}`
     div_place_number.innerText = `전화번호: ${response_json[0].place_number}`
     div_place_time.innerText = `영업시간: ${response_json[0].place_time}`
@@ -64,7 +73,8 @@ async function review_like_sort(){
 
     const rank_cnt = document.getElementById("place-review-cnt")
     rank_cnt.innerText = response_json.like_count_review.length
-
+    
+    console.log(response_json)
     response_json.like_count_review.forEach(item => {
         $('#like-rank').append(
             `
@@ -115,7 +125,7 @@ async function review_recent_sort(){
     response_json.recent_review.forEach(item => {
         $('#recent-rank').append(
             `
-            <a class="review-box-wrap" onclick="move_review_detail_page(${item.id},${item.place_id})">
+            <a class="review-box-wrap" onclick="move_review_detail_page(${item.id},${item.place_id},${item.author_id})">
                 <div class="review-item-user">
                     <img src="${backendBaseUrl}${item.profile_image}">
                     <div>
@@ -145,6 +155,22 @@ async function review_recent_sort(){
 }
 review_recent_sort()
 
+//북마크 POST
+async function place_bookmarks() {
+    const response = await fetch(`http://127.0.0.1:8000/places/${place_id}/bookmarks/`, {
+
+        method: 'POST',
+        headers: {
+            Accept:"application/json",
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("access")
+        },
+    }
+    ) 
+    
+    console.log(response)
+}
+
 //시간 포맷팅
 function time2str(date_now) {
     let today = new Date()
@@ -165,8 +191,8 @@ function time2str(date_now) {
 };
 
 
-function move_review_detail_page(review_id,place_id){
-    window.location.href = `/review_detail.html?id=${review_id}&place=${place_id}`
+function move_review_detail_page(review_id,place_id,author_id){
+    window.location.href = `/review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}`
 }
 
 function move_review_create_page(place_id){

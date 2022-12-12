@@ -38,11 +38,15 @@
         <!--여기사용하시면 됩니다~-->
         <img class="main-place-img" id="place_image" src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg">
         <div class="main-place-info">
-            <div id="div_place_address">주소: 가나다라마바사</div>
-            <div id="div_place_number">전화번호: 1234-1234</div>
+            <div style="display:flex; justify-content:space-between;">
+                <div id="div_place_address"></div>
+                <img onclick="place_bookmarks()" id="plcae_bookmarks" style="padding-bottom:10px; cursor: pointer;" src="/images/icon/bookmark.svg">
+            </div>
+            
+            <div id="div_place_number"></div>
             <div class="review-botton-box">
-                <div id="div_place_time">영업시간: 24:20</div>
-                <div class="review-botton-wrap"><button onclick="move_review_create_page(place_id)" class="review-create-botton">후기 작성하기</button></div>
+                <div id="div_place_time"></div>
+                <div class="review-botton-wrap" id="review_createa_div"><button onclick="move_review_create_page(place_id)" class="review-create-botton">후기 작성하기</button></div>
             </div>
             
             
