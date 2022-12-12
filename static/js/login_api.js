@@ -1,5 +1,5 @@
 if (localStorage.getItem("kakao") || localStorage.getItem("payload")){
-    location.replace(history.back())
+    window.location.replace(history.back())
     alert("이미 로그인이 되어있습니다.")
 } else {
 }
@@ -37,9 +37,9 @@ async function Login() {
         localStorage.setItem("payload", jsonPayload);
         console.log(localStorage.getItem("payload"))
         if (JSON.parse(localStorage.getItem("payload")).nickname == null){
-            location.replace('first_profile_edit.html')
+            window.location.replace('first_profile_edit.html')
         } else{
-            location.replace('index.html')
+            window.location.replace('index.html')
         }
     } else if(response_json['non_field_errors']){
         document.getElementById('alert-danger').style.display ="block"

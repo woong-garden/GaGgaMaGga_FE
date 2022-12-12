@@ -15,13 +15,13 @@ async function confirm_email(){
 
     if (response.status === 200) {
         alert(response_json['message'])
-        location.replace('login.html')
+        window.location.replace('login.html')
 
     } else if (response.status === 400) {
         alert(response_json['message'])
-        location.replace('index.html')
+        window.location.replace('index.html')
     }
 } else{
     alert("접근이 불가합니다.")
-    location.replace('index.html')}
+    window.location.replace('index.html')}
 }

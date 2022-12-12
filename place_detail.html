@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/style/css/place_detail.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Document</title>
+    
+    
+
+</head>
+<body>
+    <!--헤더 시작-->
+    <div class="header">
+        <div>
+            <div class="header-wrap">
+                <div>
+                    <a class="back-wrap"><img src="/images/icon/back.svg"></a>
+                </div>
+                <div class="header-place-name">아웃백</div>
+            </div> 
+            <a class="header-bell">
+                <img src="/images/icon/bell.svg">
+            </a>
+
+        </div>          
+    </div>
+    <!--헤더 끝-->
+
+    <!--메인 시작-->
+    <div class="root">
+        <div class="root_block"></div>
+        <!--여기사용하시면 됩니다~-->
+        <img class="main-place-img" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMjNfMTIy%2FMDAxNjY5MjAxODQ2Mzk0.5xUFwXnBgqDeVHRVTRW_Fyx99rIg9XHlLc985VJZ08sg.FHuAIxFeRFhrixM7ru9UbVX3dqPO4PjDwsdy5sJVKUog.JPEG.thgml071%2F20221120%25A3%25DF194230.jpg&type=sc960_832">
+        <div class="main-place-info">
+            <div>주소: 가나다라마바사</div>
+            <div>전화번호: 1234-1234</div>
+            <div>영업시간: 24:20</div>
+        </div>
+        
+        <div class="horizon"></div>
+
+        <div class="tab-menu-box">
+            <button id="menu-botton" onclick="menu_button_click()" >메뉴</button>
+            <button id="review-botton" onclick="review_botton_click()" >리뷰</button>
+        </div>
+            <!--메뉴리스트 시작-->
+            <div id="menu-list">
+                <!-- <div class="menu-list-box">
+                    <div class="menu-list-content">
+                        <div class="menu-list-content-title">
+                            갈릭 립아이 커플
+                        </div>
+                        <div>
+                            79900원
+                        </div>
+                    </div>
+                        <img class="menu-list-content-img" src="https://ldb-phinf.pstatic.net/20221114_210/1668435518684QReuq_JPEG/%B3%D7%C0%CC%B9%F6%C7%C3%B7%B9%C0%CC%BD%BA_%C4%DA%BE%EE_1%281200x970%29.jpg">
+                </div> -->
+
+                <!-- <div class="menu-list-box">
+                    <div class="menu-list-content">
+                        <div class="menu-list-content-title">
+                            갈릭 립아이 커플
+                        </div>
+                        <div>
+                            79900원
+                        </div>
+                    </div>
+                        <img class="menu-list-content-img" src="https://ldb-phinf.pstatic.net/20221114_210/1668435518684QReuq_JPEG/%B3%D7%C0%CC%B9%F6%C7%C3%B7%B9%C0%CC%BD%BA_%C4%DA%BE%EE_1%281200x970%29.jpg">
+                </div> -->
+            </div>
+            <!--메뉴리스트 끝-->
+
+            <!--리뷰리스트 시작-->
+            <div id="review-list">
+                <div class="tab-menu-wrap">
+                    <div>리뷰(3)</div>
+                    <div class="tab-menu">
+                        <div>
+                            <button id="like-sort-botton" onclick="like_rank_show()">좋아요순</button>
+                        </div>
+                        <div class="divide-bar">
+                            |
+                        </div>
+                        <div>
+                            <button id="recent-sort-botton" onclick="recent_rank_show()">최신순</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!--좋아요순 시작-->
+                <div id="like-rank">
+                    <a class="review-box-wrap">
+                        <div class="review-item-user">
+                            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
+                            <div>
+                                admin
+                            </div>
+                        </div>
+                        <div>
+                            <div class="review-item-date">
+                                2022-12-12
+                            </div>
+                            <div class="review-item-content">
+                                맛이 좋네요
+                            </div>
+                            <div class="rating">
+                                <img src="/images/icon/star.svg">
+                                <div>4</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!--좋아요순 끝-->
+
+                <!--최신순 시작-->
+                <div id="recent-rank">
+                    <a class="review-box-wrap">
+                        <div class="review-item-user">
+                            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
+                            <div>
+                                admin
+                            </div>
+                        </div>
+                        <div>
+                            <div class="review-item-date">
+                                2022-12-12
+                            </div>
+                            <div class="review-item-content">
+                                맛이 좋네요fffffff
+                            </div>
+                            <div class="rating">
+                                <img src="/images/icon/star.svg">
+                                <div>4</div>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="review-box-wrap">
+                        <div class="review-item-user">
+                            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrsXgn%2FbtrSUAVBZr3%2FstE0dfxFN7rFbP73oyvt4K%2Fimg.png">
+                            <div>
+                                admin
+                            </div>
+                        </div>
+                        <div>
+                            <div class="review-item-date">
+                                2022-12-12
+                            </div>
+                            <div class="review-item-content">
+                                맛이 좋네요fffffff
+                            </div>
+                            <div class="rating">
+                                <img src="/images/icon/star.svg">
+                                <div>4</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!--최신순 끝-->
+
+            </div>
+            <!--리뷰리스트 끝-->
+    </div>
+    <!--메인 끝-->  
+
+    <!--네비바-->
+    <div class="nav-wrap"> 
+        <div>     
+            <nav class="nav-bar">
+                <a><img src="/images/icon/home.svg"></a>
+                <a><img src="/images/icon/nav_search.svg"></a>
+                <a><img src="/images/icon/bookmark.svg"></a>
+                <a><img style="width:35px; height: 38px;" src="/images/icon/heart.svg"></a>
+                <a><img src="/images/icon/profile.svg"></a>
+            </nav>
+        </div>  
+    </div>
+    <!--네비바 끝-->
+
+    <script>
+        function menu_button_click(){
+            document.getElementById("menu-list").style.display='block';
+            document.getElementById("review-list").style.display='none';
+
+            const menu_style = document.getElementById("menu-botton")
+            menu_style.style.cssText = "width:100%; padding: 14px; cursor: pointer; border:none; background-color: transparent; border-top: solid 2px #000; border-right: solid 1px #f1f1f1; font-weight: 700;"
+            
+            const review_style = document.getElementById("review-botton")
+            review_style.style.cssText = "width:100%; padding: 14px; cursor: pointer; border:none; background-color: transparent; border-bottom: solid 1px #f1f1f1;"
+        }
+
+        function review_botton_click(){
+            document.getElementById("menu-list").style.display='none';
+            document.getElementById("review-list").style.display='block';
+
+
+            const menu_style = document.getElementById("menu-botton")
+            menu_style.style.cssText = "width:100%; padding: 14px; cursor: pointer; border:none; background-color: transparent; border-bottom: solid 1px #f1f1f1;"
+
+            const review_style = document.getElementById("review-botton")
+            review_style.style.cssText = "width:100%; padding: 14px; cursor: pointer; border:none; background-color: transparent; border-top: solid 2px #000; border-left: solid 1px #f1f1f1; font-weight: 700;"
+        }
+
+        function like_rank_show(){
+            document.getElementById("like-rank").style.display ='block';
+            document.getElementById("recent-rank").style.display ='none';
+
+            document.getElementById("like-sort-botton").style.color = "#FF792A";
+            document.getElementById("recent-sort-botton").style.color = "#9b9b9b";
+        }
+
+        function recent_rank_show(){
+            document.getElementById("like-rank").style.display ='none';
+            document.getElementById("recent-rank").style.display ='block';
+
+            document.getElementById("like-sort-botton").style.color = "#9b9b9b";
+            document.getElementById("recent-sort-botton").style.color = "#FF792A";
+        }
+        
+    </script>
+    <script src="/static/js/base_api.js"></script>
+    <script src="/static/js/place_detail_api.js"></script>
+
+    
+</body>
+</html>
