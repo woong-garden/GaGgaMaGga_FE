@@ -20,6 +20,7 @@ async function public_profile() {
 
 
     response_json = await response.json()
+    console.log(response_json)
 
 
     // 프로필
@@ -38,6 +39,9 @@ async function public_profile() {
     let image_url = response_json.profile_image
     profile_image.setAttribute("src", `${backendBaseUrl}${image_url}`)
 
+    var my_id = JSON.parse(localStorage.getItem(['payload'])).user_id
+    var profile_id = response_json.id
+
     // 후기
     if(response_json.review_set.length){
         response_json.review_set.forEach(item => {
@@ -52,11 +56,9 @@ async function public_profile() {
                         <div class="card-body">
                             <h6 style="cursor:pointer;color:  #ffbf60;" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</h6>
                             <p>평점&nbsp; ${item.rating_cnt} / 5</p>
-                            <div style="display:flex; width:50%;">
-                            <button class="update-review" onclick=move_to_edit_page(${item.place_id}, ${item.id})>리뷰 수정</button>
-                            <button class="update-review">리뷰 삭제</button>
-                            </div>
-                        </div>
+                            <div style="display:flex; width:50%;">`+
+                            (my_id == profile_id? '<button class="update-review" onclick=move_to_edit_page(${item.place_id}, ${item.id})>리뷰 수정</button> <button class="update-review">리뷰 삭제</button>':'')
+                        +`</div>
                     </div>
                 </div>
             </div>
@@ -66,7 +68,6 @@ async function public_profile() {
     }
     
     // 북마크
-
     if(response_json.bookmark_place.length){
         response_json.bookmark_place.forEach(item => {
                 $('#my-bookmark').append(
@@ -80,7 +81,7 @@ async function public_profile() {
                             </div>
                             <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
                                 <div style="padding: 1.25rem">
-                                    <h6 style="color :  #ffbf60;">${item.place_name}</h6>
+                                    <h6 style="color : #ffbf60;">${item.place_name}</h6>
                                     <p>평점&nbsp; ${item.rating} / 5</p>
                                 </div>
                             </div>
@@ -92,7 +93,6 @@ async function public_profile() {
     }
     
     // 본인 프로필에서 팔로우 버튼 숨김
-    let my_id = JSON.parse(localStorage.getItem(['payload'])).user_id
     if (response_json.id == my_id){
         document.getElementById('user_follow').style.display ="none"
     }else{
