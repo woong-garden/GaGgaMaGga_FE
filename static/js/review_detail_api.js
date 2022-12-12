@@ -163,6 +163,7 @@ async function getData(review_id, place_id) {
         commentText.classList.add(`p${cmt.id}`)
         commentContent.appendChild(commentText)
 
+
         const commentUnder = document.createElement("div")
         commentUnder.classList.add("comment-under")
         commentContent.appendChild(commentUnder)
@@ -238,7 +239,15 @@ async function getData(review_id, place_id) {
             recommentText.style.fontSize = "13px"
             recommentText.style.width = "80%"
             recommentText.style.margin = "auto 0"
+            recommentText.style.wordBreak = "break-all"
             recmtContentBox.appendChild(recommentText)
+
+            const recmtTime = document.createElement('span')
+            recmtTime.innerText = time2str(cmt.created_at)
+            recommentText.appendChild(recmtTime)
+            recmtTime.style.fontSize = "11px"
+            recmtTime.style.margin = "auto 0 auto 2vw"
+            recmtTime.style.color = "gray"
 
 
             // 대댓글 수정 삭제 버튼 박스
@@ -274,8 +283,7 @@ async function getData(review_id, place_id) {
             recommentEditBox.appendChild(recommentLikeCount)
 
 
-
-            if (recmt.nickname == payload_parse.nickname) {
+            if (recmt.user_id == payload_parse.user_id) {
 
                 // 대댓글 수정 버튼 생성
                 const editRecomment = document.createElement('button')
@@ -413,18 +421,14 @@ async function getData(review_id, place_id) {
 
 
 
-
-
         // 덧글 수정 버튼
-        if (payload_parse.nickname == cmt.nickname) {
+        if (payload_parse.user_id == cmt.user_id) {
             const editComment = document.createElement('button')
             var editText = document.createTextNode('덧글 수정')
             editComment.appendChild(editText)
             editComment.classList.add('cmt-btn')
             commentUnder.appendChild(editComment)
 
-
-            // 덧글 수정 인풋
             const editCommentContent = document.querySelector(`.p${cmt.id}`)
             editCommentContent.style.margin = '1vh 0 1.3vh 1vw'
 
