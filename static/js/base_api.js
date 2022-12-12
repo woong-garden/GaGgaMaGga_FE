@@ -1,5 +1,5 @@
 const backendBaseUrl = "http://127.0.0.1:8000"
-const frontendBaseUrl = "http://127.0.0.1:5555"
+const frontendBaseUrl = "http://127.0.0.1:5500"
 
 
 async function move_profile_page(){
