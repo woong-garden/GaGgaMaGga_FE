@@ -20,7 +20,7 @@
         <div>
             <div class="header-wrap">
                 <div>
-                    <a class="back-wrap"><img src="/images/icon/back.svg"></a>
+                    <a href="javascript:history.back();" class="back-wrap"><img src="/images/icon/back.svg"></a>
                 </div>
                 <div id="place-name" class="header-place-name"></div>
             </div> 
@@ -40,7 +40,7 @@
         <div class="main-place-info">
             <div style="display:flex; justify-content:space-between;">
                 <div id="div_place_address"></div>
-                <img onclick="place_bookmarks()" id="plcae_bookmarks" style="padding-bottom:10px; cursor: pointer;" src="/images/icon/bookmark.svg">
+                <img onclick="place_bookmarks()" id="place_bookmarks" style="padding-bottom:10px; cursor: pointer;" src="/images/icon/bookmark.svg">
             </div>
             
             <div id="div_place_number"></div>
@@ -104,11 +104,11 @@
     <div class="nav-wrap"> 
         <div>     
             <nav class="nav-bar">
-                <a><img src="/images/icon/home.svg"></a>
-                <a><img src="/images/icon/nav_search.svg"></a>
-                <a><img src="/images/icon/bookmark.svg"></a>
-                <a><img style="width:35px; height: 38px;" src="/images/icon/heart.svg"></a>
-                <a><img src="/images/icon/profile.svg"></a>
+                <a href="index.html"><img src="/images/icon/home.svg"></a>
+                <a href="search.html"><img src="/images/icon/nav_search.svg"></a>
+                <a href="best_review_list.html"><img style="width:27px; aspect-ratio: 1/1;" src="https://cdn-icons-png.flaticon.com/512/126/126473.png"></a>
+                <a onclick="move_profile_page()"><img src="/images/icon/profile.svg"></a>
+                <a href="private_profile.html"><img src="/images/icon/setting.svg"></a>
             </nav>
         </div>  
     </div>

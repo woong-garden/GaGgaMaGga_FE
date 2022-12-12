@@ -7,19 +7,19 @@
 
     body{
         position: relative;
-        background-color: rgb(232, 225, 216);
+        background-color: #FFFAE7;
         margin:auto;
     }
     
     .root {
-    position:relative;
-    height: 100vh;
-    width: 100%;
-    left:50%;
-    background-color: #fff;
-    transform: translate(-50%, 0%);
-    overflow: auto;
-    box-shadow: 0 0 20px rgb(0 0 0 / 5%);
+        position:relative;
+        height: 100vh;
+        width: 100%;
+        left:50%;
+        background-color: #fff;
+        transform: translate(-50%, 0%);
+        overflow: auto;
+        box-shadow: 0 0 20px rgb(0 0 0 / 5%);
     }
     .root_block{
         margin-top:48px;
@@ -50,7 +50,7 @@
         justify-content: space-between;
         align-items: center;
         height: 48px;
-        background-color: #fff;
+        background-color: white;
         padding: 0px 14px 0px 2px;
         box-sizing: border-box;
     }
@@ -279,7 +279,8 @@
         left: 0;
     }
     .nav-bar{
-        background-color: #fff;
+        background-color: #ffffff;
+        border-top: 0.1px solid rgb(196, 196, 196);
         height: 48px;
         box-sizing: border-box;
         display: flex;
@@ -293,14 +294,14 @@
 
     @media (min-width: 768px) { /*반응형*/
         .root {
-            width: 400px;
+            width: 500px;
         }
         .nav-wrap > div {
-            max-width: 400px;
+            max-width: 500px;
             margin:0 auto;
         }
         .header > div {
-            max-width: 400px;
+            max-width: 500px;
             margin:0 auto;
         }
         .test {

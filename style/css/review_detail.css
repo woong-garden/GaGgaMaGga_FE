@@ -53,8 +53,7 @@ body {
 
 .header {
     width: 100%;
-    background-color: #fcdbab;
-    ;
+    background-color: white;
     height: 6vh;
     position: fixed;
     top: 0;
@@ -356,7 +355,8 @@ body {
 }
 
 .nav-bar {
-    background-color: white;
+    background-color: #ffffff;
+    border-top: 0.1px solid rgb(196, 196, 196);
     height: 6vh;
     box-sizing: border-box;
     display: flex;
@@ -441,26 +441,26 @@ body {
 
 @media (min-width: 760px) {
     .root {
-        width: 400px;
+        width: 500px;
         height: 88vh;
         margin-bottom: 6vh;
     }
 
     .nav-wrap>div {
-        max-width: 400px;
+        max-width: 500px;
         margin: 0 auto;
     }
 
     .header {
-        width: 400px;
+        width: 500px;
         left: 50%;
-        margin-left: -200px;
+        margin-left: -250px;
     }
 
     #modal-box {
-        width: 400px;
+        width: 500px;
         left: 50%;
-        margin-left: -200px;
+        margin-left: -250px;
 
     }
 }

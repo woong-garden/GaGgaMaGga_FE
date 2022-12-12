@@ -28,11 +28,12 @@
     <div class="header">
         <div>
             <div class="header-logo-wrap">
-                <h2 class="header-logo">B</h2>
+                <h2 class="header-logo"><img style="margin-top: 8px; width: 40px; height: 40px;" src="./images/icon/logo.png"></h2>
             </div>
             <form>
                 <img style="padding-left:14px; width: 20px; height: 20px;" src="./images/icon/search_empty.svg">
-                <input class="search_input" type="text" placeholder="지역, 카페, 맛집명 검색">
+                <input type="text" style="display:none;"/>
+                <input class="search_input" type="text" placeholder="지역, 카페, 맛집명 검색"id="search" onkeypress="enterkey()">
             </form>
             <img style="margin-left:8px;" src="./images/icon/bell.svg">
         </div>
@@ -61,11 +62,11 @@
     <div class="nav-wrap"> 
         <div>     
             <nav class="nav-bar">
-                <a href="index.html"><img src="/images/icon/home.svg"></a>
+                <a href="index.html"><img src="/images/icon/click_home.svg"></a>
                 <a href="search.html"><img src="/images/icon/nav_search.svg"></a>
-                <a onclick="move_profile_page()"><img src="/images/icon/bookmark.svg"></a>
-                <a href="place_list.html"><img style="width:27px; aspect-ratio: 1/1;" src="https://cdn-icons-png.flaticon.com/512/126/126473.png"></a>
-                <a href="private_profile.html"><img src="/images/icon/profile.svg"></a>
+                <a href="best_review_list.html"><img style="width:27px; aspect-ratio: 1/1;" src="https://cdn-icons-png.flaticon.com/512/126/126473.png"></a>
+                <a onclick="move_profile_page()"><img src="/images/icon/profile.svg"></a>
+                <a href="private_profile.html"><img src="/images/icon/setting.svg"></a>
             </nav>
         </div>  
     </div>
@@ -73,6 +74,7 @@
     <!--네비바 끝-->
     <script src="static/js/base_api.js"></script>
     <script src="static/js/index_api.js"></script>
+    <script src="static/js/search_api.js"></script>
 </body>
 
 </html>
