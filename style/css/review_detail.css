@@ -53,8 +53,7 @@ body {
 
 .header {
     width: 100%;
-    background-color: #fcdbab;
-    ;
+    background-color: white;
     height: 6vh;
     position: fixed;
     top: 0;

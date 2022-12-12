@@ -7,7 +7,7 @@
 
     body{
         position: relative;
-        background-color: rgb(232, 225, 216);
+        background-color: #FFFAE7;
         margin:auto;
     }
     
@@ -50,7 +50,7 @@
         justify-content: space-between;
         align-items: center;
         height: 48px;
-        background-color: #fff;
+        background-color: white;
         padding: 0px 14px 0px 2px;
         box-sizing: border-box;
     }
