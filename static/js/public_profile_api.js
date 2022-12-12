@@ -1,6 +1,13 @@
 const getnickname = location.href.split('=')[1]
 const user_nickname = decodeURI(getnickname)
 
+if(localStorage.getItem("access")){
+    public_profile()
+} else{
+    alert("로그인 후 이용해주세요")
+    location.replace("login.html")
+}
+
 // 공개프로필
 async function public_profile() {
     const response = await fetch(`${backendBaseUrl}/users/profiles/${user_nickname}/`, {
@@ -13,7 +20,6 @@ async function public_profile() {
 
 
     response_json = await response.json()
-    console.log(response_json)
 
 
     // 프로필
@@ -33,25 +39,23 @@ async function public_profile() {
     profile_image.setAttribute("src", `${backendBaseUrl}${image_url}`)
 
     // 후기
-    response_json.review_set.forEach(item => {
+    if(response_json.review_set.length){
+        response_json.review_set.forEach(item => {
         $('#my-review').append(
             `
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-4" >
-                        <div class="content-img">
-                            <a onclick="move_review_detail_page(${item.id},${item.place.id})">
-                            <img alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}" style="width: 100%; height:100%; aspect-ratio: 1/1;
-                                    object-fit: cover;" >
-                            </a>
-                        </div>
+            <div class="review-box">
+                <div class="row" style="margin:0;">
+                    <div class="col-md-4" style="padding:0;">
+                            <img class="review-img" onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
                     </div>
                     <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
                         <div class="card-body">
-                            <a onclick="move_review_detail_page(${item.id},${item.place.id})">
-                            <h6>${item.place_name}</h6>
-                            <p class="card-text">평점&nbsp; ${item.rating_cnt} / 5</p>
-                            </a>
+                            <h6 style="cursor:pointer;color:  #ffbf60;" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</h6>
+                            <p>평점&nbsp; ${item.rating_cnt} / 5</p>
+                            <div style="display:flex; width:50%;">
+                            <button class="update-review" onclick=move_to_edit_page(${item.place_id}, ${item.id})>리뷰 수정</button>
+                            <button class="update-review">리뷰 삭제</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -59,23 +63,25 @@ async function public_profile() {
             `
         )
     });
+    }
+    
     // 북마크
+
     if(response_json.bookmark_place.length){
         response_json.bookmark_place.forEach(item => {
                 $('#my-bookmark').append(
                     `
-                    <div class="card">
-                        <div class="row">
-                            <div class="col-md-4" >
+                    <div class="review-box">
+                        <div class="row" style="margin:0;">
+                            <div class="col-md-4" style="padding:0;">
                                 <div class="content-img">
-                                    <img alt="장소 사진" src="${item.place_img}" style="width: 100%; height:100%; aspect-ratio: 1/1;
-                                            object-fit: cover;" >
+                                    <img class="review-img" alt="장소 사진" src="${item.place_img}">
                                 </div>
                             </div>
                             <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                                <div class="card-body">
-                                    <h6>${item.place_name}</h6>
-                                    <p class="card-text">평점&nbsp; ${item.rating} / 5</p>
+                                <div style="padding: 1.25rem">
+                                    <h6 style="color :  #ffbf60;">${item.place_name}</h6>
+                                    <p>평점&nbsp; ${item.rating} / 5</p>
                                 </div>
                             </div>
                         </div>
@@ -85,30 +91,25 @@ async function public_profile() {
             });
     }
     
-    
     // 본인 프로필에서 팔로우 버튼 숨김
-    let nickname = JSON.parse(localStorage.getItem(['payload'])).nickname
-    if (user_nickname == nickname){
+    let my_id = JSON.parse(localStorage.getItem(['payload'])).user_id
+    if (response_json.id == my_id){
         document.getElementById('user_follow').style.display ="none"
-    } 
-    else {
+    }else{
         document.getElementById("user_follow").innerHTML = "팔로우"
         document.getElementById("profile_followers").value = "1"
-
     }
-
     // 팔로우 되어있을 때 버튼
     let follow_list = response_json.followers
     for (const item of follow_list){
-        console.log(item.nickname);
-        if (nickname==item.nickname){
+        console.log(item.id);
+        if (my_id==item.id){
             document.getElementById("user_follow").innerHTML = "팔로우취소"
             document.getElementById("profile_followers").value = "0"
         }
+        
     }
 }
-
-public_profile()
 
 // 팔로우
 $('#user_follow').on('click', follow);
@@ -159,8 +160,11 @@ function move_following_page(user_nickname){
     window.location.href = `/follow.html?id=${user_nickname}?value=${value}`
 }
 
-function move_review_detail_page(review_id,place_id){
-    window.location.href = `/review_detail.html?id=${review_id}&place=${place_id}`
+function move_review_detail_page(review_id,place_id, author_id){
+    window.location.href = `/review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}`
 }
 
+function move_to_edit_page(place_id, review_id){
+    window.location.href = `/review_update.html?place_id=${place_id}&review_id=${review_id}`
+}
 

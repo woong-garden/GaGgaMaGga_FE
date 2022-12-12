@@ -1,7 +1,7 @@
 if(localStorage.getItem("access")){
 } else{
     alert("접근이 불가능합니다.")
-    location.replace("index.html")
+    window.location.replace("index.html")
 }
 
 //비밀번호 변경
@@ -24,6 +24,11 @@ async function password_change() {
     
     if (response.status === 200) {
         alert(result['message'])
+        localStorage.removeItem("kakao")
+        localStorage.removeItem("payload")
+        localStorage.removeItem("access")
+        localStorage.removeItem("refresh")
+        window.location.replace('login.html')
 
     } else if (response.status === 400) {
         document.getElementById('alert-danger').style.display ="block"

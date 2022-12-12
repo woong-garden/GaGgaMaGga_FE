@@ -34,12 +34,12 @@
     <div class="root">
         <div class="root_block"></div>
         <!-- profile 정보 -->
-        <div class="profile">
+        <div class="profile" id="profile_div">
             <div class="card mb-3" style="max-width: 540px; border-radius: 0;">
                 <div class="row g-0" style="align-items: center;">
                     <div class="col-md-4">
                         <div class ="img">
-                            <img id="porfile-img" src ="/images/default_profile_pic.jpg" alt="프로필 사진">
+                            <img id="porfile-img" src ="/images/default_profile_pic.jpg">
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -52,6 +52,7 @@
                 </div>
             </div>
         </div>
+        <div id="acctive_user">
         <div class="container" id='my-review' style="display: block;">
             <div class="card">
                 <div class="row">
@@ -84,7 +85,7 @@
                 <div class="row">
                     <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
                         <div class="card-body">
-                            <a href="change_password.html">비밀번호 변경</a>
+                            <a onclick="confirm_kakao_change_password()">비밀번호 변경</a>
                         </div>
                     </div>
                 </div>
@@ -134,9 +135,30 @@
                     </div>
                 </div>
             </div>
-
-            
         </div>
+        </div>
+        <div id="deacctive_user">
+            <div class="container" id='my-review' style="display: block;">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
+                            <div class="card-body">
+                                <a href="login.html">로그인 하러기기</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
+                            <div class="card-body">
+                                <a href="signup.html">회원가입 하러가기</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
     <!--메인 끝-->  
     </div>
     <!--네비바-->
