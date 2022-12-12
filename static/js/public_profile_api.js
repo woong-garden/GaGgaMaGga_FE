@@ -1,6 +1,13 @@
 const getnickname = location.href.split('=')[1]
 const user_nickname = decodeURI(getnickname)
 
+if(localStorage.getItem("access")){
+    public_profile()
+} else{
+    alert("로그인 후 이용해주세요")
+    location.replace("login.html")
+}
+
 // 공개프로필
 async function public_profile() {
     const response = await fetch(`${backendBaseUrl}/users/profiles/${user_nickname}/`, {
@@ -32,8 +39,8 @@ async function public_profile() {
     profile_image.setAttribute("src", `${backendBaseUrl}${image_url}`)
 
     // 후기
-    response_json.review_set.forEach(item => {
-        console.log(item)
+    if(response_json.review_set.length){
+        response_json.review_set.forEach(item => {
         $('#my-review').append(
             `
             <div class="review-box">
@@ -56,6 +63,8 @@ async function public_profile() {
             `
         )
     });
+    }
+    
     // 북마크
 
     if(response_json.bookmark_place.length){
@@ -82,30 +91,25 @@ async function public_profile() {
             });
     }
     
-    
     // 본인 프로필에서 팔로우 버튼 숨김
-    let nickname = JSON.parse(localStorage.getItem(['payload'])).nickname
-    if (user_nickname == nickname){
+    let my_id = JSON.parse(localStorage.getItem(['payload'])).user_id
+    if (response_json.id == my_id){
         document.getElementById('user_follow').style.display ="none"
-    } 
-    else {
+    }else{
         document.getElementById("user_follow").innerHTML = "팔로우"
         document.getElementById("profile_followers").value = "1"
-
     }
-
     // 팔로우 되어있을 때 버튼
     let follow_list = response_json.followers
     for (const item of follow_list){
-        console.log(item.nickname);
-        if (nickname==item.nickname){
+        console.log(item.id);
+        if (my_id==item.id){
             document.getElementById("user_follow").innerHTML = "팔로우취소"
             document.getElementById("profile_followers").value = "0"
         }
+        
     }
 }
-
-public_profile()
 
 // 팔로우
 $('#user_follow').on('click', follow);
