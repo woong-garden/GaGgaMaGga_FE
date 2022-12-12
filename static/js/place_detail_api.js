@@ -19,14 +19,28 @@ async function PlaceDetail(){
     const div_place_number = document.getElementById("div_place_number")
     const div_place_time = document.getElementById("div_place_time")
     const place_image = document.getElementById("place_image")
-    const plcae_bookmarks = document.getElementById("plcae_bookmarks")
+    const place_bookmarks = document.getElementById("place_bookmarks")
     const review_createa_div = document.getElementById("review_createa_div")
 
     if (localStorage.getItem("payload")){
-        plcae_bookmarks.style = "display:block;"
+        if (response_json[0].place_bookmark.indexOf(JSON.parse(localStorage.getItem("payload")).user_id) == 0){
+            place_bookmarks.src = '/images/icon/bookmark2.svg'
+        } else if(response_json[0].place_bookmark.indexOf(JSON.parse(localStorage.getItem("payload")).user_id) == -1) {
+            place_bookmarks.src = '/images/icon/bookmark.svg'
+    }}
+
+    if(localStorage.getItem("kakao")){
+        if (response_json[0].place_bookmark.indexOf(JSON.parse(localStorage.getItem("kakao")).user_id) == 0){
+            place_bookmarks.src = '/images/icon/bookmark2.svg'
+        } else if(response_json[0].place_bookmark.indexOf(JSON.parse(localStorage.getItem("kakao")).user_id) == -1) {
+            place_bookmarks.src = '/images/icon/bookmark.svg'
+    }}
+
+    if (localStorage.getItem("access")){
+        place_bookmarks.style = "display:block;"
         review_createa_div.style = "display:block;"
      } else{
-        plcae_bookmarks.style = "display:none;"
+        place_bookmarks.style = "display:none;"
         review_createa_div.style = "display:none;"
      }
     
@@ -69,12 +83,10 @@ async function review_like_sort(){
         }
     )
     response_json = await response.json()
-    console.log(response_json)
 
     const rank_cnt = document.getElementById("place-review-cnt")
     rank_cnt.innerText = response_json.like_count_review.length
     
-    console.log(response_json)
     response_json.like_count_review.forEach(item => {
         $('#like-rank').append(
             `
@@ -120,7 +132,6 @@ async function review_recent_sort(){
         }
     )
     response_json = await response.json()
-    console.log(response_json)
 
     response_json.recent_review.forEach(item => {
         $('#recent-rank').append(
@@ -166,9 +177,18 @@ async function place_bookmarks() {
             'Authorization': "Bearer " + localStorage.getItem("access")
         },
     }
-    ) 
+    )
+    response_json = await response.json()
+
+    const place_bookmarks = document.getElementById("place_bookmarks")
+
+    if (response_json["message"]=='북마크를 했습니다.' ){
+        place_bookmarks.src = '/images/icon/bookmark2.svg'
+
+    } else if (response_json["message"]=='북마크를 취소했습니다.'){
+        place_bookmarks.src = '/images/icon/bookmark.svg'
+    }
     
-    console.log(response)
 }
 
 //시간 포맷팅
