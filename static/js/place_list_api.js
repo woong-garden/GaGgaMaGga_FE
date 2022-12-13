@@ -218,8 +218,6 @@ async function UserPlaceListView(cate_id, page) {
             'Authorization': "Bearer " + localStorage.getItem("access")
         }
     })
-
-
     response_json = await response.json()
 
     console.log(response_json)

@@ -19,7 +19,7 @@
     
     .root {
         position:relative;
-        height: 100vh;
+        height: 100%;
         width: 100%;
         left:50%;
         background-color: white;
@@ -30,18 +30,7 @@
     .root_block{
         margin-top:48px;
     }
-    .root::-webkit-scrollbar {
-    width: 4px;
-    }
-    .root::-webkit-scrollbar-thumb {
-        background-color: rgb(131, 131, 131);
-        border-radius: 10px;
-    }
-    .root::-webkit-scrollbar-track {
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: inset 0px 0px 5px white;
-    }
+
 
 
     .header{ 
@@ -111,6 +100,7 @@
     #like-rank{
         display:block;
     }
+
     #recent-rank{
         display:none;
     }
@@ -137,8 +127,29 @@
         font-size: 12px;
         color:#9b9b9b;
     }
+    
     .review-list-box{
         padding: 14px 14px 50px 14px;
+        height:80%;
+    }
+    .review-list-data-box{
+        position:relative;
+        display:block;
+        height: 500px;
+        overflow: scroll;
+        box-shadow: 0 0 20px rgb(0 0 0 / 5%);
+    }
+    .review-list-data-box::-webkit-scrollbar {
+        width: 4px;
+    }
+    .review-list-data-box::-webkit-scrollbar-thumb {
+        background-color: rgb(131, 131, 131);
+        border-radius: 10px;
+    }
+    .review-list-data-box::-webkit-scrollbar-track {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: inset 0px 0px 5px white;
     }
     .review-list-header{
         display:flex;
@@ -233,4 +244,36 @@
             max-width: 500px;
             margin:0 auto;
         }
+    }
+
+    .pagenation {
+        text-align: center;
+        width:100%;
+        bottom: 0;
+    }
+    
+    
+    .pagenation div{
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 15px;
+        font-weight: bold;
+        width: 30px;
+        height:30px;
+        border-radius: 15px;
+        vertical-align: middle;
+        display: inline-block;
+    }
+    
+    .current_page{
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 15px;
+        font-weight: bold;
+        background-color: #FFCD48;
+        width: 30px;
+        height:30px;
+        border-radius: 15px;
+        vertical-align: middle;
+        display: inline-block;
     }

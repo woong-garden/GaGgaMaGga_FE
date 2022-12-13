@@ -15,3 +15,7 @@ async function move_profile_page(){
     var user_nickname = response_json.nickname
     window.location.href = `/public_profile.html?=${user_nickname}`
 }
+
+function move_best_review_page(){
+    window.location.href = `/best_review_list.html`
+}
