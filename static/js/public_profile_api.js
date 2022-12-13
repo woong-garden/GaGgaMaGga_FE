@@ -20,7 +20,6 @@ async function public_profile() {
 
 
     response_json = await response.json()
-    console.log(response_json)
 
 
     // 프로필
@@ -51,7 +50,7 @@ async function public_profile() {
             <div class="review-box">
                 <div class="row" style="margin:0;">
                     <div class="col-md-4" style="padding:0;">
-                        <img class="review-img" onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
+                        <img class="review-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
                     </div>
                     <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
                         <div class="card-body">
@@ -71,6 +70,7 @@ async function public_profile() {
     // 북마크
     if(response_json.bookmark_place.length){
         response_json.bookmark_place.forEach(item => {
+            console.log(item)
                 $('#my-bookmark').append(
                     `
                     <div class="review-box">

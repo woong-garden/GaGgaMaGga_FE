@@ -2,8 +2,6 @@ const review_id = location.href.split('?')[1].split('&')[0].split('=')[1]
 const place_id = location.href.split('?')[1].split('&')[1].split('=')[1]
 const author_id = location.href.split('?')[1].split('&')[2].split('=')[1]
 
-console.log(author_id)
-
 const payload = localStorage.getItem("payload");
 const payload_parse = JSON.parse(payload);
 
@@ -41,7 +39,6 @@ window.onload = () => {
     const reportModal = document.querySelector('#report-modal')
     document.querySelector('#report-button-text').onclick = function () {
         reportModal.style.display = "block"
-
     }
 
     const closeReportModal = document.querySelector('#exit-report')
@@ -130,6 +127,9 @@ async function getData(review_id, place_id) {
 
     const title = document.querySelector('h3')
     title.innerText = response.place_name
+
+    const titleLink = document.querySelector('#title-link')
+    titleLink.href = `place_detail.html?id=${place_id}`
 
     const comments = document.querySelector('.comments')
     comments.innerHTML = ""
@@ -651,18 +651,44 @@ const notificationSocket = new WebSocket(
 
 
 
-notificationSocket.onmessage = function (e) {
+notificationSocket.onmessage = async function (e) {
     const data = JSON.parse(e.data);
     const alarmBox = document.querySelector('.alarm')
+    if (payload_parse.user_id == author_id) {
 
 
-    const alarmContent = document.createElement('div')
-    alarmContent.innerHTML = `<div style="display:flex; height:10vh;">
-        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon">
-        <p class="alarm-content">${data.message}</p>
-        <button>확인</button>
-    </div>`
-    alarmBox.appendChild(alarmContent)
+        const alarmContent = document.createElement('div')
+        alarmContent.style.display = "flex"
+        alarmContent.style.height = "10vh"
+        alarmContent.innerHTML = data.message
+        alarmBox.appendChild(alarmContent)
+    
+
+    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
+        headers: {
+            "authorization": "Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET'
+    })
+    .then(response => response.json())
+
+    const notificationButton = document.createElement('button')
+    const notificationButtonText = document.createTextNode('확인')
+    notificationButton.appendChild(notificationButtonText)
+    notificationButton.onclick = async function () {
+        await fetch(`http://127.0.0.1:8000/notification/alarm/${response[0].id}/`, {
+            headers: {
+                'content-type': 'application/json',
+                "authorization": "Bearer " + localStorage.getItem("access")
+            },
+            method: 'PUT',
+            body: ''
+        })
+        alarmBox.innerHTML = ""
+        getNotification()
+    }
+    alarmContent.appendChild(notificationButton)
+}
 };
 
 
@@ -673,12 +699,12 @@ notificationSocket.onclose = function (e) {
 
 function alarm() {
     if (payload_parse.user_id != author_id) {
-        const message = "게시글에 덧글이 달렸습니다."
+        const message = `<img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon"><a style="cursor:pointer;margin:auto; text-decoration:none;" href="review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}">
+        <p class="alarm-content">후기에 덧글이 달렸습니다.</p></a>`
         notificationSocket.send(JSON.stringify({
             'message': message,
             "author": author_id,
             "user_id": payload_parse.user_id
-
         }))
     }
 }
@@ -721,6 +747,7 @@ async function post_review_report() {
 
 // comment 신고 POST
 async function post_comment_report(cmt_id) {
+    console.log(cmt_id)
     const comment_report_category = document.getElementById(`comment-report-category${cmt_id}`)
     const comment_report_value = (comment_report_category.options[comment_report_category.selectedIndex].value)
 
