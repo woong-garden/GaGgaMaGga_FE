@@ -663,11 +663,7 @@ notificationSocket.onmessage = function (e) {
 
 
     const alarmContent = document.createElement('div')
-    alarmContent.innerHTML = `<div style="display:flex; height:10vh;">
-        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon">
-        <a style="cursor:pointer;margin:auto; text-decoration:none;" href="review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}"><p class="alarm-content">${data.message}</p></a>
-        <button>확인</button>
-    </div>`
+    alarmContent.innerHTML = data.message
     alarmBox.appendChild(alarmContent)
 };
 
@@ -679,7 +675,11 @@ notificationSocket.onclose = function (e) {
 
 function alarm() {
     if (payload_parse.user_id != author_id) {
-        const message = "작성해주신 후기에 덧글이 달렸습니다."
+        const message = `<div style="display:flex; height:10vh;">
+        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon">
+        <a style="cursor:pointer;margin:auto; text-decoration:none;" href="review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}"><p class="alarm-content">후기에 덧글이 달렸습니다.</p></a>
+        <button>확인</button>
+    </div>`
         notificationSocket.send(JSON.stringify({
             'message': message,
             "author": author_id,

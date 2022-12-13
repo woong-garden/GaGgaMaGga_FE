@@ -15,15 +15,12 @@ async function getNotification() {
     .then(response => response.json())
 
     response.forEach(notification => {
+        console.log(notification)
         const alarmBox = document.querySelector('.alarm')
 
 
         const alarmContent = document.createElement('div')
-        alarmContent.innerHTML =`<div style="display:flex; height:10vh;">
-            <img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon">
-            <p class="alarm-content">${notification.content}</p>
-            <button onclick="read(${notification.id});">확인</button>
-        </div>`
+        alarmContent.innerHTML =notification.content
         alarmBox.appendChild(alarmContent)
     })
 }
