@@ -651,17 +651,44 @@ const notificationSocket = new WebSocket(
 
 
 
-notificationSocket.onmessage = function (e) {
+notificationSocket.onmessage = async function (e) {
     const data = JSON.parse(e.data);
-    if (payload_parse.user_id == author_id){
     const alarmBox = document.querySelector('.alarm')
+    if (payload_parse.user_id == author_id) {
 
 
-    const alarmContent = document.createElement('div')
-    alarmContent.style.display = "flex"
-    alarmContent.style.height = "10vh"
-    alarmContent.innerHTML = data.message
-    alarmBox.appendChild(alarmContent)}
+        const alarmContent = document.createElement('div')
+        alarmContent.style.display = "flex"
+        alarmContent.style.height = "10vh"
+        alarmContent.innerHTML = data.message
+        alarmBox.appendChild(alarmContent)
+    
+
+    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
+        headers: {
+            "authorization": "Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET'
+    })
+    .then(response => response.json())
+
+    const notificationButton = document.createElement('button')
+    const notificationButtonText = document.createTextNode('확인')
+    notificationButton.appendChild(notificationButtonText)
+    notificationButton.onclick = async function () {
+        await fetch(`http://127.0.0.1:8000/notification/alarm/${response[0].id}/`, {
+            headers: {
+                'content-type': 'application/json',
+                "authorization": "Bearer " + localStorage.getItem("access")
+            },
+            method: 'PUT',
+            body: ''
+        })
+        alarmBox.innerHTML = ""
+        getNotification()
+    }
+    alarmContent.appendChild(notificationButton)
+}
 };
 
 
@@ -673,8 +700,7 @@ notificationSocket.onclose = function (e) {
 function alarm() {
     if (payload_parse.user_id != author_id) {
         const message = `<img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon"><a style="cursor:pointer;margin:auto; text-decoration:none;" href="review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}">
-        <p class="alarm-content">후기에 덧글이 달렸습니다.</p></a>
-        <button>확인</button>`
+        <p class="alarm-content">후기에 덧글이 달렸습니다.</p></a>`
         notificationSocket.send(JSON.stringify({
             'message': message,
             "author": author_id,
