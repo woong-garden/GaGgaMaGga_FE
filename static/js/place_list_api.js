@@ -39,12 +39,37 @@ async function NewUserPlaceListView(place_id, category, page) {
         }
     })
     response_json = await response.json()
-
-    $('#place-list').empty()
+    // 페이지네이션
     const page_no = response_json.next.split('=')[1].split('/')[0]
     const last_page_no = parseInt(response_json.count/10)
-    $('#pagenation').empty()
-    $('#pagenation').append(
+    if (page_no-1 == 1) {
+        console.log(page_no-1)
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">끝</div></a>
+            >
+        `
+    )
+    } else if (page_no-1 == last_page_no) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">처음</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            >
+        `
+    )
+    } else {
+        $('#pagenation').empty()
+        $('#pagenation').append(
         `
             <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">처음</div></a>
@@ -57,6 +82,10 @@ async function NewUserPlaceListView(place_id, category, page) {
             >
         `
     )
+    }
+
+    //장소 리스트
+    $('#place-list').empty()
     response_json.results.forEach(item => {
         $('#place-list').append(
             `
