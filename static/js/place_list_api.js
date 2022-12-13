@@ -6,8 +6,9 @@ window.onload = function () {
         UserPlaceListView(cate_id)
     } else {
         const place_id = location.href.split('=')[1].split('&')[0]
-        const category = location.href.split('=')[2].split('/')[0]
-        NewUserPlaceListView(place_id, category)
+        const category = location.href.split('=')[2].split('&')[0]
+        const page_no = location.href.split('=')[3].split('/')[0]
+        NewUserPlaceListView(place_id, category, page_no)
     }
 }
 
@@ -29,14 +30,15 @@ function popClose(id) {
 
 
 //select
-async function NewUserPlaceListView(place_id, category) {
-    const response = await fetch(`http://127.0.0.1:8000/places/new/${place_id}/${category}/`, {
+async function NewUserPlaceListView(place_id, category, page_no) {
+    const response = await fetch(`http://127.0.0.1:8000/places/new/${place_id}/${category}/${page_no}/`, {
         method: 'GET',
         headers: {
             "Content-type": "application/json",
         }
     })
     response_json = await response.json()
+    console.log(response_json)
     $('#place-list').empty()
     response_json.forEach(item => {
         $('#place-list').append(
@@ -131,8 +133,20 @@ function move_list_page(cate_id) {
 }
 
 
+function move_next_page(){
+    const place_id2 = location.href.split('=')[1].split('&')[0]
+    const category2 = location.href.split('=')[2].split('&')[0]
+    let page_no2 = location.href.split('=')[3].split('/')[0]
+    page_no2 = page_no2 + 1
+    console.log(place_id2, category2, page_no2)
+    window.location.href = `/place_list.html?$place=${place_id2}&cate=${category2}&page_no=${page_no2}/`
+}
+
+
+
+
 async function UserPlaceListView(cate_id) {
-    const response = await fetch(`http://127.0.0.1:8000/places/selection/${cate_id}/`, {
+    const response = await fetch(`http://127.0.0.1:8000/places/list/${cate_id}/`, {
         method: 'GET',
         headers: {
             "Content-type": "application/json",

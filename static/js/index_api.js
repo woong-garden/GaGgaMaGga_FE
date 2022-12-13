@@ -101,10 +101,10 @@ async function IsUserOrNot(){
                     <div>장소로 선택하기</div>
                 </div>
                 <div>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(13)">
+                    <a href="#"><div class="select_box2" onclick="move_list_page(13)">
                     <img class="index_img" src="./images/icon/foods/jeju.png">
                     </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(14)">
+                    <a href="#"><div class="select_box2" onclick="move_list_page(14)">
                     <img class="index_img" src="./images/icon/foods/sgp.png">
                     </div></a>
                 </div>
