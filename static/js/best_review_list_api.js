@@ -13,9 +13,10 @@ async function BestLikeSort(){
     response_json = await response.json()
 
     const rank_cnt = document.getElementById("rank-cnt")
-    rank_cnt.innerText = response_json.like_count_review.length
+    // rank_cnt.innerText = response_json.like_count_review.length
+    console.log(response_json)
 
-    response_json.like_count_review.forEach(item => {
+    response_json.like_count_review.results.forEach(item => {
         console.log(item)
         $('#like-rank').append(
             `
@@ -27,14 +28,14 @@ async function BestLikeSort(){
                     </div>
                     <div class="place-item-content">
                         <div>${item.place_name}</div>
-                        <div class="place-item-content-cntsty">
-                            <div>
-                                좋아요 ${item.review_like_count}
-                            </div>
-                            <div>
-                                별점 ${item.rating_cnt}
-                            </div>
+                        <div class="rating">
+                            <img src="/images/icon/star.svg">
+                            <div>${item.rating_cnt}</div>
+                            <div class="review-item-box">
+                                <img src="/images/icon/review_fill_heart.svg">
+                                <div> ${item.review_like_count}</div>
                         </div>
+                    </div>
                     </div>
                 </div>
                 <a class="place-item-user" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
@@ -66,26 +67,25 @@ async function recentSort(){
     )
     response_json = await response.json()
 
-    response_json.recent_review.forEach(item => {
+    response_json.recent_review.results.forEach(item => {
         $('#recent-rank').append(
             `
             <div class="review-list">
                 <div class="place-item">
                     <div>
-                        <a onclick="move_review_detail_page(${item.id},${item.place.id})">
-                            <img class="place-item-img" src="${backendBaseUrl}${item.review_image_one}">
-                        </a>
+                        <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src="${backendBaseUrl}${item.review_image_one}">
+
                     </div>
                     <div class="place-item-content">
                         <div>${item.place_name}</div>
-                        <div class="place-item-content-cntsty">
-                            <div>
-                                좋아요 ${item.review_like_count}
-                            </div>
-                            <div>
-                                별점 ${item.rating_cnt}
-                            </div>
+                        <div class="rating">
+                            <img src="/images/icon/star.svg">
+                            <div>${item.rating_cnt}</div>
+                            <div class="review-item-box">
+                                <img src="/images/icon/review_fill_heart.svg">
+                                <div> ${item.review_like_count}</div>
                         </div>
+                    </div>
                     </div>
                 </div>
                 <a class="place-item-user" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
