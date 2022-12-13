@@ -24,20 +24,35 @@ function ActiveDeleteButton(id) {
     document.getElementById(`delete_place${id}`).style.display ="inline-block"
 }
 
-// modal
+// 지도 modal
 function popOpen(id) {
     var modalPop = $('#modal-wrap' + String(id));
     var modalBg = $('#modal-bg' + String(id));
     $(modalPop).show();
     $(modalBg).show();
 }
-
 function popClose(id) {
     var modalPop = $('#modal-wrap' + String(id));
     var modalBg = $('#modal-bg' + String(id));
     $(modalPop).hide();
     $(modalBg).hide();
 }
+
+// 삭제버튼 modal
+function DltPopOpen(id) {
+    var modalPop = $('#dlt-modal-wrap' + String(id));
+    var modalBg = $('#dlt-modal-bg' + String(id));
+    $(modalPop).show();
+    $(modalBg).show();
+}
+function DltPopClose(id) {
+    var modalPop = $('#dlt-modal-wrap' + String(id));
+    var modalBg = $('#dlt-modal-bg' + String(id));
+    $(modalPop).hide();
+    $(modalBg).hide();
+}
+
+
 
 //select
 async function NewUserPlaceListView(place_id, category, page) {
@@ -132,15 +147,13 @@ async function NewUserPlaceListView(place_id, category, page) {
                     <div>${item.place_address}</div>
                     <div style="display:inline-block;">☎${item.place_number}</div>
                     <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
-                    <a href="#" class="btn-open"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
+                    <a href="#" class="btn-open" onClick="javascript:DltPopOpen(${item.id});"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
                     </td>
                 <td width="10%">${item.rating}</td>
             </table>
             
             <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
             <div class="modal-wrap" id="modal-wrap${item.id}">
-                
-                
                 <div class="modal_contents">
                     <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
                     <a href="#"><div class="modal_close" onClick="javascript:popClose(${item.id});">Close</div></a>
@@ -153,7 +166,21 @@ async function NewUserPlaceListView(place_id, category, page) {
                 </div>
                     <div class="modal_map" id="map${item.id}">
                 </div>
-                
+            </div>
+
+            <div class="dlt-modal-bg" id="dlt-modal-bg${item.id}"onClick="javascript:DltPopClose(${item.id});"></div>
+            <div class="dlt-modal-wrap" id="dlt-modal-wrap${item.id}">
+                <div class="dlt_modal_contents">
+                    <p style="font-size:25px;">정말 삭제하시겠습니까?</p>
+                    <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
+                    <hr>
+                    <img src="${item.place_img}" style='width:300px;height:180px;')>
+                    <div style="text-align:center;">
+                        <a href="#"><div class="modal_close" onClick="DeletePlaceView(${item.id})">Delete</div></a>
+                        <a href="#"><div class="modal_close" onClick="javascript:DltPopClose(${item.id});">Close</div></a>
+                    </div>
+
+                </div>
             </div>
 
             `
@@ -315,20 +342,16 @@ async function UserPlaceListView(cate_id, page) {
                 <div>${item.place_address}</div>
                 <div style="display:inline-block;">☎${item.place_number}</div>
                 <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
-                <div class="market_detail_button btn-box" id="delete_place" style="display:none;">장소삭제</div>
-            </td>
+                <a href="#" class="btn-open" onClick="javascript:DltPopOpen(${item.id});"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
             <td width="10%">${item.rating}</td>
         </table>
         
         <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
         <div class="modal-wrap" id="modal-wrap${item.id}">
-            
-            
             <div class="modal_contents">
                 <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
                 <a href="#"><div class="modal_close" onClick="javascript:popClose(${item.id});">Close</div></a>
                 <hr>
-                
                 <img src="${item.place_img}" style='width:300px;height:180px;')>
                 <p style="font-size:15px;">주소 : ${item.place_address}</p>
                 <p style="font-size:15px;">전화번호 : ☎ ${item.place_number}</p>
@@ -336,7 +359,20 @@ async function UserPlaceListView(cate_id, page) {
             </div>
                 <div class="modal_map" id="map${item.id}">
             </div>
-            
+        </div>
+
+        <div class="dlt-modal-bg" id="dlt-modal-bg${item.id}"onClick="javascript:DltPopClose(${item.id});"></div>
+        <div class="dlt-modal-wrap" id="dlt-modal-wrap${item.id}">
+            <div class="dlt_modal_contents">
+                <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
+                <a href="#"><div class="modal_close" onClick="javascript:popClose(${item.id});">Close</div></a>
+                <hr>
+                <img src="${item.place_img}" style='width:300px;height:180px;')>
+                <p style="font-size:15px;">정말 해당 장소를 삭제하시겠습니까?</p>
+
+            </div>
+                <div class="modal_map" id="map${item.id}">
+            </div>
         </div>
                 
             `
@@ -401,5 +437,14 @@ async function UserPlaceListView(cate_id, page) {
 
 function move_place_detail_page(place_id){
     window.location.href = `/place_detail.html?id=${place_id}`
+}
 
+async function DeletePlaceView(place_id) {
+    const response = await fetch(`http://127.0.0.1:8000/places/${place_id}/`, {
+        method: 'DELETE',
+        headers: {
+            "authorization": "Bearer " + localStorage.getItem("access")
+        },
+    })
+    location.reload(true);
 }
