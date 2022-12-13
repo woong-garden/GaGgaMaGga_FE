@@ -68,4 +68,8 @@ async function private_profile(){
 
     nickname.value = response_json.nickname
     intro.innerText = response_json.intro
+
+    const profile_image = document.getElementById("preview")
+    let image_url = response_json.profile_image
+    profile_image.setAttribute("src", `${backendBaseUrl}${image_url}`)
 }
