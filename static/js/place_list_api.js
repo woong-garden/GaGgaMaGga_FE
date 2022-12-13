@@ -306,7 +306,7 @@ async function NewUserPlaceListView(place_id, category, page) {
             }
         });
     })
-    
+    _showPage()
 }
 
 function move_list_page(cate_id) {

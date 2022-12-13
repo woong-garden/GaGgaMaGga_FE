@@ -93,7 +93,7 @@ async function BestLikeSort(page){
     document.getElementById("sort-like-button").style.color = "#FF792A";
     document.getElementById("sort-recent-button").style.color = "#9b9b9b";
 
-    const response = await fetch(`http://127.0.0.1:8000/reviews/review_rank/?page=${page}`,{
+    const response = await fetch(`http://127.0.0.1:8000/reviews/review-rank/?page=${page}`,{
         method:'GET',
         headers: {
             Accept: "application/json",
@@ -219,7 +219,7 @@ async function recentSort(page){
     document.getElementById("sort-like-button").style.color = "#9b9b9b";
     document.getElementById("sort-recent-button").style.color = "#FF792A";
 
-    const response = await fetch(`http://127.0.0.1:8000/reviews/review_rank/?page=${page}`,{
+    const response = await fetch(`http://127.0.0.1:8000/reviews/review-rank/?page=${page}`,{
         method:'GET',
         headers: {
             Accept: "application/json",
