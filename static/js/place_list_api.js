@@ -2,12 +2,14 @@
 window.onload = function () {
     const storage = localStorage.getItem("payload");
     if (storage) {
-        const cate_id = location.href.split('=')[1].split('/')[0]
-        UserPlaceListView(cate_id)
+        const cate_id = location.href.split('=')[1].split('&')[0]
+        const page_no_user = location.href.split('=')[2].split('/')[0]
+        UserPlaceListView(cate_id, page_no_user)
     } else {
         const place_id = location.href.split('=')[1].split('&')[0]
-        const category = location.href.split('=')[2].split('/')[0]
-        NewUserPlaceListView(place_id, category)
+        const category = location.href.split('=')[2].split('&')[0]
+        const page_no = location.href.split('=')[3].split('/')[0]
+        NewUserPlaceListView(place_id, category, page_no)
     }
 }
 
@@ -27,29 +29,103 @@ function popClose(id) {
     $(modalBg).hide();
 }
 
+function NewMoveListPage(place_id, category, page_no){ 
+    const cate = decodeURI(category)
+    window.location.href = `/place_list.html?$place=${place_id}&cate=${cate}&page_no=${page_no}/`
+}
 
 //select
-async function NewUserPlaceListView(place_id, category) {
-    const response = await fetch(`http://127.0.0.1:8000/places/new/${place_id}/${category}/`, {    
+async function NewUserPlaceListView(place_id, category, page) {
+    const response = await fetch(`http://127.0.0.1:8000/places/new/${place_id}/${category}/?page=${page}`, {    
         method: 'GET',
         headers: {
             "Content-type": "application/json",
         }
     })
     response_json = await response.json()
+
+    // 페이지네이션
+    const page_no = response_json.next.split('=')[1].split('/')[0]
+    const last_page_no = parseInt(response_json.count/10)
+    if (page_no-1 == 1) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
+            >
+        `
+    )
+    } else if (page_no-1 == 2)  {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', 1)">1</div></a>
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
+            >
+        `)
+    }else if (page_no-1 == last_page_no) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', 1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            >
+        `
+    )
+    } else if (page_no-1 == last_page_no-1) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', 1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
+            >
+        `)
+    }else {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', 1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
+            >
+        `
+    )
+    }
+
+    //장소 추천 리스트
     $('#place-list').empty()
-    response_json.forEach(item => {
+    response_json.results.forEach(item => {
         $('#place-list').append(
             `
             <table cellpadding="0" cellspacing="0" border="0">
                 <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
                 <td width="70%">
                     <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
-                    <div>${item.place_address}  ☎${item.place_number}</div>
-                    <div></div>
+                    <div>${item.place_address}</div>
+                    <div>☎${item.place_number}</div>
                     <div>${item.place_time}</div>
                     <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
-                    <a href="#"><div class="market_detail_button">상세보기</div></a>
+                    <a href="#" onclick="move_place_detail_page(${item.id})"><div class="market_detail_button">상세보기</div></a>
                 </td>
                 <td width="10%">${item.rating}</td>
             </table>
@@ -130,9 +206,12 @@ function move_list_page(cate_id) {
     window.location.href = `/place_list.html?$id=${cate_id}/`
 }
 
+function UserMoveListPage(cate_id, page_no){ 
+    window.location.href = `/place_list.html?$cate=${cate_id}&page_no=${page_no}/`
+}
 
-async function UserPlaceListView(cate_id) {
-    const response = await fetch(`http://127.0.0.1:8000/places/selection/${cate_id}/`, {
+async function UserPlaceListView(cate_id, page) {
+    const response = await fetch(`http://127.0.0.1:8000/places/list/${cate_id}/?page=${page}`, {
         method: 'GET',
         headers: {
             "Content-type": "application/json",
@@ -142,9 +221,82 @@ async function UserPlaceListView(cate_id) {
 
 
     response_json = await response.json()
+
     console.log(response_json)
+    // 페이지네이션
+    const page_no2 = response_json.next.split('=')[1].split('/')[0]
+    const last_page_no = parseInt(response_json.count/10)
+    console.log(page_no2)
+    if (page_no2-1 == 1) {
+        console.log(page_no2-1)
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div class="current_page">${page_no2-1}</div></a>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${page_no2})">${page_no2}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
+            >
+        `
+    )
+    } else if (page_no2-1 == 2)  {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, 1)">1</div></a>
+            <a href="#"><div class="current_page">${page_no2-1}</div></a>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${page_no2})">${page_no2}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
+            >
+        `)
+    }else if (page_no2-1 == last_page_no) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, 1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${page_no2-2})">${page_no2-2}</div></a>
+            <a href="#"><div class="current_page">${page_no2-1}</div></a>
+            >
+        `
+    )
+    } else if (page_no2-1 == last_page_no-1) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="UserMoveListPage(${cate_id},1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id},${page_no2-2})">${page_no2-2}</div></a>
+            <a href="#"><div class="current_page">${page_no2-1}</div></a>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id},${last_page_no})">${last_page_no}</div></a>
+            >
+        `)
+    }else {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, 1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${page_no2-2})">${page_no2-2}</div></a>
+            <a href="#"><div class="current_page">${page_no2-1}</div></a>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id},${page_no2})">${page_no2}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
+            >
+        `
+    )
+    }
+
+
+    //장소 추천 리스트
     $('#place-list').empty()
-    response_json.forEach(item => {
+    response_json.results.forEach(item => {
         $('#place-list').append(
             `<table cellpadding="0" cellspacing="0" border="0">
             <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
@@ -154,7 +306,7 @@ async function UserPlaceListView(cate_id) {
                 <div></div>
                 <div>${item.place_time}</div>
                 <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
-                <a onclick="move_place_detail_page(${item.id})"><div class="market_detail_button">상세보기</div></a>
+                <a href="#" onclick="move_place_detail_page(${item.id})"><div class="market_detail_button">상세보기</div></a>
             </td>
             <td width="10%">${item.rating}</td>
         </table>

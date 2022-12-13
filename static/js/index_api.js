@@ -63,6 +63,16 @@ async function expired_password_confirm() {
 }
 
 
+function move_rcm_list_page(cate_id){
+    window.location.href = `/place_list.html?$cate_id=${cate_id}&page_no=1/`
+}
+
+function move_select_page(cate_id){ 
+    window.location.href = `/place_preference.html?$id=${cate_id}/`
+}
+
+
+
 
 async function IsUserOrNot(){
     const storage = localStorage.getItem("payload");
@@ -76,22 +86,22 @@ async function IsUserOrNot(){
                     <div>음식으로 선택하기</div>
                 </div>
                 <div>
-                    <a href="#"><div class="select_box2" onclick="move_list_page(3)">
+                    <a href="#"><div class="select_box2" onclick="move_rcm_list_page(3)">
                         <img class="index_img" src="./images/icon/foods/Korean.png">
                     </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_list_page(6)">
+                    <a href="#"><div class="select_box2" onclick="move_rcm_list_page(6)">
                         <img class="index_img" src="./images/icon/foods/fastfoods.png">
                     </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_list_page(7)">
+                    <a href="#"><div class="select_box2" onclick="move_rcm_list_page(7)">
                         <img class="index_img" src="./images/icon/foods/Chinese.png">
                     </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_list_page(8)">
+                    <a href="#"><div class="select_box2" onclick="move_rcm_list_page(8)">
                         <img class="index_img" src="./images/icon/foods/Japanese.png">
                     </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_list_page(9)">
+                    <a href="#"><div class="select_box2" onclick="move_rcm_list_page(9)">
                         <img class="index_img" src="./images/icon/foods/Western.png">
                     </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_list_page(12)">
+                    <a href="#"><div class="select_box2" onclick="move_rcm_list_page(12)">
                     <img class="index_img" src="./images/icon/foods/Asian.png">
                     </div></a>
                 </div>
@@ -101,10 +111,10 @@ async function IsUserOrNot(){
                     <div>장소로 선택하기</div>
                 </div>
                 <div>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(13)">
+                    <a href="#"><div class="select_box2" onclick="move_rcm_list_page(13)">
                     <img class="index_img" src="./images/icon/foods/jeju.png">
                     </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(14)">
+                    <a href="#"><div class="select_box2" onclick="move_rcm_list_page(14)">
                     <img class="index_img" src="./images/icon/foods/sgp.png">
                     </div></a>
                 </div>
@@ -156,13 +166,5 @@ async function IsUserOrNot(){
         </section>`
         )
     }
-}
-
-function move_list_page(cate_id){
-    window.location.href = `/place_list.html?$cate_id=${cate_id}/`
-}
-
-function move_select_page(cate_id){ 
-    window.location.href = `/place_preference.html?$id=${cate_id}/`
 }
 
