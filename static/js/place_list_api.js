@@ -2,19 +2,27 @@
 window.onload = function () {
     const storage = localStorage.getItem("payload");
     if (storage) {
-        const cate_id = location.href.split('=')[1].split('/')[0]
-        UserPlaceListView(cate_id, 1)
-        const cate_id = location.href.split('=')[1].split('/')[0]
-        UserPlaceListView(cate_id, 1)
+        const str_payload = JSON.parse(storage)
+        if (str_payload.review_cnt != 0) {
+            const cate_id = location.href.split('=')[1].split('/')[0]
+            UserPlaceListView(cate_id, 1)
+        } else {
+            const place_id = location.href.split('=')[1].split('&')[0]
+            const category = location.href.split('=')[2].split('/')[0]
+            NewUserPlaceListView(place_id, category, 1)
+        }
     } else {
         const place_id = location.href.split('=')[1].split('&')[0]
-        const category = location.href.split('=')[2].split('/')[0]
-        NewUserPlaceListView(place_id, category, 1)
         const category = location.href.split('=')[2].split('/')[0]
         NewUserPlaceListView(place_id, category, 1)
     }
 }
 
+
+//delete_button
+function ActiveDeleteButton(id) {
+    document.getElementById(`delete_place${id}`).style.display ="inline-block"
+}
 
 // modal
 function popOpen(id) {
@@ -41,7 +49,8 @@ async function NewUserPlaceListView(place_id, category, page) {
     })
     response_json = await response.json()
     console.log(response_json)
-    console.log(response_json)
+    const storage = localStorage.getItem("payload");
+    const str_payload = JSON.parse(storage)
 
     // 페이지네이션
     const page_no = response_json.next.split('=')[1].split('/')[0]
@@ -53,9 +62,7 @@ async function NewUserPlaceListView(place_id, category, page) {
             <
             <a href="#"><div class="current_page">${page_no-1}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             >
         `
@@ -66,12 +73,9 @@ async function NewUserPlaceListView(place_id, category, page) {
         `
             <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             >
         `)
@@ -81,9 +85,7 @@ async function NewUserPlaceListView(place_id, category, page) {
         `
             <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
             >
@@ -95,12 +97,9 @@ async function NewUserPlaceListView(place_id, category, page) {
         `
             <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             >
         `)
@@ -110,15 +109,11 @@ async function NewUserPlaceListView(place_id, category, page) {
         `
             <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             >
         `
@@ -137,7 +132,8 @@ async function NewUserPlaceListView(place_id, category, page) {
                     <div>${item.place_address}</div>
                     <div style="display:inline-block;">☎${item.place_number}</div>
                     <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
-                </td>
+                    <a href="#" class="btn-open"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
+                    </td>
                 <td width="10%">${item.rating}</td>
             </table>
             
@@ -162,6 +158,12 @@ async function NewUserPlaceListView(place_id, category, page) {
 
             `
         )
+        // 장소 삭제 버튼 생성
+        if (storage) {
+            if (str_payload.is_admin) {
+                ActiveDeleteButton(`${item.id}`)
+            }
+        }
 
         //지도 API
         var mapOptions = {
@@ -211,6 +213,7 @@ async function NewUserPlaceListView(place_id, category, page) {
             }
         });
     })
+    
 }
 
 function move_list_page(cate_id) {
@@ -226,6 +229,8 @@ async function UserPlaceListView(cate_id, page) {
         }
     })
     response_json = await response.json()
+    const storage = localStorage.getItem("payload");
+    const str_payload = JSON.parse(storage)
 
     console.log(response_json)
     // 페이지네이션
@@ -240,9 +245,7 @@ async function UserPlaceListView(cate_id, page) {
             <
             <a href="#"><div class="current_page">${page_no2-1}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no2})">${page_no2}</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no2})">${page_no2}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             >
         `
@@ -253,12 +256,9 @@ async function UserPlaceListView(cate_id, page) {
         `
             <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
             <a href="#"><div class="current_page">${page_no2-1}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no2})">${page_no2}</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no2})">${page_no2}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             >
         `)
@@ -268,9 +268,7 @@ async function UserPlaceListView(cate_id, page) {
         `
             <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no2-2})">${page_no2-2}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no2-2})">${page_no2-2}</div></a>
             <a href="#"><div class="current_page">${page_no2-1}</div></a>
             >
@@ -282,12 +280,9 @@ async function UserPlaceListView(cate_id, page) {
         `
             <
             <a href="#"><div onclick="UserPlaceListView(${cate_id},1)">1</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id},1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="UserPlaceListView(${cate_id},${page_no2-2})">${page_no2-2}</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id},${page_no2-2})">${page_no2-2}</div></a>
             <a href="#"><div class="current_page">${page_no2-1}</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id},${last_page_no})">${last_page_no}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id},${last_page_no})">${last_page_no}</div></a>
             >
         `)
@@ -297,15 +292,11 @@ async function UserPlaceListView(cate_id, page) {
         `
             <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no2-2})">${page_no2-2}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no2-2})">${page_no2-2}</div></a>
             <a href="#"><div class="current_page">${page_no2-1}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id},${page_no2})">${page_no2}</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id},${page_no2})">${page_no2}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             >
         `
@@ -324,6 +315,7 @@ async function UserPlaceListView(cate_id, page) {
                 <div>${item.place_address}</div>
                 <div style="display:inline-block;">☎${item.place_number}</div>
                 <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
+                <div class="market_detail_button btn-box" id="delete_place" style="display:none;">장소삭제</div>
             </td>
             <td width="10%">${item.rating}</td>
         </table>
@@ -349,6 +341,12 @@ async function UserPlaceListView(cate_id, page) {
                 
             `
         )
+
+        // 장소 삭제 버튼 생성
+        if (str_payload.is_admin) {
+            ActiveDeleteButton(`${item.id}`)
+        }
+        
         //지도 API
         var mapOptions = {
             center: new naver.maps.LatLng(`${item.latitude}`, `${item.longitude}`),
@@ -397,6 +395,7 @@ async function UserPlaceListView(cate_id, page) {
             }
         });
     })
+    
 }
 
 
