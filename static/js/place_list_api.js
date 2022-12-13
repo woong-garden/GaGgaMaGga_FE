@@ -29,17 +29,34 @@ function popClose(id) {
 }
 
 
+
 //select
-async function NewUserPlaceListView(place_id, category) {
-    const response = await fetch(`http://127.0.0.1:8000/places/new/${place_id}/${category}/`, {    
+async function NewUserPlaceListView(place_id, category, page) {
+    const response = await fetch(`http://127.0.0.1:8000/places/new/${place_id}/${category}/?page=${page}`, {    
         method: 'GET',
         headers: {
             "Content-type": "application/json",
         }
     })
     response_json = await response.json()
-    console.log(response_json)
+
     $('#place-list').empty()
+    const page_no = response_json.next.split('=')[1].split('/')[0]
+    const last_page_no = parseInt(response_json.count/10)
+    $('#pagenation').empty()
+    $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">처음</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">끝</div></a>
+            >
+        `
+    )
     response_json.results.forEach(item => {
         $('#place-list').append(
             `

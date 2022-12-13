@@ -360,3 +360,34 @@ td {
 .select_button {
     background-color: #FFCD48;
 }
+
+.pagenation {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+
+.pagenation div{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    width: 30px;
+    height:30px;
+    border-radius: 15px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.current_page{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #FFCD48;
+    width: 30px;
+    height:30px;
+    border-radius: 15px;
+    vertical-align: middle;
+    display: inline-block;
+}
