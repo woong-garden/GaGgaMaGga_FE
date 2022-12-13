@@ -12,19 +12,38 @@ async function getNotification() {
         },
         method: 'GET'
     })
-    .then(response => response.json())
+        .then(response => response.json())
 
     response.forEach(notification => {
         const alarmBox = document.querySelector('.alarm')
 
 
-        const alarmContent = document.createElement('div')
-        alarmContent.innerHTML =`<div style="display:flex; height:10vh;">
-            <img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon">
-            <p class="alarm-content">${notification.content}</p>
-            <button onclick="read(${notification.id});">확인</button>
-        </div>`
+        let alarmContent = document.createElement('div')
+        alarmContent.setAttribute("id", `alarm${notification.id}`)
+        alarmContent.innerHTML = notification.content
+        alarmContent.style.display = "flex"
+        alarmContent.style.height = "10vh"
         alarmBox.appendChild(alarmContent)
+
+        // const alarmButton = `<button onclick="read(${notification.id})"></button>`
+        const notificationButton = document.createElement('button')
+        const notificationButtonText = document.createTextNode('확인')
+        notificationButton.appendChild(notificationButtonText)
+        notificationButton.onclick = async function () {
+            await fetch(`http://127.0.0.1:8000/notification/alarm/${notification.id}/`, {
+                headers: {
+                    'content-type': 'application/json',
+                    "authorization": "Bearer " + localStorage.getItem("access")
+                },
+                method: 'PUT',
+                body: ''
+            })
+            alarmBox.innerHTML = ""
+            getNotification()
+
+        }
+
+        alarmContent.appendChild(notificationButton)
     })
 }
 
@@ -37,9 +56,8 @@ async function read(notification_id) {
         method: 'PUT',
         body: ''
     })
-    getNotification()
     const alarmBox = document.querySelector('.alarm')
-    alarmBox.innerHTML= ""
-
+    alarmBox.innerHTML = ""
+    getNotification()
 
 }

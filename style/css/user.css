@@ -63,7 +63,7 @@ body{
 
 #input-box h5{
     text-align: left;
-    margin:0 0 0 6%;
+    margin:0 0 0 7%;
 }
 
 #input-box input{
@@ -72,12 +72,13 @@ body{
     background: 0 0;
     background-color: white;
     border: 1px solid #efefef;
-    border-radius: 25px;
+    border-radius: 40px;
     box-sizing: border-box;
     color: #262626;
     font-size: 14px;
-    padding: 7px 8px;
+    padding: 7px 20px;
     margin : 10px 10px;
+    outline: none;
 }
 
 #buttons{
@@ -93,10 +94,10 @@ body{
     background:  rgb(255, 155, 37);
     border-color: rgb(255, 155, 37);
     color: white;
-    border-radius: 25px;
+    border-radius: 40px;
     border-style: solid;
     border-width: 1px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     line-height: 28px;
     outline: none;
@@ -104,6 +105,12 @@ body{
     cursor: pointer;
 }
 
+.user-move-page{
+    display: flex;
+    align-items: center; 
+    font-size:15px;
+    font-weight: 700;
+}
 
 .kakao{
     width : 90%;
@@ -111,10 +118,10 @@ body{
     background: #F7E600;
     border-color: #F7E600;
     color: black;
-    border-radius: 25px;
+    border-radius: 40px;
     border-style: solid;
     border-width: 1px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     line-height: 28px;
     outline: none;
@@ -126,7 +133,7 @@ body{
 #find{
     display: flex;
     justify-content: space-between;
-    width : 90%;
+    width : 80%;
     margin : auto;
 }
 

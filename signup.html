@@ -15,11 +15,12 @@
             <div>
                 <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
             </div>
-                <div>
-                    <h3>회원가입</h3>
-                </div>
-            <div> 
-            </div> 
+            <div>
+                <h3>회원가입</h3>
+            </div>
+            <div>
+                <div style="width:38px; height:38px; margin-top:2%;"></div>
+            </div>
         </div>          
     </div>
     <!--헤더 끝-->
@@ -27,19 +28,19 @@
     <!--메인 시작-->
     <div class="root">
         <div class="root_block"></div>
-        <div id="input-box">
+        <div id="input-box" style="padding-top: 20px;">
             <h5>아이디</h5>
-            <input type="text" id="username" placeholder="6자이상 20자이하의 영문 대/소문자, 숫자">
+            <input style="margin:4px 10px 10px 10px;" type="text" id="username" placeholder="6자이상 20자이하의 영문 대/소문자, 숫자">
 
             <h5>이메일</h5>
-            <input type="email" id="email" placeholder="이메일를 입력해주세요.">
+            <input style="margin:4px 10px 10px 10px;" type="email" id="email" placeholder="이메일를 입력해주세요.">
 
             <h5>비밀번호</h5>
-            <input type="password" id="password" placeholder="8자이상 16이하의 영문 대/소문자, 숫자, 특수문자">
-            <input type="password" id="repassword" placeholder="비밀번호 재확인을 입력해주세요.">
+            <input style="margin:4px 10px 10px 10px;" type="password" id="password" placeholder="8자이상 16이하의 영문 대/소문자, 숫자, 특수문자">
+            <input style="margin:4px 10px 10px 10px;" type="password" id="repassword" placeholder="비밀번호 재확인을 입력해주세요.">
 
             <h5>휴대폰 번호 (선택사항)</h5>
-            <input type="tel" id="phone_number" placeholder="-를 제외한 휴대폰 번호 입력해주세요.">
+            <input style="margin:4px 10px 10px 10px;" type="tel" id="phone_number" placeholder="-를 제외한 휴대폰 번호 입력해주세요.">
             
             <input type="checkbox" id="term_check">
             <div class="alert alert-danger" style="font-size:15px" id="alert-danger"></div>
@@ -47,7 +48,7 @@
             <div id="buttons">
                 <button onclick="Sign_Up()" class="button login">회원가입</button>
             </div>
-            <a  onclick="to_login()" style="color: rgb(149, 145, 140);">이미 회원이신가요? <strong style="color:black;">로그인</strong><img src="./images/icon/small_arrow.svg"></a>
+            <a  onclick="to_login()" style="color: rgb(149, 145, 140);">이미 회원이신가요? <span style="color:black; cursor: pointer; font-weight: 700;text-decoration: underline;">로그인</span></a>
         </div>
     </div>
     <!--메인 끝-->  

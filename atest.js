@@ -20,6 +20,7 @@ async function public_profile() {
 
 
     response_json = await response.json()
+    console.log(response_json)
 
 
     // 프로필
@@ -50,7 +51,7 @@ async function public_profile() {
             <div class="review-box">
                 <div class="row" style="margin:0;">
                     <div class="col-md-4" style="padding:0;">
-                        <img class="review-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
+                        <img class="review-img" onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
                     </div>
                     <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
                         <div class="card-body">
@@ -70,21 +71,20 @@ async function public_profile() {
     // 북마크
     if(response_json.bookmark_place.length){
         response_json.bookmark_place.forEach(item => {
-            console.log(item)
                 $('#my-bookmark').append(
                     `
-                    <div class="review-box">
-                        <div class="row" style="margin:0;">
-                            <div class="col-md-4" style="padding:0;">
-                                <div class="content-img">
-                                    <img class="review-img" onclick="move_place_detail_page(${item.id})" alt="장소 사진" src="${item.place_img}">
-                                </div>
-                            </div>
-                            <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                                <div onclick="move_place_detail_page(${item.id})" style="padding: 1.25rem">
-                                    <h6 style="color : #ffbf60;">${item.place_name}</h6>
-                                    <p>평점&nbsp; ${item.rating} / 5</p>
-                                </div>
+                    <div style="padding: 20px 0 24px;border-bottom: 1px solid #DBDBDB;display: flex;">
+                        <div>
+                            <img style="object-fit: cover;width: 150px;height: 150px;cursor: pointer;" src="${item.place_img}">
+                        </div>
+                        <div style="padding: 20px;">
+                            <div style="color:#ffbf60">${item.place_name}</div>
+                            <div>
+                                <img style="width: 14px;
+                                height: 14px;
+                                padding-right: 2px;" src="/images/icon/star.svg">
+                                <span style="font-size: 14px;
+                                font-weight: 700;">{item.rating}</span>
                             </div>
                         </div>
                     </div>
@@ -160,10 +160,6 @@ function move_following_page(user_nickname){
 
 function move_review_detail_page(review_id,place_id, author_id){
     window.location.href = `/review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}`
-}
-
-function move_place_detail_page(place_id){
-    window.location.href = `/place_detail.html?id=${place_id}`
 }
 
 function move_to_edit_page(place_id, review_id){
