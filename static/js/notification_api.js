@@ -12,7 +12,8 @@ async function getNotification() {
         },
         method: 'GET'
     })
-        .then(response => response.json())
+    .then(response => response.json())
+    console.log(response)
 
     response.forEach(notification => {
         console.log(notification)
@@ -20,14 +21,14 @@ async function getNotification() {
 
 
         const alarmContent = document.createElement('div')
+        alarmContent.setAttribute("id", `alarm${notification.id}`)
         alarmContent.innerHTML = notification.content
         alarmContent.style.display = "flex"
         alarmContent.style.height = "10vh"
         alarmBox.appendChild(alarmContent)
         
 
-        const readButton = document.querySelector('.alarm div button')
-        // readButton.setAttribute("id", `${notification.id}`)
+        const readButton = document.querySelector(`#alarm${notification.id}`)
         readButton.onclick = async function (){
             await fetch(`http://127.0.0.1:8000/notification/alarm/${notification.id}/`, {
             headers: {

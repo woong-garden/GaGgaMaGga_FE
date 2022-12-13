@@ -653,7 +653,7 @@ const notificationSocket = new WebSocket(
 
 notificationSocket.onmessage = function (e) {
     const data = JSON.parse(e.data);
-    console.log(data)
+    if (payload_parse.user_id == author_id){
     const alarmBox = document.querySelector('.alarm')
 
 
@@ -661,7 +661,7 @@ notificationSocket.onmessage = function (e) {
     alarmContent.style.display = "flex"
     alarmContent.style.height = "10vh"
     alarmContent.innerHTML = data.message
-    alarmBox.appendChild(alarmContent)
+    alarmBox.appendChild(alarmContent)}
 };
 
 
