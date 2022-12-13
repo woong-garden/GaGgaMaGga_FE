@@ -64,7 +64,7 @@ async function expired_password_confirm() {
 
 
 function move_rcm_list_page(cate_id){
-    window.location.href = `/place_list.html?$cate_id=${cate_id}&page_no=1/`
+    window.location.href = `/place_list.html?$cate_id=${cate_id}/`
 }
 
 function move_select_page(cate_id){ 

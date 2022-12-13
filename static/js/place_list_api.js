@@ -2,14 +2,12 @@
 window.onload = function () {
     const storage = localStorage.getItem("payload");
     if (storage) {
-        const cate_id = location.href.split('=')[1].split('&')[0]
-        const page_no_user = location.href.split('=')[2].split('/')[0]
-        UserPlaceListView(cate_id, page_no_user)
+        const cate_id = location.href.split('=')[1].split('/')[0]
+        UserPlaceListView(cate_id, 1)
     } else {
         const place_id = location.href.split('=')[1].split('&')[0]
-        const category = location.href.split('=')[2].split('&')[0]
-        const page_no = location.href.split('=')[3].split('/')[0]
-        NewUserPlaceListView(place_id, category, page_no)
+        const category = location.href.split('=')[2].split('/')[0]
+        NewUserPlaceListView(place_id, category, 1)
     }
 }
 
@@ -27,11 +25,6 @@ function popClose(id) {
     var modalBg = $('#modal-bg' + String(id));
     $(modalPop).hide();
     $(modalBg).hide();
-}
-
-function NewMoveListPage(place_id, category, page_no){ 
-    const cate = decodeURI(category)
-    window.location.href = `/place_list.html?$place=${place_id}&cate=${cate}&page_no=${page_no}/`
 }
 
 //select
@@ -53,9 +46,9 @@ async function NewUserPlaceListView(place_id, category, page) {
         `
             <
             <a href="#"><div class="current_page">${page_no-1}</div></a>
-            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             >
         `
     )
@@ -64,11 +57,11 @@ async function NewUserPlaceListView(place_id, category, page) {
         $('#pagenation').append(
         `
             <
-            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', 1)">1</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
-            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             >
         `)
     }else if (page_no-1 == last_page_no) {
@@ -76,9 +69,9 @@ async function NewUserPlaceListView(place_id, category, page) {
         $('#pagenation').append(
         `
             <
-            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', 1)">1</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
             >
         `
@@ -88,11 +81,11 @@ async function NewUserPlaceListView(place_id, category, page) {
         $('#pagenation').append(
         `
             <
-            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', 1)">1</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
-            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             >
         `)
     }else {
@@ -100,13 +93,13 @@ async function NewUserPlaceListView(place_id, category, page) {
         $('#pagenation').append(
         `
             <
-            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', 1)">1</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
-            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             >
         `
     )
@@ -206,10 +199,6 @@ function move_list_page(cate_id) {
     window.location.href = `/place_list.html?$id=${cate_id}/`
 }
 
-function UserMoveListPage(cate_id, page_no){ 
-    window.location.href = `/place_list.html?$cate=${cate_id}&page_no=${page_no}/`
-}
-
 async function UserPlaceListView(cate_id, page) {
     const response = await fetch(`http://127.0.0.1:8000/places/list/${cate_id}/?page=${page}`, {
         method: 'GET',
@@ -232,9 +221,9 @@ async function UserPlaceListView(cate_id, page) {
         `
             <
             <a href="#"><div class="current_page">${page_no2-1}</div></a>
-            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${page_no2})">${page_no2}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no2})">${page_no2}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             >
         `
     )
@@ -243,11 +232,11 @@ async function UserPlaceListView(cate_id, page) {
         $('#pagenation').append(
         `
             <
-            <a href="#"><div onclick="UserMoveListPage(${cate_id}, 1)">1</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
             <a href="#"><div class="current_page">${page_no2-1}</div></a>
-            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${page_no2})">${page_no2}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no2})">${page_no2}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             >
         `)
     }else if (page_no2-1 == last_page_no) {
@@ -255,9 +244,9 @@ async function UserPlaceListView(cate_id, page) {
         $('#pagenation').append(
         `
             <
-            <a href="#"><div onclick="UserMoveListPage(${cate_id}, 1)">1</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${page_no2-2})">${page_no2-2}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no2-2})">${page_no2-2}</div></a>
             <a href="#"><div class="current_page">${page_no2-1}</div></a>
             >
         `
@@ -267,11 +256,11 @@ async function UserPlaceListView(cate_id, page) {
         $('#pagenation').append(
         `
             <
-            <a href="#"><div onclick="UserMoveListPage(${cate_id},1)">1</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id},1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserMoveListPage(${cate_id},${page_no2-2})">${page_no2-2}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id},${page_no2-2})">${page_no2-2}</div></a>
             <a href="#"><div class="current_page">${page_no2-1}</div></a>
-            <a href="#"><div onclick="UserMoveListPage(${cate_id},${last_page_no})">${last_page_no}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id},${last_page_no})">${last_page_no}</div></a>
             >
         `)
     }else {
@@ -279,13 +268,13 @@ async function UserPlaceListView(cate_id, page) {
         $('#pagenation').append(
         `
             <
-            <a href="#"><div onclick="UserMoveListPage(${cate_id}, 1)">1</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${page_no2-2})">${page_no2-2}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no2-2})">${page_no2-2}</div></a>
             <a href="#"><div class="current_page">${page_no2-1}</div></a>
-            <a href="#"><div onclick="UserMoveListPage(${cate_id},${page_no2})">${page_no2}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id},${page_no2})">${page_no2}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             >
         `
     )
