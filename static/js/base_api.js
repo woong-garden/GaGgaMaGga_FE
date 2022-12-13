@@ -16,6 +16,6 @@ async function move_profile_page(){
     window.location.href = `/public_profile.html?=${user_nickname}`
 }
 
-function move_best_review_page(){
-    window.location.href = `/best_review_list.html`
+function move_best_review_page(page, choice){
+    window.location.href = `/best_review_list.html?page=${page}&choice=${choice}`
 }

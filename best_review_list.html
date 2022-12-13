@@ -66,9 +66,7 @@
                 </div>
                 <!--조회순 끝-->
             </div>
-            <div class="pagenation" id="pagenation">
-                <div>ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div>
-            </div>
+            <div class="pagenation" id="pagenation"></div>
         </div>
         
     </div>
@@ -90,24 +88,6 @@
     </div>
     <!--네비바 끝-->
 
-    <script>
-        //좋아요순,조회순 토글
-        function like_rank_show(){
-            document.getElementById("like-rank").style.display ='block';
-            document.getElementById("recent-rank").style.display ='none';
-
-            document.getElementById("sort-like-button").style.color = "#FF792A";
-            document.getElementById("sort-recent-button").style.color = "#9b9b9b";
-        }
-
-        function views_rank_show(){
-            document.getElementById("like-rank").style.display ='none';
-            document.getElementById("recent-rank").style.display ='block';
-
-            document.getElementById("sort-like-button").style.color = "#9b9b9b";
-            document.getElementById("sort-recent-button").style.color = "#FF792A";
-        }
-    </script>
     <script src="/static/js/best_review_list_api.js"></script>
     <script src="/static/js/base_api.js"></script>
 </body>
