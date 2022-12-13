@@ -65,3 +65,15 @@
     /* margin-right : auto 10px auto 0; */
     margin: auto;
 }
+
+.alarm div button {
+    background: #c8c8c8;
+    border-radius: 32px;
+    margin: auto 0;
+    text-align: center;
+    color: #fff;
+    min-width: 80px;
+    height: 32px;
+    border: none;
+    cursor: pointer;
+}

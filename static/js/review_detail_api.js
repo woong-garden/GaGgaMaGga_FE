@@ -2,10 +2,6 @@ const review_id = location.href.split('?')[1].split('&')[0].split('=')[1]
 const place_id = location.href.split('?')[1].split('&')[1].split('=')[1]
 const author_id = location.href.split('?')[1].split('&')[2].split('=')[1]
 
-console.log(location.href.split('?')[1])
-
-console.log(author_id)
-
 const payload = localStorage.getItem("payload");
 const payload_parse = JSON.parse(payload);
 
@@ -43,7 +39,6 @@ window.onload = () => {
     const reportModal = document.querySelector('#report-modal')
     document.querySelector('#report-button-text').onclick = function () {
         reportModal.style.display = "block"
-
     }
 
     const closeReportModal = document.querySelector('#exit-report')
@@ -663,6 +658,8 @@ notificationSocket.onmessage = function (e) {
 
 
     const alarmContent = document.createElement('div')
+    alarmContent.style.display = "flex"
+    alarmContent.style.height = "10vh"
     alarmContent.innerHTML = data.message
     alarmBox.appendChild(alarmContent)
 };
@@ -675,16 +672,13 @@ notificationSocket.onclose = function (e) {
 
 function alarm() {
     if (payload_parse.user_id != author_id) {
-        const message = `<div style="display:flex; height:10vh;">
-        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon">
-        <a style="cursor:pointer;margin:auto; text-decoration:none;" href="review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}"><p class="alarm-content">후기에 덧글이 달렸습니다.</p></a>
-        <button>확인</button>
-    </div>`
+        const message = `<img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon"><a style="cursor:pointer;margin:auto; text-decoration:none;" href="review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}">
+        <p class="alarm-content">후기에 덧글이 달렸습니다.</p></a>
+        <button>확인</button>`
         notificationSocket.send(JSON.stringify({
             'message': message,
             "author": author_id,
             "user_id": payload_parse.user_id
-
         }))
     }
 }
