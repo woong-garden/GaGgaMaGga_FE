@@ -8,6 +8,9 @@
 <!--폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
+<!--타이틀 로고-->
+<link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
+
 <!--css-->
 <link rel="stylesheet" href="./style/css/place.css">
 <link rel="stylesheet" href="/style/css/modal.css">
@@ -47,7 +50,7 @@
     <!--메인 시작-->
     <div class="root" style="padding-top:50px;">
         <p class="sub_title">가 보고 싶었던 장소를 선택해보세요</p>
-        <div class="select_button">다시 검색하기</div>
+        <div class="select_button" onclick="reload_page()"><a href="#" style="text-decoration:none">다시 검색하기</a></div>
         <div class="select_container">
             <div id="select-box"></div>
         </div>

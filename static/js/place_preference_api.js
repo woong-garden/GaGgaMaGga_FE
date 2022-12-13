@@ -5,7 +5,6 @@ window.onload = function(){
     PlaceSelectView(cate_id)
     }
 
-
     const payload = localStorage.getItem("payload");
     const payload_parse = JSON.parse(payload);
     
@@ -69,9 +68,11 @@ window.onload = function(){
     notificationSocket.onclose = function (e) {
         console.error('소켓이 닫혔어요 ㅜㅜ');
     };
-    
-    
-    
+
+    function reload_page(){
+        location.reload(true);
+    }
+
 //select
 async function PlaceSelectView(choice_no){
     const response = await fetch(`http://127.0.0.1:8000/places/selection/${choice_no}/`, {
@@ -81,6 +82,7 @@ async function PlaceSelectView(choice_no){
         }
     })
     response_json = await response.json()
+    console.log(response_json)
     if (choice_no > 12) {
         $('#select-box').empty()
         response_json.forEach(item => {
@@ -107,6 +109,6 @@ async function PlaceSelectView(choice_no){
 }
 
 function move_list_page(category, place_id){ 
-    window.location.href = `/place_list.html?$place=${place_id}&cate=${category}&page_no=1/`
+    window.location.href = `/place_list.html?$place=${place_id}&cate=${category}/`
 }
 

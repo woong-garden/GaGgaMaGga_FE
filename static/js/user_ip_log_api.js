@@ -93,7 +93,7 @@ async function login_log(){
         console.log(item.created_at)
         $('#my-review').append(
             `
-            <div class="card">
+            <div class="card" style="margin-bottom:12px">
             <div class="row">
                 <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
                     <div class="card-body">

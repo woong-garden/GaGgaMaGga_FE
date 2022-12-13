@@ -9,7 +9,7 @@ if(localStorage.getItem("access")){
     private_profile()
     active_user.style = "display:block;"
     deacctive_user.style = "display:none;"
-    profile_div.style = "display:block"
+    profile_div.style = "display:block;padding:14px 30px 0px 30px; display: flex; align-items: center;"
     
 } else {
     active_user.style = "display:none;"

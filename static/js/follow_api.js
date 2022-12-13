@@ -110,12 +110,12 @@ async function follow() {
             `
             <div class="profile">
                 <div class = "img">
-                    <a onclick="move_user_profile('${item.nickname}')">
+                    <a class="user-item" onclick="move_user_profile('${item.nickname}')">
                     <img id="porfile-img" src ="${backendBaseUrl}${item.profile_image}" alt="프로필 사진" >
                     </a>
                 </div>
                 <div style="width: 77%;">
-                    <a onclick="move_user_profile('${item.nickname}')">${item.nickname}</a>
+                    <a class="user-item" onclick="move_user_profile('${item.nickname}')">${item.nickname}</a>
                 </div>
             </div>
             `
@@ -128,12 +128,12 @@ async function follow() {
             `
             <div class="profile">
                 <div class = "img">
-                    <a onclick="move_user_profile('${item.nickname}')">
+                    <a class="user-item" onclick="move_user_profile('${item.nickname}')">
                     <img id="porfile-img" src ="${backendBaseUrl}${item.profile_image}" alt="프로필 사진" >
                     </a>
                 </div>
                 <div style="width: 77%;">
-                    <a onclick="move_user_profile('${item.nickname}')">${item.nickname}</a>
+                    <a class="user-item" onclick="move_user_profile('${item.nickname}')">${item.nickname}</a>
                 </div>
             </div>
             `

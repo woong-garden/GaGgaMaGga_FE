@@ -127,37 +127,92 @@ async function expired_password_confirm() {
 }
 
 
+function move_rcm_list_page(cate_id){
+    window.location.href = `/place_list.html?$cate_id=${cate_id}/`
+}
+
+function move_select_page(cate_id){ 
+    window.location.href = `/place_preference.html?$id=${cate_id}/`
+}
+
+
+
 
 async function IsUserOrNot(){
     const storage = localStorage.getItem("payload");
     if (storage) {
         console.log("[로그인 계정] 데이터 로드 완료")
-        $('#index-selectbox').empty()
+        const str_payload = JSON.parse(storage)
+        if (str_payload.review_cnt != 0) {
+            $('#index-selectbox').empty()
+            $('#index-selectbox').append(
+                `<section class="select-place-wrap">
+                <div>
+                    <div>
+                        <div>음식으로 선택하기</div>
+                    </div>
+                    <div>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(3)">
+                            <img class="index_img" src="./images/icon/foods/Korean.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(6)">
+                            <img class="index_img" src="./images/icon/foods/fastfoods.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(7)">
+                            <img class="index_img" src="./images/icon/foods/Chinese.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(8)">
+                            <img class="index_img" src="./images/icon/foods/Japanese.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(9)">
+                            <img class="index_img" src="./images/icon/foods/Western.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(12)">
+                        <img class="index_img" src="./images/icon/foods/Asian.png">
+                        </div></a>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div>장소로 선택하기</div>
+                    </div>
+                    <div>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(13)">
+                        <img class="index_img" src="./images/icon/foods/jeju.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(14)">
+                        <img class="index_img" src="./images/icon/foods/sgp.png">
+                        </div></a>
+                    </div>
+                </div>
+            </section>`)
+        } else {
+            $('#index-selectbox').empty()
         $('#index-selectbox').append(
             `<section class="select-place-wrap">
             <div>
                 <div>
-                    <div>음식으로 선택하기</div>
+                    <div>음식으로 검색하기</div>
                 </div>
                 <div>
-                    <a href="#"><div class="select_box2" onclick="move_list_page(3)">
-                        <img class="index_img" src="./images/icon/foods/Korean.png">
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_list_page(6)">
-                        <img class="index_img" src="./images/icon/foods/fastfoods.png">
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_list_page(7)">
-                        <img class="index_img" src="./images/icon/foods/Chinese.png">
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_list_page(8)">
-                        <img class="index_img" src="./images/icon/foods/Japanese.png">
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_list_page(9)">
-                        <img class="index_img" src="./images/icon/foods/Western.png">
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_list_page(12)">
-                    <img class="index_img" src="./images/icon/foods/Asian.png">
-                    </div></a>
+                <a href="#"><div class="select_box2" onclick="move_select_page(3)">
+                <img class="index_img" src="./images/icon/foods/Korean.png">
+            </div></a>
+            <a href="#"><div class="select_box2" onclick="move_select_page(6)">
+                <img class="index_img" src="./images/icon/foods/fastfoods.png">
+            </div></a>
+            <a href="#"><div class="select_box2" onclick="move_select_page(7)">
+                <img class="index_img" src="./images/icon/foods/Chinese.png">
+            </div></a>
+            <a href="#"><div class="select_box2" onclick="move_select_page(8)">
+                <img class="index_img" src="./images/icon/foods/Japanese.png">
+            </div></a>
+            <a href="#"><div class="select_box2" onclick="move_select_page(9)">
+                <img class="index_img" src="./images/icon/foods/Western.png">
+            </div></a>
+            <a href="#"><div class="select_box2" onclick="move_select_page(12)">
+            <img class="index_img" src="./images/icon/foods/Asian.png">
+            </div></a>
                 </div>
             </div>
             <div>
@@ -166,6 +221,7 @@ async function IsUserOrNot(){
                 </div>
                 <div>
                     <a href="#"><div class="select_box2" onclick="move_select_page(13)">
+                    <a href="#"><div class="select_box2" onclick="move_select_page(13)">
                     <img class="index_img" src="./images/icon/foods/jeju.png">
                     </div></a>
                     <a href="#"><div class="select_box2" onclick="move_select_page(14)">
@@ -173,7 +229,9 @@ async function IsUserOrNot(){
                     </div></a>
                 </div>
             </div>
-        </section>`)
+        </section>`
+        )
+        }
     }else{
         console.log("[비로그인 계정] 데이터 로드 완료")
         $('#index-selectbox').empty()
