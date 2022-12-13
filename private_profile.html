@@ -4,27 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!--폰트-->
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
 
     <!--css-->
     <link rel="stylesheet" href="./style/css/private_profile.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="/style/css/modal.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="static/js/notification_api.js"></script>
+    <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
 
     <title>개인 프로필 설정</title>
 </head>
 <body style="background-color: #FFFAE7">
+    <div id="modal-box">
+        <div id="modal-body">
+            <div class="alarm">
+            </div>
+            <button id="close-modal" onclick="closeModal()">닫기</button>
+        </div>
+    </div>
+
+
     <!--헤더 시작-->
     <div class="header">
         <div>
             <div>
-                <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
-            </div> 
+                <a href="javascript:history.back();"><img class="header-back-icon" src="/images/icon/back.svg"></a>
+            </div>
+        
             <div> 
-                <a><img style="margin-left:8px;" src="/images/icon/bell.svg"></a>
+                <a><img style="margin-left:8px; cursor: pointer;" onclick="openModal()" src="/images/icon/bell.svg"></a>
+
             </div> 
         </div>          
     </div>
@@ -33,134 +46,93 @@
     <!--메인 시작-->
     <div class="root">
         <div class="root_block"></div>
-        <!-- profile 정보 -->
-        <div class="profile" id="profile_div">
-            <div class="card mb-3" style="max-width: 540px; border-radius: 0;">
-                <div class="row g-0" style="align-items: center;">
-                    <div class="col-md-4">
-                        <div class ="img">
-                            <img id="porfile-img" src ="/images/default_profile_pic.jpg">
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h6 id="profile_nickname" style="font-size:13px" class="card-title"></h6>
-                            <h6 id="profile_username" style="font-size:13px" class="card-title"></h6>
-                            <h6 id="profile_email" style="font-size:13px" class="card-title"></h6>
-                        </div>
-                    </div>
-                </div>
+        <!--여기사용하시면 됩니다~-->
+        <div id="profile_div">
+            <div>
+                <img id="porfile-img" src ="/images/default_profile_pic.jpg">
+            </div>
+            <div class="user-infor-wrap">
+                <div id="profile_nickname" class="card-title">닉네임 : 어드민</div>
+                <div id="profile_username"  class="card-title">아이디 admin</div>
+                <div id="profile_email"  class="card-title">이메일 admin@andmi</div>
             </div>
         </div>
+
+        <div class="horizon"></div>
+
         <div id="acctive_user">
-        <div class="container" id='my-review' style="display: block;">
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                        <div class="card-body">
-                            <a onclick="move_profile_page()">내 프로필</a>
-                        </div>
+            <div id='my-review' style="display: block;">
+                <div class="user-infor-wrap">
+                    <div>
+                        <div class="private-list-title">내정보</div>
+                        <a onclick="move_profile_page()" class="private-list-item">
+                            <div class="private-list-font-style">내 프로필</div>
+                            <img src="/images/icon/small_arrow.svg">
+                        </a>
+                        <a href="profile_edit.html" class="private-list-item">
+                            <div class="private-list-font-style">프로필 편집</div>
+                            <img src="/images/icon/small_arrow.svg">
+                        </a>
+                        <a onclick="confirm_kakao_user_edit()" class="private-list-item">
+                            <div class="private-list-font-style">회원정보 수정</div>
+                            <img src="/images/icon/small_arrow.svg">
+                        </a>
+                        <a onclick="confirm_kakao_change_password()" class="private-list-item">
+                            <div class="private-list-font-style">비밀 번호 변경</div>
+                            <img src="/images/icon/small_arrow.svg">
+                        </a>
+                    </div>
+                </div>    
+                <div class="horizon"></div>
+                <div class="user-infor-wrap">
+                    <div>
+                        <div class="private-list-title">서비스 이용</div>
+                        <a href="user_ip_log.html" class="private-list-item">
+                            <div class="private-list-font-style">로그인 기록 확인</div>
+                            <img src="/images/icon/small_arrow.svg">
+                        </a>
+                        <a onclick="resend_email()" class="private-list-item">
+                            <div class="private-list-font-style">이메일 재인증</div>
+                            <img src="/images/icon/small_arrow.svg">
+                        </a>
+                        <a onclick="Report()" class="private-list-item">
+                            <div class="private-list-font-style">1:1 문의</div>
+                            <img src="/images/icon/small_arrow.svg">
+                        </a>  
+                        <a onclick="withdrawal()" class="private-list-item">
+                            <div class="private-list-font-style">계정 비활성화</div>
+                            <img src="/images/icon/small_arrow.svg">
+                        </a>  
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                        <div class="card-body">
-                            <a href="profile_edit.html">프로필 편집</a>
-                        </div>
-                    </div>
+                <div class="horizon"></div>
+                <div class="user-logout-wrap">
+                    <a class="private-list-item">
+                        <div onclick="logout()" class="private-list-font-style">로그아웃</div>
+                        <img src="/images/icon/small_arrow.svg">
+                    </a>
                 </div>
             </div>
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                        <div class="card-body">
-                            <a onclick="confirm_kakao_user_edit()">회원정보 수정</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                        <div class="card-body">
-                            <a onclick="confirm_kakao_change_password()">비밀번호 변경</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                        <div class="card-body">
-                            <a href="user_ip_log.html">로그인 기록 확인</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                        <div class="card-body">
-                            <a onclick="resend_email()">이메일 재인증</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                        <div class="card-body">
-                            <a onclick="Report()">1:1 문의</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                        <div class="card-body">
-                            <a onclick="withdrawal()">계정 비활성화</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                        <div class="card-body">
-                            <a onclick="logout()">로그아웃</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         </div>
         <div id="deacctive_user">
-            <div class="container" id='my-review' style="display: block;">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                            <div class="card-body">
-                                <a href="login.html">로그인 하러기기</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                            <div class="card-body">
-                                <a href="signup.html">회원가입 하러가기</a>
-                            </div>
-                        </div>
-                    </div>
+            <div id='my-review' style="display: block;">
+                <div class="user-logout-wrap">
+                    <a href="login.html" class="private-list-item">
+                        <div onclick="logout()" class="private-list-font-style">로그인</div>
+                        <img src="/images/icon/small_arrow.svg">
+                    </a>
+                    <a href="signup.html" class="private-list-item">
+                        <div onclick="logout()" class="private-list-font-style">회원가입</div>
+                        <img src="/images/icon/small_arrow.svg">
+                    </a>
                 </div>
             </div>
-            </div>
-    <!--메인 끝-->  
+        </div>
+        
+        
     </div>
+    <!--메인 끝-->  
+
     <!--네비바-->
     <div class="nav-wrap"> 
         <div>     
@@ -173,10 +145,8 @@
             </nav>
         </div>  
     </div>
+    <!--네비바 끝-->
     <script src="static/js/base_api.js"></script>
     <script src="static/js/private_profile_api.js"></script>
-    <!--네비바 끝-->
-
 </body>
-
 </html>

@@ -10,8 +10,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
+    <!--타이틀 로고-->
+    <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
     <title>후기 상세 페이지</title>
     <link rel="stylesheet" href="/style/css/review_detail.css">
+    <link rel="stylesheet" href="/style/css/modal.css">
     <style>
 
     </style>
@@ -28,14 +31,26 @@
     </div>
 
     <div id="report-modal">
-        <h4>신고하기</h4>
-        <h4>닫기</h4>
+        <select id="review_report_category" >
+            <option value="욕설이 들어갔어요.">욕설이 들어갔어요.</option>
+            <option value="성적인 발언이 들어갔어요.">성적인 발언이 들어갔어요.</option>
+            <option value="정치적 요소가 들어갔어요.">정치적 요소가 들어갔어요.</option>
+            <option value="관계 없는 내용이예요.">관계 없는 내용이예요.</option>
+            <option value="도배된 내용이예요.">도배된 내용이예요.</option>
+            <option value="광고성이 포함된 글이예요.">광고성이 포함된 글이예요.</option>
+            <option value="기타">기타</option>
+        </select>
+        <textarea id="review_report_content" placeholder="내용을 입력해주세요."></textarea>
+        <div class="report-buttons">
+            <button id="exit-report" class="edit-button">닫기</button>
+            <button id="report-button" class="edit-button" onclick="post_review_report()">신고하기</button>
+        </div>
     </div>
 
     <div class="header">
         <div>
             <a href="javascript:history.back();"><img id="back" src="/images/icon/back.svg"></a>
-            <h3>가게 이름</h3>
+            <a id="title-link"><h3>가게 이름</h3></a>
             <button onclick="openModal()"><img class="modal-icon"
                     src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png"></button>
         </div>
@@ -80,7 +95,7 @@
             <div class="review-time">
                 <p></p>
             </div>
-            <div class="comment-cnt">댓글 <sapn id="comment-count"></sapn> <img
+            <div class="comment-cnt"><span id="report-button-text">신고하기</span> 댓글 <sapn id="comment-count"></sapn> <img
                     src="https://cdn-icons-png.flaticon.com/512/2107/2107952.png"> <span id="like-count"></span></div>
         </div>
         <!--내용 끝-->

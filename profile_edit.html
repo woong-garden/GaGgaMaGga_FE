@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/css/user_base.css">
     <link rel="stylesheet" href="style/css/user.css">
+    <!--타이틀 로고-->
+    <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
     <title>프로필 편집</title>
 </head>
 <body>
@@ -18,8 +20,9 @@
             <div>
                 <h3>프로필 편집</h3>
             </div>
-            <div> 
-            </div> 
+            <div>
+                <div style="width:38px; height:38px; margin-top:2%;"></div>
+            </div>
         </div>          
     </div>
     <!--헤더 끝-->
@@ -29,9 +32,12 @@
         <div class="root_block"></div>
         <!--여기사용하시면 됩니다~-->
         <div id="input-box">
+            <div class="profile-img-wrap">
+                <img id="preview" src="/images/default_profile_pic.jpg">
+            </div>
             <h5>프로필 편집</h5>
-            <input type="file" id="profile_image">
-            <input type="text" id="nickname" placeholder="3자이상 10자이하로 닉네임을 입력해주세요.">
+            <input style="border-radius:8px;" type="file" id="profile_image" onchange="readURL(this);">
+            <input style="border-radius:8px;" type="text" id="nickname" placeholder="3자이상 10자이하로 닉네임을 입력해주세요.">
             <textarea id="intro" cols="50" rows="5" placeholder="자기소개를 입력해주세요."></textarea>
             <div class="alert alert-danger" style="font-size:15px" id="alert-danger"></div>
 
@@ -52,6 +58,20 @@
             </nav>
         </div>  
     </div>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                document.getElementById('preview').src = "";
+            }
+        }
+    
+    </script>
     <script src="static/js/base_api.js"></script>
     <script src="static/js/profile_edit_api.js"></script>
 </body>

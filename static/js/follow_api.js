@@ -1,8 +1,77 @@
+
+
+
 const getnickname = location.href.split('=')[1].split('?')[0]
 const user_nickname = decodeURI(getnickname)
 console.log(user_nickname)
 const getvalue = location.href.split('=')[2]
 const follow_value = decodeURI(getvalue)
+
+const payload = localStorage.getItem("payload");
+const payload_parse = JSON.parse(payload);
+
+
+
+
+
+
+
+
+// 알람 
+console.log(payload_parse.user_id)
+const notificationSocket = new WebSocket(
+    'ws://'
+    + "127.0.0.1:8000"
+    + '/ws/notification/'
+    + payload_parse.user_id
+    + '/'
+);
+
+notificationSocket.onmessage = async function (e) {
+    const data = JSON.parse(e.data);
+    const alarmBox = document.querySelector('.alarm')
+
+
+        const alarmContent = document.createElement('div')
+        alarmContent.style.display = "flex"
+        alarmContent.style.height = "10vh"
+        alarmContent.innerHTML = data.message
+        alarmBox.appendChild(alarmContent)
+
+
+    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
+        headers: {
+            "authorization": "Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET'
+    })
+    .then(response => response.json())
+
+    const notificationButton = document.createElement('button')
+    const notificationButtonText = document.createTextNode('확인')
+    notificationButton.appendChild(notificationButtonText)
+    notificationButton.onclick = async function () {
+        await fetch(`http://127.0.0.1:8000/notification/alarm/${response[0].id}/`, {
+            headers: {
+                'content-type': 'application/json',
+                "authorization": "Bearer " + localStorage.getItem("access")
+            },
+            method: 'PUT',
+            body: ''
+        })
+        alarmBox.innerHTML = ""
+        getNotification()
+    }
+    alarmContent.appendChild(notificationButton)
+
+    alarmBox.appendChild(alarmContent)
+};
+
+notificationSocket.onclose = function (e) {
+    console.error('소켓이 닫혔어요 ㅜㅜ');
+};
+
+
 
 console.log(follow_value)
 function followershow(){
@@ -41,12 +110,12 @@ async function follow() {
             `
             <div class="profile">
                 <div class = "img">
-                    <a onclick="move_user_profile('${item.nickname}')">
+                    <a class="user-item" onclick="move_user_profile('${item.nickname}')">
                     <img id="porfile-img" src ="${backendBaseUrl}${item.profile_image}" alt="프로필 사진" >
                     </a>
                 </div>
                 <div style="width: 77%;">
-                    <a onclick="move_user_profile('${item.nickname}')">${item.nickname}</a>
+                    <a class="user-item" onclick="move_user_profile('${item.nickname}')">${item.nickname}</a>
                 </div>
             </div>
             `
@@ -59,12 +128,12 @@ async function follow() {
             `
             <div class="profile">
                 <div class = "img">
-                    <a onclick="move_user_profile('${item.nickname}')">
+                    <a class="user-item" onclick="move_user_profile('${item.nickname}')">
                     <img id="porfile-img" src ="${backendBaseUrl}${item.profile_image}" alt="프로필 사진" >
                     </a>
                 </div>
                 <div style="width: 77%;">
-                    <a onclick="move_user_profile('${item.nickname}')">${item.nickname}</a>
+                    <a class="user-item" onclick="move_user_profile('${item.nickname}')">${item.nickname}</a>
                 </div>
             </div>
             `

@@ -8,15 +8,28 @@
     <!--폰트-->
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
+    <!--타이틀 로고-->
+    <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
+
     <!--css-->
     <link rel="stylesheet" href="./style/css/private_profile.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/css/modal.css">
 
+    <script src="static/js/notification_api.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <title>로그인 ip 접속 기록</title>
 </head>
 <body style="background-color: #FFFAE7">
+
+    <div id="modal-box">
+        <div id="modal-body">
+            <div class="alarm">
+            </div>
+            <button id="close-modal" onclick="closeModal()">닫기</button>
+        </div>
+    </div>
     <!--헤더 시작-->
     <div class="header">
         <div>
@@ -24,7 +37,7 @@
                 <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
             </div> 
             <div> 
-                <a><img style="margin-left:8px;" src="/images/icon/bell.svg"></a>
+                <a><img style="margin-left:8px; cursor: pointer;" onclick="openModal()" src="/images/icon/bell.svg"></a>
             </div> 
         </div>          
     </div>
@@ -35,15 +48,15 @@
         <div class="root_block"></div>
         <!-- profile 정보 -->
         <div class="profile">
-            <div class="card mb-3" style="max-width: 540px; border-radius: 0;">
-                <div class="row g-0" style="align-items: center;">
-                    <div class="col-md-8">
+            <div style="max-width: 540px; border-radius: 0;padding:14px 14px 0px 14px;">
+                <div style="align-items: center;">
+                    <div>
                         최근 접속 ip 10건만 보여줍니다.
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container" id='my-review' style="display: block;">
+        <div class="container" id='my-review' style="display: block; padding:14px 14px 50px 14px;">
         </div>
     <!--메인 끝-->  
     </div>

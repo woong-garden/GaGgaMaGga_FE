@@ -15,15 +15,24 @@
     <!--css-->
     <link rel="stylesheet" href="./style/css/place.css">
     <link rel="stylesheet" href="./style/css/index.css">
+    <link rel="stylesheet" href="/style/css/modal.css">
 
     <!--jquery-->
     <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-
+    <!--타이틀 로고-->
+    <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
     <title>Document</title>
 
 </head>
 
 <body>
+    <div id="modal-box">
+        <div id="modal-body">
+            <div class="alarm">
+            </div>
+            <button id="close-modal" onclick="closeModal()">닫기</button>
+        </div>
+    </div>
     <!--헤더 시작-->
     <div class="header">
         <div>
@@ -35,7 +44,7 @@
                 <input type="text" style="display:none;"/>
                 <input class="search_input" type="text" placeholder="지역, 카페, 맛집명 검색"id="search" onkeypress="enterkey()">
             </form>
-            <img style="margin-left:8px;" src="./images/icon/bell.svg">
+            <img onclick="openModal()" style="cursor: pointer;;margin-left:8px;" src="./images/icon/bell.svg">
         </div>
     </div>
     <!--헤더 끝-->
@@ -53,7 +62,6 @@
                 </div>
             </section>
             <div id="index-selectbox"></div>
-
         </div>
     </div>
     <!--메인 끝-->
@@ -64,7 +72,7 @@
             <nav class="nav-bar">
                 <a href="index.html"><img src="/images/icon/click_home.svg"></a>
                 <a href="search.html"><img src="/images/icon/nav_search.svg"></a>
-                <a href="best_review_list.html"><img style="width:27px; aspect-ratio: 1/1;" src="https://cdn-icons-png.flaticon.com/512/126/126473.png"></a>
+                <a onclick="move_best_review_page(1, 1)"><img style="width:27px; aspect-ratio: 1/1;" src="https://cdn-icons-png.flaticon.com/512/126/126473.png"></a>
                 <a onclick="move_profile_page()"><img src="/images/icon/profile.svg"></a>
                 <a href="private_profile.html"><img src="/images/icon/setting.svg"></a>
             </nav>
@@ -75,6 +83,7 @@
     <script src="static/js/base_api.js"></script>
     <script src="static/js/index_api.js"></script>
     <script src="static/js/search_api.js"></script>
+    <script src="static/js/notification_api.js"></script>
 </body>
 
 </html>

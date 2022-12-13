@@ -1,5 +1,7 @@
 const getnickname = location.href.split('=')[1]
 const user_nickname = decodeURI(getnickname)
+const payload = localStorage.getItem("payload");
+const payload_parse = JSON.parse(payload);
 
 if(localStorage.getItem("access")){
     public_profile()
@@ -7,6 +9,63 @@ if(localStorage.getItem("access")){
     alert("로그인 후 이용해주세요")
     location.replace("login.html")
 }
+
+
+
+// 알람 
+console.log(payload_parse.user_id)
+const notificationSocket = new WebSocket(
+    'ws://'
+    + "127.0.0.1:8000"
+    + '/ws/notification/'
+    + payload_parse.user_id
+    + '/'
+);
+
+notificationSocket.onmessage = async function (e) {
+    const data = JSON.parse(e.data);
+    const alarmBox = document.querySelector('.alarm')
+
+
+        const alarmContent = document.createElement('div')
+        alarmContent.style.display = "flex"
+        alarmContent.style.height = "10vh"
+        alarmContent.innerHTML = data.message
+        alarmBox.appendChild(alarmContent)
+
+
+    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
+        headers: {
+            "authorization": "Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET'
+    })
+    .then(response => response.json())
+
+    const notificationButton = document.createElement('button')
+    const notificationButtonText = document.createTextNode('확인')
+    notificationButton.appendChild(notificationButtonText)
+    notificationButton.onclick = async function () {
+        await fetch(`http://127.0.0.1:8000/notification/alarm/${response[0].id}/`, {
+            headers: {
+                'content-type': 'application/json',
+                "authorization": "Bearer " + localStorage.getItem("access")
+            },
+            method: 'PUT',
+            body: ''
+        })
+        alarmBox.innerHTML = ""
+        getNotification()
+    }
+    alarmContent.appendChild(notificationButton)
+
+    alarmBox.appendChild(alarmContent)
+};
+
+notificationSocket.onclose = function (e) {
+    console.error('소켓이 닫혔어요 ㅜㅜ');
+};
+
 
 // 공개프로필
 async function public_profile() {
@@ -21,7 +80,6 @@ async function public_profile() {
 
 
     response_json = await response.json()
-    console.log(response_json)
 
 
     // 프로필
@@ -64,6 +122,7 @@ async function public_profile() {
     // 후기
     if(response_json.review_set.length){
         response_json.review_set.forEach(item => {
+
         if(my_id == profile_id){
             $('#my-review').append(
                 `

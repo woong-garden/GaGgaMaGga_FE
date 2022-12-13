@@ -14,16 +14,28 @@
 
     <!--css-->
     <link rel="stylesheet" href="./style/css/review_create.css">
+    <link rel="stylesheet" href="/style/css/modal.css">
 
+    <script src="static/js/notification_api.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="static/js/review_create.js"></script>
+    <!--타이틀 로고-->
+    <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
 
-    <title>Document</title>
+    <title>review-Update</title>
 
 
 </head>
 
 <body>
+    <div id="modal-box">
+        <div id="modal-body">
+            <div class="alarm">
+            </div>
+            <button id="close-modal" onclick="closeModal()">닫기</button>
+        </div>
+    </div>
+
     <!--헤더 시작-->
     <div class="header">
         <div>
@@ -31,7 +43,7 @@
                 <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
             </div>
             <div>
-                <a><img style="margin-left:8px;" src="/images/icon/bell.svg"></a>
+                <a><img style="margin-left:8px; cursor: pointer;" onclick="openModal()" src="/images/icon/bell.svg"></a>
             </div>
         </div>
     </div>
@@ -89,11 +101,11 @@
             <div id="star">
                 <fieldset>
                     <legend>별점을 선택해 주세요</legend>
-                    <input id="rate5" value="5" type="radio" name="rating5" ><label for="rate5">⭐️</label>
-                    <input id="rate4" value="4" type="radio" name="rating4" ><label for="rate4">⭐️</label>
-                    <input id="rate3" value="3" type="radio" name="rating3" ><label for="rate3">⭐️</label>
-                    <input id="rate2" value="2" type="radio" name="rating2" ><label for="rate2">⭐️</label>
-                    <input id="rate1" value="1" type="radio" name="rating1" ><label for="rate1">⭐️</label>
+                    <input id="rate5" value="5" type="radio" name="rating" ><label for="rate5">⭐️</label>
+                    <input id="rate4" value="4" type="radio" name="rating" ><label for="rate4">⭐️</label>
+                    <input id="rate3" value="3" type="radio" name="rating" ><label for="rate3">⭐️</label>
+                    <input id="rate2" value="2" type="radio" name="rating" ><label for="rate2">⭐️</label>
+                    <input id="rate1" value="1" type="radio" name="rating" ><label for="rate1">⭐️</label>
                 </fieldset>
             </div>
             <!-- 별점 끝 -->

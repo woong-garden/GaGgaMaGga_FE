@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/css/user_base.css">
     <link rel="stylesheet" href="style/css/user.css">
+    <!--타이틀 로고-->
+    <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
     <title>아이디 찾기</title>
 </head>
 <body>
@@ -18,7 +20,8 @@
             <div>
                 <h3>아이디 찾기</h3>
             </div>
-            <div> 
+            <div>
+                <div style="width:38px; height:38px; margin-top:2%;"></div> 
             </div> 
         </div>          
     </div>
@@ -38,8 +41,14 @@
             <div id="buttons">
                 <button onclick="auth_number_confirm()" class="button login" >확인</button>
                 <div id="find">
-                    <a style="font-size:15px;" onclick="to_signup()">회원가입하러 가기<img src="./images/icon/small_arrow.svg"></a>
-                    <a style="font-size:15px;" onclick="to_login()">로그인하러 가기<img src="./images/icon/small_arrow.svg"></a>
+                    <a class="user-move-page" onclick="to_signup()">
+                        <div>회원가입하러 가기</div>
+                        <img src="./images/icon/small_arrow.svg">
+                    </a>
+                    <a class="user-move-page" onclick="to_login()">
+                        로그인하러 가기
+                        <img src="./images/icon/small_arrow.svg">
+                    </a>
                 </div>
             </div>
             </div>

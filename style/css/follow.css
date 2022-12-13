@@ -20,7 +20,7 @@ body{
     background-color: white;
     transform: translate(-50%, 0%);
     overflow: auto;
-    border: solid 1px rgba(219, 219, 219, 1);
+    box-shadow: 0 0 20px rgb(0 0 0 / 5%);
 }
 .root_block{
     margin-top:48px;
@@ -65,7 +65,9 @@ body{
     width: 100%;
     padding-top: 3px;
 }
-
+.user-item{
+    cursor: pointer;
+}
 .nav-wrap{
     position: fixed;
     width:100%;
@@ -74,7 +76,8 @@ body{
 }
 .nav-bar{
     background-color: #ffffff;
-    border-top: 0.1px solid rgb(196, 196, 196);
+    /* border-top: 0.1px solid rgb(196, 196, 196); */
+    box-shadow: 0 0 20px rgb(0 0 0 / 5%);
     height: 48px;
     box-sizing: border-box;
     display: flex;
@@ -145,7 +148,10 @@ body{
     width: 50%;
     height: 100%;
     border:  0.5px solid #c4c4c4;
-    float: left;  
+    float: left;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;  
 }
 
 .profile{
