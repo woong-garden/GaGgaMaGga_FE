@@ -2,8 +2,15 @@
 window.onload = function () {
     const storage = localStorage.getItem("payload");
     if (storage) {
-        const cate_id = location.href.split('=')[1].split('/')[0]
-        UserPlaceListView(cate_id, 1)
+        const str_payload = JSON.parse(storage)
+        if (str_payload.review_cnt != 0) {
+            const cate_id = location.href.split('=')[1].split('/')[0]
+            UserPlaceListView(cate_id, 1)
+        } else {
+            const place_id = location.href.split('=')[1].split('&')[0]
+            const category = location.href.split('=')[2].split('/')[0]
+            NewUserPlaceListView(place_id, category, 1)
+        }
     } else {
         const place_id = location.href.split('=')[1].split('&')[0]
         const category = location.href.split('=')[2].split('/')[0]
@@ -12,20 +19,40 @@ window.onload = function () {
 }
 
 
-// modal
+//delete_button
+function ActiveDeleteButton(id) {
+    document.getElementById(`delete_place${id}`).style.display ="inline-block"
+}
+
+// 지도 modal
 function popOpen(id) {
     var modalPop = $('#modal-wrap' + String(id));
     var modalBg = $('#modal-bg' + String(id));
     $(modalPop).show();
     $(modalBg).show();
 }
-
 function popClose(id) {
     var modalPop = $('#modal-wrap' + String(id));
     var modalBg = $('#modal-bg' + String(id));
     $(modalPop).hide();
     $(modalBg).hide();
 }
+
+// 삭제버튼 modal
+function DltPopOpen(id) {
+    var modalPop = $('#dlt-modal-wrap' + String(id));
+    var modalBg = $('#dlt-modal-bg' + String(id));
+    $(modalPop).show();
+    $(modalBg).show();
+}
+function DltPopClose(id) {
+    var modalPop = $('#dlt-modal-wrap' + String(id));
+    var modalBg = $('#dlt-modal-bg' + String(id));
+    $(modalPop).hide();
+    $(modalBg).hide();
+}
+
+
 
 //select
 async function NewUserPlaceListView(place_id, category, page) {
@@ -37,6 +64,8 @@ async function NewUserPlaceListView(place_id, category, page) {
     })
     response_json = await response.json()
     console.log(response_json)
+    const storage = localStorage.getItem("payload");
+    const str_payload = JSON.parse(storage)
 
     // 페이지네이션
     const page_no = response_json.next.split('=')[1].split('/')[0]
@@ -114,19 +143,17 @@ async function NewUserPlaceListView(place_id, category, page) {
             <table cellpadding="0" cellspacing="0" border="0">
                 <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
                 <td width="70%">
-                    <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
+                <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                     <div>${item.place_address}</div>
-                    <div>☎${item.place_number}</div>
+                    <div style="display:inline-block;">☎${item.place_number}</div>
                     <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
-                    <a href="#" onclick="move_place_detail_page(${item.id})"><div class="market_detail_button">상세보기</div></a>
-                </td>
+                    <a href="#" class="btn-open" onClick="javascript:DltPopOpen(${item.id});"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
+                    </td>
                 <td width="10%">${item.rating}</td>
             </table>
             
             <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
             <div class="modal-wrap" id="modal-wrap${item.id}">
-                
-                
                 <div class="modal_contents">
                     <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
                     <a href="#"><div class="modal_close" onClick="javascript:popClose(${item.id});">Close</div></a>
@@ -139,11 +166,31 @@ async function NewUserPlaceListView(place_id, category, page) {
                 </div>
                     <div class="modal_map" id="map${item.id}">
                 </div>
-                
+            </div>
+
+            <div class="dlt-modal-bg" id="dlt-modal-bg${item.id}"onClick="javascript:DltPopClose(${item.id});"></div>
+            <div class="dlt-modal-wrap" id="dlt-modal-wrap${item.id}">
+                <div class="dlt_modal_contents">
+                    <p style="font-size:25px;">정말 삭제하시겠습니까?</p>
+                    <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
+                    <hr>
+                    <img src="${item.place_img}" style='width:300px;height:180px;')>
+                    <div style="text-align:center;">
+                        <a href="#"><div class="modal_close" onClick="DeletePlaceView(${item.id})">Delete</div></a>
+                        <a href="#"><div class="modal_close" onClick="javascript:DltPopClose(${item.id});">Close</div></a>
+                    </div>
+
+                </div>
             </div>
 
             `
         )
+        // 장소 삭제 버튼 생성
+        if (storage) {
+            if (str_payload.is_admin) {
+                ActiveDeleteButton(`${item.id}`)
+            }
+        }
 
         //지도 API
         var mapOptions = {
@@ -193,6 +240,7 @@ async function NewUserPlaceListView(place_id, category, page) {
             }
         });
     })
+    
 }
 
 function move_list_page(cate_id) {
@@ -208,6 +256,8 @@ async function UserPlaceListView(cate_id, page) {
         }
     })
     response_json = await response.json()
+    const storage = localStorage.getItem("payload");
+    const str_payload = JSON.parse(storage)
 
     console.log(response_json)
     // 페이지네이션
@@ -288,25 +338,20 @@ async function UserPlaceListView(cate_id, page) {
             `<table cellpadding="0" cellspacing="0" border="0">
             <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
             <td width="70%">
-                <a href="#" onclick="move_place_detail_page(${item.id})"><div style="font-size:15px;">[${item.category}] ${item.place_name}</div></a>
+                <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                 <div>${item.place_address}</div>
-                <div>☎${item.place_number}</div>
-                <div>${item.place_time}</div>
+                <div style="display:inline-block;">☎${item.place_number}</div>
                 <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
-                <a href="#" onclick="move_place_detail_page(${item.id})"><div class="market_detail_button">상세보기</div></a>
-            </td>
+                <a href="#" class="btn-open" onClick="javascript:DltPopOpen(${item.id});"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
             <td width="10%">${item.rating}</td>
         </table>
         
         <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
         <div class="modal-wrap" id="modal-wrap${item.id}">
-            
-            
             <div class="modal_contents">
                 <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
                 <a href="#"><div class="modal_close" onClick="javascript:popClose(${item.id});">Close</div></a>
                 <hr>
-                
                 <img src="${item.place_img}" style='width:300px;height:180px;')>
                 <p style="font-size:15px;">주소 : ${item.place_address}</p>
                 <p style="font-size:15px;">전화번호 : ☎ ${item.place_number}</p>
@@ -314,11 +359,30 @@ async function UserPlaceListView(cate_id, page) {
             </div>
                 <div class="modal_map" id="map${item.id}">
             </div>
-            
+        </div>
+
+        <div class="dlt-modal-bg" id="dlt-modal-bg${item.id}"onClick="javascript:DltPopClose(${item.id});"></div>
+        <div class="dlt-modal-wrap" id="dlt-modal-wrap${item.id}">
+            <div class="dlt_modal_contents">
+                <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
+                <a href="#"><div class="modal_close" onClick="javascript:popClose(${item.id});">Close</div></a>
+                <hr>
+                <img src="${item.place_img}" style='width:300px;height:180px;')>
+                <p style="font-size:15px;">정말 해당 장소를 삭제하시겠습니까?</p>
+
+            </div>
+                <div class="modal_map" id="map${item.id}">
+            </div>
         </div>
                 
             `
         )
+
+        // 장소 삭제 버튼 생성
+        if (str_payload.is_admin) {
+            ActiveDeleteButton(`${item.id}`)
+        }
+        
         //지도 API
         var mapOptions = {
             center: new naver.maps.LatLng(`${item.latitude}`, `${item.longitude}`),
@@ -367,10 +431,20 @@ async function UserPlaceListView(cate_id, page) {
             }
         });
     })
+    
 }
 
 
 function move_place_detail_page(place_id){
     window.location.href = `/place_detail.html?id=${place_id}`
+}
 
+async function DeletePlaceView(place_id) {
+    const response = await fetch(`http://127.0.0.1:8000/places/${place_id}/`, {
+        method: 'DELETE',
+        headers: {
+            "authorization": "Bearer " + localStorage.getItem("access")
+        },
+    })
+    location.reload(true);
 }

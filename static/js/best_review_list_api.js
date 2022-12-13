@@ -1,23 +1,120 @@
+window.onload = function () {
+    console.log("로드 완료")
+    const choice = location.href.split('=')[2]
+    console.log(choice)
+    if (choice == 1){ 
+        console.log("좋아요")
+        BestLikeSort(1)
+    } else {
+        console.log("최신")
+        recentSort(1)
+    }
+}
 
 
-async function BestLikeSort(){
-    const response = await fetch(`http://127.0.0.1:8000/reviews/review-rank/`,{
+
+function like_rank_show(){
+    move_best_review_page(1, 1)
+}
+
+function views_rank_show(){
+    move_best_review_page(1,0)
+}
+
+
+
+
+
+async function BestLikeSort(page){
+    document.getElementById("like-rank").style.display ='block';
+    document.getElementById("recent-rank").style.display ='none';
+
+    document.getElementById("sort-like-button").style.color = "#FF792A";
+    document.getElementById("sort-recent-button").style.color = "#9b9b9b";
+
+    const response = await fetch(`http://127.0.0.1:8000/reviews/review_rank/?page=${page}`,{
         method:'GET',
         headers: {
             Accept: "application/json",
             "Content-type": "application/json",
-            // "Authorization": "Bearer " + localStorage.getItem("access")
             }
         }
     )
     response_json = await response.json()
-
-    const rank_cnt = document.getElementById("rank-cnt")
-    // rank_cnt.innerText = response_json.like_count_review.length
     console.log(response_json)
-
+    const rank_cnt = document.getElementById("rank-cnt")
+    rank_cnt.innerText = response_json.like_count_review.count
+    
+    // 페이지네이션
+    const page_no = response_json.like_count_review.next.split('=')[1].split('/')[0]
+    const last_page_no = parseInt(response_json.like_count_review.count/10)
+    if (page_no-1 == 1) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            <a href="#"><div onclick="BestLikeSort(${page_no})">${page_no}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="BestLikeSort(${last_page_no})">${last_page_no}</div></a>
+            >
+        `
+    )
+    } else if (page_no-1 == 2)  {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="BestLikeSort(1)">1</div></a>
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            <a href="#"><div onclick="BestLikeSort(${page_no})">${page_no}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="BestLikeSort(${last_page_no})">${last_page_no}</div></a>
+            >
+        `)
+    }else if (page_no-1 == last_page_no) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="BestLikeSort(1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="BestLikeSort(${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            >
+        `
+    )
+    } else if (page_no-1 == last_page_no-1) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="BestLikeSort(1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="BestLikeSort(${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            <a href="#"><div onclick="BestLikeSort(${last_page_no})">${last_page_no}</div></a>
+            >
+        `)
+    }else {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="BestLikeSort(1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="BestLikeSort(${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            <a href="#"><div onclick="BestLikeSort(${page_no})">${page_no}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="BestLikeSort(${last_page_no})">${last_page_no}</div></a>
+            >
+        `
+    )
+    }
+    $('#like-rank').empty()
     response_json.like_count_review.results.forEach(item => {
-        console.log(item)
+        
         $('#like-rank').append(
             `
             <div class="review-list">
@@ -52,22 +149,98 @@ async function BestLikeSort(){
     })
 
 }
-BestLikeSort()
 
 
-async function recentSort(){
-    const response = await fetch(`http://127.0.0.1:8000/reviews/review-rank/`,{
+async function recentSort(page){
+    document.getElementById("like-rank").style.display ='none';
+    document.getElementById("recent-rank").style.display ='block';
+
+    document.getElementById("sort-like-button").style.color = "#9b9b9b";
+    document.getElementById("sort-recent-button").style.color = "#FF792A";
+
+    const response = await fetch(`http://127.0.0.1:8000/reviews/review_rank/?page=${page}`,{
         method:'GET',
         headers: {
             Accept: "application/json",
             "Content-type": "application/json",
-            // "Authorization": "Bearer " + localStorage.getItem("access")
             }
         }
     )
     response_json = await response.json()
-
+    console.log(response_json)
+    const rank_cnt = document.getElementById("rank-cnt")
+    rank_cnt.innerText = response_json.recent_review.count
+    
+    // 페이지네이션
+    const page_no = response_json.recent_review.next.split('=')[1].split('/')[0]
+    const last_page_no = parseInt(response_json.recent_review.count/10)
+    if (page_no-1 == 1) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            <a href="#"><div onclick="recentSort(${page_no})">${page_no}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="recentSort(${last_page_no})">${last_page_no}</div></a>
+            >
+        `
+    )
+    } else if (page_no-1 == 2)  {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="recentSort(1)">1</div></a>
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            <a href="#"><div onclick="recentSort(${page_no})">${page_no}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="recentSort(${last_page_no})">${last_page_no}</div></a>
+            >
+        `)
+    }else if (page_no-1 == last_page_no) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="recentSort(1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="recentSort(${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            >
+        `
+    )
+    } else if (page_no-1 == last_page_no-1) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="recentSort(1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="recentSort(${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            <a href="#"><div onclick="recentSort(${last_page_no})">${last_page_no}</div></a>
+            >
+        `)
+    }else {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="recentSort(1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="recentSort(${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div class="current_page">${page_no-1}</div></a>
+            <a href="#"><div onclick="recentSort(${page_no})">${page_no}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="recentSort(${last_page_no})">${last_page_no}</div></a>
+            >
+        `
+    )
+    }
+    $('#recent-rank').empty()
     response_json.recent_review.results.forEach(item => {
+        
         $('#recent-rank').append(
             `
             <div class="review-list">
@@ -102,7 +275,7 @@ async function recentSort(){
     })
 
 }
-recentSort()
+
 
 
 function move_review_detail_page(review_id,place_id, author_id){
