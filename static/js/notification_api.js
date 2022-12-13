@@ -1,3 +1,15 @@
+// 모달창 열기
+function openModal() {
+    const modalBox = document.querySelector('#modal-box')
+    modalBox.style.display = "block"
+}
+
+
+// 모달창 닫기
+function closeModal() {
+    const modalBox = document.querySelector('#modal-box')
+    modalBox.style.display = "none"
+}
 
 
 getNotification()
