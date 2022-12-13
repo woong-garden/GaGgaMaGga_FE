@@ -1,5 +1,7 @@
 const getnickname = location.href.split('=')[1]
 const user_nickname = decodeURI(getnickname)
+const payload = localStorage.getItem("payload");
+const payload_parse = JSON.parse(payload);
 
 if(localStorage.getItem("access")){
     public_profile()
@@ -7,6 +9,63 @@ if(localStorage.getItem("access")){
     alert("로그인 후 이용해주세요")
     location.replace("login.html")
 }
+
+
+
+// 알람 
+console.log(payload_parse.user_id)
+const notificationSocket = new WebSocket(
+    'ws://'
+    + "127.0.0.1:8000"
+    + '/ws/notification/'
+    + payload_parse.user_id
+    + '/'
+);
+
+notificationSocket.onmessage = async function (e) {
+    const data = JSON.parse(e.data);
+    const alarmBox = document.querySelector('.alarm')
+
+
+        const alarmContent = document.createElement('div')
+        alarmContent.style.display = "flex"
+        alarmContent.style.height = "10vh"
+        alarmContent.innerHTML = data.message
+        alarmBox.appendChild(alarmContent)
+
+
+    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
+        headers: {
+            "authorization": "Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET'
+    })
+    .then(response => response.json())
+
+    const notificationButton = document.createElement('button')
+    const notificationButtonText = document.createTextNode('확인')
+    notificationButton.appendChild(notificationButtonText)
+    notificationButton.onclick = async function () {
+        await fetch(`http://127.0.0.1:8000/notification/alarm/${response[0].id}/`, {
+            headers: {
+                'content-type': 'application/json',
+                "authorization": "Bearer " + localStorage.getItem("access")
+            },
+            method: 'PUT',
+            body: ''
+        })
+        alarmBox.innerHTML = ""
+        getNotification()
+    }
+    alarmContent.appendChild(notificationButton)
+
+    alarmBox.appendChild(alarmContent)
+};
+
+notificationSocket.onclose = function (e) {
+    console.error('소켓이 닫혔어요 ㅜㅜ');
+};
+
 
 // 공개프로필
 async function public_profile() {
@@ -16,7 +75,8 @@ async function public_profile() {
             Accept: "application/json",
             "Content-type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("access"),
-        }})
+        }
+    })
 
 
     response_json = await response.json()
@@ -40,59 +100,8 @@ async function public_profile() {
 
     var my_id = JSON.parse(localStorage.getItem(['payload'])).user_id
     var profile_id = response_json.user_id
+    console.log(my_id, profile_id)
 
-
-    // 후기
-    if(response_json.review_set.length){
-        response_json.review_set.forEach(item => {
-        $('#my-review').append(
-            `
-            <div class="review-box">
-                <div class="row" style="margin:0;">
-                    <div class="col-md-4" style="padding:0;">
-                        <img class="review-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
-                    </div>
-                    <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                        <div class="card-body">
-                            <h6 style="cursor:pointer;color:  #ffbf60;" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</h6>
-                            <p>평점&nbsp; ${item.rating_cnt} / 5</p>
-                            <div style="display:flex; width:50%;">`+
-                            (my_id == profile_id? '<button class="update-review" onclick="move_to_edit_page(${item.place_id}, ${item.id})">리뷰 수정</button> <button class="update-review" onclick="delete_review(${item.place_id}, ${item.id})">리뷰 삭제</button>':'')
-                        +`</div>
-                    </div>
-                </div>
-            </div>
-            `
-        )
-    });
-    }
-    
-    // 북마크
-    if(response_json.bookmark_place.length){
-        response_json.bookmark_place.forEach(item => {
-            console.log(item)
-                $('#my-bookmark').append(
-                    `
-                    <div class="review-box">
-                        <div class="row" style="margin:0;">
-                            <div class="col-md-4" style="padding:0;">
-                                <div class="content-img">
-                                    <img class="review-img" onclick="move_place_detail_page(${item.id})" alt="장소 사진" src="${item.place_img}">
-                                </div>
-                            </div>
-                            <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                                <div onclick="move_place_detail_page(${item.id})" style="padding: 1.25rem">
-                                    <h6 style="color : #ffbf60;">${item.place_name}</h6>
-                                    <p>평점&nbsp; ${item.rating} / 5</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    `
-                )
-            });
-    }
-    
     // 본인 프로필에서 팔로우 버튼 숨김
     if (profile_id == my_id){
         document.getElementById('user_follow').style.display ="none"
@@ -102,13 +111,94 @@ async function public_profile() {
     }
     // 팔로우 되어있을 때 버튼
     let follow_list = response_json.followers
-    for (const item of follow_list){
-        if (my_id==item.id){
+    for (var item of follow_list){
+        if (my_id == item.id){
+            console.log(my_id, item.id)
             document.getElementById("user_follow").innerHTML = "팔로우취소"
             document.getElementById("profile_followers").value = "0"
         }
-        
     }
+
+    // 후기
+    if(response_json.review_set.length){
+        response_json.review_set.forEach(item => {
+
+        if(my_id == profile_id){
+            $('#my-review').append(
+                `
+                <div style="padding: 20px 0 24px;border-bottom: 1px solid #DBDBDB;display: flex;">
+                    <div>
+                        <img style="object-fit: cover;width: 150px;height: 150px;cursor: pointer;" 
+                        onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
+                    </div>
+                    <div style="padding: 20px;">
+                        <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>
+                        <div>
+                            <img style="width: 14px;
+                            height: 14px;
+                            padding-right: 2px;" src="/images/icon/star.svg">
+                            <span style="font-size: 14px;
+                            font-weight: 700;">${item.rating_cnt}</span>
+                        </div>
+                        <button class="update-review" onclick="move_to_edit_page(${item.place_id},${item.id})">리뷰 수정</button> 
+                        <button class="update-review" onclick="delete_review(${item.place_id}, ${item.id})">리뷰 삭제</button>
+                    </div>
+                </div>
+                `
+            )
+
+        }else{
+            $('#my-review').append(
+                `
+                <div style="padding: 20px 0 24px;border-bottom: 1px solid #DBDBDB;display: flex;">
+                    <div>
+                        <img style="object-fit: cover;width: 150px;height: 150px;cursor: pointer;" 
+                        onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
+                    </div>
+                    <div style="padding: 20px;">
+                        <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>
+                        <div>
+                            <img style="width: 14px;
+                            height: 14px;
+                            padding-right: 2px;" src="/images/icon/star.svg">
+                            <span style="font-size: 14px;
+                            font-weight: 700;">${item.rating_cnt}</span>
+                        </div>
+                    </div>
+                </div>
+                `
+            )
+        }
+        
+    });
+    }
+    
+    // 북마크
+    if(response_json.bookmark_place.length){
+        response_json.bookmark_place.forEach(item => {
+            $('#my-bookmark').append(
+                `
+                <div style="padding: 20px 0 24px;border-bottom: 1px solid #DBDBDB;display: flex;">
+                    <div>
+                        <img style="object-fit: cover;width: 150px;height: 150px;cursor: pointer;" onclick="move_place_detail_page(${item.id})" alt="장소 사진" src="${item.place_img}">
+                    </div>
+                    <div style="padding: 20px;" onclick="move_place_detail_page(${item.id})">
+                        <div style="color:#ffbf60">${item.place_name}</div>
+                        <div>
+                            <img style="width: 14px;
+                            height: 14px;
+                            padding-right: 2px;" src="/images/icon/star.svg">
+                            <span style="font-size: 14px;
+                            font-weight: 700;">${item.rating}</span>
+                        </div>
+                    </div>
+                </div>
+                `
+            )
+        });
+    }
+    
+    
 }
 
 // 팔로우
@@ -143,10 +233,44 @@ function follow(){
 function reviewshow(){
     $('#my-review').show();
     $('#my-bookmark').hide();
+    $('.profile-button2').css({width:"100%",
+        padding: "14px",
+        cursor: "pointer",
+        border: "none",
+        backgroundColor: "transparent",
+        borderTop: "solid 2px #000",
+        borderLeft: "solid 1px #F1F1F1",
+        fontWeight: "700"
+    });
+    $('.profile-button').css({width:"100%",
+        padding: "14px",
+        cursor: "pointer",
+        border: "none",
+        backgroundColor: "transparent",
+        borderBottom: "solid 1px #F1F1F1"
+    });
+    
+
 }
 function bookmarkshow(){
     $('#my-review').hide();
     $('#my-bookmark').show();
+    $('.profile-button').css({width:"100%",
+        padding: "14px",
+        cursor: "pointer",
+        border: "none",
+        backgroundColor: "transparent",
+        borderTop: "solid 2px #000",
+        borderRight: "solid 1px #F1F1F1",
+        fontWeight: "700"
+    });
+    $('.profile-button2').css({width:"100%",
+        padding: "14px",
+        cursor: "pointer",
+        border: "none",
+        backgroundColor: "transparent",
+        borderBottom: "solid 1px #F1F1F1"
+    });
 }
 
 function move_follow_page(user_nickname){
@@ -170,6 +294,7 @@ function move_to_edit_page(place_id, review_id){
     window.location.href = `/review_update.html?place_id=${place_id}&review_id=${review_id}`
 }
 
+
 function delete_review(place_id, review_id){
     fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
         headers: {
@@ -178,5 +303,5 @@ function delete_review(place_id, review_id){
         method: 'DELETE',
     })
     public_profile()
-    document.querySelector('.profile-button').click()
+    document.querySelector('.profile-button2').click()
 }

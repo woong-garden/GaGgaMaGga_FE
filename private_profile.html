@@ -7,14 +7,27 @@
     <!--폰트-->
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-    <!--타이틀 로고-->
+
+    <!--css-->
+    <link rel="stylesheet" href="./style/css/private_profile.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/css/modal.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="static/js/notification_api.js"></script>
     <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
 
-    <title>Document</title>
-    <link rel="stylesheet" href="/style/css/private_profile.css">
-    
+    <title>개인 프로필 설정</title>
 </head>
-<body>
+<body style="background-color: #FFFAE7">
+    <div id="modal-box">
+        <div id="modal-body">
+            <div class="alarm">
+            </div>
+            <button id="close-modal" onclick="closeModal()">닫기</button>
+        </div>
+    </div>
+
+
     <!--헤더 시작-->
     <div class="header">
         <div>
@@ -23,7 +36,8 @@
             </div>
         
             <div> 
-                <a><img class="header-bell-icon" src="/images/icon/bell.svg"></a>
+                <a><img style="margin-left:8px; cursor: pointer;" onclick="openModal()" src="/images/icon/bell.svg"></a>
+
             </div> 
         </div>          
     </div>
