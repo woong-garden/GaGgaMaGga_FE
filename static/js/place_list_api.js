@@ -28,6 +28,10 @@ function popClose(id) {
     $(modalBg).hide();
 }
 
+function NewMoveListPage(place_id, category, page_no){ 
+    const cate = decodeURI(category)
+    window.location.href = `/place_list.html?$place=${place_id}&cate=${cate}&page_no=${page_no}/`
+}
 
 
 //select
@@ -39,6 +43,7 @@ async function NewUserPlaceListView(place_id, category, page) {
         }
     })
     response_json = await response.json()
+
     // 페이지네이션
     const page_no = response_json.next.split('=')[1].split('/')[0]
     const last_page_no = parseInt(response_json.count/10)
@@ -49,9 +54,9 @@ async function NewUserPlaceListView(place_id, category, page) {
         `
             <
             <a href="#"><div class="current_page">${page_no-1}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">끝</div></a>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${last_page_no})">끝</div></a>
             >
         `
     )
@@ -60,9 +65,9 @@ async function NewUserPlaceListView(place_id, category, page) {
         $('#pagenation').append(
         `
             <
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">처음</div></a>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', 1)">처음</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
             >
         `
@@ -72,13 +77,13 @@ async function NewUserPlaceListView(place_id, category, page) {
         $('#pagenation').append(
         `
             <
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">처음</div></a>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', 1)">처음</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">끝</div></a>
+            <a href="#"><div onclick="NewMoveListPage(${place_id}, '${category}', ${last_page_no})">끝</div></a>
             >
         `
     )

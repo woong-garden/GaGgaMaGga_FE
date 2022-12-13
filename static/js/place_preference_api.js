@@ -43,3 +43,4 @@ async function PlaceSelectView(choice_no){
 function move_list_page(category, place_id){ 
     window.location.href = `/place_list.html?$place=${place_id}&cate=${category}&page_no=1/`
 }
+
