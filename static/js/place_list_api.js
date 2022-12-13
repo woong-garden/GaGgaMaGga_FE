@@ -2,8 +2,9 @@
 window.onload = function () {
     const storage = localStorage.getItem("payload");
     if (storage) {
-        const cate_id = location.href.split('=')[1].split('/')[0]
-        UserPlaceListView(cate_id)
+        const cate_id = location.href.split('=')[1].split('&')[0]
+        const page_no_user = location.href.split('=')[2].split('/')[0]
+        UserPlaceListView(cate_id, page_no_user)
     } else {
         const place_id = location.href.split('=')[1].split('&')[0]
         const category = location.href.split('=')[2].split('&')[0]
@@ -32,7 +33,6 @@ function NewMoveListPage(place_id, category, page_no){
     const cate = decodeURI(category)
     window.location.href = `/place_list.html?$place=${place_id}&cate=${cate}&page_no=${page_no}/`
 }
-
 
 //select
 async function NewUserPlaceListView(place_id, category, page) {
@@ -112,7 +112,7 @@ async function NewUserPlaceListView(place_id, category, page) {
     )
     }
 
-    //장소 리스트
+    //장소 추천 리스트
     $('#place-list').empty()
     response_json.results.forEach(item => {
         $('#place-list').append(
@@ -206,9 +206,12 @@ function move_list_page(cate_id) {
     window.location.href = `/place_list.html?$id=${cate_id}/`
 }
 
+function UserMoveListPage(cate_id, page_no){ 
+    window.location.href = `/place_list.html?$cate=${cate_id}&page_no=${page_no}/`
+}
 
-async function UserPlaceListView(cate_id) {
-    const response = await fetch(`http://127.0.0.1:8000/places/list/${cate_id}/`, {
+async function UserPlaceListView(cate_id, page) {
+    const response = await fetch(`http://127.0.0.1:8000/places/list/${cate_id}/?page=${page}`, {
         method: 'GET',
         headers: {
             "Content-type": "application/json",
@@ -218,9 +221,82 @@ async function UserPlaceListView(cate_id) {
 
 
     response_json = await response.json()
+
     console.log(response_json)
+    // 페이지네이션
+    const page_no2 = response_json.next.split('=')[1].split('/')[0]
+    const last_page_no = parseInt(response_json.count/10)
+    console.log(page_no2)
+    if (page_no2-1 == 1) {
+        console.log(page_no2-1)
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div class="current_page">${page_no2-1}</div></a>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${page_no2})">${page_no2}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
+            >
+        `
+    )
+    } else if (page_no2-1 == 2)  {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, 1)">1</div></a>
+            <a href="#"><div class="current_page">${page_no2-1}</div></a>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${page_no2})">${page_no2}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
+            >
+        `)
+    }else if (page_no2-1 == last_page_no) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, 1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${page_no2-2})">${page_no2-2}</div></a>
+            <a href="#"><div class="current_page">${page_no2-1}</div></a>
+            >
+        `
+    )
+    } else if (page_no2-1 == last_page_no-1) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="UserMoveListPage(${cate_id},1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id},${page_no2-2})">${page_no2-2}</div></a>
+            <a href="#"><div class="current_page">${page_no2-1}</div></a>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id},${last_page_no})">${last_page_no}</div></a>
+            >
+        `)
+    }else {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, 1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${page_no2-2})">${page_no2-2}</div></a>
+            <a href="#"><div class="current_page">${page_no2-1}</div></a>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id},${page_no2})">${page_no2}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="UserMoveListPage(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
+            >
+        `
+    )
+    }
+
+
+    //장소 추천 리스트
     $('#place-list').empty()
-    response_json.forEach(item => {
+    response_json.results.forEach(item => {
         $('#place-list').append(
             `<table cellpadding="0" cellspacing="0" border="0">
             <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
