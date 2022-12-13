@@ -38,6 +38,7 @@ async function getNotification() {
         alarmContent.style.display = "flex"
         alarmContent.style.height = "10vh"
         alarmBox.appendChild(alarmContent)
+        console.log(alarmBox)
 
         // const alarmButton = `<button onclick="read(${notification.id})"></button>`
         const notificationButton = document.createElement('button')

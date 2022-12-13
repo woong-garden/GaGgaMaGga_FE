@@ -14,15 +14,11 @@ if(localStorage.getItem("payload")){
 }
 window.onload = function(){
     IsUserOrNot()
-
-
-    // document.querySelector('.header div img').onclick = openModal()
 }
 
 
 
 // 알람 
-console.log(payload_parse.user_id)
 const notificationSocket = new WebSocket(
     'ws://'
     + "127.0.0.1:8000"

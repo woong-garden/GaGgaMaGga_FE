@@ -534,5 +534,6 @@ textarea{
 }
 
 .report-buttons button{
-    margin : 3vh 2vw;
+    width : 42%;
+    margin : 3vh 0.5vw;
 }
