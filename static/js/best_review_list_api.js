@@ -1,7 +1,7 @@
 
 
 async function BestLikeSort(){
-    const response = await fetch(`http://127.0.0.1:8000/reviews/review_rank/`,{
+    const response = await fetch(`http://127.0.0.1:8000/reviews/review-rank/`,{
         method:'GET',
         headers: {
             Accept: "application/json",
@@ -55,7 +55,7 @@ BestLikeSort()
 
 
 async function recentSort(){
-    const response = await fetch(`http://127.0.0.1:8000/reviews/review_rank/`,{
+    const response = await fetch(`http://127.0.0.1:8000/reviews/review-rank/`,{
         method:'GET',
         headers: {
             Accept: "application/json",
