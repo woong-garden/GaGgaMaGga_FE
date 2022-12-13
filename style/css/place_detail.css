@@ -236,12 +236,12 @@
         align-items: center;
     }
     .rating > :first-child{
-        width: 14px; 
-        height:14px; 
+        width: 20px; 
+        height:20px; 
         padding-right:2px;
     }
     .rating > :nth-child(2){
-        font-size:14px; 
+        font-size:16px; 
         font-weight:700
     }
     #place-review-cnt{
@@ -258,11 +258,11 @@
         padding-left:6px;
     }
     .review-item-box >img {
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
     }
     .review-item-box >div {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 700;
     }
     #div_place_address{

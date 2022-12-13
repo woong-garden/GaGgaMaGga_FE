@@ -125,14 +125,14 @@ async function BestLikeSort(page){
                     </div>
                     <div class="place-item-content">
                         <div>${item.place_name}</div>
-                        <div class="place-item-content-cntsty">
-                            <div>
-                                좋아요 ${item.review_like_count}
-                            </div>
-                            <div>
-                                별점 ${item.rating_cnt}
-                            </div>
+                        <div class="rating">
+                            <img src="/images/icon/star.svg">
+                            <div>${item.rating_cnt}</div>
+                            <div class="review-item-box">
+                                <img src="/images/icon/review_fill_heart.svg">
+                                <div> ${item.review_like_count}</div>
                         </div>
+                    </div>
                     </div>
                 </div>
                 <a class="place-item-user" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
@@ -251,14 +251,14 @@ async function recentSort(page){
                     </div>
                     <div class="place-item-content">
                         <div>${item.place_name}</div>
-                        <div class="place-item-content-cntsty">
-                            <div>
-                                좋아요 ${item.review_like_count}
-                            </div>
-                            <div>
-                                별점 ${item.rating_cnt}
-                            </div>
+                        <div class="rating">
+                            <img src="/images/icon/star.svg">
+                            <div>${item.rating_cnt}</div>
+                            <div class="review-item-box">
+                                <img src="/images/icon/review_fill_heart.svg">
+                                <div> ${item.review_like_count}</div>
                         </div>
+                    </div>
                     </div>
                 </div>
                 <a class="place-item-user" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">

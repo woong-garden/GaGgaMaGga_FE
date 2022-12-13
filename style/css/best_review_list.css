@@ -72,7 +72,32 @@
         width: 100%;
         padding-top: 3px;
     }
-
+    .rating{
+        display: flex; 
+        align-items: center;
+    }
+    .rating > :first-child{
+        width: 20px; 
+        height:20px; 
+        padding-right:2px;
+    }
+    .rating > :nth-child(2){
+        font-size:16px; 
+        font-weight:700
+    }
+    .review-item-box{
+        display:flex; 
+        align-items:center; 
+        padding-left:6px;
+    }
+    .review-item-box >img {
+        width: 20px;
+        height: 20px;
+    }
+    .review-item-box >div {
+        font-size: 16px;
+        font-weight: 700;
+    }
     .place-name{
         padding:20px; 
         text-align:center;
