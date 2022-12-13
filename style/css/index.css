@@ -177,6 +177,9 @@ body{
     word-break: keep-all;
     color: black;
 }
+.select_box2 :hover {
+
+}
 
 .index_img {
     width:70px;

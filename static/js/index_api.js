@@ -208,22 +208,22 @@ async function IsUserOrNot(){
                 <div>
                 <a href="#"><div class="select_box2" onclick="move_select_page(3)">
                 <img class="index_img" src="./images/icon/foods/Korean.png">
-            </div></a>
-            <a href="#"><div class="select_box2" onclick="move_select_page(6)">
-                <img class="index_img" src="./images/icon/foods/fastfoods.png">
-            </div></a>
-            <a href="#"><div class="select_box2" onclick="move_select_page(7)">
-                <img class="index_img" src="./images/icon/foods/Chinese.png">
-            </div></a>
-            <a href="#"><div class="select_box2" onclick="move_select_page(8)">
-                <img class="index_img" src="./images/icon/foods/Japanese.png">
-            </div></a>
-            <a href="#"><div class="select_box2" onclick="move_select_page(9)">
-                <img class="index_img" src="./images/icon/foods/Western.png">
-            </div></a>
-            <a href="#"><div class="select_box2" onclick="move_select_page(12)">
-            <img class="index_img" src="./images/icon/foods/Asian.png">
-            </div></a>
+                    </div></a>
+                    <a href="#"><div class="select_box2" onclick="move_select_page(6)">
+                        <img class="index_img" src="./images/icon/foods/fastfoods.png">
+                    </div></a>
+                    <a href="#"><div class="select_box2" onclick="move_select_page(7)">
+                        <img class="index_img" src="./images/icon/foods/Chinese.png">
+                    </div></a>
+                    <a href="#"><div class="select_box2" onclick="move_select_page(8)">
+                        <img class="index_img" src="./images/icon/foods/Japanese.png">
+                    </div></a>
+                    <a href="#"><div class="select_box2" onclick="move_select_page(9)">
+                        <img class="index_img" src="./images/icon/foods/Western.png">
+                    </div></a>
+                    <a href="#"><div class="select_box2" onclick="move_select_page(12)">
+                    <img class="index_img" src="./images/icon/foods/Asian.png">
+                    </div></a>
                 </div>
             </div>
             <div>
@@ -231,7 +231,6 @@ async function IsUserOrNot(){
                     <div>장소로 선택하기</div>
                 </div>
                 <div>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(13)">
                     <a href="#"><div class="select_box2" onclick="move_select_page(13)">
                     <img class="index_img" src="./images/icon/foods/jeju.png">
                     </div></a>

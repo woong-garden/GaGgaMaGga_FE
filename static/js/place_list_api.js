@@ -431,7 +431,7 @@ async function UserPlaceListView(cate_id, page) {
             }
         });
     })
-    
+    _showPage()
 }
 
 
@@ -448,3 +448,11 @@ async function DeletePlaceView(place_id) {
     })
     location.reload(true);
 }
+
+
+var _showPage = function() {
+    var loader = $("div.loader");
+    var container = $("div.tbl-content");
+    loader.css("display","none");
+    container.css("display","block");
+};
