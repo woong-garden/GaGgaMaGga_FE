@@ -40,18 +40,18 @@ async function NewUserPlaceListView(place_id, category) {
     response_json = await response.json()
     console.log(response_json)
     $('#place-list').empty()
-    response_json.forEach(item => {
+    response_json.results.forEach(item => {
         $('#place-list').append(
             `
             <table cellpadding="0" cellspacing="0" border="0">
                 <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
                 <td width="70%">
                     <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
-                    <div>${item.place_address}  ☎${item.place_number}</div>
-                    <div></div>
+                    <div>${item.place_address}</div>
+                    <div>☎${item.place_number}</div>
                     <div>${item.place_time}</div>
                     <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
-                    <a href="#"><div class="market_detail_button">상세보기</div></a>
+                    <a onclick="move_place_detail_page(${item.id})"><div class="market_detail_button">상세보기</div></a>
                 </td>
                 <td width="10%">${item.rating}</td>
             </table>
@@ -131,18 +131,6 @@ async function NewUserPlaceListView(place_id, category) {
 function move_list_page(cate_id) {
     window.location.href = `/place_list.html?$id=${cate_id}/`
 }
-
-
-function move_next_page(){
-    const place_id2 = location.href.split('=')[1].split('&')[0]
-    const category2 = location.href.split('=')[2].split('&')[0]
-    let page_no2 = location.href.split('=')[3].split('/')[0]
-    page_no2 = page_no2 + 1
-    console.log(place_id2, category2, page_no2)
-    window.location.href = `/place_list.html?$place=${place_id2}&cate=${category2}&page_no=${page_no2}/`
-}
-
-
 
 
 async function UserPlaceListView(cate_id) {
