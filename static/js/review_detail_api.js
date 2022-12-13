@@ -133,6 +133,9 @@ async function getData(review_id, place_id) {
     const title = document.querySelector('h3')
     title.innerText = response.place_name
 
+    const titleLink = document.querySelector('#title-link')
+    titleLink.href = `place_detail.html?id=${place_id}`
+
     const comments = document.querySelector('.comments')
     comments.innerHTML = ""
 
@@ -655,13 +658,14 @@ const notificationSocket = new WebSocket(
 
 notificationSocket.onmessage = function (e) {
     const data = JSON.parse(e.data);
+    console.log(data)
     const alarmBox = document.querySelector('.alarm')
 
 
     const alarmContent = document.createElement('div')
     alarmContent.innerHTML = `<div style="display:flex; height:10vh;">
         <img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon">
-        <p class="alarm-content">${data.message}</p>
+        <a style="cursor:pointer;margin:auto; text-decoration:none;" href="review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}"><p class="alarm-content">${data.message}</p></a>
         <button>확인</button>
     </div>`
     alarmBox.appendChild(alarmContent)
@@ -675,7 +679,7 @@ notificationSocket.onclose = function (e) {
 
 function alarm() {
     if (payload_parse.user_id != author_id) {
-        const message = "게시글에 덧글이 달렸습니다."
+        const message = "작성해주신 후기에 덧글이 달렸습니다."
         notificationSocket.send(JSON.stringify({
             'message': message,
             "author": author_id,
@@ -723,6 +727,7 @@ async function post_review_report() {
 
 // comment 신고 POST
 async function post_comment_report(cmt_id) {
+    console.log(cmt_id)
     const comment_report_category = document.getElementById(`comment-report-category${cmt_id}`)
     const comment_report_value = (comment_report_category.options[comment_report_category.selectedIndex].value)
 

@@ -69,8 +69,16 @@ body {
     box-sizing: border-box;
 }
 
-.header div a {
+.header div a:nth-child(1) {
     width: 8%;
+}
+.header div a:nth-child(2) {
+    text-decoration: none;
+    color : black;
+    cursor:pointer
+}
+.header div a:nth-child(2):hover {
+    color: #ffc774;;
 }
 
 .header div button {
@@ -456,82 +464,12 @@ body {
         left: 50%;
         margin-left: -250px;
     }
-
-    #modal-box {
-        width: 500px;
-        left: 50%;
-        margin-left: -250px;
-
-    }
 }
 
 .review-detail-box {
     margin: 2vh 15px;
 }
 
-#modal-box {
-    position: absolute;
-    background-color: white;
-    width: 400px;
-    left: 50%;
-    margin-left: -200px;
-    height: 100vh;
-    display: none;
-    z-index: 2;
-}
-
-.modal-icon {
-    width: 70%;
-    vertical-align: middle;
-}
-
-#modal-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.modal-icon:hover {
-    content: url(https://cdn-icons-png.flaticon.com/512/1827/1827314.png);
-    cursor: pointer;
-}
-
-.alarm p {
-    width: 60%;
-    margin: auto;
-    vertical-align: middle;
-}
-
-#close-modal {
-    margin: 5vh auto;
-    background: #c8c8c8;
-    border-radius: 32px;
-    text-align: center;
-    color: #fff;
-    min-width: 80px;
-    height: 32px;
-    border: none;
-    cursor: pointer;
-
-}
-
-#close-modal:hover {
-    background-color: #fcdbab;
-    color: black;
-}
-
-.alarm {
-    display: flex;
-    width: 90%;
-    flex-direction: column;
-    margin: auto;
-}
-
-.alarm img {
-    width: 10%;
-    /* margin-right : auto 10px auto 0; */
-    margin: auto;
-}
 
 .hide-recomment {
     display: none;
