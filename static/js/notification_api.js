@@ -12,9 +12,11 @@ async function getNotification() {
         },
         method: 'GET'
     })
-        .then(response => response.json())
+    .then(response => response.json())
+    console.log(response)
 
     response.forEach(notification => {
+        console.log(notification)
         const alarmBox = document.querySelector('.alarm')
 
 
@@ -45,19 +47,4 @@ async function getNotification() {
 
         alarmContent.appendChild(notificationButton)
     })
-}
-
-async function read(notification_id) {
-    await fetch(`http://127.0.0.1:8000/notification/alarm/${notification_id}/`, {
-        headers: {
-            'content-type': 'application/json',
-            "authorization": "Bearer " + localStorage.getItem("access")
-        },
-        method: 'PUT',
-        body: ''
-    })
-    const alarmBox = document.querySelector('.alarm')
-    alarmBox.innerHTML = ""
-    getNotification()
-
 }
