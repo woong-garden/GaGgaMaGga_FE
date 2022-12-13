@@ -23,7 +23,7 @@
             <div>
                 <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
             </div>
-            <form>
+            <form action="#">
                 <img style="padding-left:14px; width: 20px; height: 20px;" src="./images/icon/search_empty.svg">
                 <input type="text" style="display:none;"/>
                 <input class="search_input" type="text" placeholder="지역, 카페, 맛집명 검색" id="search" onkeypress="enterkey()">
@@ -43,35 +43,14 @@
 
         <div class="review-list-box">
             <div class="review-list-header">
-                <div>
+                <div id="place_list_count">
                     순위 (50)
                 </div> 
             </div>
             
             <!--검색결과시작-->
             <div id="search-list">
-                <!-- <div class="review-list">
-                    <a class="place-item">
-                        <div>
-                            <div style="width:100px;height:100px;"">
-                                <img style="width:100%;height:100%;" src="https://image.toast.com/aaaaaqx/catchtable/shopinfo/s3703/3703_2211011285806715_thumbMenuImage.png?small180">
-                            </div>
-                        </div>
-                        <div class="place-item-content-box">
-                            <div>봉쥬르 와인살롱</div>
-                            <div class="place-item-content">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste commodi nisi aliquam, aliquid est illo quaerat maxime aspernatur eveniet beatae molestias nam exercitationem ut incidunt unde libero placeat sapiente! Quisquam!
-                            </div>
-                            <div class="rating">
-                                <img src="/images/icon/star.svg" alt="">
-                                <div>4.5</div>
-                            </div>
-                        </div>
-                    </a>
-                    <div>
-                        <button class="btn-bookmark">북마크</button>
-                    </div>
-                </div> -->
+                
             </div>
             
             <!--검색결과끝-->
@@ -84,21 +63,21 @@
         <div>     
             <nav class="nav-bar">
                 <a href="index.html"><img src="/images/icon/home.svg"></a>
-                <a href="search.html"><img src="/images/icon/nav_search.svg"></a>
-                <a onclick="move_profile_page()"><img src="/images/icon/bookmark.svg"></a>
-                <a href="place_list.html"><img style="width:27px; aspect-ratio: 1/1;" src="https://cdn-icons-png.flaticon.com/512/126/126473.png"></a>
-                <a href="private_profile.html"><img src="/images/icon/profile.svg"></a>
+                <a href="search.html"><img src="/images/icon/click_nav_search.svg"></a>
+                <a href="best_review_list.html"><img style="width:27px; aspect-ratio: 1/1;" src="https://cdn-icons-png.flaticon.com/512/126/126473.png"></a>
+                <a onclick="move_profile_page()"><img src="/images/icon/profile.svg"></a>
+                <a href="private_profile.html"><img src="/images/icon/setting.svg"></a>
             </nav>
         </div>  
     </div>
     <!--네비바 끝-->
 
     <!-- JS ============================================ -->
-    <script>
+    <!-- <script>
         $(document).ready(function(){
             searchParam();
         })
-    </script>
+    </script> -->
     <script src="/static/js/search_api.js"></script>
     <script src="/static/js/base_api.js"></script>
 </body>

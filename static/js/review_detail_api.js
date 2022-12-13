@@ -2,10 +2,52 @@ const review_id = location.href.split('?')[1].split('&')[0].split('=')[1]
 const place_id = location.href.split('?')[1].split('&')[1].split('=')[1]
 const author_id = location.href.split('?')[1].split('&')[2].split('=')[1]
 
+console.log(author_id)
+
 const payload = localStorage.getItem("payload");
 const payload_parse = JSON.parse(payload);
 
+//시간 포맷팅
+function time2str(date_now) {
+    let today = new Date()
+    let before = new Date(date_now)
+    let time = (today - before) / 1000 / 60  // 분
+    if (time < 60) {
+        return parseInt(time) + "분 전"
+    }
+    time = time / 60  // 시간
+    if (time < 24) {
+        return parseInt(time) + "시간 전"
+    }
+    time = time / 24
+    if (time < 7) {
+        return parseInt(time) + "일 전"
+    }
+    return `${date_now.getFullYear()}년 ${date_now.getMonth() + 1}월 ${date_now.getDate()}일`
+};
+
 window.onload = () => {
+
+    // 엔터로만 덧글 등록
+    document.querySelector(".nav-input-wrap input").focus();
+    document.querySelector(".nav-input-wrap input").onkeyup = function (e) {
+        if (e.keyCode === 13) {
+            document.querySelector('#button').click();
+        }
+    }
+
+
+    // 후기 신고 모달창 trigger
+    const reportModal = document.querySelector('#report-modal')
+    document.querySelector('#report-button-text').onclick = function () {
+        reportModal.style.display = "block"
+
+    }
+
+    const closeReportModal = document.querySelector('#exit-report')
+    closeReportModal.onclick = function () {
+        reportModal.style.display = "none"
+    }
     getData(review_id, place_id)
 }
 const modalBox = document.querySelector('#modal-box')
@@ -69,7 +111,7 @@ async function getData(review_id, place_id) {
     content.innerText = response.content
 
     const date = document.querySelector('.review-time p')
-    date.innerText = `작성 시간 : ${response.created_at}`
+    date.innerText = `작성 시간 : ${time2str(response.created_at)}`
     date.style.fontSize = "11px"
     date.style.color = "gray"
 
@@ -119,30 +161,63 @@ async function getData(review_id, place_id) {
 
         const time = document.createElement('p')
         time.classList.add('time')
-        time.innerText = cmt.created_at
+        time.innerText = time2str(cmt.created_at)
         time.style.fontSize = "11px"
         time.style.color = "gray"
         commentHead.appendChild(time)
 
-        // 신고 모달창 trigger
+        // cmt 신고 모달창 trigger
         const dots = document.createElement('img')
         dots.src = "/images/icon/dot.svg"
+        dots.setAttribute("id", `dot${cmt.id}`)
         dots.style.cursor = "pointer"
         commentHead.appendChild(dots)
-        const reportModal = document.querySelector('#report-modal')
-        dots.onclick = function(){
-            reportModal.style.display = "block"
+
+        const commentReportModal = document.createElement('div')
+        commentReportModal.classList.add(`cmt-report${cmt.id}`)
+        document.querySelector('body').appendChild(commentReportModal)
+        commentReportModal.style.position = "absolute"
+        commentReportModal.style.backgroundColor = "white"
+        commentReportModal.style.width = "23vw"
+        commentReportModal.style.height = "30vh"
+        commentReportModal.style.display = "none"
+        commentReportModal.style.borderRadius = "25px"
+        commentReportModal.style.boxShadow = "4px 4px 4px rgb(199,199,199)"
+        commentReportModal.style.left = "50%"
+        commentReportModal.style.marginLeft = "-11.5vw"
+        commentReportModal.style.top = "50%"
+        commentReportModal.style.marginTop = "-15vh"
+        commentReportModal.style.zIndex = "1"
+
+        commentReportModal.innerHTML = `<select style="border-radius:10px;width : 88%;margin:3vh auto;display:block" id="comment-report-category${cmt.id}" >
+        <option value="욕설이 들어갔어요.">욕설이 들어갔어요.</option>
+        <option value="성적인 발언이 들어갔어요.">성적인 발언이 들어갔어요.</option>
+        <option value="정치적 요소가 들어갔어요.">정치적 요소가 들어갔어요.</option>
+        <option value="관계 없는 내용이예요.">관계 없는 내용이예요.</option>
+        <option value="도배된 내용이예요.">도배된 내용이예요.</option>
+        <option value="광고성이 포함된 글이예요.">광고성이 포함된 글이예요.</option>
+        <option value="기타">기타</option>
+    </select>
+    <textarea id="comment-report-content${cmt.id}" placeholder="내용을 입력해주세요."></textarea>
+    <div class="report-buttons">
+        <button id="exit-comment-report${cmt.id}" class="edit-button">닫기</button>
+        <button id="comment-report-btn${cmt.id}" class="edit-button" onclick="post_comment_report(${cmt.id})">신고하기</button>
+    </div>`
+
+        document.querySelector(`#dot${cmt.id}`).onclick = function () {
+            commentReportModal.style.display = "block"
 
         }
-        const closeReportModal = document.querySelector('#report-modal h4:nth-child(2)')
-        closeReportModal.onclick = function(){
-            reportModal.style.display = "none"
+        const closeReportModal = document.querySelector(`#exit-comment-report${cmt.id}`)
+        closeReportModal.onclick = function () {
+            commentReportModal.style.display = "none"
         }
 
         const commentText = document.createElement("p")
         commentText.innerText = cmt.content
         commentText.classList.add(`p${cmt.id}`)
         commentContent.appendChild(commentText)
+
 
         const commentUnder = document.createElement("div")
         commentUnder.classList.add("comment-under")
@@ -219,7 +294,69 @@ async function getData(review_id, place_id) {
             recommentText.style.fontSize = "13px"
             recommentText.style.width = "80%"
             recommentText.style.margin = "auto 0"
+            recommentText.style.wordBreak = "break-all"
             recmtContentBox.appendChild(recommentText)
+
+
+            // 리코멘트 작성 시간
+            const recmtTime = document.createElement('span')
+            recmtTime.innerText = time2str(cmt.created_at)
+            recommentText.appendChild(recmtTime)
+            recmtTime.style.fontSize = "11px"
+            recmtTime.style.margin = "auto 0 auto 2vw"
+            recmtTime.style.color = "gray"
+
+            // 리코멘트 신고 버튼
+            const recmtReportBtn = document.createElement('span')
+            recmtReportBtn.innerText = "신고"
+            recmtReportBtn.style.fontSize = "11px"
+            recmtReportBtn.setAttribute("id", `recomment-dots${recmt.id}`)
+            recmtReportBtn.style.color = "rgb(237, 155, 83)"
+            recmtReportBtn.style.margin = "auto 0 auto 2vw"
+            recmtReportBtn.style.cursor = "pointer"
+            recommentText.appendChild(recmtReportBtn)
+
+            // 리코멘트 모달
+            const recommentReportModal = document.createElement('div')
+            recommentReportModal.classList.add(`recmt-report${recmt.id}`)
+            document.querySelector('body').appendChild(recommentReportModal)
+            recommentReportModal.style.position = "absolute"
+            recommentReportModal.style.backgroundColor = "white"
+            recommentReportModal.style.width = "23vw"
+            recommentReportModal.style.height = "30vh"
+            recommentReportModal.style.display = "none"
+            recommentReportModal.style.borderRadius = "25px"
+            recommentReportModal.style.boxShadow = "4px 4px 4px rgb(199,199,199)"
+            recommentReportModal.style.left = "50%"
+            recommentReportModal.style.marginLeft = "-11.5vw"
+            recommentReportModal.style.top = "50%"
+            recommentReportModal.style.marginTop = "-15vh"
+            recommentReportModal.style.zIndex = "1"
+
+            recommentReportModal.innerHTML = `<select style="border-radius:10px;width : 88%;margin:3vh auto;display:block" id="recomment-report-category${recmt.id}" >
+                <option value="욕설이 들어갔어요.">욕설이 들어갔어요.</option>
+                <option value="성적인 발언이 들어갔어요.">성적인 발언이 들어갔어요.</option>
+                <option value="정치적 요소가 들어갔어요.">정치적 요소가 들어갔어요.</option>
+                <option value="관계 없는 내용이예요.">관계 없는 내용이예요.</option>
+                <option value="도배된 내용이예요.">도배된 내용이예요.</option>
+                <option value="광고성이 포함된 글이예요.">광고성이 포함된 글이예요.</option>
+                <option value="기타">기타</option>
+            </select>
+            <textarea id="recomment-report-content${recmt.id}" placeholder="내용을 입력해주세요."></textarea>
+            <div class="report-buttons">
+                <button id="exit-recomment-report${recmt.id}" class="edit-button">닫기</button>
+                <button id="recomment-report-btn${recmt.id}" class="edit-button" onclick="post_recomment_report(${cmt.id},${recmt.id})">신고하기</button>
+            </div>`
+
+            document.querySelector(`#recomment-dots${recmt.id}`).onclick = function () {
+                recommentReportModal.style.display = "block"
+
+            }
+            const closeRecommentReportModal = document.querySelector(`#exit-recomment-report${recmt.id}`)
+            closeRecommentReportModal.onclick = function () {
+                recommentReportModal.style.display = "none"
+            }
+
 
 
             // 대댓글 수정 삭제 버튼 박스
@@ -255,8 +392,7 @@ async function getData(review_id, place_id) {
             recommentEditBox.appendChild(recommentLikeCount)
 
 
-
-            if (recmt.nickname == payload_parse.nickname) {
+            if (recmt.user_id == payload_parse.user_id) {
 
                 // 대댓글 수정 버튼 생성
                 const editRecomment = document.createElement('button')
@@ -394,18 +530,14 @@ async function getData(review_id, place_id) {
 
 
 
-
-
         // 덧글 수정 버튼
-        if (payload_parse.nickname == cmt.nickname) {
+        if (payload_parse.user_id == cmt.user_id) {
             const editComment = document.createElement('button')
             var editText = document.createTextNode('덧글 수정')
             editComment.appendChild(editText)
             editComment.classList.add('cmt-btn')
             commentUnder.appendChild(editComment)
 
-
-            // 덧글 수정 인풋
             const editCommentContent = document.querySelector(`.p${cmt.id}`)
             editCommentContent.style.margin = '1vh 0 1.3vh 1vw'
 
@@ -548,5 +680,114 @@ function alarm() {
             "user_id": payload_parse.user_id
 
         }))
+    }
+}
+
+
+// review 신고 POST
+async function post_review_report() {
+    const review_report_category = document.getElementById("review_report_category")
+    const review_report_value = (review_report_category.options[review_report_category.selectedIndex].value)
+
+    const reportData = {
+        category: review_report_value,
+        content: document.getElementById("review_report_content").value,
+    }
+
+    const response = await fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
+
+        method: 'POST',
+        headers: {
+            Accept: "application/json",
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("access")
+        },
+        body: JSON.stringify(reportData)
+    })
+    const result = await response.json()
+
+    if (response.status === 200) {
+        alert(result['message'])
+    }
+
+    if (response.status === 208) {
+        alert(result['message'])
+    }
+
+    if (response.status === 400 && result['content']) {
+        alert(result['content'])
+    }
+}
+
+// comment 신고 POST
+async function post_comment_report(cmt_id) {
+    const comment_report_category = document.getElementById(`comment-report-category${cmt_id}`)
+    const comment_report_value = (comment_report_category.options[comment_report_category.selectedIndex].value)
+
+    const reportData = {
+        category: comment_report_value,
+        content: document.getElementById(`comment-report-content${cmt_id}`).value,
+    }
+    console.log(document.getElementById(`comment-report-content${cmt_id}`).value)
+
+    const response = await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${cmt_id}/`, {
+
+        method: 'POST',
+        headers: {
+            Accept: "application/json",
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("access")
+        },
+        body: JSON.stringify(reportData)
+    })
+    const result = await response.json()
+
+    if (response.status === 200) {
+        alert(result['message'])
+    }
+
+    if (response.status === 208) {
+        alert(result['message'])
+    }
+
+    if (response.status === 400 && result['content']) {
+        alert(result['content'])
+    }
+}
+
+// recomment 신고 POST
+async function post_recomment_report(comment_id, recmt_id) {
+    const recomment_report_category = document.getElementById(`recomment-report-category${recmt_id}`)
+    const recomment_report_value = (recomment_report_category.options[recomment_report_category.selectedIndex].value)
+    console.log(recomment_report_value)
+
+    const reportData = {
+        category: recomment_report_value,
+        content: document.getElementById(`recomment-report-content${recmt_id}`).value,
+    }
+    console.log(document.getElementById(`recomment-report-content${recmt_id}`).value)
+
+    const response = await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${comment_id}/recomments/${recmt_id}/`, {
+
+        method: 'POST',
+        headers: {
+            Accept: "application/json",
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("access")
+        },
+        body: JSON.stringify(reportData)
+    })
+    const result = await response.json()
+
+    if (response.status === 200) {
+        alert(result['message'])
+    }
+
+    if (response.status === 208) {
+        alert(result['message'])
+    }
+
+    if (response.status === 400 && result['content']) {
+        alert(result['content'])
     }
 }

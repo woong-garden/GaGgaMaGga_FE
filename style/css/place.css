@@ -140,7 +140,8 @@ body {
 }
 
 .nav-bar {
-    background-color: #FFCD48;
+    background-color: #ffffff;
+    border-top: 0.1px solid rgb(196, 196, 196);
     height: 48px;
     box-sizing: border-box;
     display: flex;
@@ -158,16 +159,16 @@ body {
 
     /*반응형*/
     .root {
-        width: 400px;
+        width: 500px;
     }
 
     .nav-wrap>div {
-        max-width: 400px;
+        max-width: 500px;
         margin: 0 auto;
     }
 
     .header>div {
-        max-width: 400px;
+        max-width: 500px;
         margin: 0 auto;
     }
 }
