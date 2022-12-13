@@ -7,6 +7,9 @@
     <!--폰트-->
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style/css/place_review_list.css">
+    <link rel="stylesheet" href="/style/css/modal.css">
+
+    <script src="static/js/notification_api.js"></script>
 
     <!--제이쿼리문-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
@@ -15,6 +18,13 @@
 
 </head>
 <body>
+    <div id="modal-box">
+        <div id="modal-body">
+            <div class="alarm">
+            </div>
+            <button id="close-modal" onclick="closeModal()">닫기</button>
+        </div>
+    </div>
     <!--헤더 시작-->
     <div class="header">
         <div>
@@ -22,7 +32,7 @@
                 <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
             </div> 
             <div> 
-                <a><img style="margin-left:8px;" src="/images/icon/bell.svg"></a>
+                <a><img style="margin-left:8px; cursor: pointer;" onclick="openModal()" src="/images/icon/bell.svg"></a>
             </div> 
         </div>          
     </div>
