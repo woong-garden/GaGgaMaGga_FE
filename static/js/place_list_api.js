@@ -36,6 +36,7 @@ async function NewUserPlaceListView(place_id, category, page) {
         }
     })
     response_json = await response.json()
+    console.log(response_json)
 
     // 페이지네이션
     const page_no = response_json.next.split('=')[1].split('/')[0]
@@ -113,12 +114,10 @@ async function NewUserPlaceListView(place_id, category, page) {
             <table cellpadding="0" cellspacing="0" border="0">
                 <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
                 <td width="70%">
-                    <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
+                <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                     <div>${item.place_address}</div>
-                    <div>☎${item.place_number}</div>
-                    <div>${item.place_time}</div>
+                    <div style="display:inline-block;">☎${item.place_number}</div>
                     <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
-                    <a href="#" onclick="move_place_detail_page(${item.id})"><div class="market_detail_button">상세보기</div></a>
                 </td>
                 <td width="10%">${item.rating}</td>
             </table>
@@ -288,12 +287,10 @@ async function UserPlaceListView(cate_id, page) {
             `<table cellpadding="0" cellspacing="0" border="0">
             <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
             <td width="70%">
-                <div style="font-size:15px;">[${item.category}] ${item.place_name}</div>
-                <div>${item.place_address}  ☎${item.place_number}</div>
-                <div></div>
-                <div>${item.place_time}</div>
+                <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
+                <div>${item.place_address}</div>
+                <div style="display:inline-block;">☎${item.place_number}</div>
                 <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
-                <a href="#" onclick="move_place_detail_page(${item.id})"><div class="market_detail_button">상세보기</div></a>
             </td>
             <td width="10%">${item.rating}</td>
         </table>

@@ -6,6 +6,10 @@ window.onload = function(){
     }
 
 
+function reload_page(){
+    location.reload(true);
+}
+
 //select
 async function PlaceSelectView(choice_no){
     const response = await fetch(`http://127.0.0.1:8000/places/selection/${choice_no}/`, {
@@ -15,6 +19,7 @@ async function PlaceSelectView(choice_no){
         }
     })
     response_json = await response.json()
+    console.log(response_json)
     if (choice_no > 12) {
         $('#select-box').empty()
         response_json.forEach(item => {

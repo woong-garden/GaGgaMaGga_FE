@@ -46,51 +46,51 @@ async function public_profile() {
     // 후기
     if(response_json.review_set.length){
         response_json.review_set.forEach(item => {
-        $('#my-review').append(
-            `
-            <div class="review-box">
-                <div class="row" style="margin:0;">
-                    <div class="col-md-4" style="padding:0;">
-                        <img class="review-img" onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
-                    </div>
-                    <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                        <div class="card-body">
-                            <h6 style="cursor:pointer;color:  #ffbf60;" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</h6>
-                            <p>평점&nbsp; ${item.rating_cnt} / 5</p>
-                            <div style="display:flex; width:50%;">`+
-                            (my_id == profile_id? '<button class="update-review" onclick="move_to_edit_page(${item.place_id}, ${item.id})">리뷰 수정</button> <button class="update-review" onclick="delete_review(${item.place_id}, ${item.id})">리뷰 삭제</button>':'')
-                        +`</div>
+            $('#my-review').append(
+                `
+                <div class="review-box">
+                    <div class="row" style="margin:0;">
+                        <div class="col-md-4" style="padding:0;">
+                            <img class="review-img" onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
+                        </div>
+                        <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
+                            <div class="card-body">
+                                <h6 style="cursor:pointer;color:  #ffbf60;" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</h6>
+                                <p>평점&nbsp; ${item.rating_cnt} / 5</p>
+                                <div style="display:flex; width:50%;">`+
+                                (my_id == profile_id? '<button class="update-review" onclick="move_to_edit_page(${item.place_id}, ${item.id})">리뷰 수정</button> <button class="update-review" onclick="delete_review(${item.place_id}, ${item.id})">리뷰 삭제</button>':'')
+                            +`</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            `
-        )
-    });
+                `
+            )
+        });
     }
     
     // 북마크
     if(response_json.bookmark_place.length){
         response_json.bookmark_place.forEach(item => {
-                $('#my-bookmark').append(
-                    `
-                    <div class="review-box">
-                        <div class="row" style="margin:0;">
-                            <div class="col-md-4" style="padding:0;">
-                                <div class="content-img">
-                                    <img class="review-img" onclick="move_place_detail_page(${item.id})" alt="장소 사진" src="${item.place_img}">
-                                </div>
+            $('#my-bookmark').append(
+                `
+                <div class="review-box">
+                    <div class="row" style="margin:0;">
+                        <div class="col-md-4" style="padding:0;">
+                            <div class="content-img">
+                                <img class="review-img" onclick="move_place_detail_page(${item.id})" alt="장소 사진" src="${item.place_img}">
                             </div>
-                            <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
-                                <div onclick="move_place_detail_page(${item.id})" style="padding: 1.25rem">
-                                    <h6 style="color : #ffbf60;">${item.place_name}</h6>
-                                    <p>평점&nbsp; ${item.rating} / 5</p>
-                                </div>
+                        </div>
+                        <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
+                            <div onclick="move_place_detail_page(${item.id})" style="padding: 1.25rem">
+                                <h6 style="color : #ffbf60;">${item.place_name}</h6>
+                                <p>평점&nbsp; ${item.rating} / 5</p>
                             </div>
                         </div>
                     </div>
-                    `
-                )
-            });
+                </div>
+                `
+            )
+        });
     }
     
     // 본인 프로필에서 팔로우 버튼 숨김
