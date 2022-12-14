@@ -126,19 +126,16 @@ async function public_profile() {
         if(my_id == profile_id){
             $('#my-review').append(
                 `
-                <div style="padding: 20px 0 24px;border-bottom: 1px solid #DBDBDB;display: flex;">
+                <div class="review-box">
                     <div>
-                        <img style="object-fit: cover;width: 150px;height: 150px;cursor: pointer;" 
+                        <img class="review-content-img" 
                         onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
                     </div>
-                    <div style="padding: 20px;">
+                    <div class="review-content-info">
                         <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>
-                        <div>
-                            <img style="width: 14px;
-                            height: 14px;
-                            padding-right: 2px;" src="/images/icon/star.svg">
-                            <span style="font-size: 14px;
-                            font-weight: 700;">${item.rating_cnt}</span>
+                        <div class="star-wrap">
+                            <img class="star-icon" src="/images/icon/star.svg">
+                            <div class="star-num">${item.rating_cnt}</div>
                         </div>
                         <button class="update-review" onclick="move_to_edit_page(${item.place_id},${item.id})">리뷰 수정</button> 
                         <button class="update-review" onclick="delete_review(${item.place_id}, ${item.id})">리뷰 삭제</button>
@@ -150,19 +147,16 @@ async function public_profile() {
         }else{
             $('#my-review').append(
                 `
-                <div style="padding: 20px 0 24px;border-bottom: 1px solid #DBDBDB;display: flex;">
+                <div class="review-box">
                     <div>
-                        <img style="object-fit: cover;width: 150px;height: 150px;cursor: pointer;" 
+                        <img class="review-content-img" 
                         onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
                     </div>
-                    <div style="padding: 20px;">
+                    <div class="review-content-info">
                         <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>
-                        <div>
-                            <img style="width: 14px;
-                            height: 14px;
-                            padding-right: 2px;" src="/images/icon/star.svg">
-                            <span style="font-size: 14px;
-                            font-weight: 700;">${item.rating_cnt}</span>
+                        <div class="star-wrap">
+                            <img class="star-icon" src="/images/icon/star.svg">
+                            <div class="star-num">${item.rating_cnt}</div>
                         </div>
                     </div>
                 </div>
@@ -178,18 +172,15 @@ async function public_profile() {
         response_json.bookmark_place.forEach(item => {
             $('#my-bookmark').append(
                 `
-                <div style="padding: 20px 0 24px;border-bottom: 1px solid #DBDBDB;display: flex;">
+                <div class="bookmark-box">
                     <div>
-                        <img style="object-fit: cover;width: 150px;height: 150px;cursor: pointer;" onclick="move_place_detail_page(${item.id})" alt="장소 사진" src="${item.place_img}">
+                        <img class="bookmark-content-img" onclick="move_place_detail_page(${item.id})" alt="장소 사진" src="${item.place_img}">
                     </div>
-                    <div style="padding: 20px;" onclick="move_place_detail_page(${item.id})">
+                    <div class="review-content-info" onclick="move_place_detail_page(${item.id})">
                         <div style="color:#ffbf60">${item.place_name}</div>
-                        <div>
-                            <img style="width: 14px;
-                            height: 14px;
-                            padding-right: 2px;" src="/images/icon/star.svg">
-                            <span style="font-size: 14px;
-                            font-weight: 700;">${item.rating}</span>
+                        <div class="star-wrap">
+                            <img class="star-icon" src="/images/icon/star.svg">
+                            <div class="star-num">${item.rating}</div>
                         </div>
                     </div>
                 </div>
