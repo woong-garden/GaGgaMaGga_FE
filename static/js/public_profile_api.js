@@ -1,72 +1,14 @@
-const getnickname = location.href.split('=')[1]
-const user_nickname = decodeURI(getnickname)
-const payload = localStorage.getItem("payload");
-const payload_parse = JSON.parse(payload);
-
-if(localStorage.getItem("access")){
-    public_profile()
-} else{
+if(localStorage.getItem("access")){} 
+else{
     alert("로그인 후 이용해주세요")
     location.replace("login.html")
-}
-
-
-
-// 알람 
-console.log(payload_parse.user_id)
-const notificationSocket = new WebSocket(
-    'ws://'
-    + "127.0.0.1:8000"
-    + '/ws/notification/'
-    + payload_parse.user_id
-    + '/'
-);
-
-notificationSocket.onmessage = async function (e) {
-    const data = JSON.parse(e.data);
-    const alarmBox = document.querySelector('.alarm')
-
-
-        const alarmContent = document.createElement('div')
-        alarmContent.style.display = "flex"
-        alarmContent.style.height = "10vh"
-        alarmContent.innerHTML = data.message
-        alarmBox.appendChild(alarmContent)
-
-
-    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
-        headers: {
-            "authorization": "Bearer " + localStorage.getItem("access")
-        },
-        method: 'GET'
-    })
-    .then(response => response.json())
-
-    const notificationButton = document.createElement('button')
-    const notificationButtonText = document.createTextNode('확인')
-    notificationButton.appendChild(notificationButtonText)
-    notificationButton.onclick = async function () {
-        await fetch(`http://127.0.0.1:8000/notification/alarm/${response[0].id}/`, {
-            headers: {
-                'content-type': 'application/json',
-                "authorization": "Bearer " + localStorage.getItem("access")
-            },
-            method: 'PUT',
-            body: ''
-        })
-        alarmBox.innerHTML = ""
-        getNotification()
     }
-    alarmContent.appendChild(notificationButton)
 
-    alarmBox.appendChild(alarmContent)
-};
-
-notificationSocket.onclose = function (e) {
-    console.error('소켓이 닫혔어요 ㅜㅜ');
-};
-
-
+const getnickname = location.href.split('=')[1]
+const user_nickname = decodeURI(getnickname)
+public_profile()
+    
+    
 // 공개프로필
 async function public_profile() {
     const response = await fetch(`${backendBaseUrl}/users/profiles/${user_nickname}/`, {
@@ -80,6 +22,7 @@ async function public_profile() {
 
 
     response_json = await response.json()
+    console.log(response_json)
 
 
     // 프로필
@@ -97,11 +40,19 @@ async function public_profile() {
     const profile_image = document.getElementById("profile_image")
     let image_url = response_json.profile_image
     profile_image.setAttribute("src", `${backendBaseUrl}${image_url}`)
+    console.log(JSON.parse(localStorage.getItem(['kakao'])).user_id)
+    console.log(JSON.parse(localStorage.getItem(['payload'])))
+    
 
-    var my_id = JSON.parse(localStorage.getItem(['payload'])).user_id
+    var my_id = ""
+    console.log(my_id)
+    if(JSON.parse(localStorage.getItem(['payload']))){
+        my_id = JSON.parse(localStorage.getItem(['payload'])).user_id
+    }else{
+        my_id = JSON.parse(localStorage.getItem(['kakao'])).user_id
+    }
+ 
     var profile_id = response_json.user_id
-    console.log(my_id, profile_id)
-
     // 본인 프로필에서 팔로우 버튼 숨김
     if (profile_id == my_id){
         document.getElementById('user_follow').style.display ="none"
@@ -287,7 +238,8 @@ function move_to_edit_page(place_id, review_id){
 
 
 async function delete_review(place_id, review_id){
-    await fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
+    var delConfirm = confirm("리뷰를 삭제하시겠습니까?")
+    if (delConfirm) {await fetch(`${backendBaseUrl}/reviews/details/${place_id}/${review_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
@@ -296,4 +248,5 @@ async function delete_review(place_id, review_id){
     document.querySelector('#my-review').innerHTML = ""
     public_profile()
     document.querySelector('.profile-button2').click()
+}
 }

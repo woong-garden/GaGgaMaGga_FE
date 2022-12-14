@@ -1,73 +1,9 @@
+if(localStorage.getItem("access")){}
+else{
+    alert("로그인 후 이용해주세요")
+    location.replace("login.html")
+}
 const place_id = location.href.split('?')[1].split('=')[1]
-const payload = localStorage.getItem("payload");
-const payload_parse = JSON.parse(payload);
-
-
-
-
-
-
-
-
-
-
-// 알람 
-console.log(payload_parse.user_id)
-const notificationSocket = new WebSocket(
-    'ws://'
-    + "127.0.0.1:8000"
-    + '/ws/notification/'
-    + payload_parse.user_id
-    + '/'
-);
-
-notificationSocket.onmessage = async function (e) {
-    const data = JSON.parse(e.data);
-    const alarmBox = document.querySelector('.alarm')
-
-
-        const alarmContent = document.createElement('div')
-        alarmContent.style.display = "flex"
-        alarmContent.style.height = "10vh"
-        alarmContent.innerHTML = data.message
-        alarmBox.appendChild(alarmContent)
-
-
-    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
-        headers: {
-            "authorization": "Bearer " + localStorage.getItem("access")
-        },
-        method: 'GET'
-    })
-    .then(response => response.json())
-
-    const notificationButton = document.createElement('button')
-    const notificationButtonText = document.createTextNode('확인')
-    notificationButton.appendChild(notificationButtonText)
-    notificationButton.onclick = async function () {
-        await fetch(`http://127.0.0.1:8000/notification/alarm/${response[0].id}/`, {
-            headers: {
-                'content-type': 'application/json',
-                "authorization": "Bearer " + localStorage.getItem("access")
-            },
-            method: 'PUT',
-            body: ''
-        })
-        alarmBox.innerHTML = ""
-        getNotification()
-    }
-    alarmContent.appendChild(notificationButton)
-
-    alarmBox.appendChild(alarmContent)
-};
-
-notificationSocket.onclose = function (e) {
-    console.error('소켓이 닫혔어요 ㅜㅜ');
-};
-
-
-
-
 
 window.onload = () => {
     const realUpload = document.querySelector('.real-upload');
@@ -155,7 +91,7 @@ async function uploadReview() {
     formData.append("review_image_two", images.files[1])
     formData.append("review_image_three", images.files[2])
 
-    await fetch(`http://127.0.0.1:8000/reviews/${place_id}/`, {
+    await fetch(`${backendBaseUrl}/reviews/${place_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },

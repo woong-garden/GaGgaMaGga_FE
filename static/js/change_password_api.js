@@ -4,6 +4,7 @@ if(localStorage.getItem("access")){
     window.location.replace("index.html")
 }
 
+
 //비밀번호 변경
 async function password_change() {
     const password_change_data = {

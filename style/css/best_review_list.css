@@ -27,10 +27,6 @@
         overflow: auto;
         box-shadow: 0 0 20px rgb(0 0 0 / 5%);
     }
-    .root_block{
-        margin-top:48px;
-    }
-
 
 
     .header{ 
@@ -44,7 +40,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 48px;
+        height: 6vh;
         background-color: white;
         padding: 0px 14px 0px 2px;
         box-sizing: border-box;
@@ -154,13 +150,13 @@
     }
     
     .review-list-box{
-        padding: 14px 14px 50px 14px;
-        height:80%;
+        padding: 0 2vw;
+        height:85vh;
     }
     .review-list-data-box{
         position:relative;
         display:block;
-        height: 500px;
+        height:85vh;
         overflow: scroll;
         box-shadow: 0 0 20px rgb(0 0 0 / 5%);
     }
@@ -245,9 +241,8 @@
     }
     .nav-bar{
         background-color: #ffffff;
-        /* border-top: 0.1px solid rgb(196, 196, 196); */
         box-shadow: 0 0 20px rgb(0 0 0 / 5%);
-        height: 48px;
+        height: 6vh;
         box-sizing: border-box;
         display: flex;
         align-items: center;

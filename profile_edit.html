@@ -9,6 +9,22 @@
     <!--타이틀 로고-->
     <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
     <title>가까? 마까 | 프로필 편집</title>
+
+<script>
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+            document.getElementById('preview').src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            document.getElementById('preview').src = "";
+        }
+    }
+
+</script>
 </head>
 <body>
     <!--헤더 시작-->
@@ -35,9 +51,11 @@
             <div class="profile-img-wrap">
                 <img id="preview" src="/images/default_profile_pic.jpg">
             </div>
-            <h5>프로필 편집</h5>
+            <h5>프로필 이미지</h5>
             <input style="border-radius:8px;" type="file" id="profile_image" onchange="readURL(this);">
+            <h5>프로필 닉네임</h5>
             <input style="border-radius:8px;" type="text" id="nickname" placeholder="3자이상 10자이하로 닉네임을 입력해주세요.">
+            <h5>프로필 자기소개</h5>
             <textarea id="intro" cols="50" rows="5" placeholder="자기소개를 입력해주세요."></textarea>
             <div class="alert alert-danger" style="font-size:15px" id="alert-danger"></div>
 
@@ -58,21 +76,7 @@
             </nav>
         </div>  
     </div>
-    <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                document.getElementById('preview').src = e.target.result;
-                };
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                document.getElementById('preview').src = "";
-            }
-        }
-    
-    </script>
-    <script src="static/js/base_api.js"></script>
-    <script src="static/js/profile_edit_api.js"></script>
 </body>
+<script src="static/js/base_api.js"></script>
+<script src="static/js/profile_edit_api.js"></script>
 </html>

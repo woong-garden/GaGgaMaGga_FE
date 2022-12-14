@@ -7,14 +7,14 @@
     <!--폰트-->
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-
     <!--css-->
     <link rel="stylesheet" href="./style/css/private_profile.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/style/css/modal.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="static/js/notification_api.js"></script>
+
     <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
+
 
     <title>가까? 마까 | 개인 프로필 설정</title>
 </head>
@@ -52,15 +52,15 @@
                 <img id="porfile-img" src ="/images/default_profile_pic.jpg">
             </div>
             <div class="user-infor-wrap">
-                <div id="profile_nickname" class="card-title">닉네임 : 어드민</div>
-                <div id="profile_username"  class="card-title">아이디 admin</div>
-                <div id="profile_email"  class="card-title">이메일 admin@andmi</div>
+                <div id="profile_nickname" class="card-title"></div>
+                <div id="profile_username"  class="card-title"></div>
+                <div id="profile_email"  class="card-title"></div>
             </div>
         </div>
 
         <div class="horizon"></div>
 
-        <div id="acctive_user">
+        <div id="active_user">
             <div id='my-review' style="display: block;">
                 <div class="user-infor-wrap">
                     <div>
@@ -78,7 +78,7 @@
                             <img src="/images/icon/small_arrow.svg">
                         </a>
                         <a onclick="confirm_kakao_change_password()" class="private-list-item">
-                            <div class="private-list-font-style">비밀 번호 변경</div>
+                            <div class="private-list-font-style">비밀번호 변경</div>
                             <img src="/images/icon/small_arrow.svg">
                         </a>
                     </div>
@@ -107,14 +107,14 @@
                 </div>
                 <div class="horizon"></div>
                 <div class="user-logout-wrap">
-                    <a class="private-list-item">
-                        <div onclick="logout()" class="private-list-font-style">로그아웃</div>
+                    <a class="private-list-item" onclick="logout()">
+                        <div class="private-list-font-style">로그아웃</div>
                         <img src="/images/icon/small_arrow.svg">
                     </a>
                 </div>
             </div>
         </div>
-        <div id="deacctive_user">
+        <div id="deactive_user">
             <div id='my-review' style="display: block;">
                 <div class="user-logout-wrap">
                     <a href="login.html" class="private-list-item">
@@ -146,7 +146,9 @@
         </div>  
     </div>
     <!--네비바 끝-->
-    <script src="static/js/base_api.js"></script>
-    <script src="static/js/private_profile_api.js"></script>
 </body>
+
+<script src="static/js/base_api.js"></script>
+<script src="static/js/notification_api.js"></script>
+<script src="static/js/private_profile_api.js"></script>
 </html>

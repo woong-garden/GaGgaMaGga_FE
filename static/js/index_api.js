@@ -1,5 +1,3 @@
-const payload = localStorage.getItem("payload");
-const payload_parse = JSON.parse(payload);
 
 if (localStorage.getItem("kakao")){
 } else if (location.href.split('=')[1]){
@@ -16,65 +14,20 @@ window.onload = function(){
     IsUserOrNot()
 }
 
+function sendSearchKeyword(){
+    var inputValue = document.getElementById('search').value;
+    window.location.href = `/search.html?search=${inputValue}`
+}
 
-
-// 알람 
-const notificationSocket = new WebSocket(
-    'ws://'
-    + "127.0.0.1:8000"
-    + '/ws/notification/'
-    + payload_parse.user_id
-    + '/'
-);
-
-notificationSocket.onmessage = async function (e) {
-    const data = JSON.parse(e.data);
-    const alarmBox = document.querySelector('.alarm')
-
-
-        const alarmContent = document.createElement('div')
-        alarmContent.style.display = "flex"
-        alarmContent.style.height = "10vh"
-        alarmContent.innerHTML = data.message
-        alarmBox.appendChild(alarmContent)
-    
-
-    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
-        headers: {
-            "authorization": "Bearer " + localStorage.getItem("access")
-        },
-        method: 'GET'
-    })
-    .then(response => response.json())
-
-    const notificationButton = document.createElement('button')
-    const notificationButtonText = document.createTextNode('확인')
-    notificationButton.appendChild(notificationButtonText)
-    notificationButton.onclick = async function () {
-        await fetch(`http://127.0.0.1:8000/notification/alarm/${response[0].id}/`, {
-            headers: {
-                'content-type': 'application/json',
-                "authorization": "Bearer " + localStorage.getItem("access")
-            },
-            method: 'PUT',
-            body: ''
-        })
-        alarmBox.innerHTML = ""
-        getNotification()
+function enterkey(e) {
+    if (window.event.keyCode == 13){
+        sendSearchKeyword().then();
     }
-    alarmContent.appendChild(notificationButton)
-
-    alarmBox.appendChild(alarmContent)
-};
-
-notificationSocket.onclose = function (e) {
-    console.error('소켓이 닫혔어요 ㅜㅜ');
-};
-
+}
 
 //카카오 로그인 back으로 전달
 async function kakaoLoginApi(kakao_code) {
-    const response = await fetch(`http://127.0.0.1:8000/users/kakao/`, {
+    const response = await fetch(`${backendBaseUrl}/users/kakao/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -87,6 +40,7 @@ async function kakaoLoginApi(kakao_code) {
         localStorage.setItem("access", response_json.access); 
         localStorage.setItem("refresh", response_json.refresh);
         localStorage.setItem('nickname', response_json.nickname);
+        localStorage.setItem('review_cnt', response_json.review_cnt);
 
         const base64Url = response_json.access.split('.')[1];
         const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -136,8 +90,9 @@ function move_select_page(cate_id){
 
 async function IsUserOrNot(){
     const storage = localStorage.getItem("payload");
-    if (storage) {
-        console.log("[로그인 계정] 데이터 로드 완료")
+    const kakao = localStorage.getItem("kakao");
+    if (storage !== null) {
+        console.log("[일반 로그인 계정] 데이터 로드 완료")
         const str_payload = JSON.parse(storage)
         if (str_payload.review_cnt != 0) {
             $('#index-selectbox').empty()
@@ -184,48 +139,140 @@ async function IsUserOrNot(){
             </section>`)
         } else {
             $('#index-selectbox').empty()
-        $('#index-selectbox').append(
-            `<section class="select-place-wrap">
-            <div>
+            $('#index-selectbox').append(
+                `<section class="select-place-wrap">
                 <div>
-                    <div>음식으로 검색하기</div>
+                    <div>
+                        <div>음식으로 검색하기</div>
+                    </div>
+                    <div>
+                    <a href="#"><div class="select_box2" onclick="move_select_page(3)">
+                    <img class="index_img" src="./images/icon/foods/Korean.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_select_page(6)">
+                            <img class="index_img" src="./images/icon/foods/fastfoods.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_select_page(7)">
+                            <img class="index_img" src="./images/icon/foods/Chinese.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_select_page(8)">
+                            <img class="index_img" src="./images/icon/foods/Japanese.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_select_page(9)">
+                            <img class="index_img" src="./images/icon/foods/Western.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_select_page(12)">
+                        <img class="index_img" src="./images/icon/foods/Asian.png">
+                        </div></a>
+                    </div>
                 </div>
                 <div>
-                <a href="#"><div class="select_box2" onclick="move_select_page(3)">
-                <img class="index_img" src="./images/icon/foods/Korean.png">
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(6)">
-                        <img class="index_img" src="./images/icon/foods/fastfoods.png">
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(7)">
-                        <img class="index_img" src="./images/icon/foods/Chinese.png">
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(8)">
-                        <img class="index_img" src="./images/icon/foods/Japanese.png">
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(9)">
-                        <img class="index_img" src="./images/icon/foods/Western.png">
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(12)">
-                    <img class="index_img" src="./images/icon/foods/Asian.png">
-                    </div></a>
+                    <div>
+                        <div>장소로 선택하기</div>
+                    </div>
+                    <div>
+                        <a href="#"><div class="select_box2" onclick="move_select_page(13)">
+                        <img class="index_img" src="./images/icon/foods/jeju.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_select_page(14)">
+                        <img class="index_img" src="./images/icon/foods/sgp.png">
+                        </div></a>
+                    </div>
                 </div>
-            </div>
-            <div>
+            </section>`
+            )
+        }
+    }else if(kakao !== null){
+        console.log("[카카오 로그인 계정] 데이터 로드 완료")
+        const rev_cnt = localStorage.getItem("review_cnt");
+        console.log(rev_cnt)
+        if (rev_cnt != 0) {
+            $('#index-selectbox').empty()
+            $('#index-selectbox').append(
+                `<section class="select-place-wrap">
                 <div>
-                    <div>장소로 선택하기</div>
+                    <div>
+                        <div>음식으로 선택하기</div>
+                    </div>
+                    <div>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(3)">
+                            <img class="index_img" src="./images/icon/foods/Korean.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(6)">
+                            <img class="index_img" src="./images/icon/foods/fastfoods.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(7)">
+                            <img class="index_img" src="./images/icon/foods/Chinese.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(8)">
+                            <img class="index_img" src="./images/icon/foods/Japanese.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(9)">
+                            <img class="index_img" src="./images/icon/foods/Western.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(12)">
+                        <img class="index_img" src="./images/icon/foods/Asian.png">
+                        </div></a>
+                    </div>
                 </div>
                 <div>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(13)">
-                    <img class="index_img" src="./images/icon/foods/jeju.png">
-                    </div></a>
-                    <a href="#"><div class="select_box2" onclick="move_select_page(14)">
-                    <img class="index_img" src="./images/icon/foods/sgp.png">
-                    </div></a>
+                    <div>
+                        <div>장소로 선택하기</div>
+                    </div>
+                    <div>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(13)">
+                        <img class="index_img" src="./images/icon/foods/jeju.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_rcm_list_page(14)">
+                        <img class="index_img" src="./images/icon/foods/sgp.png">
+                        </div></a>
+                    </div>
                 </div>
-            </div>
-        </section>`
-        )
+            </section>`)
+        } else {
+            $('#index-selectbox').empty()
+            $('#index-selectbox').append(
+                `<section class="select-place-wrap">
+                <div>
+                    <div>
+                        <div>음식으로 검색하기</div>
+                    </div>
+                    <div>
+                    <a href="#"><div class="select_box2" onclick="move_select_page(3)">
+                    <img class="index_img" src="./images/icon/foods/Korean.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_select_page(6)">
+                            <img class="index_img" src="./images/icon/foods/fastfoods.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_select_page(7)">
+                            <img class="index_img" src="./images/icon/foods/Chinese.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_select_page(8)">
+                            <img class="index_img" src="./images/icon/foods/Japanese.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_select_page(9)">
+                            <img class="index_img" src="./images/icon/foods/Western.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_select_page(12)">
+                        <img class="index_img" src="./images/icon/foods/Asian.png">
+                        </div></a>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div>장소로 선택하기</div>
+                    </div>
+                    <div>
+                        <a href="#"><div class="select_box2" onclick="move_select_page(13)">
+                        <img class="index_img" src="./images/icon/foods/jeju.png">
+                        </div></a>
+                        <a href="#"><div class="select_box2" onclick="move_select_page(14)">
+                        <img class="index_img" src="./images/icon/foods/sgp.png">
+                        </div></a>
+                    </div>
+                </div>
+            </section>`
+            )
         }
     }else{
         console.log("[비로그인 계정] 데이터 로드 완료")

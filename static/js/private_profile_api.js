@@ -1,9 +1,6 @@
-let active_user = document.getElementById("acctive_user")
-let deacctive_user = document.getElementById("deacctive_user")
-let profile_div = document.getElementById("profile_div")
-const payload = localStorage.getItem("payload");
-const payload_parse = JSON.parse(payload);
-
+const active_user = document.getElementById("active_user")
+const deacctive_user = document.getElementById("deactive_user")
+const profile_div = document.getElementById("profile_div")
 
 if(localStorage.getItem("access")){
     private_profile()
@@ -12,71 +9,11 @@ if(localStorage.getItem("access")){
     profile_div.style = "display:block;padding:14px 30px 0px 30px; display: flex; align-items: center;"
     
 } else {
+    console.log(active_user.style)
     active_user.style = "display:none;"
     deacctive_user.style= "display:block;"
     profile_div.style = "display:none"
 }
-
-
-
-
-
-// 알람 
-console.log(payload_parse.user_id)
-const notificationSocket = new WebSocket(
-    'ws://'
-    + "127.0.0.1:8000"
-    + '/ws/notification/'
-    + payload_parse.user_id
-    + '/'
-);
-
-notificationSocket.onmessage = async function (e) {
-    const data = JSON.parse(e.data);
-    const alarmBox = document.querySelector('.alarm')
-
-
-        const alarmContent = document.createElement('div')
-        alarmContent.style.display = "flex"
-        alarmContent.style.height = "10vh"
-        alarmContent.innerHTML = data.message
-        alarmBox.appendChild(alarmContent)
-
-
-    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
-        headers: {
-            "authorization": "Bearer " + localStorage.getItem("access")
-        },
-        method: 'GET'
-    })
-    .then(response => response.json())
-
-    const notificationButton = document.createElement('button')
-    const notificationButtonText = document.createTextNode('확인')
-    notificationButton.appendChild(notificationButtonText)
-    notificationButton.onclick = async function () {
-        await fetch(`http://127.0.0.1:8000/notification/alarm/${response[0].id}/`, {
-            headers: {
-                'content-type': 'application/json',
-                "authorization": "Bearer " + localStorage.getItem("access")
-            },
-            method: 'PUT',
-            body: ''
-        })
-        alarmBox.innerHTML = ""
-        getNotification()
-    }
-    alarmContent.appendChild(notificationButton)
-
-    alarmBox.appendChild(alarmContent)
-};
-
-notificationSocket.onclose = function (e) {
-    console.error('소켓이 닫혔어요 ㅜㅜ');
-};
-
-
-
 
 
 //개인 프로필
