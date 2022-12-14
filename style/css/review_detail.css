@@ -488,13 +488,13 @@ body {
 #report-modal {
     position: absolute;
     background-color: white;
-    width: 23vw;
+    width: 30vw;
     height: 30vh;
     display: none;
     border-radius: 25px;
     box-shadow: 4px 4px 4px rgb(199, 199, 199);
     left: 50%;
-    margin-left : -11.5vw;
+    margin-left : -15vw;
     top: 50%;
     margin-top : -15vh;
     z-index: 1;
