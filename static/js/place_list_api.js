@@ -188,7 +188,6 @@ function pagenation_new(page_no, last_page_no, place_id, category) {
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+2})">${page_no+2}</div></a>
-
             >
         `)
     } else {
@@ -326,7 +325,6 @@ function pagenation(page_no, last_page_no, cate_id) {
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+2})">${page_no+2}</div></a>
-
             >
         `)
     } else {
@@ -491,7 +489,6 @@ async function NewUserPlaceListView(place_id, category, page) {
                     <div class="modal_map" id="map${item.id}">
                 </div>
             </div>
-
             <div class="dlt-modal-bg" id="dlt-modal-bg${item.id}"onClick="javascript:DltPopClose(${item.id});"></div>
             <div class="dlt-modal-wrap" id="dlt-modal-wrap${item.id}">
                 <div class="dlt_modal_contents">
@@ -503,10 +500,8 @@ async function NewUserPlaceListView(place_id, category, page) {
                         <a href="#"><div class="modal_close" onClick="DeletePlaceView(${item.id})">Delete</div></a>
                         <a href="#"><div class="modal_close" onClick="javascript:DltPopClose(${item.id});">Close</div></a>
                     </div>
-
                 </div>
             </div>
-
             `
         )
         }
@@ -692,7 +687,6 @@ async function UserPlaceListView(cate_id, page) {
                 <div class="modal_map" id="map${item.id}">
             </div>
         </div>
-
         <div class="dlt-modal-bg" id="dlt-modal-bg${item.id}"onClick="javascript:DltPopClose(${item.id});"></div>
         <div class="dlt-modal-wrap" id="dlt-modal-wrap${item.id}">
             <div class="dlt_modal_contents">
@@ -701,7 +695,6 @@ async function UserPlaceListView(cate_id, page) {
                 <hr>
                 <img src="${item.place_img}" style='width:300px;height:180px;')>
                 <p style="font-size:15px;">정말 해당 장소를 삭제하시겠습니까?</p>
-
             </div>
                 <div class="modal_map" id="map${item.id}">
             </div>
@@ -784,5 +777,3 @@ async function DeletePlaceView(place_id) {
     })
     location.reload(true);
 }
-
-

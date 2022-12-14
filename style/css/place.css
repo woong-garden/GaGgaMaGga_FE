@@ -14,7 +14,7 @@ body {
 }
 
 .root {
-    position: relative;
+    position: fixed;
     height: 100%;
     width: 100%;
     left: 50%;
@@ -247,7 +247,8 @@ table {
 }
 
 .tbl-content {
-    height: 600px;
+    position: relative;
+    height: 70%;
     overflow-x: auto;
     margin-top: 0px;
     background-color: white;
@@ -409,14 +410,16 @@ td {
 }
 
 .pagenation {
+    left: 50%;
+    width:100%; 
     position: fixed;
     text-align: center;
     margin-bottom: 48px;
-    background-color: #ffffff;
+    background-color: transparent;
     width: 100%;
     bottom: 0;
     left: 0;
-    z-index: 2;
+    z-index: 0;
 }
 
 .pagenation a{
