@@ -133,13 +133,23 @@ async function getData(review_id, place_id) {
 
     const likeCount = document.querySelector('#like-count')
     likeCount.innerText = response.review_like.length
-
-    const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
-    firstImage.src = backendBaseUrl + response.review_image_one
-    const secondImage = document.querySelector('.slidelist li:nth-child(2) img')
-    secondImage.src = backendBaseUrl + response.review_image_two
-    const thirdImage = document.querySelector('.slidelist li:nth-child(3) img')
-    thirdImage.src = backendBaseUrl + response.review_image_three
+    
+    // 이미지 null 값일때 default이미지 설정
+    if(response.review_image_one){
+        const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
+        firstImage.src = backendBaseUrl + response.review_image_one
+        const secondImage = document.querySelector('.slidelist li:nth-child(2) img')
+        secondImage.src = backendBaseUrl + response.review_image_two
+        const thirdImage = document.querySelector('.slidelist li:nth-child(3) img')
+        thirdImage.src = backendBaseUrl + response.review_image_three
+    }else{
+        const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
+        firstImage.src = 'https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg'
+        const secondImage = document.querySelector('.slidelist li:nth-child(2) img')
+        secondImage.src = 'https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg'
+        const thirdImage = document.querySelector('.slidelist li:nth-child(3) img')
+        thirdImage.src = 'https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg'
+    }
     const title = document.querySelector('h3')
     title.innerText = response.place_name
     const titleLink = document.querySelector('#title-link')
@@ -509,10 +519,10 @@ async function getData(review_id, place_id) {
 
             // getData(review_id, place_id)
         }
-        // 덧글 수정 버튼
+        // 댓글 수정 버튼
         if (payload_parse.user_id == cmt.user_id) {
             const editComment = document.createElement('button')
-            var editText = document.createTextNode('덧글 수정')
+            var editText = document.createTextNode('댓글 수정')
             editComment.appendChild(editText)
             editComment.classList.add('cmt-btn')
             commentUnder.appendChild(editComment)
@@ -559,9 +569,9 @@ async function getData(review_id, place_id) {
                 editInput.classList.toggle('recomment-content')
                 editButton.classList.toggle('recomment-content')
             }
-            // 덧글 삭제 버튼
+            // 댓글 삭제 버튼
             const delComment = document.createElement('button')
-            var editText = document.createTextNode('덧글 삭제')
+            var editText = document.createTextNode('댓글 삭제')
             delComment.appendChild(editText)
             delComment.classList.add('cmt-btn')
             commentUnder.appendChild(delComment)

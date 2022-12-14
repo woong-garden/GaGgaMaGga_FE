@@ -114,14 +114,44 @@ async function BestLikeSort(page){
     }
     $('#like-rank').empty()
     response_json.like_count_review.results.forEach(item => {
-        
-        $('#like-rank').append(
+        if(item.review_image_one){
+            $('#like-rank').append(
+                `
+                <div class="review-list">
+                    <div class="place-item">
+                        <div>
+                            <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src="${backendBaseUrl}${item.review_image_one}">
+                        </div>
+                        <div class="place-item-content">
+                            <div>${item.place_name}</div>
+                            <div class="rating">
+                                <img src="/images/icon/star.svg">
+                                <div>${item.rating_cnt}</div>
+                                <div class="review-item-box">
+                                    <img src="/images/icon/review_fill_heart.svg">
+                                    <div> ${item.review_like_count}</div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <a class="place-item-user" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
+                        <div>
+                            <img class="place-item-user-img" src="${backendBaseUrl}${item.profile_image}">
+                        </div>
+                        <div>
+                            ${item.nickname}
+                        </div>
+                    </a>
+                </div>
+                `
+            )
+        }else{
+            $('#like-rank').append(
             `
             <div class="review-list">
                 <div class="place-item">
                     <div>
-                        <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src="${backendBaseUrl}${item.review_image_one}">
-
+                        <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src='https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg'>
                     </div>
                     <div class="place-item-content">
                         <div>${item.place_name}</div>
@@ -146,6 +176,8 @@ async function BestLikeSort(page){
             </div>
             `
         )
+        }
+        
     })
 
 }
@@ -240,13 +272,45 @@ async function recentSort(page){
     }
     $('#recent-rank').empty()
     response_json.recent_review.results.forEach(item => {
-        
-        $('#recent-rank').append(
+        if(item.review_image_one){
+            $('#recent-rank').append(
+                `
+                <div class="review-list">
+                    <div class="place-item">
+                        <div>
+                            <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src="${backendBaseUrl}${item.review_image_one}">
+    
+                        </div>
+                        <div class="place-item-content">
+                            <div>${item.place_name}</div>
+                            <div class="rating">
+                                <img src="/images/icon/star.svg">
+                                <div>${item.rating_cnt}</div>
+                                <div class="review-item-box">
+                                    <img src="/images/icon/review_fill_heart.svg">
+                                    <div> ${item.review_like_count}</div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <a class="place-item-user" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
+                        <div>
+                            <img class="place-item-user-img" src="${backendBaseUrl}${item.profile_image}">
+                        </div>
+                        <div>
+                            ${item.nickname}
+                        </div>
+                    </a>
+                </div>
+                `
+            )
+        }else{
+            $('#recent-rank').append(
             `
             <div class="review-list">
                 <div class="place-item">
                     <div>
-                        <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src="${backendBaseUrl}${item.review_image_one}">
+                        <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src='https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg'>
 
                     </div>
                     <div class="place-item-content">
@@ -272,6 +336,8 @@ async function recentSort(page){
             </div>
             `
         )
+        }
+        
     })
 
 }
