@@ -51,7 +51,7 @@ async function getData(place_id, review_id) {
         },
         method: 'GET'
     })
-    .then(response => response.json())
+        .then(response => response.json())
     console.log(response)
 
 
@@ -76,11 +76,19 @@ async function getData(place_id, review_id) {
         const starFour = document.querySelector('#rate4')
         const starFive = document.querySelector('#rate5')
 
+        // 경고문
+        const overImageAlert = document.querySelector('#over-image-alert')
+        const contentAlert = document.querySelector('#content-alert')
+        const starAlert = document.querySelector('#star-alert')
+
+        overImageAlert.style.display = "none"
+        contentAlert.style.display = "none"
+        starAlert.style.display = "none"
+
         if (starOne.checked) {
             content.classList.add('1');
             content.classList.remove("2", "3", "4", "5");
         }
-
 
         if (starTwo.checked) {
             content.classList.add('2');
@@ -101,22 +109,25 @@ async function getData(place_id, review_id) {
         }
 
         let cls = content.getAttribute("class");
-        if (cls == null){
-            alert('평점을 매겨주세요!')
-        }
-        cls = cls.toString()
-        const images = document.querySelector('.real-upload');
 
+        if (cls) {
+            cls = cls.toString()
+        } else {
+            starAlert.style.display = "block"
+        }
+
+        const images = document.querySelector('.real-upload');
+    if (content.value) {
         var formData = new FormData()
         formData.append("rating_cnt", cls)
         formData.append("content", content.value)
-        if (images.files[0]){
+        if (images.files[0]) {
             formData.append("review_image_one", images.files[0])
         }
-        if (images.files[1]){
-            formData.append("review_image_one", images.files[1])
-        }if (images.files[2]){
-            formData.append("review_image_one", images.files[2])
+        if (images.files[1]) {
+            formData.append("review_image_two", images.files[1])
+        } if (images.files[2]) {
+            formData.append("review_image_three", images.files[2])
         }
 
         const editResponse = await fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
@@ -127,13 +138,14 @@ async function getData(place_id, review_id) {
             body: formData
         })
         const editResponseJson = await editResponse.json()
-        if (editResponse.status == 400){
-            alert(editResponseJson['content'])
+
+        if (editResponse.status == 200) {
+            location.href = `review_detail.html?id=${review_id}&place=${place_id}&author=${response.author_id}`
+   
         }
-        else if (editResponse.status == 200){        
-        alert("후기 수정 완료")
-        }
-        console.log(response)
-        location.href = `review_detail.html?id=${review_id}&place=${place_id}&author=${response.author_id}`
-    }
+         }
+    else {
+        contentAlert.style.display = "block"}
+}
+
 }

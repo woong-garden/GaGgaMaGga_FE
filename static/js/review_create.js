@@ -46,12 +46,25 @@ window.onload = () => {
 
 // 리뷰 작성
 async function createReview() {
+    // 별점
     const content = document.querySelector("textarea")
     const starOne = document.querySelector('#rate1')
     const starTwo = document.querySelector('#rate2')
     const starThree = document.querySelector('#rate3')
     const starFour = document.querySelector('#rate4')
     const starFive = document.querySelector('#rate5')
+
+
+    // 경고문
+    const overImageAlert = document.querySelector('#over-image-alert')
+    const imageAlert = document.querySelector('#image-alert')
+    const contentAlert = document.querySelector('#content-alert')
+    const starAlert = document.querySelector('#star-alert')
+
+    overImageAlert.style.display = "none"
+    imageAlert.style.display = "none"   
+    contentAlert.style.display = "none"
+    starAlert.style.display = "none"
 
     if (starOne.checked) {
         content.classList.add('1');
@@ -79,12 +92,10 @@ async function createReview() {
 
 
     let cls = content.getAttribute("class");
-    console.log(cls)
 
     if (cls) {
         cls = cls.toString()
     } else {
-        const starAlert = document.querySelector('#star-alert')
         starAlert.style.display = "block"
     }
 
@@ -108,20 +119,17 @@ async function createReview() {
                 cache: 'no-cache',
                 body: formData
             })
-            // alert("후기 등록 완료")
-            // window.history.back()
+            alert("후기 등록 완료")
+            window.history.back()
         }
         else if (images.files.length > 3) {
-            const overImageAlert = document.querySelector('#over-image-alert')
             overImageAlert.style.display = "block"
         }
         else {
-            const imageAlert = document.querySelector('#image-alert')
             imageAlert.style.display = "block"
         }
     }
     else {
-        const contentAlert = document.querySelector('#content-alert')
         contentAlert.style.display = "block"
     }
 }
