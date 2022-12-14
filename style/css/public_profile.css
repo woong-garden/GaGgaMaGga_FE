@@ -124,11 +124,6 @@ body{
 }
 
 
-/* 프로필 이미지 */
-.profile {
-    /* margin-top: 15%; */
-}
-
 .profile > div{
     border-radius: 0; 
     margin-bottom: 1rem!important; 

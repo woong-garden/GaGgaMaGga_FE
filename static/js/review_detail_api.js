@@ -99,6 +99,7 @@ async function getData(review_id, place_id) {
 
     const likeCount = document.querySelector('#like-count')
     likeCount.innerText = response.review_like.length
+    console.log(response.review_like)
 
     const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
     firstImage.src = "http://127.0.0.1:8000" + response.review_image_one
@@ -304,7 +305,7 @@ async function getData(review_id, place_id) {
             document.querySelector('body').appendChild(recommentReportModal)
             recommentReportModal.style.position = "absolute"
             recommentReportModal.style.backgroundColor = "white"
-            recommentReportModal.style.width = "23vw"
+            recommentReportModal.style.width = "30vw"
             recommentReportModal.style.height = "30vh"
             recommentReportModal.style.display = "none"
             recommentReportModal.style.borderRadius = "25px"
@@ -725,6 +726,7 @@ async function post_review_report() {
     if (response.status === 400 && result['content']) {
         alert(result['content'])
     }
+    document.querySelector('#report-modal').style.display = "none"
 }
 
 // comment 신고 POST
@@ -762,6 +764,7 @@ async function post_comment_report(cmt_id) {
     if (response.status === 400 && result['content']) {
         alert(result['content'])
     }
+    document.querySelector(`.cmt-report${cmt_id}`).style.display = "none"
 }
 
 // recomment 신고 POST
@@ -799,4 +802,5 @@ async function post_recomment_report(comment_id, recmt_id) {
     if (response.status === 400 && result['content']) {
         alert(result['content'])
     }
+    document.querySelector(`.recmt-report${recmt_id}`).style.display = "none"
 }
