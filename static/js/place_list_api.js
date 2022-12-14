@@ -133,6 +133,7 @@ function pagenation_new(page_no, last_page_no, place_id, category) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
+            <div class="no_page"></div>
             <
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
@@ -270,6 +271,7 @@ function pagenation(page_no, last_page_no, cate_id) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
+            <div class="no_page"></div>
             <
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
