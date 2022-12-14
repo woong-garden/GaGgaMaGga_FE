@@ -16,8 +16,7 @@ async function PlaceDetail(){
         }
     )
     response_json = [await response.json()]
-    
-    const menu_list = response_json[0].menu.split('|')
+
     const place_name = response_json[0].place_name
 
     const div_place_name = document.getElementById("place-name")
@@ -56,7 +55,9 @@ async function PlaceDetail(){
     div_place_number.innerText = `전화번호: ${response_json[0].place_number}`
     div_place_time.innerText = `영업시간: ${response_json[0].place_time}`
 
-
+    if (response_json[0].menu){
+        const menu_list = response_json[0].menu.split('|')
+        
     menu_list.forEach(item => {
         $('#menu-list').append(
             `
@@ -72,7 +73,7 @@ async function PlaceDetail(){
             </div>
             `
         )
-    })
+    })}
 }
 PlaceDetail()
 
