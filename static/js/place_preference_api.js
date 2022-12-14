@@ -11,6 +11,8 @@ window.onload = function(){
         location.reload(true);
     }
 
+
+
 //select
 async function PlaceSelectView(choice_no){
     const response = await fetch(`${backendBaseUrl}/places/selection/${choice_no}/`, {
