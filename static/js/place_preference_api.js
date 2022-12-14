@@ -11,6 +11,8 @@ window.onload = function(){
         location.reload(true);
     }
 
+const backendBaseUrl = 'http://127.0.0.1:8000'
+
 //select
 async function PlaceSelectView(choice_no){
     const response = await fetch(`${backendBaseUrl}/places/selection/${choice_no}/`, {

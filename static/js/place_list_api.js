@@ -206,12 +206,6 @@ async function NewUserPlaceListView(place_id, category, page) {
 
             `
         )
-        // 장소 삭제 버튼 생성
-        if (storage) {
-            if (str_payload.is_admin) {
-                ActiveDeleteButton(`${item.id}`)
-            }
-        }
 
         //지도 API
         var mapOptions = {
@@ -400,8 +394,10 @@ async function UserPlaceListView(cate_id, page) {
         )
 
         // 장소 삭제 버튼 생성
-        if (str_payload.is_admin) {
-            ActiveDeleteButton(`${item.id}`)
+        if (storage !== null) {
+            if (str_payload.is_admin) {
+                ActiveDeleteButton(`${item.id}`)
+            }
         }
         
         //지도 API
