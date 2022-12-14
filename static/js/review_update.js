@@ -140,6 +140,7 @@ async function getData(place_id, review_id) {
         const editResponseJson = await editResponse.json()
 
         if (editResponse.status == 200) {
+            alert("리뷰 수정 되었습니다.")
             location.href = `review_detail.html?id=${review_id}&place=${place_id}&author=${response.author_id}`
    
         }

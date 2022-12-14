@@ -48,7 +48,7 @@ async function public_profile() {
     }else{
         my_id = JSON.parse(localStorage.getItem(['kakao'])).user_id
     }
- 
+
     var profile_id = response_json.user_id
     // 본인 프로필에서 팔로우 버튼 숨김
     if (profile_id == my_id){

@@ -126,7 +126,7 @@ async function createReview() {
                 cache: 'no-cache',
                 body: formData
             })
-            alert("후기 등록 완료")
+            alert("리뷰 생성 완료했습니다.")
             window.history.back()
         }
         else if (images.files.length > 3) {
