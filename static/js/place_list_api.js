@@ -12,7 +12,7 @@ window.onload = function () {
             const category = location.href.split('=')[2].split('/')[0]
             NewUserPlaceListView(place_id, category, 1)
         }
-    }else if(kakao !== null){
+    } else if (kakao !== null) {
         const rev_cnt = localStorage.getItem("review_cnt");
         if (rev_cnt != 0) {
             const cate_id = location.href.split('=')[1].split('/')[0]
@@ -30,18 +30,18 @@ window.onload = function () {
 }
 
 
-var _showPage = function() {
+var _showPage = function () {
     var loader = $("div.loader");
     var container = $("div.tbl-content");
-    loader.css("display","none");
-    container.css("display","block");
+    loader.css("display", "none");
+    container.css("display", "block");
 };
 
 
 
 //delete_button
 function ActiveDeleteButton(id) {
-    document.getElementById(`delete_place${id}`).style.display ="inline-block"
+    document.getElementById(`delete_place${id}`).style.display = "inline-block"
 }
 
 // 지도 modal
@@ -73,70 +73,70 @@ function DltPopClose(id) {
 }
 
 function pagenation_new(page_no, last_page_no, place_id, category) {
-    if ((page_no==1)&(last_page_no == 1)){
+    if ((page_no == 1) & (last_page_no == 1)) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
             <a href="#"><div class="current_page">${page_no}</div></a>
             >
         `)
-    }else if ((page_no == 1)&(last_page_no == 2)) {
+    } else if ((page_no == 1) & (last_page_no == 2)) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
             <a href="#"><div class="current_page">${page_no}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no + 1})">${page_no + 1}</div></a>
             >
         `)
-    }else if ((page_no == 2)&(last_page_no == 2)) {
+    } else if ((page_no == 2) & (last_page_no == 2)) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
             >
         `)
-    } else if ((page_no == 1)&(last_page_no == 3)) {
+    } else if ((page_no == 1) & (last_page_no == 3)) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
             <a href="#"><div class="current_page">${page_no}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no + 1})">${page_no + 1}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             >
         `)
-    } else if ((page_no == 2)&(last_page_no == 3)) {
+    } else if ((page_no == 2) & (last_page_no == 3)) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             >
         `)
-    } else if ((page_no == 3)&(last_page_no == 3)) {
+    } else if ((page_no == 3) & (last_page_no == 3)) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no - 2})">${page_no - 2}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
             >
         `)
     } else if (page_no == 1) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <div class="no_page"></div>
             <
             <a href="#"><div class="current_page">${page_no}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no + 1})">${page_no + 1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             >
@@ -144,137 +144,136 @@ function pagenation_new(page_no, last_page_no, place_id, category) {
     } else if (page_no == 2) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no + 1})">${page_no + 1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             >
         `)
-    }else if (page_no == last_page_no) {
+    } else if (page_no == last_page_no) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
             >
         `)
-    }else if (page_no == last_page_no-1) {
+    } else if (page_no == last_page_no - 1) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no + 1})">${page_no + 1}</div></a>
             >
         `)
-    }else if (page_no == last_page_no-2) {
+    } else if (page_no == last_page_no - 2) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no + 1})">${page_no + 1}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+2})">${page_no+2}</div></a>
-
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no + 2})">${page_no + 2}</div></a>
             >
         `)
     } else {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no + 1})">${page_no + 1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
             >
         `
-    )
+        )
     }
 }
 
 
 function pagenation(page_no, last_page_no, cate_id) {
-    if ((page_no==1)&(last_page_no == 1)){
+    if ((page_no == 1) & (last_page_no == 1)) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
             <a href="#"><div class="current_page">${page_no}</div></a>
             >
         `)
-    }else if ((page_no == 1)&(last_page_no == 2)) {
+    } else if ((page_no == 1) & (last_page_no == 2)) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
             <a href="#"><div class="current_page">${page_no}</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no + 1})">${page_no + 1}</div></a>
             >
         `)
-    }else if ((page_no == 2)&(last_page_no == 2)) {
+    } else if ((page_no == 2) & (last_page_no == 2)) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
             >
         `)
-    } else if ((page_no == 1)&(last_page_no == 3)) {
+    } else if ((page_no == 1) & (last_page_no == 3)) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
             <a href="#"><div class="current_page">${page_no}</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no + 1})">${page_no + 1}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             >
         `)
-    } else if ((page_no == 2)&(last_page_no == 3)) {
+    } else if ((page_no == 2) & (last_page_no == 3)) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             >
         `)
-    } else if ((page_no == 3)&(last_page_no == 3)) {
+    } else if ((page_no == 3) & (last_page_no == 3)) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-2})">${page_no-2}</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no - 2})">${page_no - 2}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
             >
         `)
     } else if (page_no == 1) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <div class="no_page"></div>
             <
             <a href="#"><div class="current_page">${page_no}</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no + 1})">${page_no + 1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             >
@@ -282,68 +281,67 @@ function pagenation(page_no, last_page_no, cate_id) {
     } else if (page_no == 2) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no + 1})">${page_no + 1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             >
         `)
-    }else if (page_no == last_page_no) {
+    } else if (page_no == last_page_no) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
             >
         `)
-    }else if (page_no == last_page_no-1) {
+    } else if (page_no == last_page_no - 1) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no + 1})">${page_no + 1}</div></a>
             >
         `)
-    }else if (page_no == last_page_no-2) {
+    } else if (page_no == last_page_no - 2) {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no + 1})">${page_no + 1}</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+2})">${page_no+2}</div></a>
-
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no + 2})">${page_no + 2}</div></a>
             >
         `)
     } else {
         $('#pagenation').empty()
         $('#pagenation').append(
-        `
+            `
             <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
             <div>...</div>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no - 1})">${page_no - 1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
-            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no + 1})">${page_no + 1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             >
         `
-    )
+        )
     }
 }
 
@@ -352,7 +350,7 @@ function pagenation(page_no, last_page_no, cate_id) {
 
 //select
 async function NewUserPlaceListView(place_id, category, page) {
-    const response = await fetch(`${backendBaseUrl}/places/new/${place_id}/${category}/?page=${page}`, {    
+    const response = await fetch(`${backendBaseUrl}/places/new/${place_id}/${category}/?page=${page}`, {
         method: 'GET',
         headers: {
             "Content-type": "application/json",
@@ -363,36 +361,36 @@ async function NewUserPlaceListView(place_id, category, page) {
     const str_payload = JSON.parse(storage)
 
     // 페이지네이션
-    if (response_json.next== null) {
-        if (parseInt(response_json.count%10) !== 0){
+    if (response_json.next == null) {
+        if (parseInt(response_json.count % 10) !== 0) {
             if (response_json.count <= 10) {
                 const page_no = 1
                 const last_page_no = 1
                 pagenation_new(page_no, last_page_no, place_id, category)
             } else {
-                const last_page_no = parseInt(response_json.count/10)+1
+                const last_page_no = parseInt(response_json.count / 10) + 1
                 const page_no = last_page_no
                 pagenation_new(page_no, last_page_no, place_id, category)
             }
         } else {
-            const page_no = parseInt(response_json.count/10)
-            const last_page_no = parseInt(response_json.count/10)
-            pagenation_new(page_no, last_page_no, place_id, category)
-        }        
-    } else {
-        if (parseInt(response_json.count%10) !== 0){
-            const page_no = response_json.next.split('=')[1].split('/')[0]-1
-            const last_page_no = parseInt(response_json.count/10)+1
-            pagenation_new(page_no, last_page_no, place_id, category)
-        }else{
-            const page_no = response_json.next.split('=')[1].split('/')[0]-1
-            const last_page_no = parseInt(response_json.count/10)
+            const page_no = parseInt(response_json.count / 10)
+            const last_page_no = parseInt(response_json.count / 10)
             pagenation_new(page_no, last_page_no, place_id, category)
         }
-        
+    } else {
+        if (parseInt(response_json.count % 10) !== 0) {
+            const page_no = response_json.next.split('=')[1].split('/')[0] - 1
+            const last_page_no = parseInt(response_json.count / 10) + 1
+            pagenation_new(page_no, last_page_no, place_id, category)
+        } else {
+            const page_no = response_json.next.split('=')[1].split('/')[0] - 1
+            const last_page_no = parseInt(response_json.count / 10)
+            pagenation_new(page_no, last_page_no, place_id, category)
+        }ack
+
     }
-    
-    
+
+
 
     //장소 추천 리스트
     $('#place-list').empty()
@@ -400,22 +398,30 @@ async function NewUserPlaceListView(place_id, category, page) {
         $('#place-list').append(
             `
             <table cellpadding="0" cellspacing="0" border="0">
-                <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
+                <td width="30%"><img src="${item.place_img}" class="place-item-img"></td>
                 <td width="70%">
-                <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
+                <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                     <div>${item.place_address}</div>
                     <div style="display:inline-block;">☎${item.place_number}</div>
                     <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
                     <a href="#" class="btn-open" onClick="javascript:DltPopOpen(${item.id});"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
                     </td>
-                <td width="10%">${item.rating}</td>
+                <td class="item-rating" width="10%">${item.rating}</td>
             </table>
             
             <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
             <div class="modal-wrap" id="modal-wrap${item.id}">
                 <div class="modal_contents">
-                    <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
-                    <a href="#"><div class="modal_close" onClick="javascript:popClose(${item.id});">Close</div></a>
+                    <div style="display:flex;justify-content: space-between; align-items:center;">
+                        <div style="font-size:20px;display:inline-block;">
+                            [${item.category}] ${item.place_name}
+                        </div>
+                        <a href="#">
+                            <div class="modal_close" onClick="javascript:popClose(${item.id});">
+                                Close
+                            </div>
+                        </a>
+                    </div>
                     <hr>
                     
                     <img src="${item.place_img}" style='width:300px;height:180px;')>
@@ -426,7 +432,6 @@ async function NewUserPlaceListView(place_id, category, page) {
                     <div class="modal_map" id="map${item.id}">
                 </div>
             </div>
-
             <div class="dlt-modal-bg" id="dlt-modal-bg${item.id}"onClick="javascript:DltPopClose(${item.id});"></div>
             <div class="dlt-modal-wrap" id="dlt-modal-wrap${item.id}">
                 <div class="dlt_modal_contents">
@@ -438,10 +443,8 @@ async function NewUserPlaceListView(place_id, category, page) {
                         <a href="#"><div class="modal_close" onClick="DeletePlaceView(${item.id})">Delete</div></a>
                         <a href="#"><div class="modal_close" onClick="javascript:DltPopClose(${item.id});">Close</div></a>
                     </div>
-
                 </div>
             </div>
-
             `
         )
 
@@ -450,9 +453,9 @@ async function NewUserPlaceListView(place_id, category, page) {
             center: new naver.maps.LatLng(`${item.latitude}`, `${item.longitude}`),
             zoom: 16
         }
-        
-        var contentString = 
-        `<div class="iw_inner">
+
+        var contentString =
+            `<div class="iw_inner">
             [${item.category}]  ${item.place_name}<br>
             ${item.place_address}<br>
             ☎${item.place_number}<br>
@@ -470,7 +473,7 @@ async function NewUserPlaceListView(place_id, category, page) {
             }
         });
 
-        
+
         let infoWindows = new Array();
         // infowindow 내용
         var infowindow = new naver.maps.InfoWindow({
@@ -481,11 +484,11 @@ async function NewUserPlaceListView(place_id, category, page) {
             pixelOffset: new naver.maps.Point(0, -10),
         });
 
-        
+
         infoWindows.push(infowindow)
 
         // infowindow 클릭
-        naver.maps.Event.addListener(marker, "click", function(e) {
+        naver.maps.Event.addListener(marker, "click", function (e) {
             if (infowindow.getMap()) {
                 infowindow.close();
             } else {
@@ -513,56 +516,109 @@ async function UserPlaceListView(cate_id, page) {
     const str_payload = JSON.parse(storage)
 
     // 페이지네이션
-    if (response_json.next== null) {
-        if (parseInt(response_json.count%10) !== 0){
+    if (response_json.next == null) {
+        if (parseInt(response_json.count % 10) !== 0) {
             if (response_json.count <= 10) {
                 const page_no = 1
                 const last_page_no = 1
                 pagenation(page_no, last_page_no, cate_id)
             } else {
-                const last_page_no = parseInt(response_json.count/10)+1
+                const last_page_no = parseInt(response_json.count / 10) + 1
                 const page_no = last_page_no
                 pagenation(page_no, last_page_no, cate_id)
             }
         } else {
-            const page_no = parseInt(response_json.count/10)
-            const last_page_no = parseInt(response_json.count/10)
-            pagenation(page_no, last_page_no, cate_id)
-        }        
-    } else {
-        if (parseInt(response_json.count%10) !== 0){
-            const page_no = response_json.next.split('=')[1].split('/')[0]-1
-            const last_page_no = parseInt(response_json.count/10)+1
-            pagenation(page_no, last_page_no, cate_id)
-        }else{
-            const page_no = response_json.next.split('=')[1].split('/')[0]-1
-            const last_page_no = parseInt(response_json.count/10)
+            const page_no = parseInt(response_json.count / 10)
+            const last_page_no = parseInt(response_json.count / 10)
             pagenation(page_no, last_page_no, cate_id)
         }
-        
+    } else {
+        if (parseInt(response_json.count % 10) !== 0) {
+            const page_no = response_json.next.split('=')[1].split('/')[0] - 1
+            const last_page_no = parseInt(response_json.count / 10) + 1
+            pagenation(page_no, last_page_no, cate_id)
+        } else {
+            const page_no = response_json.next.split('=')[1].split('/')[0] - 1
+            const last_page_no = parseInt(response_json.count / 10)
+            pagenation(page_no, last_page_no, cate_id)
+        }
+
     }
 
 
     //장소 추천 리스트
     $('#place-list').empty()
     response_json.results.forEach(item => {
-        $('#place-list').append(
-            `<table cellpadding="0" cellspacing="0" border="0">
-            <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
+        if (item.place_img) {
+            $('#place-list').append(
+                `<table cellpadding="0" cellspacing="0" border="0">
+                <td width="30%"><img class="place-item-img" src="${item.place_img}")></td>
+                <td width="70%">
+                    <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
+                    <div>${item.place_address}</div>
+                    <div style="display:inline-block;">☎${item.place_number}</div>
+                    <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
+                    <a href="#" class="btn-open" onClick="javascript:DltPopOpen(${item.id});"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
+                <td class="item-rating" width="10%">${item.rating}</td>
+            </table>
+            
+            <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
+            <div class="modal-wrap" id="modal-wrap${item.id}">
+                <div class="modal_contents">
+                        <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
+                        <a href="#">
+                            <div class="modal_close" onClick="javascript:popClose(${item.id});">
+                                Close
+                        </a>
+                    </div>
+                    <hr>
+                    <img src="${item.place_img}" style='width:300px;height:180px;')>
+                    <p style="font-size:15px;">주소 : ${item.place_address}</p>
+                    <p style="font-size:15px;">전화번호 : ☎ ${item.place_number}</p>
+                    <p style="font-size:15px;">영업시간 : ${item.place_time}</p>
+                </div>
+                    <div class="modal_map" id="map${item.id}">
+                </div>
+            </div>
+    
+            <div class="dlt-modal-bg" id="dlt-modal-bg${item.id}"onClick="javascript:DltPopClose(${item.id});"></div>
+            <div class="dlt-modal-wrap" id="dlt-modal-wrap${item.id}">
+                <div class="dlt_modal_contents">
+                    <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
+                    <a href="#"><div class="modal_close" onClick="javascript:popClose(${item.id});">Close</div></a>
+                    <hr>
+                    <img src="${item.place_img}" style='width:300px;height:180px;')>
+                    <p style="font-size:15px;">정말 해당 장소를 삭제하시겠습니까?</p>
+    
+                </div>
+                    <div class="modal_map" id="map${item.id}">
+                </div>
+            </div>
+                    
+                `
+            )
+        } else {
+            $('#place-list').append(
+                `<table cellpadding="0" cellspacing="0" border="0">
+            <td width="30%"><img class="place-item-img" src='https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg')></td>
             <td width="70%">
-                <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
+                <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                 <div>${item.place_address}</div>
                 <div style="display:inline-block;">☎${item.place_number}</div>
                 <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
                 <a href="#" class="btn-open" onClick="javascript:DltPopOpen(${item.id});"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
-            <td width="10%">${item.rating}</td>
+            <td class="item-rating" width="10%">${item.rating}</td>
         </table>
         
         <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
         <div class="modal-wrap" id="modal-wrap${item.id}">
             <div class="modal_contents">
-                <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
-                <a href="#"><div class="modal_close" onClick="javascript:popClose(${item.id});">Close</div></a>
+                    <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
+                    <a href="#">
+                        <div class="modal_close" onClick="javascript:popClose(${item.id});">
+                            Close
+                    </a>
+                </div>
                 <hr>
                 <img src="${item.place_img}" style='width:300px;height:180px;')>
                 <p style="font-size:15px;">주소 : ${item.place_address}</p>
@@ -572,7 +628,6 @@ async function UserPlaceListView(cate_id, page) {
                 <div class="modal_map" id="map${item.id}">
             </div>
         </div>
-
         <div class="dlt-modal-bg" id="dlt-modal-bg${item.id}"onClick="javascript:DltPopClose(${item.id});"></div>
         <div class="dlt-modal-wrap" id="dlt-modal-wrap${item.id}">
             <div class="dlt_modal_contents">
@@ -581,14 +636,15 @@ async function UserPlaceListView(cate_id, page) {
                 <hr>
                 <img src="${item.place_img}" style='width:300px;height:180px;')>
                 <p style="font-size:15px;">정말 해당 장소를 삭제하시겠습니까?</p>
-
             </div>
                 <div class="modal_map" id="map${item.id}">
             </div>
         </div>
                 
             `
-        )
+            )
+        }
+
 
         // 장소 삭제 버튼 생성
         if (storage !== null) {
@@ -596,15 +652,15 @@ async function UserPlaceListView(cate_id, page) {
                 ActiveDeleteButton(`${item.id}`)
             }
         }
-        
+
         //지도 API
         var mapOptions = {
             center: new naver.maps.LatLng(`${item.latitude}`, `${item.longitude}`),
             zoom: 16
         }
-        
-        var contentString = 
-        `<div class="iw_inner">
+
+        var contentString =
+            `<div class="iw_inner">
             [${item.category}]  ${item.place_name}<br>
             ${item.place_address}<br>
             ☎${item.place_number}<br>
@@ -622,7 +678,7 @@ async function UserPlaceListView(cate_id, page) {
             }
         });
 
-        
+
         let infoWindows = new Array();
         // infowindow 내용
         var infowindow = new naver.maps.InfoWindow({
@@ -633,11 +689,11 @@ async function UserPlaceListView(cate_id, page) {
             pixelOffset: new naver.maps.Point(0, -10),
         });
 
-        
+
         infoWindows.push(infowindow)
 
         // infowindow 클릭
-        naver.maps.Event.addListener(marker, "click", function(e) {
+        naver.maps.Event.addListener(marker, "click", function (e) {
             if (infowindow.getMap()) {
                 infowindow.close();
             } else {
@@ -649,7 +705,7 @@ async function UserPlaceListView(cate_id, page) {
 }
 
 
-function move_place_detail_page(place_id){
+function move_place_detail_page(place_id) {
     window.location.href = `/place_detail.html?id=${place_id}`
 }
 
@@ -662,5 +718,3 @@ async function DeletePlaceView(place_id) {
     })
     location.reload(true);
 }
-
-
