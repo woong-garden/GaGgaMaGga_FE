@@ -4,7 +4,10 @@ else{
     location.replace("login.html")
 }
 const place_id = location.href.split('?')[1].split('=')[1]
+const review_id = location.href.split('?')[1].split('=')[1]
 
+
+// 사진 미리보기\
 window.onload = () => {
     const realUpload = document.querySelector('.real-upload');
     const upload = document.querySelector('.upload');
@@ -12,7 +15,7 @@ window.onload = () => {
     upload.addEventListener('click', () => realUpload.click());
 
     function readMultipleImage(input) {
-        if (input.files && input.files[0]){
+        if (input.files && input.files[0]) {
             const reader = new FileReader()
 
             reader.onload = e => {
@@ -21,7 +24,7 @@ window.onload = () => {
             }
             reader.readAsDataURL(input.files[0])
         }
-        if (input.files && input.files[1]){
+        if (input.files && input.files[1]) {
             const reader = new FileReader()
 
             reader.onload = e => {
@@ -30,7 +33,7 @@ window.onload = () => {
             }
             reader.readAsDataURL(input.files[1])
         }
-        if (input.files && input.files[2]){
+        if (input.files && input.files[2]) {
             const reader = new FileReader()
 
             reader.onload = e => {
@@ -41,12 +44,15 @@ window.onload = () => {
         }
     }
     const inputImage = document.querySelector('.real-upload')
-    inputImage.addEventListener('change', e=> {
+    inputImage.addEventListener('change', e => {
         readMultipleImage(e.target)
     })
 }
 
-async function uploadReview() {
+
+// 리뷰 작성
+async function createReview() {
+    // 별점
     const content = document.querySelector("textarea")
     const starOne = document.querySelector('#rate1')
     const starTwo = document.querySelector('#rate2')
@@ -54,56 +60,83 @@ async function uploadReview() {
     const starFour = document.querySelector('#rate4')
     const starFive = document.querySelector('#rate5')
 
-    if(starOne.checked){
+
+    // 경고문
+    const overImageAlert = document.querySelector('#over-image-alert')
+    const imageAlert = document.querySelector('#image-alert')
+    const contentAlert = document.querySelector('#content-alert')
+    const starAlert = document.querySelector('#star-alert')
+
+    overImageAlert.style.display = "none"
+    imageAlert.style.display = "none"   
+    contentAlert.style.display = "none"
+    starAlert.style.display = "none"
+
+    if (starOne.checked) {
         content.classList.add('1');
-        content.classList.remove("2","3","4","5");
+        content.classList.remove("2", "3", "4", "5");
     }
 
 
-    if(starTwo.checked){
+    if (starTwo.checked) {
         content.classList.add('2');
-        content.classList.remove("1","3","4","5");
+        content.classList.remove("1", "3", "4", "5");
     }
-    if(starThree.checked){
+    if (starThree.checked) {
         content.classList.add('3');
-        content.classList.remove("2","1","4","5");
+        content.classList.remove("2", "1", "4", "5");
     }
 
-    if(starFour.checked){
+    if (starFour.checked) {
         content.classList.add('4');
-        content.classList.remove("2","3","1","5");
+        content.classList.remove("2", "3", "1", "5");
     }
-    if(starFive.checked){
+    if (starFive.checked) {
         content.classList.add('5');
-        content.classList.remove("2","3","4","1");
+        content.classList.remove("2", "3", "4", "1");
     }
+
 
     let cls = content.getAttribute("class");
-    console.log(cls)
-    cls = cls.toString()
+
+    if (cls) {
+        cls = cls.toString()
+    } else {
+        starAlert.style.display = "block"
+    }
+
     const images = document.querySelector('.real-upload');
 
 
-    var formData = new FormData()
-    formData.append("rating_cnt", cls)
-    formData.append("content", content.value)
-    formData.append("review_image_one", images.files[0])
-    formData.append("review_image_two", images.files[1])
-    formData.append("review_image_three", images.files[2])
+    if (content.value) {
 
-    const response = await fetch(`${backendBaseUrl}/reviews/${place_id}/`, {
-        headers: {
-            "authorization": "Bearer " + localStorage.getItem("access")
-        },
-        method: 'POST',
-        cache:'no-cache',
-        body: formData
-    })
+        if (images.files.length == 3) {
+            var formData = new FormData()
+            formData.append("rating_cnt", cls)
+            formData.append("content", content.value)
+            formData.append("review_image_one", images.files[0])
+            formData.append("review_image_two", images.files[1])
+            formData.append("review_image_three", images.files[2])
 
-
-    if (response.status === 201) {
-    alert("후기 등록 완료")
-    window.history.back()}
-    console.log(response)
-    console.log(response.status)
+            await fetch(`${backendBaseUrl}/reviews/${place_id}/`, {
+                headers: {
+                    "authorization": "Bearer " + localStorage.getItem("access")
+                },
+                method: 'POST',
+                cache: 'no-cache',
+                body: formData
+            })
+            alert("리뷰 생성 완료했습니다.")
+            window.history.back()
+        }
+        else if (images.files.length > 3) {
+            overImageAlert.style.display = "block"
+        }
+        else {
+            imageAlert.style.display = "block"
+        }
+    }
+    else {
+        contentAlert.style.display = "block"
+    }
 }
