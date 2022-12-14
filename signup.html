@@ -43,9 +43,16 @@
             <input style="margin:4px 10px 10px 10px;" type="password" id="repassword" placeholder="비밀번호 재확인을 입력해주세요.">
 
             <h5>휴대폰 번호 (선택사항)</h5>
-            <input style="margin:4px 10px 10px 10px;" type="tel" id="phone_number" placeholder="-를 제외한 휴대폰 번호 입력해주세요.">
+            <div><input style="margin:4px 10px 10px 10px;" type="tel" id="phone_number" placeholder="-를 제외한 휴대폰 번호 입력해주세요."></div>
             
-            <input type="checkbox" id="term_check">
+
+                <div style="display: flex;justify-content: center;align-items: center;">
+                    <input style="width:20px; height: 20px;" type="checkbox" id="term_check">
+                    <a class="terms-of-service-move" href="https://teamsparta.notion.site/247d57da1322424d8e8c551df21a048e" target="_blank">이용약관 동의</a><span class="text-color">(필수)</span>
+                    
+                </div>
+            
+
             <div class="alert alert-danger" style="font-size:15px" id="alert-danger"></div>
 
             <div id="buttons">
