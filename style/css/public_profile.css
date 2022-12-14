@@ -17,7 +17,7 @@ left:50%;
 background-color: #fff;
 transform: translate(-50%, 0%);
 overflow: auto;
-border: solid 1px rgba(219, 219, 219, 1);
+box-shadow: 0 0 20px rgb(0 0 0 / 5%);
 }
 .root_block{
     margin-top:48px;
@@ -76,6 +76,7 @@ border: solid 1px rgba(219, 219, 219, 1);
 .nav-bar{
     background-color: #fff;
     height: 48px;
+    box-shadow: 0 0 20px rgb(0 0 0 / 5%);
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -230,6 +231,7 @@ border: solid 1px rgba(219, 219, 219, 1);
     width: 150px;
     height: 150px;
     cursor: pointer;
+    border-radius: 8px;
 }
 
 .review-content-info{
@@ -262,4 +264,5 @@ border: solid 1px rgba(219, 219, 219, 1);
     width: 150px;
     height: 150px;
     cursor: pointer;
+    border-radius: 8px;
 }
