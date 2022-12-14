@@ -1,16 +1,9 @@
-
 const payload = localStorage.getItem("payload");
 const payload_parse = JSON.parse(payload);
 
 
 
-
-
-
-
-
 // 알람 
-console.log(payload_parse.user_id)
 const notificationSocket = new WebSocket(
     'ws://'
     + "127.0.0.1:8000"

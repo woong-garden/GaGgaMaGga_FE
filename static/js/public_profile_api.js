@@ -286,13 +286,14 @@ function move_to_edit_page(place_id, review_id){
 }
 
 
-function delete_review(place_id, review_id){
-    fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
+async function delete_review(place_id, review_id){
+    await fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
         method: 'DELETE',
     })
+    document.querySelector('#my-review').innerHTML = ""
     public_profile()
     document.querySelector('.profile-button2').click()
 }

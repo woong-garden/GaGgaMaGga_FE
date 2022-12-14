@@ -21,12 +21,12 @@ window.onload = function () {
 const payload = localStorage.getItem("payload");
 const payload_parse = JSON.parse(payload);
 
-
-
-
-
-
-
+var _showPage = function() {
+    var loader = $("div.loader");
+    var container = $("div.tbl-content");
+    loader.css("display","none");
+    container.css("display","block");
+};
 
 // 알람 
 console.log(payload_parse.user_id)
@@ -516,9 +516,3 @@ async function DeletePlaceView(place_id) {
 }
 
 
-var _showPage = function() {
-    var loader = $("div.loader");
-    var container = $("div.tbl-content");
-    loader.css("display","none");
-    container.css("display","block");
-};
