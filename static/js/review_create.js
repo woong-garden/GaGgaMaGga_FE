@@ -91,7 +91,7 @@ async function uploadReview() {
     formData.append("review_image_two", images.files[1])
     formData.append("review_image_three", images.files[2])
 
-    await fetch(`${backendBaseUrl}/reviews/${place_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/reviews/${place_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
@@ -99,6 +99,11 @@ async function uploadReview() {
         cache:'no-cache',
         body: formData
     })
+
+
+    if (response.status === 201) {
     alert("후기 등록 완료")
-    window.history.back()
+    window.history.back()}
+    console.log(response)
+    console.log(response.status)
 }

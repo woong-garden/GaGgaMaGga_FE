@@ -34,79 +34,79 @@
     
 
 
-    const response = await fetch(`${backendBaseUrl}/notification/${ JSON.parse(localStorage.getItem("payload")).user_id}/`, {
-        headers: {
-            "authorization": "Bearer " + localStorage.getItem("access")
-        },
-        method: 'GET'
-    })
-    .then(response => response.json())
+//     const response = await fetch(`${backendBaseUrl}/notification/${ JSON.parse(localStorage.getItem("payload")).user_id}/`, {
+//         headers: {
+//             "authorization": "Bearer " + localStorage.getItem("access")
+//         },
+//         method: 'GET'
+//     })
+//     .then(response => response.json())
 
-    const notificationButton = document.createElement('button')
-    const notificationButtonText = document.createTextNode('확인')
-    notificationButton.appendChild(notificationButtonText)
-    notificationButton.onclick = async function () {
-        await fetch(`${backendBaseUrl}/notification/alarm/${response[0].id}/`, {
-            headers: {
-                'content-type': 'application/json',
-                "authorization": "Bearer " + localStorage.getItem("access")
-            },
-            method: 'PUT',
-            body: ''
-        })
-        alarmBox.innerHTML = ""
-        getNotification()
-    }
-    alarmContent.appendChild(notificationButton)
+//     const notificationButton = document.createElement('button')
+//     const notificationButtonText = document.createTextNode('확인')
+//     notificationButton.appendChild(notificationButtonText)
+//     notificationButton.onclick = async function () {
+//         await fetch(`${backendBaseUrl}/notification/alarm/${response[0].id}/`, {
+//             headers: {
+//                 'content-type': 'application/json',
+//                 "authorization": "Bearer " + localStorage.getItem("access")
+//             },
+//             method: 'PUT',
+//             body: ''
+//         })
+//         alarmBox.innerHTML = ""
+//         getNotification()
+//     }
+//     alarmContent.appendChild(notificationButton)
 
-    alarmBox.appendChild(alarmContent)
-};
+//     alarmBox.appendChild(alarmContent)
+// };
 
-notificationSocket.onclose = function (e) {
-    console.error('소켓이 닫혔어요 ㅜㅜ');
-};
-
-
-getNotification()
-async function getNotification() {
-
-    const response = await fetch(`${backendBaseUrl}/notification/${ JSON.parse(localStorage.getItem("payload")).user_id}/`, {
-        headers: {
-            "authorization": "Bearer " + localStorage.getItem("access")
-        },
-        method: 'GET'
-    })
-    .then(response => response.json())
-    response.forEach(notification => {
-        const alarmBox = document.querySelector('.alarm')
+// notificationSocket.onclose = function (e) {
+//     console.error('소켓이 닫혔어요 ㅜㅜ');
+// };
 
 
-        let alarmContent = document.createElement('div')
-        alarmContent.setAttribute("id", `alarm${notification.id}`)
-        alarmContent.innerHTML = notification.content
-        alarmContent.style.display = "flex"
-        alarmContent.style.height = "10vh"
-        alarmBox.appendChild(alarmContent)
+// getNotification()
+// async function getNotification() {
 
-        const notificationButton = document.createElement('button')
-        const notificationButtonText = document.createTextNode('확인')
-        notificationButton.appendChild(notificationButtonText)
-        notificationButton.onclick = async function () {
-            await fetch(`${backendBaseUrl}/notification/alarm/${notification.id}/`, {
-                headers: {
-                    'content-type': 'application/json',
-                    "authorization": "Bearer " + localStorage.getItem("access")
-                },
-                method: 'PUT',
-                body: ''
-            })
-            alarmBox.innerHTML = ""
-            getNotification()
+//     const response = await fetch(`${backendBaseUrl}/notification/${ JSON.parse(localStorage.getItem("payload")).user_id}/`, {
+//         headers: {
+//             "authorization": "Bearer " + localStorage.getItem("access")
+//         },
+//         method: 'GET'
+//     })
+//     .then(response => response.json())
+//     response.forEach(notification => {
+//         const alarmBox = document.querySelector('.alarm')
 
-        }
 
-        alarmContent.appendChild(notificationButton)
-    })
-}
+//         let alarmContent = document.createElement('div')
+//         alarmContent.setAttribute("id", `alarm${notification.id}`)
+//         alarmContent.innerHTML = notification.content
+//         alarmContent.style.display = "flex"
+//         alarmContent.style.height = "10vh"
+//         alarmBox.appendChild(alarmContent)
+
+//         const notificationButton = document.createElement('button')
+//         const notificationButtonText = document.createTextNode('확인')
+//         notificationButton.appendChild(notificationButtonText)
+//         notificationButton.onclick = async function () {
+//             await fetch(`${backendBaseUrl}/notification/alarm/${notification.id}/`, {
+//                 headers: {
+//                     'content-type': 'application/json',
+//                     "authorization": "Bearer " + localStorage.getItem("access")
+//                 },
+//                 method: 'PUT',
+//                 body: ''
+//             })
+//             alarmBox.innerHTML = ""
+//             getNotification()
+
+//         }
+
+//         alarmContent.appendChild(notificationButton)
+//     })
+// }
 
 

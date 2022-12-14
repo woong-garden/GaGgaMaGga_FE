@@ -145,6 +145,8 @@ async function logout(){
             localStorage.removeItem("refresh")
             localStorage.removeItem("payload")
             localStorage.removeItem("kakao")
+            localStorage.removeItem("nickname")
+            localStorage.removeItem("review_cnt")
             alert("로그아웃 완료")
             window.location.replace('login.html')
 
