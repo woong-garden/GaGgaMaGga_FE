@@ -1,17 +1,3 @@
-const payload = localStorage.getItem("payload");
-const payload_parse = JSON.parse(payload);
-
-
-
-// 알람 
-const notificationSocket = new WebSocket(
-    'ws://'
-    + "127.0.0.1:8000"
-    + '/ws/notification/'
-    + payload_parse.user_id
-    + '/'
-);
-
 notificationSocket.onmessage = async function (e) {
     const data = JSON.parse(e.data);
     const alarmBox = document.querySelector('.alarm')
@@ -24,7 +10,7 @@ notificationSocket.onmessage = async function (e) {
         alarmBox.appendChild(alarmContent)
 
 
-    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
+    const response = await fetch(`http://127.0.0.1:8000/notification/${JSON.parse(localStorage.getItem("payload")).user_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },

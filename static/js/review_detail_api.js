@@ -3,7 +3,7 @@ const place_id = location.href.split('?')[1].split('&')[1].split('=')[1]
 const author_id = location.href.split('?')[1].split('&')[2].split('=')[1]
 
 const payload = localStorage.getItem("payload");
-const payload_parse = JSON.parse(payload);
+const payload_parse = JSON.parse(localStorage.getItem("payload"));
 
 //시간 포맷팅
 function time2str(date_now) {
