@@ -66,7 +66,6 @@ notificationSocket.onclose = function (e) {
 };
 
 
-
 getNotification()
 async function getNotification() {
 
@@ -88,7 +87,6 @@ async function getNotification() {
         alarmContent.style.height = "10vh"
         alarmBox.appendChild(alarmContent)
 
-        // const alarmButton = `<button onclick="read(${notification.id})"></button>`
         const notificationButton = document.createElement('button')
         const notificationButtonText = document.createTextNode('확인')
         notificationButton.appendChild(notificationButtonText)
