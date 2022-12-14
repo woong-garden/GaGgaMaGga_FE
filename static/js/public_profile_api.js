@@ -73,7 +73,7 @@ async function public_profile() {
                 <div class="review-box">
                     <div>
                         <img class="review-content-img" 
-                        onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
+                        onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
                     </div>
                     <div class="review-content-info">
                         <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>

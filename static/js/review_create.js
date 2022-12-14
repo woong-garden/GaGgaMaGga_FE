@@ -1,6 +1,7 @@
 const place_id = location.href.split('?')[1].split('=')[1]
+const review_id = location.href.split('?')[1].split('=')[1]
 
-
+// 사진 미리보기
 window.onload = () => {
     const realUpload = document.querySelector('.real-upload');
     const upload = document.querySelector('.upload');
@@ -42,7 +43,9 @@ window.onload = () => {
     })
 }
 
-async function uploadReview() {
+
+// 리뷰 작성
+async function createReview() {
     const content = document.querySelector("textarea")
     const starOne = document.querySelector('#rate1')
     const starTwo = document.querySelector('#rate2')
