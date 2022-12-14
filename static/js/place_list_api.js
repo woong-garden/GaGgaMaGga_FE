@@ -73,6 +73,147 @@ function DltPopClose(id) {
     $(modalBg).hide();
 }
 
+function pagenation(page_no, last_page_no, place_id, category, page) {
+    console.log(page_no)
+    console.log(last_page_no)
+    if ((page_no==1)&(last_page_no == 1)){
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div class="current_page">${page_no}</div></a>
+            >
+        `)
+    }else if ((page_no == 1)&(last_page_no == 2)) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div class="current_page">${page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
+            >
+        `)
+    }else if ((page_no == 2)&(last_page_no == 2)) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div class="current_page">${page_no}</div></a>
+            >
+        `)
+    } else if ((page_no == 1)&(last_page_no == 3)) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div class="current_page">${page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
+            >
+        `)
+    } else if ((page_no == 2)&(last_page_no == 3)) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div class="current_page">${page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
+            >
+        `)
+    } else if ((page_no == 3)&(last_page_no == 3)) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div class="current_page">${page_no}</div></a>
+
+            >
+        `)
+    } else if (page_no == 1) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div class="current_page">${page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
+            >
+        `)
+    } else if (page_no == 2) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div class="current_page">${page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
+            >
+        `)
+    }else if (page_no == last_page_no) {
+        console.log("마지막 페이지")
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div class="current_page">${page_no}</div></a>
+            >
+        `)
+    }else if (page_no == last_page_no-1) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div class="current_page">${page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
+            >
+        `)
+    }else if (page_no == last_page_no-2) {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div class="current_page">${page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+2})">${page_no+2}</div></a>
+
+            >
+        `)
+    } else {
+        $('#pagenation').empty()
+        $('#pagenation').append(
+        `
+            <
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
+            <a href="#"><div class="current_page">${page_no}</div></a>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
+            <div>...</div>
+            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
+            >
+        `
+    )
+    }
+}
+
+
 
 
 //select
@@ -89,72 +230,36 @@ async function NewUserPlaceListView(place_id, category, page) {
     const str_payload = JSON.parse(storage)
 
     // 페이지네이션
-    const page_no = response_json.next.split('=')[1].split('/')[0]
-    const last_page_no = parseInt(response_json.count/10)
-    if (page_no-1 == 1) {
-        $('#pagenation').empty()
-        $('#pagenation').append(
-        `
-            <
-            <a href="#"><div class="current_page">${page_no-1}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
-            <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
-            >
-        `
-    )
-    } else if (page_no-1 == 2)  {
-        $('#pagenation').empty()
-        $('#pagenation').append(
-        `
-            <
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
-            <a href="#"><div class="current_page">${page_no-1}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
-            <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
-            >
-        `)
-    }else if (page_no-1 == last_page_no) {
-        $('#pagenation').empty()
-        $('#pagenation').append(
-        `
-            <
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
-            <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
-            <a href="#"><div class="current_page">${page_no-1}</div></a>
-            >
-        `
-    )
-    } else if (page_no-1 == last_page_no-1) {
-        $('#pagenation').empty()
-        $('#pagenation').append(
-        `
-            <
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
-            <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
-            <a href="#"><div class="current_page">${page_no-1}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
-            >
-        `)
-    }else {
-        $('#pagenation').empty()
-        $('#pagenation').append(
-        `
-            <
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
-            <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
-            <a href="#"><div class="current_page">${page_no-1}</div></a>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no})">${page_no}</div></a>
-            <div>...</div>
-            <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
-            >
-        `
-    )
+    if (response_json.next== null) {
+        if (parseInt(response_json.count%10) !== 0){
+            if (response_json.count <= 10) {
+                const page_no = 1
+                const last_page_no = 1
+                pagenation(page_no, last_page_no, place_id, category, page)
+            } else {
+                const last_page_no = parseInt(response_json.count/10)+1
+                const page_no = last_page_no
+                pagenation(page_no, last_page_no, place_id, category, page)
+            }
+        } else {
+            const page_no = parseInt(response_json.count/10)
+            const last_page_no = parseInt(response_json.count/10)
+            pagenation(page_no, last_page_no, place_id, category, page)
+        }        
+    } else {
+        if (parseInt(response_json.count%10) !== 0){
+            const page_no = response_json.next.split('=')[1].split('/')[0]-1
+            const last_page_no = parseInt(response_json.count/10)+1
+            pagenation(page_no, last_page_no, place_id, category, page)
+        }else{
+            const page_no = response_json.next.split('=')[1].split('/')[0]-1
+            const last_page_no = parseInt(response_json.count/10)
+            pagenation(page_no, last_page_no, place_id, category, page)
+        }
+        
     }
+    
+    
 
     //장소 추천 리스트
     $('#place-list').empty()
