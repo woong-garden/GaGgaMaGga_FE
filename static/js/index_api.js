@@ -18,7 +18,7 @@ window.onload = function(){
 
 //카카오 로그인 back으로 전달
 async function kakaoLoginApi(kakao_code) {
-    const response = await fetch(`http://127.0.0.1:8000/users/kakao/`, {
+    const response = await fetch(`${backendBaseUrl}/users/kakao/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

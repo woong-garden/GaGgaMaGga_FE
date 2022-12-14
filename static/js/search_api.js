@@ -1,46 +1,3 @@
-notificationSocket.onmessage = async function (e) {
-    const data = JSON.parse(e.data);
-    const alarmBox = document.querySelector('.alarm')
-
-
-        const alarmContent = document.createElement('div')
-        alarmContent.style.display = "flex"
-        alarmContent.style.height = "10vh"
-        alarmContent.innerHTML = data.message
-        alarmBox.appendChild(alarmContent)
-
-
-    const response = await fetch(`http://127.0.0.1:8000/notification/${JSON.parse(localStorage.getItem("payload")).user_id}/`, {
-        headers: {
-            "authorization": "Bearer " + localStorage.getItem("access")
-        },
-        method: 'GET'
-    })
-    .then(response => response.json())
-
-    const notificationButton = document.createElement('button')
-    const notificationButtonText = document.createTextNode('확인')
-    notificationButton.appendChild(notificationButtonText)
-    notificationButton.onclick = async function () {
-        await fetch(`http://127.0.0.1:8000/notification/alarm/${response[0].id}/`, {
-            headers: {
-                'content-type': 'application/json',
-                "authorization": "Bearer " + localStorage.getItem("access")
-            },
-            method: 'PUT',
-            body: ''
-        })
-        alarmBox.innerHTML = ""
-        getNotification()
-    }
-    alarmContent.appendChild(notificationButton)
-
-    alarmBox.appendChild(alarmContent)
-};
-
-notificationSocket.onclose = function (e) {
-    console.error('소켓이 닫혔어요 ㅜㅜ');
-};
 
 
 
@@ -58,7 +15,7 @@ async function searchParam(){
     const decodeResult = decodeURI(getLink_result);
 
     if(decodeResult){
-        const response = await fetch(`http://127.0.0.1:8000/places/search/?keyword=${decodeResult}`,{
+        const response = await fetch(`${backendBaseUrl}/places/search/?keyword=${decodeResult}`,{
             headers:{
                 'content-type':'application/json'
             },

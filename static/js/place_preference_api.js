@@ -13,7 +13,7 @@ window.onload = function(){
 
 //select
 async function PlaceSelectView(choice_no){
-    const response = await fetch(`http://127.0.0.1:8000/places/selection/${choice_no}/`, {
+    const response = await fetch(`${backendBaseUrl}/places/selection/${choice_no}/`, {
         method: 'GET',
         headers: {
             "Content-type": "application/json",
