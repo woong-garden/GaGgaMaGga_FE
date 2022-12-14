@@ -8,8 +8,18 @@ const review_id = location.href.split('?')[1].split('&')[0].split('=')[1]
 const place_id = location.href.split('?')[1].split('&')[1].split('=')[1]
 const author_id = location.href.split('?')[1].split('&')[2].split('=')[1]
 
-const payload = localStorage.getItem("payload");
-const payload_parse = JSON.parse(localStorage.getItem("payload"));
+// 모달창 열기
+function openModal() {
+    const modalBox = document.querySelector('#modal-box')
+    modalBox.style.display = "block"
+}
+
+
+// 모달창 닫기
+function closeModal() {
+    const modalBox = document.querySelector('#modal-box')
+    modalBox.style.display = "none"
+}
 
 //시간 포맷팅
 function time2str(date_now) {
@@ -31,6 +41,7 @@ function time2str(date_now) {
 };
 
 window.onload = () => {
+    getNotification()
 
     // 엔터로만 덧글 등록
     document.querySelector(".nav-input-wrap input").focus();
@@ -73,7 +84,7 @@ async function getData(review_id, place_id) {
         .then(response => response.json())
 
     const reviewLikeHeart = document.querySelector('.comment-cnt img')
-    if (response.review_like.includes(payload_parse.user_id)) {
+    if (response.review_like.includes(JSON.parse(localStorage.getItem("payload")).user_id)) {
         reviewLikeHeart.src = "https://cdn-icons-png.flaticon.com/512/2107/2107845.png"
     }
     else {
@@ -105,7 +116,6 @@ async function getData(review_id, place_id) {
 
     const likeCount = document.querySelector('#like-count')
     likeCount.innerText = response.review_like.length
-    console.log(response.review_like)
 
     const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
     firstImage.src = `${backendBaseUrl}` + response.review_image_one
@@ -215,7 +225,7 @@ async function getData(review_id, place_id) {
         const commentLike = document.createElement("img")
         commentLike.classList.add('comment-like-img')
         commentLike.src = "https://cdn-icons-png.flaticon.com/512/2107/2107845.png"
-        // if (cmt.comment_like.includes(payload_parse.user_id)) {
+        // if (cmt.comment_like.includes(JSON.parse(localStorage.getItem("payload")).user_id)) {
         //     commentLike.src = "https://cdn-icons-png.flaticon.com/512/2107/2107845.png"
         // }
         // else {
@@ -381,7 +391,7 @@ async function getData(review_id, place_id) {
             recommentEditBox.appendChild(recommentLikeCount)
 
 
-            if (recmt.user_id == payload_parse.user_id) {
+            if (recmt.user_id == JSON.parse(localStorage.getItem("payload")).user_id) {
 
                 // 대댓글 수정 버튼 생성
                 const editRecomment = document.createElement('button')
@@ -520,7 +530,7 @@ async function getData(review_id, place_id) {
 
 
         // 덧글 수정 버튼
-        if (payload_parse.user_id == cmt.user_id) {
+        if (JSON.parse(localStorage.getItem("payload")).user_id == cmt.user_id) {
             const editComment = document.createElement('button')
             var editText = document.createTextNode('덧글 수정')
             editComment.appendChild(editText)
@@ -639,65 +649,107 @@ async function writeComment() {
 // );
 
 
-
-// notificationSocket.onmessage = async function (e) {
-//     const data = JSON.parse(e.data);
-//     const alarmBox = document.querySelector('.alarm')
-//     if (payload_parse.user_id == author_id) {
-
-
-//         const alarmContent = document.createElement('div')
-//         alarmContent.style.display = "flex"
-//         alarmContent.style.height = "10vh"
-//         alarmContent.innerHTML = data.message
-//         alarmBox.appendChild(alarmContent)
-    
-
-//     const response = await fetch(`${backendBaseUrl}/notification/${payload_parse.user_id}/`, {
-//         headers: {
-//             "authorization": "Bearer " + localStorage.getItem("access")
-//         },
-//         method: 'GET'
-//     })
-//     .then(response => response.json())
-
-//     const notificationButton = document.createElement('button')
-//     const notificationButtonText = document.createTextNode('확인')
-//     notificationButton.appendChild(notificationButtonText)
-//     notificationButton.onclick = async function () {
-//         await fetch(`${backendBaseUrl}/notification/alarm/${response[0].id}/`, {
-//             headers: {
-//                 'content-type': 'application/json',
-//                 "authorization": "Bearer " + localStorage.getItem("access")
-//             },
-//             method: 'PUT',
-//             body: ''
-//         })
-//         alarmBox.innerHTML = ""
-//         getNotification()
-//     }
-//     alarmContent.appendChild(notificationButton)
-// }
-// };
-
-
 // notificationSocket.onclose = function (e) {
 //     console.error('소켓이 닫혔어요 ㅜㅜ');
 // };
 
 
+
+// notificationSocket.onmessage = async function (e) {
+//     const data = JSON.parse(e.data);
+//     const alarmBox = document.querySelector('.alarm')
+
+
+//     if (JSON.parse(localStorage.getItem("payload")).user_id == author_id) {
+//         const alarmContent = document.createElement('div')
+//         alarmContent.style.display = "flex"
+//         alarmContent.style.height = "10vh"
+//         alarmContent.innerHTML = data.message
+//         alarmBox.appendChild(alarmContent)
+
+//         const response = await fetch(`http://127.0.0.1:8000/notification/${JSON.parse(localStorage.getItem("payload")).user_id}/`, {
+//             headers: {
+//                 "authorization": "Bearer " + localStorage.getItem("access")
+//             },
+//             method: 'GET'
+//         })
+//             .then(response => response.json())
+
+//         const notificationButton = document.createElement('button')
+//         const notificationButtonText = document.createTextNode('확인')
+//         notificationButton.appendChild(notificationButtonText)
+//         notificationButton.onclick = async function () {
+//             await fetch(`${backendBaseUrl}/notification/alarm/${response[0].id}/`, {
+//                 headers: {
+//                     'content-type': 'application/json',
+//                     "authorization": "Bearer " + localStorage.getItem("access")
+//                 },
+//                 method: 'PUT',
+//                 body: ''
+//             })
+//             alarmBox.innerHTML = ""
+//             getNotification()
+//         }
+//         alarmContent.appendChild(notificationButton)
+//     }
+// };
+
+
+
+// async function getNotification() {
+
+//     const response = await fetch(`${backendBaseUrl}/notification/${JSON.parse(localStorage.getItem("payload")).user_id}/`, {
+//         headers: {
+//             "authorization": "Bearer " + localStorage.getItem("access")
+//         },
+//         method: 'GET'
+//     })
+//         .then(response => response.json())
+//     response.forEach(notification => {
+//         const alarmBox = document.querySelector('.alarm')
+
+
+//         let alarmContent = document.createElement('div')
+//         alarmContent.setAttribute("id", `alarm${notification.id}`)
+//         alarmContent.innerHTML = notification.content
+//         alarmContent.style.display = "flex"
+//         alarmBox.appendChild(alarmContent)
+
+
+//         const notificationButton = document.createElement('button')
+//         const notificationButtonText = document.createTextNode('확인')
+//         notificationButton.appendChild(notificationButtonText)
+//         notificationButton.onclick = async function () {
+//             await fetch(`${backendBaseUrl}/notification/alarm/${notification.id}/`, {
+//                 headers: {
+//                     'content-type': 'application/json',
+//                     "authorization": "Bearer " + localStorage.getItem("access")
+//                 },
+//                 method: 'PUT',
+//                 body: ''
+//             })
+//             alarmBox.innerHTML = ""
+//             getNotification()
+
+//         }
+
+//         alarmContent.appendChild(notificationButton)
+//     })
+// }
+
+
+
 // function alarm() {
-//     if (payload_parse.user_id != author_id) {
+//     if (JSON.parse(localStorage.getItem("payload")).user_id != author_id) {
 //         const message = `<img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon"><a style="cursor:pointer;margin:auto; text-decoration:none;" href="review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}">
 //         <p class="alarm-content">후기에 덧글이 달렸습니다.</p></a>`
 //         notificationSocket.send(JSON.stringify({
 //             'message': message,
 //             "author": author_id,
-//             "user_id": payload_parse.user_id
+//             "user_id": JSON.parse(localStorage.getItem("payload")).user_id
 //         }))
 //     }
 // }
-
 
 // review 신고 POST
 async function post_review_report() {

@@ -14,7 +14,7 @@
 }
 
 .modal-icon {
-    width: 60%;
+    width: 50%;
     vertical-align: middle;
 }
 
@@ -29,20 +29,22 @@
     cursor: pointer;
 }
 
+.alarm-content{
+    line-height : 8vh;
+}
+
 .alarm p {
-    width: 90%;
-    margin: auto;
-    vertical-align: middle;
+    height: 8vh;
 }
 
 #close-modal {
-    margin: 5vh auto;
+    margin: 3vh auto;
     background: #c8c8c8;
     border-radius: 32px;
     text-align: center;
     color: #fff;
     min-width: 80px;
-    height: 32px;
+    height: 5vh;
     border: none;
     cursor: pointer;
 
@@ -54,6 +56,8 @@
 }
 
 .alarm {
+    overflow: auto;
+    height: 45vh;
     display: flex;
     width: 90%;
     flex-direction: column;
