@@ -22,6 +22,7 @@ async function public_profile() {
 
 
     response_json = await response.json()
+    console.log(response_json)
 
 
     // 프로필
@@ -39,10 +40,19 @@ async function public_profile() {
     const profile_image = document.getElementById("profile_image")
     let image_url = response_json.profile_image
     profile_image.setAttribute("src", `${backendBaseUrl}${image_url}`)
+    console.log(JSON.parse(localStorage.getItem(['kakao'])).user_id)
+    console.log(JSON.parse(localStorage.getItem(['payload'])))
+    
 
-    var my_id = JSON.parse(localStorage.getItem(['payload'])).user_id
+    var my_id = ""
+    console.log(my_id)
+    if(JSON.parse(localStorage.getItem(['payload']))){
+        my_id = JSON.parse(localStorage.getItem(['payload'])).user_id
+    }else{
+        my_id = JSON.parse(localStorage.getItem(['kakao'])).user_id
+    }
+ 
     var profile_id = response_json.user_id
-
     // 본인 프로필에서 팔로우 버튼 숨김
     if (profile_id == my_id){
         document.getElementById('user_follow').style.display ="none"
@@ -228,7 +238,8 @@ function move_to_edit_page(place_id, review_id){
 
 
 async function delete_review(place_id, review_id){
-    await fetch(`${backendBaseUrl}/reviews/details/${place_id}/${review_id}/`, {
+    var delConfirm = confirm("리뷰를 삭제하시겠습니까?")
+    if (delConfirm) {await fetch(`${backendBaseUrl}/reviews/details/${place_id}/${review_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
@@ -237,4 +248,5 @@ async function delete_review(place_id, review_id){
     document.querySelector('#my-review').innerHTML = ""
     public_profile()
     document.querySelector('.profile-button2').click()
+}
 }

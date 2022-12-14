@@ -5,9 +5,6 @@ if(localStorage.getItem("access")){
     location.replace("login.html")
 }
 
-
-follow()
-
 const getnickname = location.href.split('=')[1].split('?')[0]
 const user_nickname = decodeURI(getnickname)
 const getvalue = location.href.split('=')[2]
@@ -21,6 +18,8 @@ function followingshow(){
     $('#follower').hide();
     $('#following').show();
 }
+
+follow()
 
 // 팔로우
 async function follow() {
