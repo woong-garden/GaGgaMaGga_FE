@@ -109,7 +109,6 @@ body{
     display: flex;
     align-items: center; 
     font-size:15px;
-    font-weight: 700;
     cursor: pointer;
 }
 

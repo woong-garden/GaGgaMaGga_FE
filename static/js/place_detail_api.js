@@ -32,7 +32,7 @@ notificationSocket.onmessage = async function (e) {
         alarmBox.appendChild(alarmContent)
 
 
-    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/notification/${payload_parse.user_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
@@ -68,7 +68,7 @@ notificationSocket.onclose = function (e) {
 
 
 async function PlaceDetail(){
-    const response = await fetch(`http://127.0.0.1:8000/places/${place_id}/`,{
+    const response = await fetch(`${backendBaseUrl}/places/${place_id}/`,{
         method:'GET',
         headers: {
             Accept: "application/json",
@@ -106,12 +106,18 @@ async function PlaceDetail(){
     if (localStorage.getItem("access")){
         place_bookmarks.style = "display:block;"
         review_createa_div.style = "display:block;"
-     } else{
+    } else{
         place_bookmarks.style = "display:none;"
         review_createa_div.style = "display:none;"
-     }
+    }
     
-    place_image.src =  response_json[0].place_img
+    if(response_json[0].place_img == null){
+        place_image.src = "https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg"
+    }else{
+        place_image.src =  response_json[0].place_img
+    }
+
+    
     div_place_name.innerText = `${response_json[0].place_name}(${response_json[0].hit})`
     div_place_address.innerText = `주소: ${response_json[0].place_address}`
     div_place_number.innerText = `전화번호: ${response_json[0].place_number}`
@@ -141,7 +147,7 @@ PlaceDetail()
 
 
 async function review_like_sort(){
-    const response = await fetch(`http://127.0.0.1:8000/reviews/${place_id}/`,{
+    const response = await fetch(`${backendBaseUrl}/${place_id}/`,{
         method:'GET',
         headers: {
             Accept: "application/json",
@@ -190,7 +196,7 @@ review_like_sort()
 
 
 async function review_recent_sort(){
-    const response = await fetch(`http://127.0.0.1:8000/reviews/${place_id}/`,{
+    const response = await fetch(`${backendBaseUrl}/reviews/${place_id}/`,{
         method:'GET',
         headers: {
             Accept: "application/json",
@@ -236,7 +242,7 @@ review_recent_sort()
 
 //북마크 POST
 async function place_bookmarks() {
-    const response = await fetch(`http://127.0.0.1:8000/places/${place_id}/bookmarks/`, {
+    const response = await fetch(`${backendBaseUrl}/places/${place_id}/bookmarks/`, {
 
         method: 'POST',
         headers: {
