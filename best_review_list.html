@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--폰트-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style/css/best_review_list.css"> <link rel="stylesheet" href="/style/css/modal.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/style/css/best_review_list.css">
+    <link rel="stylesheet" href="/style/css/modal.css">
+    <!-- JS -->
     <script src="static/js/notification_api.js"></script>
+    <script src="/static/js/best_review_list_api.js"></script>
+    <script src="/static/js/base_api.js"></script>
     <!--제이쿼리문-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!--타이틀 로고-->
-    <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">  
+    <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
     <title>가까? 마까 | 베스트 리뷰</title>
 
 
 </head>
+
 <body>
     <div id="modal-box">
         <div id="modal-body">
@@ -29,12 +37,13 @@
     <div class="header">
         <div>
             <div>
-                <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
-            </div> 
-            <div> 
+                <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;"
+                        src="/images/icon/back.svg"></a>
+            </div>
+            <div>
                 <a><img style="margin-left:8px; cursor: pointer;" onclick="openModal()" src="/images/icon/bell.svg"></a>
-            </div> 
-        </div>          
+            </div>
+        </div>
     </div>
     <!--헤더 끝-->
 
@@ -46,11 +55,13 @@
         <div class="place-name">Best 후기 모음</div>
 
         <div class="horizon"></div>
-        
+
         <div class="review-list-box">
             <div class="review-list-header">
                 <div>
-                    <span id="rank-cnt">0</span> <span class="rank-cnt-text-style" >개의 후기</span>
+
+                    <span id="rank-cnt"></span> <span class="rank-cnt-text-style">개의 후기</span>
+
                 </div>
                 <div>
                     <div>
@@ -62,7 +73,7 @@
                     <div>
                         <button id="sort-recent-button" class="button-style" onclick="views_rank_show()">최신순</button>
                     </div>
-                </div>    
+                </div>
             </div>
             <div class="review-list-data-box">
                 <!--좋아요순 시작-->
@@ -73,33 +84,34 @@
 
                 <!--최신순 시작-->
                 <div id="recent-rank">
-                    
+
                 </div>
                 <!--조회순 끝-->
             </div>
             <div class="pagenation" id="pagenation"></div>
         </div>
-        
+
     </div>
-    
-    
-    <!--메인 끝-->  
+
+
+    <!--메인 끝-->
 
     <!--네비바-->
-    <div class="nav-wrap"> 
-        <div>     
+    <div class="nav-wrap">
+        <div>
             <nav class="nav-bar">
                 <a href="index.html"><img src="/images/icon/home.svg"></a>
                 <a href="search.html"><img src="/images/icon/nav_search.svg"></a>
-                <a href="best_review_list.html"><img style="filter: invert(45%) sepia(78%) saturate(1488%) hue-rotate(1deg) brightness(107%) contrast(104%); width:27px; aspect-ratio: 1/1;" src="https://cdn-icons-png.flaticon.com/512/126/126473.png"></a>
+                <a href="best_review_list.html"><img
+                        style="filter: invert(45%) sepia(78%) saturate(1488%) hue-rotate(1deg) brightness(107%) contrast(104%); width:27px; aspect-ratio: 1/1;"
+                        src="https://cdn-icons-png.flaticon.com/512/126/126473.png"></a>
                 <a onclick="move_profile_page()"><img src="/images/icon/profile.svg"></a>
                 <a href="private_profile.html"><img src="/images/icon/setting.svg"></a>
             </nav>
-        </div>  
+        </div>
     </div>
     <!--네비바 끝-->
 
-    <script src="/static/js/best_review_list_api.js"></script>
-    <script src="/static/js/base_api.js"></script>
 </body>
+
 </html>
