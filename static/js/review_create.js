@@ -1,7 +1,13 @@
+if(localStorage.getItem("access")){}
+else{
+    alert("로그인 후 이용해주세요")
+    location.replace("login.html")
+}
 const place_id = location.href.split('?')[1].split('=')[1]
 const review_id = location.href.split('?')[1].split('=')[1]
 
-// 사진 미리보기
+
+// 사진 미리보기\
 window.onload = () => {
     const realUpload = document.querySelector('.real-upload');
     const upload = document.querySelector('.upload');
@@ -101,6 +107,7 @@ async function createReview() {
 
     const images = document.querySelector('.real-upload');
 
+
     if (content.value) {
 
         if (images.files.length == 3) {
@@ -133,3 +140,28 @@ async function createReview() {
         contentAlert.style.display = "block"
     }
 }
+
+    var formData = new FormData()
+    formData.append("rating_cnt", cls)
+    formData.append("content", content.value)
+    formData.append("review_image_one", images.files[0])
+    formData.append("review_image_two", images.files[1])
+    formData.append("review_image_three", images.files[2])
+
+    const response = await fetch(`${backendBaseUrl}/reviews/${place_id}/`, {
+        headers: {
+            "authorization": "Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+        cache:'no-cache',
+        body: formData
+    })
+
+
+    if (response.status === 201) {
+    alert("후기 등록 완료")
+    window.history.back()}
+    console.log(response)
+    console.log(response.status)
+}
+

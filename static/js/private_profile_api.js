@@ -1,6 +1,6 @@
-let active_user = document.getElementById("acctive_user")
-let deacctive_user = document.getElementById("deacctive_user")
-let profile_div = document.getElementById("profile_div")
+const active_user = document.getElementById("active_user")
+const deacctive_user = document.getElementById("deactive_user")
+const profile_div = document.getElementById("profile_div")
 
 if(localStorage.getItem("access")){
     private_profile()
@@ -9,14 +9,11 @@ if(localStorage.getItem("access")){
     profile_div.style = "display:block;padding:14px 30px 0px 30px; display: flex; align-items: center;"
     
 } else {
+    console.log(active_user.style)
     active_user.style = "display:none;"
     deacctive_user.style= "display:block;"
     profile_div.style = "display:none"
 }
-
-
-
-
 
 
 //개인 프로필
@@ -148,6 +145,8 @@ async function logout(){
             localStorage.removeItem("refresh")
             localStorage.removeItem("payload")
             localStorage.removeItem("kakao")
+            localStorage.removeItem("nickname")
+            localStorage.removeItem("review_cnt")
             alert("로그아웃 완료")
             window.location.replace('login.html')
 

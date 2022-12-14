@@ -1,12 +1,11 @@
-if(localStorage.getItem("payload")){
-} else if (localStorage.getItem("kakao")){
+if(localStorage.getItem("payload")){} else if (localStorage.getItem("kakao")){
     alert("카카오 회원은 회원정보 수정이 불가합니다.")
     window.location.replace("private_profile.html")
 } else{
     alert("접근 불가합니다.")
     window.location.replace("private_profile.html")
 }
-
+    
 //회원정보 수정
 async function user_edit() {
     const user_edit_data = {
@@ -61,3 +60,4 @@ async function private_profile(){
     if (response_json.phone_number == null) {} 
     else{phone_number.value = response_json.phone_number }
 }
+
