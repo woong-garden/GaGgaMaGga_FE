@@ -85,15 +85,15 @@
         margin-left:8px
     }
     #profile_div{
-        padding:14px 30px 0px 30px; 
+        padding:0px 30px 0px 30px; 
         display: flex; 
         align-items: center;
     }
     #porfile-img{
-        width:100px; 
+        width:130px; 
         object-fit: cover; 
         border-radius: 8px; 
-        height:100px;
+        height:130px;
     }
     .user-infor-wrap{
         padding-left:20px;
