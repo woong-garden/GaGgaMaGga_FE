@@ -187,3 +187,13 @@ body{
 #authentication button{
     width : 28%;
 }
+
+.terms-of-service-move{
+    /* text-decoration: none; */
+    text-decoration-color: rgb(155, 155, 155);
+    color:rgb(155, 155, 155);
+}
+
+.text-color{
+    color:rgb(155, 155, 155);
+}

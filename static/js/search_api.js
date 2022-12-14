@@ -24,7 +24,7 @@ notificationSocket.onmessage = async function (e) {
         alarmBox.appendChild(alarmContent)
 
 
-    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/notification/${payload_parse.user_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
@@ -72,7 +72,7 @@ async function searchParam(){
     const decodeResult = decodeURI(getLink_result);
 
     if(decodeResult){
-        const response = await fetch(`http://127.0.0.1:8000/places/search/?keyword=${decodeResult}`,{
+        const response = await fetch(`${backendBaseUrl}/places/search/?keyword=${decodeResult}`,{
             headers:{
                 'content-type':'application/json'
             },

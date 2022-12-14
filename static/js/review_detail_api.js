@@ -26,7 +26,7 @@ function time2str(date_now) {
 
 window.onload = () => {
 
-    // 엔터로만 덧글 등록
+    // 엔터로만 댓글 등록
     document.querySelector(".nav-input-wrap input").focus();
     document.querySelector(".nav-input-wrap input").onkeyup = function (e) {
         if (e.keyCode === 13) {
@@ -218,7 +218,7 @@ async function getData(review_id, place_id) {
         commentLike.style.cursor = "pointer"
         commentUnder.appendChild(commentLike)
 
-        // 덧글 좋아요 기능
+        // 댓글 좋아요 기능
         commentLike.onclick = async function () {
             await fetch(`http://127.0.0.1:8000/reviews/comments/${cmt.id}/likes/`, {
                 headers: {
@@ -513,10 +513,10 @@ async function getData(review_id, place_id) {
 
 
 
-        // 덧글 수정 버튼
+        // 댓글 수정 버튼
         if (payload_parse.user_id == cmt.user_id) {
             const editComment = document.createElement('button')
-            var editText = document.createTextNode('덧글 수정')
+            var editText = document.createTextNode('댓글 수정')
             editComment.appendChild(editText)
             editComment.classList.add('cmt-btn')
             commentUnder.appendChild(editComment)
@@ -573,9 +573,9 @@ async function getData(review_id, place_id) {
             }
 
 
-            // 덧글 삭제 버튼
+            // 댓글 삭제 버튼
             const delComment = document.createElement('button')
-            var editText = document.createTextNode('덧글 삭제')
+            var editText = document.createTextNode('댓글 삭제')
             delComment.appendChild(editText)
             delComment.classList.add('cmt-btn')
             commentUnder.appendChild(delComment)
