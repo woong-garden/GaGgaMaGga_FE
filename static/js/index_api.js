@@ -14,7 +14,16 @@ window.onload = function(){
     IsUserOrNot()
 }
 
+function sendSearchKeyword(){
+    var inputValue = document.getElementById('search').value;
+    window.location.href = `/search.html?search=${inputValue}`
+}
 
+function enterkey(e) {
+    if (window.event.keyCode == 13){
+        sendSearchKeyword().then();
+    }
+}
 
 //카카오 로그인 back으로 전달
 async function kakaoLoginApi(kakao_code) {
