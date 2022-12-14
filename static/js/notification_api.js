@@ -33,7 +33,7 @@ notificationSocket.onmessage = async function (e) {
         alarmBox.appendChild(alarmContent)
     
 
-    const response = await fetch(`http://127.0.0.1:8000/notification/${ JSON.parse(localStorage.getItem("payload")).user_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/notification/${ JSON.parse(localStorage.getItem("payload")).user_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
@@ -45,7 +45,7 @@ notificationSocket.onmessage = async function (e) {
     const notificationButtonText = document.createTextNode('확인')
     notificationButton.appendChild(notificationButtonText)
     notificationButton.onclick = async function () {
-        await fetch(`http://127.0.0.1:8000/notification/alarm/${response[0].id}/`, {
+        await fetch(`${backendBaseUrl}/notification/alarm/${response[0].id}/`, {
             headers: {
                 'content-type': 'application/json',
                 "authorization": "Bearer " + localStorage.getItem("access")
@@ -70,7 +70,7 @@ notificationSocket.onclose = function (e) {
 getNotification()
 async function getNotification() {
 
-    const response = await fetch(`http://127.0.0.1:8000/notification/${ JSON.parse(localStorage.getItem("payload")).user_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/notification/${ JSON.parse(localStorage.getItem("payload")).user_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
@@ -93,7 +93,7 @@ async function getNotification() {
         const notificationButtonText = document.createTextNode('확인')
         notificationButton.appendChild(notificationButtonText)
         notificationButton.onclick = async function () {
-            await fetch(`http://127.0.0.1:8000/notification/alarm/${notification.id}/`, {
+            await fetch(`${backendBaseUrl}/notification/alarm/${notification.id}/`, {
                 headers: {
                     'content-type': 'application/json',
                     "authorization": "Bearer " + localStorage.getItem("access")

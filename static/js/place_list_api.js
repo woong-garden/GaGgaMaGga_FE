@@ -65,7 +65,7 @@ function DltPopClose(id) {
 
 //select
 async function NewUserPlaceListView(place_id, category, page) {
-    const response = await fetch(`http://127.0.0.1:8000/places/new/${place_id}/${category}/?page=${page}`, {    
+    const response = await fetch(`${backendBaseUrl}/places/new/${place_id}/${category}/?page=${page}`, {    
         method: 'GET',
         headers: {
             "Content-type": "application/json",
@@ -257,7 +257,7 @@ function move_list_page(cate_id) {
 }
 
 async function UserPlaceListView(cate_id, page) {
-    const response = await fetch(`http://127.0.0.1:8000/places/list/${cate_id}/?page=${page}`, {
+    const response = await fetch(`${backendBaseUrl}/places/list/${cate_id}/?page=${page}`, {
         method: 'GET',
         headers: {
             "Content-type": "application/json",
@@ -449,7 +449,7 @@ function move_place_detail_page(place_id){
 }
 
 async function DeletePlaceView(place_id) {
-    const response = await fetch(`http://127.0.0.1:8000/places/${place_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/places/${place_id}/`, {
         method: 'DELETE',
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")

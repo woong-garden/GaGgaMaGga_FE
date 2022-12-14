@@ -231,7 +231,7 @@ function move_to_edit_page(place_id, review_id){
 
 
 async function delete_review(place_id, review_id){
-    await fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
+    await fetch(`${backendBaseUrl}/reviews/details/${place_id}/${review_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
