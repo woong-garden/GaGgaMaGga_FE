@@ -6,8 +6,6 @@ function sendSearchKeyword(){
     window.location.href = `/search.html?search=${inputValue}`
 }
 
-
-
 async function searchParam(){
     const getLink = window.location.search;
     const getLink_Name = getLink.split('=');

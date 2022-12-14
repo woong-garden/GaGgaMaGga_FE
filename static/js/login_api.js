@@ -1,9 +1,8 @@
 if (localStorage.getItem("kakao") || localStorage.getItem("payload")){
-    window.location.replace(history.back())
+    window.location.replace("index.html")
     alert("이미 로그인이 되어있습니다.")
-} else {
-}
-
+} else {}
+    
 //로그인
 async function Login() {
     const username = document.getElementById("username").value;
@@ -61,6 +60,10 @@ function kakao_login_code(){
 
 function to_signup(){
     location.href = "signup.html"
+}
+
+function to_index(){
+    location.href = "index.html"
 }
 
 function to_find_username(){

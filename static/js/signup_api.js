@@ -1,8 +1,8 @@
-if (localStorage.getItem("kakao") || localStorage.getItem("playload")){
-    window.location.replace(history.back())
+if (localStorage.getItem("kakao") || localStorage.getItem("payload")){
+    window.location.replace("index.html")
     alert("이미 로그인이 되어있습니다.")
 } else {}
-
+    
 //회원가입
 async function Sign_Up() {
     let input_check = document.getElementById("term_check");
@@ -64,3 +64,4 @@ function to_signup(){
 function to_login(){
     location.href = "login.html"
 }
+

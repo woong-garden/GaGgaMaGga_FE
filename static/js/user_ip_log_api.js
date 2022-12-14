@@ -1,19 +1,16 @@
 
 
-if(localStorage.getItem("access")){
-    login_log() 
-} else{
+if(localStorage.getItem("access")){} 
+else{
     alert("접근이 불가능합니다.")
     window.location.replace("index.html")
 }
-
+    login_log() 
 function time2str(date) {
     let date_time = new Date(date)
 
     return `${date_time.getFullYear()}년 ${date_time.getMonth() + 1}월 ${date_time.getDate()}일 ${date_time.getHours()}시 ${date_time.getMinutes()}분`
 };
-
-
 
 
 async function login_log(){

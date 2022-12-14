@@ -1,17 +1,14 @@
-const getnickname = location.href.split('=')[1]
-const user_nickname = decodeURI(getnickname)
-
-if(localStorage.getItem("access")){
-    public_profile()
-} else{
+if(localStorage.getItem("access")){} 
+else{
     alert("로그인 후 이용해주세요")
     location.replace("login.html")
-}
+    }
 
-
-
-
-
+const getnickname = location.href.split('=')[1]
+const user_nickname = decodeURI(getnickname)
+public_profile()
+    
+    
 // 공개프로필
 async function public_profile() {
     const response = await fetch(`${backendBaseUrl}/users/profiles/${user_nickname}/`, {
