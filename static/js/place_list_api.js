@@ -30,8 +30,6 @@ window.onload = function () {
     }
 }
 
-const payload = localStorage.getItem("payload");
-const payload_parse = JSON.parse(payload);
 
 var _showPage = function() {
     var loader = $("div.loader");
@@ -39,61 +37,6 @@ var _showPage = function() {
     loader.css("display","none");
     container.css("display","block");
 };
-
-// 알람 
-console.log(payload_parse.user_id)
-const notificationSocket = new WebSocket(
-    'ws://'
-    + "127.0.0.1:8000"
-    + '/ws/notification/'
-    + payload_parse.user_id
-    + '/'
-);
-
-notificationSocket.onmessage = async function (e) {
-    const data = JSON.parse(e.data);
-    const alarmBox = document.querySelector('.alarm')
-
-
-        const alarmContent = document.createElement('div')
-        alarmContent.style.display = "flex"
-        alarmContent.style.height = "10vh"
-        alarmContent.innerHTML = data.message
-        alarmBox.appendChild(alarmContent)
-
-
-    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
-        headers: {
-            "authorization": "Bearer " + localStorage.getItem("access")
-        },
-        method: 'GET'
-    })
-    .then(response => response.json())
-
-    const notificationButton = document.createElement('button')
-    const notificationButtonText = document.createTextNode('확인')
-    notificationButton.appendChild(notificationButtonText)
-    notificationButton.onclick = async function () {
-        await fetch(`http://127.0.0.1:8000/notification/alarm/${response[0].id}/`, {
-            headers: {
-                'content-type': 'application/json',
-                "authorization": "Bearer " + localStorage.getItem("access")
-            },
-            method: 'PUT',
-            body: ''
-        })
-        alarmBox.innerHTML = ""
-        getNotification()
-    }
-    alarmContent.appendChild(notificationButton)
-
-    alarmBox.appendChild(alarmContent)
-};
-
-notificationSocket.onclose = function (e) {
-    console.error('소켓이 닫혔어요 ㅜㅜ');
-};
-
 
 
 
@@ -134,7 +77,7 @@ function DltPopClose(id) {
 
 //select
 async function NewUserPlaceListView(place_id, category, page) {
-    const response = await fetch(`http://127.0.0.1:8000/places/new/${place_id}/${category}/?page=${page}`, {    
+    const response = await fetch(`${backendBaseUrl}/places/new/${place_id}/${category}/?page=${page}`, {    
         method: 'GET',
         headers: {
             "Content-type": "application/json",
@@ -326,7 +269,7 @@ function move_list_page(cate_id) {
 }
 
 async function UserPlaceListView(cate_id, page) {
-    const response = await fetch(`http://127.0.0.1:8000/places/list/${cate_id}/?page=${page}`, {
+    const response = await fetch(`${backendBaseUrl}/places/list/${cate_id}/?page=${page}`, {
         method: 'GET',
         headers: {
             "Content-type": "application/json",
@@ -518,7 +461,7 @@ function move_place_detail_page(place_id){
 }
 
 async function DeletePlaceView(place_id) {
-    const response = await fetch(`http://127.0.0.1:8000/places/${place_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/places/${place_id}/`, {
         method: 'DELETE',
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")

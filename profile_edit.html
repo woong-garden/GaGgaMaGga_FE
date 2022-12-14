@@ -8,7 +8,24 @@
     <link rel="stylesheet" href="style/css/user.css">
     <!--타이틀 로고-->
     <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
-    <title>프로필 편집</title>
+    <title>가까? 마까 | 프로필 편집</title>
+
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+            document.getElementById('preview').src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            document.getElementById('preview').src = "";
+        }
+    }
+
+</script>
+<script src="static/js/base_api.js"></script>
+<script src="static/js/profile_edit_api.js"></script>
 </head>
 <body>
     <!--헤더 시작-->
@@ -59,20 +76,5 @@
         </div>  
     </div>
     <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                document.getElementById('preview').src = e.target.result;
-                };
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                document.getElementById('preview').src = "";
-            }
-        }
-    
-    </script>
-    <script src="static/js/base_api.js"></script>
-    <script src="static/js/profile_edit_api.js"></script>
 </body>
 </html>

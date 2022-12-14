@@ -1,7 +1,5 @@
 const getnickname = location.href.split('=')[1]
 const user_nickname = decodeURI(getnickname)
-const payload = localStorage.getItem("payload");
-const payload_parse = JSON.parse(payload);
 
 if(localStorage.getItem("access")){
     public_profile()
@@ -12,59 +10,6 @@ if(localStorage.getItem("access")){
 
 
 
-// 알람 
-console.log(payload_parse.user_id)
-const notificationSocket = new WebSocket(
-    'ws://'
-    + "127.0.0.1:8000"
-    + '/ws/notification/'
-    + payload_parse.user_id
-    + '/'
-);
-
-notificationSocket.onmessage = async function (e) {
-    const data = JSON.parse(e.data);
-    const alarmBox = document.querySelector('.alarm')
-
-
-        const alarmContent = document.createElement('div')
-        alarmContent.style.display = "flex"
-        alarmContent.style.height = "10vh"
-        alarmContent.innerHTML = data.message
-        alarmBox.appendChild(alarmContent)
-
-
-    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
-        headers: {
-            "authorization": "Bearer " + localStorage.getItem("access")
-        },
-        method: 'GET'
-    })
-    .then(response => response.json())
-
-    const notificationButton = document.createElement('button')
-    const notificationButtonText = document.createTextNode('확인')
-    notificationButton.appendChild(notificationButtonText)
-    notificationButton.onclick = async function () {
-        await fetch(`http://127.0.0.1:8000/notification/alarm/${response[0].id}/`, {
-            headers: {
-                'content-type': 'application/json',
-                "authorization": "Bearer " + localStorage.getItem("access")
-            },
-            method: 'PUT',
-            body: ''
-        })
-        alarmBox.innerHTML = ""
-        getNotification()
-    }
-    alarmContent.appendChild(notificationButton)
-
-    alarmBox.appendChild(alarmContent)
-};
-
-notificationSocket.onclose = function (e) {
-    console.error('소켓이 닫혔어요 ㅜㅜ');
-};
 
 
 // 공개프로필
@@ -100,7 +45,6 @@ async function public_profile() {
 
     var my_id = JSON.parse(localStorage.getItem(['payload'])).user_id
     var profile_id = response_json.user_id
-    console.log(my_id, profile_id)
 
     // 본인 프로필에서 팔로우 버튼 숨김
     if (profile_id == my_id){
@@ -126,19 +70,16 @@ async function public_profile() {
         if(my_id == profile_id){
             $('#my-review').append(
                 `
-                <div style="padding: 20px 0 24px;border-bottom: 1px solid #DBDBDB;display: flex;">
+                <div class="review-box">
                     <div>
-                        <img style="object-fit: cover;width: 150px;height: 150px;cursor: pointer;" 
+                        <img class="review-content-img" 
                         onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
                     </div>
-                    <div style="padding: 20px;">
+                    <div class="review-content-info">
                         <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>
-                        <div>
-                            <img style="width: 14px;
-                            height: 14px;
-                            padding-right: 2px;" src="/images/icon/star.svg">
-                            <span style="font-size: 14px;
-                            font-weight: 700;">${item.rating_cnt}</span>
+                        <div class="star-wrap">
+                            <img class="star-icon" src="/images/icon/star.svg">
+                            <div class="star-num">${item.rating_cnt}</div>
                         </div>
                         <button class="update-review" onclick="move_to_edit_page(${item.place_id},${item.id})">리뷰 수정</button> 
                         <button class="update-review" onclick="delete_review(${item.place_id}, ${item.id})">리뷰 삭제</button>
@@ -150,19 +91,16 @@ async function public_profile() {
         }else{
             $('#my-review').append(
                 `
-                <div style="padding: 20px 0 24px;border-bottom: 1px solid #DBDBDB;display: flex;">
+                <div class="review-box">
                     <div>
-                        <img style="object-fit: cover;width: 150px;height: 150px;cursor: pointer;" 
+                        <img class="review-content-img" 
                         onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
                     </div>
-                    <div style="padding: 20px;">
+                    <div class="review-content-info">
                         <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>
-                        <div>
-                            <img style="width: 14px;
-                            height: 14px;
-                            padding-right: 2px;" src="/images/icon/star.svg">
-                            <span style="font-size: 14px;
-                            font-weight: 700;">${item.rating_cnt}</span>
+                        <div class="star-wrap">
+                            <img class="star-icon" src="/images/icon/star.svg">
+                            <div class="star-num">${item.rating_cnt}</div>
                         </div>
                     </div>
                 </div>
@@ -178,18 +116,15 @@ async function public_profile() {
         response_json.bookmark_place.forEach(item => {
             $('#my-bookmark').append(
                 `
-                <div style="padding: 20px 0 24px;border-bottom: 1px solid #DBDBDB;display: flex;">
+                <div class="bookmark-box">
                     <div>
-                        <img style="object-fit: cover;width: 150px;height: 150px;cursor: pointer;" onclick="move_place_detail_page(${item.id})" alt="장소 사진" src="${item.place_img}">
+                        <img class="bookmark-content-img" onclick="move_place_detail_page(${item.id})" alt="장소 사진" src="${item.place_img}">
                     </div>
-                    <div style="padding: 20px;" onclick="move_place_detail_page(${item.id})">
+                    <div class="review-content-info" onclick="move_place_detail_page(${item.id})">
                         <div style="color:#ffbf60">${item.place_name}</div>
-                        <div>
-                            <img style="width: 14px;
-                            height: 14px;
-                            padding-right: 2px;" src="/images/icon/star.svg">
-                            <span style="font-size: 14px;
-                            font-weight: 700;">${item.rating}</span>
+                        <div class="star-wrap">
+                            <img class="star-icon" src="/images/icon/star.svg">
+                            <div class="star-num">${item.rating}</div>
                         </div>
                     </div>
                 </div>
@@ -295,13 +230,14 @@ function move_to_edit_page(place_id, review_id){
 }
 
 
-function delete_review(place_id, review_id){
-    fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
+async function delete_review(place_id, review_id){
+    await fetch(`${backendBaseUrl}/reviews/details/${place_id}/${review_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
         method: 'DELETE',
     })
+    document.querySelector('#my-review').innerHTML = ""
     public_profile()
     document.querySelector('.profile-button2').click()
 }

@@ -1,7 +1,10 @@
 const place_id = location.href.split('?')[1].split('=')[1]
 
+
+
+
 async function PlaceDetail(){
-    const response = await fetch(`http://127.0.0.1:8000/places/${place_id}/`,{
+    const response = await fetch(`${backendBaseUrl}/places/${place_id}/`,{
         method:'GET',
         headers: {
             Accept: "application/json",
@@ -74,7 +77,7 @@ PlaceDetail()
 
 
 async function review_like_sort(){
-    const response = await fetch(`http://127.0.0.1:8000/reviews/${place_id}/`,{
+    const response = await fetch(`${backendBaseUrl}/reviews/${place_id}/`,{
         method:'GET',
         headers: {
             Accept: "application/json",
@@ -123,7 +126,7 @@ review_like_sort()
 
 
 async function review_recent_sort(){
-    const response = await fetch(`http://127.0.0.1:8000/reviews/${place_id}/`,{
+    const response = await fetch(`${backendBaseUrl}/reviews/${place_id}/`,{
         method:'GET',
         headers: {
             Accept: "application/json",
@@ -169,7 +172,7 @@ review_recent_sort()
 
 //북마크 POST
 async function place_bookmarks() {
-    const response = await fetch(`http://127.0.0.1:8000/places/${place_id}/bookmarks/`, {
+    const response = await fetch(`${backendBaseUrl}/places/${place_id}/bookmarks/`, {
 
         method: 'POST',
         headers: {
