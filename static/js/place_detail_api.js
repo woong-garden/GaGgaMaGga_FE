@@ -1,8 +1,10 @@
+
 if(localStorage.getItem("access")){
 } else{
     alert("로그인 후 이용해주세요")
     location.replace("login.html")
 }
+
 
 const place_id = location.href.split('?')[1].split('=')[1]
 
@@ -44,12 +46,18 @@ async function PlaceDetail(){
     if (localStorage.getItem("access")){
         place_bookmarks.style = "display:block;"
         review_createa_div.style = "display:block;"
-     } else{
+    } else{
         place_bookmarks.style = "display:none;"
         review_createa_div.style = "display:none;"
-     }
+    }
     
-    place_image.src =  response_json[0].place_img
+    if(response_json[0].place_img == null){
+        place_image.src = "https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg"
+    }else{
+        place_image.src =  response_json[0].place_img
+    }
+
+    
     div_place_name.innerText = `${response_json[0].place_name}(${response_json[0].hit})`
     div_place_address.innerText = `주소: ${response_json[0].place_address}`
     div_place_number.innerText = `전화번호: ${response_json[0].place_number}`
@@ -99,6 +107,7 @@ function time2str(date_now) {
 
 
 async function review_like_sort(){
+
     const response = await fetch(`${backendBaseUrl}/reviews/${place_id}/`,{
         method:'GET',
         headers: {
@@ -193,9 +202,7 @@ review_recent_sort()
 
 //북마크 POST
 async function place_bookmarks() {
-    console.log(place_id)
     const response = await fetch(`${backendBaseUrl}/places/${place_id}/bookmarks/`, {
-        
         method: 'POST',
         headers: {
             Accept:"application/json",
