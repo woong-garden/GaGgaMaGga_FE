@@ -1,5 +1,9 @@
+if(localStorage.getItem("access")){}
+else{
+    alert("로그인 후 이용해주세요")
+    location.replace("login.html")
+}
 const place_id = location.href.split('?')[1].split('=')[1]
-
 
 window.onload = () => {
     const realUpload = document.querySelector('.real-upload');

@@ -1,9 +1,21 @@
 
 window.onload = function () {
     const storage = localStorage.getItem("payload");
-    if (storage) {
+    const kakao = localStorage.getItem("kakao");
+    if (storage !== null) {
         const str_payload = JSON.parse(storage)
         if (str_payload.review_cnt != 0) {
+            const cate_id = location.href.split('=')[1].split('/')[0]
+            UserPlaceListView(cate_id, 1)
+        } else {
+            const place_id = location.href.split('=')[1].split('&')[0]
+            const category = location.href.split('=')[2].split('/')[0]
+            NewUserPlaceListView(place_id, category, 1)
+        }
+    }else if(kakao !== null){
+        const rev_cnt = localStorage.getItem("review_cnt");
+        console.log(rev_cnt)
+        if (rev_cnt != 0) {
             const cate_id = location.href.split('=')[1].split('/')[0]
             UserPlaceListView(cate_id, 1)
         } else {
@@ -194,12 +206,6 @@ async function NewUserPlaceListView(place_id, category, page) {
 
             `
         )
-        // 장소 삭제 버튼 생성
-        if (storage) {
-            if (str_payload.is_admin) {
-                ActiveDeleteButton(`${item.id}`)
-            }
-        }
 
         //지도 API
         var mapOptions = {
@@ -388,8 +394,10 @@ async function UserPlaceListView(cate_id, page) {
         )
 
         // 장소 삭제 버튼 생성
-        if (str_payload.is_admin) {
-            ActiveDeleteButton(`${item.id}`)
+        if (storage !== null) {
+            if (str_payload.is_admin) {
+                ActiveDeleteButton(`${item.id}`)
+            }
         }
         
         //지도 API

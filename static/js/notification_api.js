@@ -1,37 +1,38 @@
-// 모달창 열기
-function openModal() {
-    const modalBox = document.querySelector('#modal-box')
-    modalBox.style.display = "block"
-}
+// // 모달창 열기
+// function openModal() {
+//     const modalBox = document.querySelector('#modal-box')
+//     modalBox.style.display = "block"
+// }
 
 
-// 모달창 닫기
-function closeModal() {
-    const modalBox = document.querySelector('#modal-box')
-    modalBox.style.display = "none"
-}
+// // 모달창 닫기
+// function closeModal() {
+//     const modalBox = document.querySelector('#modal-box')
+//     modalBox.style.display = "none"
+// }
 
 
-// 알람 
-const notificationSocket = new WebSocket(
-    'ws://'
-    + "127.0.0.1:8000"
-    + '/ws/notification/'
-    +  JSON.parse(localStorage.getItem("payload")).user_id
-    + '/'
-);
+// // 알람 
+// const notificationSocket = new WebSocket(
+//     'ws://'
+//     + "127.0.0.1:8000"
+//     + '/ws/notification/'
+//     +  JSON.parse(localStorage.getItem("payload")).user_id
+//     + '/'
+// );
 
-notificationSocket.onmessage = async function (e) {
-    const data = JSON.parse(e.data);
-    const alarmBox = document.querySelector('.alarm')
+// notificationSocket.onmessage = async function (e) {
+//     const data = JSON.parse(e.data);
+//     const alarmBox = document.querySelector('.alarm')
 
 
-        const alarmContent = document.createElement('div')
-        alarmContent.style.display = "flex"
-        alarmContent.style.height = "10vh"
-        alarmContent.innerHTML = data.message
-        alarmBox.appendChild(alarmContent)
+//         const alarmContent = document.createElement('div')
+//         alarmContent.style.display = "flex"
+//         alarmContent.style.height = "10vh"
+//         alarmContent.innerHTML = data.message
+//         alarmBox.appendChild(alarmContent)
     
+
 
     const response = await fetch(`${backendBaseUrl}/notification/${ JSON.parse(localStorage.getItem("payload")).user_id}/`, {
         headers: {
@@ -107,3 +108,5 @@ async function getNotification() {
         alarmContent.appendChild(notificationButton)
     })
 }
+
+

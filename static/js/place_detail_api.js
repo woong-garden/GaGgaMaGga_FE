@@ -1,7 +1,12 @@
+
+if(localStorage.getItem("access")){
+} else{
+    alert("로그인 후 이용해주세요")
+    location.replace("login.html")
+}
+
+
 const place_id = location.href.split('?')[1].split('=')[1]
-
-
-
 
 async function PlaceDetail(){
     const response = await fetch(`${backendBaseUrl}/places/${place_id}/`,{
@@ -42,12 +47,18 @@ async function PlaceDetail(){
     if (localStorage.getItem("access")){
         place_bookmarks.style = "display:block;"
         review_createa_div.style = "display:block;"
-     } else{
+    } else{
         place_bookmarks.style = "display:none;"
         review_createa_div.style = "display:none;"
-     }
+    }
     
-    place_image.src =  response_json[0].place_img
+    if(response_json[0].place_img == null){
+        place_image.src = "https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg"
+    }else{
+        place_image.src =  response_json[0].place_img
+    }
+
+    
     div_place_name.innerText = `${response_json[0].place_name}(${response_json[0].hit})`
     div_place_address.innerText = `주소: ${response_json[0].place_address}`
     div_place_number.innerText = `전화번호: ${response_json[0].place_number}`
@@ -55,7 +66,6 @@ async function PlaceDetail(){
 
 
     menu_list.forEach(item => {
-        console.log(item.author_id)
         $('#menu-list').append(
             `
             <div class="menu-list-box">
@@ -74,9 +84,29 @@ async function PlaceDetail(){
 }
 PlaceDetail()
 
+//시간 포맷팅
+function time2str(date_now) {
+    let today = new Date()
+    let before = new Date(date_now)
+    let time = (today - before) / 1000 / 60  // 분
+    if (time < 60) {
+        return parseInt(time) + "분 전"
+    }
+    time = time / 60  // 시간
+    if (time < 24) {
+        return parseInt(time) + "시간 전"
+    }
+    time = time / 24
+    if (time < 7) {
+        return parseInt(time) + "일 전"
+    }
+    return `${new Date(date_now).getFullYear()}년 ${new Date(date_now).getMonth() + 1}월 ${new Date(date_now).getDate()}일`
+};
+
 
 
 async function review_like_sort(){
+
     const response = await fetch(`${backendBaseUrl}/reviews/${place_id}/`,{
         method:'GET',
         headers: {
@@ -91,7 +121,6 @@ async function review_like_sort(){
     const rank_cnt = document.getElementById("place-review-cnt")
     rank_cnt.innerText = response_json.like_count_review.length
     response_json.like_count_review.forEach(item => {
-        console.log(item.author_id)
         $('#like-rank').append(
             `
             <a class="review-box-wrap" onclick="move_review_detail_page(${item.id},${item.place_id},${item.author_id})">
@@ -173,7 +202,6 @@ review_recent_sort()
 //북마크 POST
 async function place_bookmarks() {
     const response = await fetch(`${backendBaseUrl}/places/${place_id}/bookmarks/`, {
-
         method: 'POST',
         headers: {
             Accept:"application/json",
@@ -195,24 +223,6 @@ async function place_bookmarks() {
 
 }
 
-//시간 포맷팅
-function time2str(date_now) {
-    let today = new Date()
-    let before = new Date(date_now)
-    let time = (today - before) / 1000 / 60  // 분
-    if (time < 60) {
-        return parseInt(time) + "분 전"
-    }
-    time = time / 60  // 시간
-    if (time < 24) {
-        return parseInt(time) + "시간 전"
-    }
-    time = time / 24
-    if (time < 7) {
-        return parseInt(time) + "일 전"
-    }
-    return `${date_now.getFullYear()}년 ${date_now.getMonth() + 1}월 ${date_now.getDate()}일`
-};
 
 
 function move_review_detail_page(review_id,place_id,author_id){

@@ -2,7 +2,7 @@ if (localStorage.getItem("kakao") || localStorage.getItem("payload")){
     location.replace(history.back())
     alert("이미 로그인이 되어있습니다.")
 } else {}
-
+    
 //uibd와 token이 없을 때 로그인 페이지로
 if (location.href.split('/')[5] || location.href.split('/')[4]){
     Check_Password()
@@ -65,3 +65,5 @@ function to_signup(){
 function to_login(){
     location.href = "login.html"
 }
+
+

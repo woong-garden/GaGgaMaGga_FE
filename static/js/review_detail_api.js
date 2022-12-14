@@ -1,3 +1,9 @@
+if(localStorage.getItem("access")){} else{
+    alert("로그인 후 이용해주세요")
+    location.replace("login.html")
+}
+
+    
 const review_id = location.href.split('?')[1].split('&')[0].split('=')[1]
 const place_id = location.href.split('?')[1].split('&')[1].split('=')[1]
 const author_id = location.href.split('?')[1].split('&')[2].split('=')[1]
