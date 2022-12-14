@@ -54,6 +54,7 @@ body {
     background-color: white;
     padding: 0 14px;
     box-sizing: border-box;
+    justify-content: space-between;
 }
 
 .header-logo {
