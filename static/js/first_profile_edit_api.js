@@ -1,7 +1,8 @@
 if(localStorage.getItem("access")){
     if (JSON.parse(localStorage.getItem("payload")).nickname == null){
     }else{
-    window.location.replace("index.html")}
+    window.location.replace("index.html")
+}
 } else{
     alert("접근이 불가능합니다.")
     window.location.replace("login.html")

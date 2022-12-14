@@ -1,9 +1,15 @@
+if(localStorage.getItem("access")){} else{
+    alert("로그인 후 이용해주세요")
+    location.replace("login.html")
+}
+
+    
 const review_id = location.href.split('?')[1].split('&')[0].split('=')[1]
 const place_id = location.href.split('?')[1].split('&')[1].split('=')[1]
 const author_id = location.href.split('?')[1].split('&')[2].split('=')[1]
 
 const payload = localStorage.getItem("payload");
-const payload_parse = JSON.parse(payload);
+const payload_parse = JSON.parse(localStorage.getItem("payload"));
 
 //시간 포맷팅
 function time2str(date_now) {
@@ -58,7 +64,7 @@ const nav = document.querySelector('.nav-wrap')
 async function getData(review_id, place_id) {
 
 
-    const response = await fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/reviews/details/${place_id}/${review_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
@@ -74,7 +80,7 @@ async function getData(review_id, place_id) {
         reviewLikeHeart.src = "https://cdn-icons-png.flaticon.com/512/2107/2107952.png"
     }
     reviewLikeHeart.onclick = async function () {
-        await fetch(`http://127.0.0.1:8000/reviews/${review_id}/likes/`, {
+        await fetch(`${backendBaseUrl}/reviews/${review_id}/likes/`, {
             headers: {
                 'content-type': 'application/json',
                 "authorization": "Bearer " + localStorage.getItem("access")
@@ -102,11 +108,11 @@ async function getData(review_id, place_id) {
     console.log(response.review_like)
 
     const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
-    firstImage.src = "http://127.0.0.1:8000" + response.review_image_one
+    firstImage.src = `${backendBaseUrl}` + response.review_image_one
     const secondImage = document.querySelector('.slidelist li:nth-child(2) img')
-    secondImage.src = "http://127.0.0.1:8000" + response.review_image_two
+    secondImage.src = `${backendBaseUrl}` + response.review_image_two
     const thirdImage = document.querySelector('.slidelist li:nth-child(3) img')
-    thirdImage.src = "http://127.0.0.1:8000" + response.review_image_three
+    thirdImage.src = `${backendBaseUrl}` + response.review_image_three
 
     const title = document.querySelector('h3')
     title.innerText = response.place_name
@@ -125,7 +131,7 @@ async function getData(review_id, place_id) {
 
         const profileImg = document.createElement('img')
         profileImg.classList.add('comment-user-img')
-        profileImg.src = "http://127.0.0.1:8000" + cmt.profile_image
+        profileImg.src = `${backendBaseUrl}` + cmt.profile_image
         eachComment.appendChild(profileImg)
 
         const commentContent = document.createElement("div")
@@ -220,7 +226,7 @@ async function getData(review_id, place_id) {
 
         // 덧글 좋아요 기능
         commentLike.onclick = async function () {
-            await fetch(`http://127.0.0.1:8000/reviews/comments/${cmt.id}/likes/`, {
+            await fetch(`${backendBaseUrl}/reviews/comments/${cmt.id}/likes/`, {
                 headers: {
                     'content-type': 'application/json',
                     "authorization": "Bearer " + localStorage.getItem("access")
@@ -259,7 +265,7 @@ async function getData(review_id, place_id) {
 
 
             const recommentImage = document.createElement('img')
-            recommentImage.src = "http://127.0.0.1:8000" + recmt.profile_image
+            recommentImage.src = `${backendBaseUrl}` + recmt.profile_image
             recommentImage.classList.add("comment-user-img")
             recommentImage.style.margin = "1vh 0"
             recmtContentBox.appendChild(recommentImage)
@@ -358,7 +364,7 @@ async function getData(review_id, place_id) {
 
             // 대댓글 좋아요
             recommentLike.onclick = async function () {
-                await fetch(`http://127.0.0.1:8000/reviews/recomments/${recmt.id}/likes/`, {
+                await fetch(`${backendBaseUrl}/reviews/recomments/${recmt.id}/likes/`, {
                     headers: {
                         'content-type': 'application/json',
                         "authorization": "Bearer " + localStorage.getItem("access")
@@ -411,7 +417,7 @@ async function getData(review_id, place_id) {
 
                     const updateButton = document.getElementById(`reEdit${recmt.id}`)
                     updateButton.onclick = async function () {
-                        await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${cmt.id}/recomments/${recmt.id}/`, {
+                        await fetch(`${backendBaseUrl}/reviews/${review_id}/comments/${cmt.id}/recomments/${recmt.id}/`, {
                             headers: {
                                 'content-type': 'application/json',
                                 "authorization": "Bearer " + localStorage.getItem("access")
@@ -435,7 +441,7 @@ async function getData(review_id, place_id) {
                 recommentEditBox.appendChild(delRecomment)
 
                 delRecomment.onclick = async function () {
-                    await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${cmt.id}/recomments/${recmt.id}/`, {
+                    await fetch(`${backendBaseUrl}/reviews/${review_id}/comments/${cmt.id}/recomments/${recmt.id}/`, {
                         headers: {
                             "authorization": "Bearer " + localStorage.getItem("access")
                         },
@@ -469,7 +475,7 @@ async function getData(review_id, place_id) {
         recommentButton.appendChild(text)
         recommentButton.onclick = async function () {
             const content = document.querySelector(`.input-recomment${cmt.id}`)
-            await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${cmt.id}/recomments/`, {
+            await fetch(`${backendBaseUrl}/reviews/${review_id}/comments/${cmt.id}/recomments/`, {
                 headers: {
                     'content-type': 'application/json',
                     "authorization": "Bearer " + localStorage.getItem("access")
@@ -496,7 +502,7 @@ async function getData(review_id, place_id) {
         insertRecomment.onclick = async function () {
             recomment.classList.toggle('show-recomment')
             recommentContent.classList.toggle('show-recomment')
-            const userResponse = await fetch(`http://127.0.0.1:8000/users/profiles/`, {
+            const userResponse = await fetch(`${backendBaseUrl}/users/profiles/`, {
                 method: 'GET',
                 headers: {
                     Accept: "application/json",
@@ -507,7 +513,7 @@ async function getData(review_id, place_id) {
             )
             userResponseJson = await userResponse.json()
 
-            recommentImg.src = "http://127.0.0.1:8000" + userResponseJson.profile_image
+            recommentImg.src = `${backendBaseUrl}` + userResponseJson.profile_image
             // getData(review_id, place_id)
         }
 
@@ -552,7 +558,7 @@ async function getData(review_id, place_id) {
             editButton.classList.add('recomment-content')
             editBox.appendChild(editButton)
             editButton.onclick = async function () {
-                await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${cmt.id}/`, {
+                await fetch(`${backendBaseUrl}/reviews/${review_id}/comments/${cmt.id}/`, {
                     headers: {
                         'content-type': 'application/json',
                         "authorization": "Bearer " + localStorage.getItem("access")
@@ -580,7 +586,7 @@ async function getData(review_id, place_id) {
             delComment.classList.add('cmt-btn')
             commentUnder.appendChild(delComment)
             delComment.onclick = async function () {
-                await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${cmt.id}/`, {
+                await fetch(`${backendBaseUrl}/reviews/${review_id}/comments/${cmt.id}/`, {
                     headers: {
                         "authorization": "Bearer " + localStorage.getItem("access")
                     },
@@ -599,7 +605,7 @@ async function getData(review_id, place_id) {
 
 // 코멘트 등록
 async function postComment(review_id, content) {
-    const response = await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/`, {
+    const response = await fetch(`${backendBaseUrl}/reviews/${review_id}/comments/`, {
         headers: {
             'content-type': 'application/json',
             "authorization": "Bearer " + localStorage.getItem("access")
@@ -647,7 +653,7 @@ notificationSocket.onmessage = async function (e) {
         alarmBox.appendChild(alarmContent)
     
 
-    const response = await fetch(`http://127.0.0.1:8000/notification/${payload_parse.user_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/notification/${payload_parse.user_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
@@ -659,7 +665,7 @@ notificationSocket.onmessage = async function (e) {
     const notificationButtonText = document.createTextNode('확인')
     notificationButton.appendChild(notificationButtonText)
     notificationButton.onclick = async function () {
-        await fetch(`http://127.0.0.1:8000/notification/alarm/${response[0].id}/`, {
+        await fetch(`${backendBaseUrl}/notification/alarm/${response[0].id}/`, {
             headers: {
                 'content-type': 'application/json',
                 "authorization": "Bearer " + localStorage.getItem("access")
@@ -703,7 +709,7 @@ async function post_review_report() {
         content: document.getElementById("review_report_content").value,
     }
 
-    const response = await fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/reviews/details/${place_id}/${review_id}/`, {
 
         method: 'POST',
         headers: {
@@ -741,7 +747,7 @@ async function post_comment_report(cmt_id) {
     }
     console.log(document.getElementById(`comment-report-content${cmt_id}`).value)
 
-    const response = await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${cmt_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/reviews/${review_id}/comments/${cmt_id}/`, {
 
         method: 'POST',
         headers: {
@@ -779,7 +785,7 @@ async function post_recomment_report(comment_id, recmt_id) {
     }
     console.log(document.getElementById(`recomment-report-content${recmt_id}`).value)
 
-    const response = await fetch(`http://127.0.0.1:8000/reviews/${review_id}/comments/${comment_id}/recomments/${recmt_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/reviews/${review_id}/comments/${comment_id}/recomments/${recmt_id}/`, {
 
         method: 'POST',
         headers: {

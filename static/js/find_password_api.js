@@ -1,8 +1,8 @@
 if (localStorage.getItem("kakao") || localStorage.getItem("payload")){
-    window.location.replace(history.back())
+    window.location.replace("index.html")
     alert("이미 로그인이 되어있습니다.")
 } else {}
-
+    
 //비밀번호 찾기
 async function password_find() {
     const password_find_data = {
@@ -50,5 +50,6 @@ function to_signup(){
 function to_login(){
     window.location.href = "login.html"
 }
+
 
 
