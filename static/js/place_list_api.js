@@ -14,7 +14,6 @@ window.onload = function () {
         }
     }else if(kakao !== null){
         const rev_cnt = localStorage.getItem("review_cnt");
-        console.log(rev_cnt)
         if (rev_cnt != 0) {
             const cate_id = location.href.split('=')[1].split('/')[0]
             UserPlaceListView(cate_id, 1)
@@ -74,8 +73,6 @@ function DltPopClose(id) {
 }
 
 function pagenation_new(page_no, last_page_no, place_id, category) {
-    console.log(page_no)
-    console.log(last_page_no)
     if ((page_no==1)&(last_page_no == 1)){
         $('#pagenation').empty()
         $('#pagenation').append(
@@ -156,7 +153,6 @@ function pagenation_new(page_no, last_page_no, place_id, category) {
             >
         `)
     }else if (page_no == last_page_no) {
-        console.log("마지막 페이지")
         $('#pagenation').empty()
         $('#pagenation').append(
         `
@@ -214,8 +210,6 @@ function pagenation_new(page_no, last_page_no, place_id, category) {
 
 
 function pagenation(page_no, last_page_no, cate_id) {
-    console.log(page_no)
-    console.log(last_page_no)
     if ((page_no==1)&(last_page_no == 1)){
         $('#pagenation').empty()
         $('#pagenation').append(
@@ -296,7 +290,6 @@ function pagenation(page_no, last_page_no, cate_id) {
             >
         `)
     }else if (page_no == last_page_no) {
-        console.log("마지막 페이지")
         $('#pagenation').empty()
         $('#pagenation').append(
         `
@@ -364,7 +357,6 @@ async function NewUserPlaceListView(place_id, category, page) {
         }
     })
     response_json = await response.json()
-    console.log(response_json)
     const storage = localStorage.getItem("payload");
     const str_payload = JSON.parse(storage)
 
@@ -518,7 +510,6 @@ async function UserPlaceListView(cate_id, page) {
     const storage = localStorage.getItem("payload");
     const str_payload = JSON.parse(storage)
 
-    console.log(response_json)
     // 페이지네이션
     if (response_json.next== null) {
         if (parseInt(response_json.count%10) !== 0){
