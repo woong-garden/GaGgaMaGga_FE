@@ -40,12 +40,9 @@ async function public_profile() {
     const profile_image = document.getElementById("profile_image")
     let image_url = response_json.profile_image
     profile_image.setAttribute("src", `${backendBaseUrl}${image_url}`)
-    console.log(JSON.parse(localStorage.getItem(['kakao'])).user_id)
-    console.log(JSON.parse(localStorage.getItem(['payload'])))
     
-
+    // user_id 설정 (카카오로그인 or payload로그인)
     var my_id = ""
-    console.log(my_id)
     if(JSON.parse(localStorage.getItem(['payload']))){
         my_id = JSON.parse(localStorage.getItem(['payload'])).user_id
     }else{
