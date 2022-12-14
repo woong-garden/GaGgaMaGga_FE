@@ -1,7 +1,11 @@
+const review_id = location.href.split('?')[1].split('&')[0].split('=')[1]
+const place_id = location.href.split('?')[1].split('&')[1].split('=')[1]
+const author_id = location.href.split('?')[1].split('&')[2].split('=')[1]
+
 private_profile()
 async function private_profile() {
 
-    const author = await fetch(`${backendBaseUrl}/users/profiles/`, {
+    const author = await fetch(`${backendBaseUrl}/reviews/details/${place_id}/${review_id}/`, {
         method: 'GET',
         headers: {
             Accept: "application/json",
@@ -35,12 +39,6 @@ if (localStorage.getItem("payload")) {
 else if (localStorage.getItem("kakao")) {
     payload_parse = JSON.parse(localStorage.getItem("kakao"));
 }
-
-const review_id = location.href.split('?')[1].split('&')[0].split('=')[1]
-const place_id = location.href.split('?')[1].split('&')[1].split('=')[1]
-const author_id = location.href.split('?')[1].split('&')[2].split('=')[1]
-
-
 
 // 모달창 열기
 function openModal() {
