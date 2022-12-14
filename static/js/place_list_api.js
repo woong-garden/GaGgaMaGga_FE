@@ -400,22 +400,30 @@ async function NewUserPlaceListView(place_id, category, page) {
         $('#place-list').append(
             `
             <table cellpadding="0" cellspacing="0" border="0">
-                <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
+                <td width="20%"><img src="${item.place_img}" class="place-item-img")></td>
                 <td width="70%">
-                <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
+                <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                     <div>${item.place_address}</div>
                     <div style="display:inline-block;">☎${item.place_number}</div>
                     <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
                     <a href="#" class="btn-open" onClick="javascript:DltPopOpen(${item.id});"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
                     </td>
-                <td width="10%">${item.rating}</td>
+                <td class="item-rating" width="10%">${item.rating}</td>
             </table>
             
             <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
             <div class="modal-wrap" id="modal-wrap${item.id}">
                 <div class="modal_contents">
-                    <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
-                    <a href="#"><div class="modal_close" onClick="javascript:popClose(${item.id});">Close</div></a>
+                    <div style="display:flex;justify-content: space-between; align-items:center;">
+                        <div style="font-size:20px;display:inline-block;">
+                            [${item.category}] ${item.place_name}
+                        </div>
+                        <a href="#">
+                            <div class="modal_close" onClick="javascript:popClose(${item.id});">
+                                Close
+                            </div>
+                        </a>
+                    </div>
                     <hr>
                     
                     <img src="${item.place_img}" style='width:300px;height:180px;')>
@@ -548,21 +556,25 @@ async function UserPlaceListView(cate_id, page) {
     response_json.results.forEach(item => {
         $('#place-list').append(
             `<table cellpadding="0" cellspacing="0" border="0">
-            <td width="20%"><img src="${item.place_img}" style='width:70px;height:80px;')></td>
+            <td width="20%"><img class="place-item-img" src="${item.place_img}")></td>
             <td width="70%">
-                <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
+                <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                 <div>${item.place_address}</div>
                 <div style="display:inline-block;">☎${item.place_number}</div>
                 <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
                 <a href="#" class="btn-open" onClick="javascript:DltPopOpen(${item.id});"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
-            <td width="10%">${item.rating}</td>
+            <td class="item-rating" width="10%">${item.rating}</td>
         </table>
         
         <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
         <div class="modal-wrap" id="modal-wrap${item.id}">
             <div class="modal_contents">
-                <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
-                <a href="#"><div class="modal_close" onClick="javascript:popClose(${item.id});">Close</div></a>
+                    <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
+                    <a href="#">
+                        <div class="modal_close" onClick="javascript:popClose(${item.id});">
+                            Close
+                    </a>
+                </div>
                 <hr>
                 <img src="${item.place_img}" style='width:300px;height:180px;')>
                 <p style="font-size:15px;">주소 : ${item.place_address}</p>
