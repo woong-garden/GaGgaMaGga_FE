@@ -118,6 +118,8 @@ async function withdrawal() {
     if (response.status === 200) {
     alert(withdrawal_json["message"])
     localStorage.removeItem("kakao")
+    localStorage.removeItem("nickname")
+    localStorage.removeItem("review_cnt")
     localStorage.removeItem("payload")
     localStorage.removeItem("access")
     localStorage.removeItem("refresh")

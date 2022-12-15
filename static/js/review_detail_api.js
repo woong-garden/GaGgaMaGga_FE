@@ -243,7 +243,7 @@ async function getData(review_id, place_id) {
         commentUnder.appendChild(commentLike)
         // 덧글 좋아요 기능
         commentLike.onclick = async function () {
-            await fetch(`${backendBaseUrl}:/reviews/comments/${cmt.id}/likes/`, {
+            await fetch(`${backendBaseUrl}/reviews/comments/${cmt.id}/likes/`, {
                 headers: {
                     'content-type': 'application/json',
                     "authorization": "Bearer " + localStorage.getItem("access")
