@@ -27,8 +27,6 @@ async function profile_edit() {
     })
 
     const result = await response.json()
-    console.log(result
-        )
     if (response.status === 200) {
         alert("회원정보 수정이 완료되었습니다.")
         window.location.replace(`private_profile.html`)

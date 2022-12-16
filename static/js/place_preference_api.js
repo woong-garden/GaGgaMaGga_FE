@@ -1,6 +1,5 @@
 
 window.onload = function(){
-    console.log("연결완료")
     const cate_id = location.href.split('=')[1].split('/')[0]
     PlaceSelectView(cate_id)
     }
@@ -22,7 +21,6 @@ async function PlaceSelectView(choice_no){
         }
     })
     response_json = await response.json()
-    console.log(response_json)
     if (choice_no > 12) {
         $('#select-box').empty()
         response_json.forEach(item => {

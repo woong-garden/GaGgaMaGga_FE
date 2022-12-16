@@ -410,7 +410,6 @@ async function getData(review_id, place_id) {
                 editRecommentInput.style.width = "80%"
                 editRecommentContent.parentNode.insertBefore(editRecommentInput, editRecommentContent)
                 editRecommentInput.value = editRecommentContent.innerText /// 여기다
-                console.log(editRecommentContent.innerText)
 
                 editRecommentInput.style.borderLeftWidth = "0"
                 editRecommentInput.style.borderRightWidth = "0"
@@ -744,14 +743,12 @@ async function post_review_report() {
 
 // comment 신고 POST
 async function post_comment_report(cmt_id) {
-    console.log(cmt_id)
     const comment_report_category = document.getElementById(`comment-report-category${cmt_id}`)
     const comment_report_value = (comment_report_category.options[comment_report_category.selectedIndex].value)
     const reportData = {
         category: comment_report_value,
         content: document.getElementById(`comment-report-content${cmt_id}`).value,
     }
-    console.log(document.getElementById(`comment-report-content${cmt_id}`).value)
     const response = await fetch(`${backendBaseUrl}/reviews/${review_id}/comments/${cmt_id}/`, {
         method: 'POST',
         headers: {
@@ -778,12 +775,10 @@ async function post_comment_report(cmt_id) {
 async function post_recomment_report(comment_id, recmt_id) {
     const recomment_report_category = document.getElementById(`recomment-report-category${recmt_id}`)
     const recomment_report_value = (recomment_report_category.options[recomment_report_category.selectedIndex].value)
-    console.log(recomment_report_value)
     const reportData = {
         category: recomment_report_value,
         content: document.getElementById(`recomment-report-content${recmt_id}`).value,
     }
-    console.log(document.getElementById(`recomment-report-content${recmt_id}`).value)
     const response = await fetch(`${backendBaseUrl}/reviews/${review_id}/comments/${comment_id}/recomments/${recmt_id}/`, {
         method: 'POST',
         headers: {

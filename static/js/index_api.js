@@ -92,7 +92,6 @@ async function IsUserOrNot(){
     const storage = localStorage.getItem("payload");
     const kakao = localStorage.getItem("kakao");
     if (storage !== null) {
-        console.log("[일반 로그인 계정] 데이터 로드 완료")
         const str_payload = JSON.parse(storage)
         if (str_payload.review_cnt != 0) {
             $('#index-selectbox').empty()
@@ -183,9 +182,7 @@ async function IsUserOrNot(){
             )
         }
     }else if(kakao !== null){
-        console.log("[카카오 로그인 계정] 데이터 로드 완료")
         const rev_cnt = localStorage.getItem("review_cnt");
-        console.log(rev_cnt)
         if (rev_cnt != 0) {
             $('#index-selectbox').empty()
             $('#index-selectbox').append(
@@ -275,7 +272,6 @@ async function IsUserOrNot(){
             )
         }
     }else{
-        console.log("[비로그인 계정] 데이터 로드 완료")
         $('#index-selectbox').empty()
         $('#index-selectbox').append(
             `<section class="select-place-wrap">

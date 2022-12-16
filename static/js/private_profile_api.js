@@ -9,7 +9,6 @@ if(localStorage.getItem("access")){
     profile_div.style = "display:block;padding:14px 30px 0px 30px; display: flex; align-items: center;"
     
 } else {
-    console.log(active_user.style)
     active_user.style = "display:none;"
     deacctive_user.style= "display:block;"
     profile_div.style = "display:none"
@@ -29,7 +28,6 @@ async function private_profile(){
         }
     )
     response_json = await response.json()
-    console.log(response_json)
     const h6_profile_nickname = document.getElementById("profile_nickname")
     const h6_profile_username = document.getElementById("profile_username")
     const h6_profile_email = document.getElementById("profile_email")

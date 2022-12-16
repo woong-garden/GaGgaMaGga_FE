@@ -34,7 +34,6 @@ async function Login() {
             }).join('')
         );
         localStorage.setItem("payload", jsonPayload);
-        console.log(localStorage.getItem("payload"))
         if (JSON.parse(localStorage.getItem("payload")).nickname == null){
             window.location.replace('first_profile_edit.html')
         } else{
