@@ -27,7 +27,6 @@ async function login_log(){
     response_json = await response.json()
     response_json.forEach(item => {
         const time_format = time2str(item.created_at)
-        console.log(item.created_at)
         $('#my-review').append(
             `
             <div class="card" style="margin-bottom:12px">

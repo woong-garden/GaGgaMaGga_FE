@@ -45,22 +45,21 @@ window.onload = () => {
 }
 
 async function getData(place_id, review_id) {
-    const response = await fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/reviews/details/${place_id}/${review_id}/`, {
         headers: {
             "authorization": "Bearer " + localStorage.getItem("access")
         },
         method: 'GET'
     })
         .then(response => response.json())
-    console.log(response)
 
 
     const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
-    firstImage.src = "http://127.0.0.1:8000" + response.review_image_one
+    firstImage.src = backendBaseUrl + response.review_image_one
     const secondImage = document.querySelector('.slidelist li:nth-child(2) img')
-    secondImage.src = "http://127.0.0.1:8000" + response.review_image_two
+    secondImage.src = backendBaseUrl + response.review_image_two
     const thirdImage = document.querySelector('.slidelist li:nth-child(3) img')
-    thirdImage.src = "http://127.0.0.1:8000" + response.review_image_three
+    thirdImage.src = $backendBaseUrl + response.review_image_three
 
     const textarea = document.querySelector('textarea')
     textarea.value = response.content
@@ -130,7 +129,7 @@ async function getData(place_id, review_id) {
             formData.append("review_image_three", images.files[2])
         }
 
-        const editResponse = await fetch(`http://127.0.0.1:8000/reviews/details/${place_id}/${review_id}/`, {
+        const editResponse = await fetch(`${backendBaseUrl}/reviews/details/${place_id}/${review_id}/`, {
             headers: {
                 "authorization": "Bearer " + localStorage.getItem("access")
             },

@@ -25,8 +25,6 @@ async function searchParam(){
         const place_list_count = document.getElementById("place_list_count")
         place_list_count.innerText = `검색결과 (${response_json.hits.length})`
         
-        console.log(response_json.hits.place_img)
-
             if(response_json.hits.length){
                 response_json.hits.forEach(item => {
                     if(item.place_img==null){

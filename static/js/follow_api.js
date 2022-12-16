@@ -33,7 +33,6 @@ async function follow() {
 
 
     response_json = await response.json()
-    console.log(response_json)
 
 
     // 프로필
@@ -43,7 +42,6 @@ async function follow() {
 
     // 팔로워
     response_json.followers.forEach(item => {
-        console.log(item.nickname)
         $('#follower').append(
             `
             <div class="profile">
@@ -88,11 +86,9 @@ async function follow() {
 }
 
 function move_user_profile(click_nickname){
-    console.log(click_nickname)
     window.location.href = `/public_profile.html?=${click_nickname}`
 }
 // 뒤로가기
 function back_profile_page(user_nickname){
-    console.log(user_nickname)
     window.location.href = `/public_profile.html?=${user_nickname}`
 }

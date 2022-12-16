@@ -20,7 +20,6 @@ async function Sign_Up() {
         phone_number: document.getElementById("phone_number").value,
         term_check :input_check,
     }
-    console.log(input_check)
     const response = await fetch(`${backendBaseUrl}/users/`,{
         headers:{
             'Content-type':'application/json',

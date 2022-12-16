@@ -1,12 +1,8 @@
 window.onload = function () {
-    console.log("로드 완료")
     const choice = location.href.split('=')[2]
-    console.log(choice)
     if (choice == 1){ 
-        console.log("좋아요")
         BestLikeSort(1)
     } else {
-        console.log("최신")
         recentSort(1)
     }
 }
@@ -41,7 +37,6 @@ async function BestLikeSort(page){
         }
     )
     response_json = await response.json()
-    console.log(response_json)
     const rank_cnt = document.getElementById("rank-cnt")
     rank_cnt.innerText = response_json.like_count_review.count
     
@@ -199,7 +194,6 @@ async function recentSort(page){
         }
     )
     response_json = await response.json()
-    console.log(response_json)
     const rank_cnt = document.getElementById("rank-cnt")
     rank_cnt.innerText = response_json.recent_review.count
     
