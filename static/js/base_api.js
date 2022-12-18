@@ -1,4 +1,4 @@
-const backendBaseUrl = "http://www.back-gaggamagga.tk"
+const backendBaseUrl = "https://www.back-gaggamagga.tk/"
 const frontendBaseUrl = "http://127.0.0.1:5500"
 
 async function move_profile_page(){
