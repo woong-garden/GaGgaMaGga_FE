@@ -44,6 +44,7 @@ body {
 .root {
     position: relative;
     height: 88vh;
+    height: var(--vh);
     margin-top: 6vh;
     margin-bottom: 6vh;
     width: 100%;

@@ -1,4 +1,5 @@
-const backendBaseUrl = "https://www.back-gaggamagga.tk"
+// const backendBaseUrl = "https://www.back-gaggamagga.tk"
+const backendBaseUrl = "http://127.0.0.1:8000"
 const frontendBaseUrl = "http://127.0.0.1:5500"
 
 async function move_profile_page(){
@@ -19,3 +20,14 @@ async function move_profile_page(){
 function move_best_review_page(page, choice){
     window.location.href = `/best_review_list.html?page=${page}&choice=${choice}`
 }
+
+
+
+//모바일 환경 스크롤
+const setVh = () => {
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`)
+    };
+    window.addEventListener('resize', setVh);
+setVh();
+
+
