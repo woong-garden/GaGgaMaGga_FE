@@ -46,7 +46,9 @@ textarea {
     width : 90%;
     margin : 25px auto 0 auto;
 }
-
+.review-content-box{
+    padding-bottom:50px;
+}
 .buttons {
     display: flex;
     margin: 4vh auto;
@@ -99,6 +101,7 @@ body {
 .root {
     position: relative;
     height: 94vh;
+    height: var(--vh);
     width: 100%;
     left: 50%;
     margin-bottom: 6vh;

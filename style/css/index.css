@@ -13,12 +13,14 @@ body{
 .root {
     position:relative;
     height: 100vh;
+    height: var(--vh);
     width: 100%;
     left:50%;
     background-color:white;
     transform: translate(-50%, 0%);
     overflow: auto;
     box-shadow: 0 0 20px rgb(0 0 0 / 5%);
+    
 }
 
 .root::-webkit-scrollbar {
@@ -84,7 +86,7 @@ body{
 .img-test{
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .select-place-wrap{
@@ -166,7 +168,7 @@ body{
 }
 
 .select_box2 {
-    width: 100px;
+    width: 29%;
     height: 50px;
     margin: 10px 5px;
     border-radius: 15px;

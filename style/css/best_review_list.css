@@ -20,6 +20,7 @@
     .root {
         position:relative;
         height: 100%;
+        height: var(--vh);
         width: 100%;
         left:50%;
         background-color: white;

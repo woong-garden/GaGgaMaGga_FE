@@ -133,7 +133,7 @@ function pagenation_new(page_no, last_page_no, place_id, category) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <div class="no_page"></div>
+            <div class="no_page" style="display:none;"></div>
             <
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
@@ -270,7 +270,7 @@ function pagenation(page_no, last_page_no, cate_id) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <div class="no_page"></div>
+            <div class="no_page"style="display:none;></div>
             <
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
@@ -413,8 +413,8 @@ async function NewUserPlaceListView(place_id, category, page) {
                 <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
                 <div class="modal-wrap" id="modal-wrap${item.id}">
                     <div class="modal_contents">
-                        <div style="display:flex;justify-content: space-between; align-items:center;">
-                            <div style="font-size:20px;display:inline-block;">
+                        <div style="display:flex;justify-content: space-between; align-items:center; padding: 10px 10px 10px 10px;">
+                            <div style="font-size:16px;display:inline-block;">
                                 [${item.category}] ${item.place_name}
                             </div>
                             <a href="#">
@@ -423,12 +423,11 @@ async function NewUserPlaceListView(place_id, category, page) {
                                 </div>
                             </a>
                         </div>
-                        <hr>
                         
-                        <img src="${item.place_img}" style='width:300px;height:180px;')>
-                        <p style="font-size:15px;">주소 : ${item.place_address}</p>
-                        <p style="font-size:15px;">전화번호 : ☎ ${item.place_number}</p>
-                        <p style="font-size:15px;">영업시간 : ${item.place_time}</p>
+                        <img src="${item.place_img}" style='object-fit:cover; width:100%;height:180px;')>
+                        <p style="font-size:15px; margin: 0 10px;">주소 : ${item.place_address}</p>
+                        <p style="font-size:15px; margin: 0 10px;">전화번호 : ☎ ${item.place_number}</p>
+                        <p style="font-size:15px; margin: 0 10px;">영업시간 : ${item.place_time}</p>
                     </div>
                         <div class="modal_map" id="map${item.id}">
                     </div>
@@ -610,7 +609,8 @@ async function UserPlaceListView(cate_id, page) {
     response_json.results.forEach(item => {
         if(item.place_img){
             $('#place-list').append(
-                `<table cellpadding="0" cellspacing="0" border="0">
+                `
+                <table cellpadding="0" cellspacing="0" border="0">
                 <td width="30%"><img class="place-item-img" src="${item.place_img}"></td>
                 <td width="70%">
                     <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
@@ -624,13 +624,12 @@ async function UserPlaceListView(cate_id, page) {
             <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
             <div class="modal-wrap" id="modal-wrap${item.id}">
                 <div class="modal_contents">
-                        <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
+                        <div style="font-size:16px;display:inline-block; ">[${item.category}] ${item.place_name}</div>
                         <a href="#">
                             <div class="modal_close" onClick="javascript:popClose(${item.id});">
                                 Close
                         </a>
                     </div>
-                    <hr>
                     <img src="${item.place_img}" style='width:300px;height:180px;')>
                     <p style="font-size:15px;">주소 : ${item.place_address}</p>
                     <p style="font-size:15px;">전화번호 : ☎ ${item.place_number}</p>
