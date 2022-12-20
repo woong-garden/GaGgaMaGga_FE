@@ -291,9 +291,17 @@ body {
     content: url(https://cdn-icons-png.flaticon.com/512/2107/2107952.png);
     width: 4%;
 }
-
+.comment-liked-img {
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    content: url(https://cdn-icons-png.flaticon.com/512/2107/2107845.png);
+    width: 4%;
+}
 .comment-like-img:hover {
     content: url(https://cdn-icons-png.flaticon.com/512/2107/2107845.png);
+}
+.comment-liked-img:hover {
+    content: url(https://cdn-icons-png.flaticon.com/512/2107/2107952.png);
 }
 
 .comment-content>p {
