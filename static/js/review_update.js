@@ -59,7 +59,7 @@ async function getData(place_id, review_id) {
     const secondImage = document.querySelector('.slidelist li:nth-child(2) img')
     secondImage.src = backendBaseUrl + response.review_image_two
     const thirdImage = document.querySelector('.slidelist li:nth-child(3) img')
-    thirdImage.src = $backendBaseUrl + response.review_image_three
+    thirdImage.src = backendBaseUrl + response.review_image_three
 
     const textarea = document.querySelector('textarea')
     textarea.value = response.content
