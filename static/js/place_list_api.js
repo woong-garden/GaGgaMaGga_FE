@@ -399,7 +399,7 @@ async function NewUserPlaceListView(place_id, category, page) {
             $('#place-list').append(
                 `
                 <table cellpadding="0" cellspacing="0" border="0">
-                    <a href="#" onclick="move_place_detail_page(${item.id})"><td width="30%"><img src="${item.place_img}" class="place-item-img"></td></a>
+                    <td width="30%"><a href="#" onclick="move_place_detail_page(${item.id})"><img src="${item.place_img}" class="place-item-img"></a></td>
                     <td width="70%">
                     <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                         <div>${item.place_address}</div>
@@ -454,7 +454,7 @@ async function NewUserPlaceListView(place_id, category, page) {
             $('#place-list').append(
             `
             <table cellpadding="0" cellspacing="0" border="0">
-            <a href="#" onclick="move_place_detail_page(${item.id})"><td width="30%"><img src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg" class="place-item-img"></td></a>
+            <td width="30%"><a href="#" onclick="move_place_detail_page(${item.id})"><img src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg" class="place-item-img"></a></td>
                 <td width="70%">
                 <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                     <div>${item.place_address}</div>
@@ -611,7 +611,7 @@ async function UserPlaceListView(cate_id, page) {
             $('#place-list').append(
                 `
                 <table cellpadding="0" cellspacing="0" border="0">
-                <a href="#" onclick="move_place_detail_page(${item.id})"><td width="30%"><img class="place-item-img" src="${item.place_img}"></td></a>
+                <td width="30%"><a href="#" onclick="move_place_detail_page(${item.id})"><img class="place-item-img" src="${item.place_img}"></a></td>
                 <td width="70%">
                     <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                     <div>${item.place_address}</div>
@@ -658,15 +658,15 @@ async function UserPlaceListView(cate_id, page) {
         }else{
             $('#place-list').append(
             `<table cellpadding="0" cellspacing="0" border="0">
-            <a href="#" onclick="move_place_detail_page(${item.id})"><td width="30%"><img class="place-item-img" src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg"></td></a>
-            <td width="70%">
-                <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
-                <div>${item.place_address}</div>
-                <div style="display:inline-block;">☎${item.place_number}</div>
-                <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
-                <a href="#" class="btn-open" onClick="javascript:DltPopOpen(${item.id});"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
-            <td class="item-rating" width="10%">${item.rating}</td>
-        </table>
+                <td width="30%"><a href="#" onclick="move_place_detail_page(${item.id})"><img class="place-item-img" src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg"></a></td>
+                <td width="70%">
+                    <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
+                    <div>${item.place_address}</div>
+                    <div style="display:inline-block;">☎${item.place_number}</div>
+                    <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
+                    <a href="#" class="btn-open" onClick="javascript:DltPopOpen(${item.id});"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
+                <td class="item-rating" width="10%">${item.rating}</td>
+            </table>
         
         <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
         <div class="modal-wrap" id="modal-wrap${item.id}">
