@@ -675,13 +675,17 @@ async function UserPlaceListView(cate_id, page) {
         <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
         <div class="modal-wrap" id="modal-wrap${item.id}">
             <div class="modal_contents">
-                    <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
-                    <a href="#">
-                        <div class="modal_close" onClick="javascript:popClose(${item.id});">
-                            Close
-                    </a>
-                </div>
-                <hr>
+                    <div style="display:flex;justify-content: space-between; align-items:center; padding: 10px 10px 10px 10px;">
+                        <div style="font-size:16px;display:inline-block;">
+                            [${item.category}] ${item.place_name}
+                        </div>
+                        <a href="#">
+                            <div class="modal_close" onClick="javascript:popClose(${item.id});">
+                                Close
+                            </div>
+                        </a>
+                    </div>
+                    
                 <img src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg" style='object-fit:cover; width:100%;height:180px;'>
                         <div style="font-size:15px; display:flex; align-items:center; margin: 4px 15px 0px 15px;"><img style="padding-right:6px; fill:#9e9e9e; width:16px; height:16px;" src="/images/icon/area.svg"><div>${item.place_address}</div></div>
                         <div style="font-size:15px; display:flex; align-items:center; margin: 4px 15px 0px 15px;"><img style="padding-right:6px; fill:#9e9e9e; width:16px; height:16px;" src="/images/icon/phone.svg"><div>${item.place_number}</div></div>
