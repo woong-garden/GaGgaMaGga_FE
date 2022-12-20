@@ -215,7 +215,7 @@ body {
     height: 100%;
     display: flex;
 }
-#image-alert, #star-alert, #over-image-alert, #content-alert{
+#star-alert,#content-alert{
     text-align: center;
     margin-top: 25px;
     font-size: 13px;

@@ -62,13 +62,9 @@ async function createReview() {
 
 
     // 경고문
-    const overImageAlert = document.querySelector('#over-image-alert')
-    const imageAlert = document.querySelector('#image-alert')
     const contentAlert = document.querySelector('#content-alert')
     const starAlert = document.querySelector('#star-alert')
 
-    overImageAlert.style.display = "none"
-    imageAlert.style.display = "none"   
     contentAlert.style.display = "none"
     starAlert.style.display = "none"
 
@@ -109,8 +105,6 @@ async function createReview() {
 
 
     if (content.value) {
-
-        if (images.files.length == 3) {
             var formData = new FormData()
             formData.append("rating_cnt", cls)
             formData.append("content", content.value)
@@ -128,13 +122,6 @@ async function createReview() {
             })
             alert("리뷰 생성 완료했습니다.")
             window.history.back()
-        }
-        else if (images.files.length > 3) {
-            overImageAlert.style.display = "block"
-        }
-        else {
-            imageAlert.style.display = "block"
-        }
     }
     else {
         contentAlert.style.display = "block"
