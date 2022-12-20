@@ -197,18 +197,20 @@ async function getData(review_id, place_id) {
         commentHead.appendChild(dots)
         const commentReportModal = document.createElement('div')
         commentReportModal.classList.add(`cmt-report${cmt.id}`)
-        document.querySelector('body').appendChild(commentReportModal)
+        document.querySelector('.root').appendChild(commentReportModal)
         commentReportModal.style.position = "absolute"
         commentReportModal.style.backgroundColor = "white"
-        commentReportModal.style.width = "30vw"
-        commentReportModal.style.height = "30vh"
+        commentReportModal.style.width = "70%"
+        // commentReportModal.style.height = "30%"
         commentReportModal.style.display = "none"
         commentReportModal.style.borderRadius = "25px"
         commentReportModal.style.boxShadow = "4px 4px 4px rgb(199,199,199)"
-        commentReportModal.style.left = "50%"
-        commentReportModal.style.marginLeft = "-15vw"
-        commentReportModal.style.top = "50%"
-        commentReportModal.style.marginTop = "-15vh"
+        commentReportModal.style.left = "0"
+        // commentReportModal.style.marginLeft = "-15vw"
+        commentReportModal.style.margin = "0 auto"
+        commentReportModal.style.right = "0"
+        commentReportModal.style.top = "30%"
+        // commentReportModal.style.marginTop = "-15vh"
         commentReportModal.style.zIndex = "1"
         commentReportModal.innerHTML = `<select style="border-radius:10px;width : 88%;margin:3vh auto;display:block" id="comment-report-category${cmt.id}" >
         <option value="욕설이 들어갔어요.">욕설이 들어갔어요.</option>
@@ -331,18 +333,20 @@ async function getData(review_id, place_id) {
             // 리코멘트 모달
             const recommentReportModal = document.createElement('div')
             recommentReportModal.classList.add(`recmt-report${recmt.id}`)
-            document.querySelector('body').appendChild(recommentReportModal)
+            document.querySelector('.root').appendChild(recommentReportModal)
             recommentReportModal.style.position = "absolute"
             recommentReportModal.style.backgroundColor = "white"
-            recommentReportModal.style.width = "30vw"
-            recommentReportModal.style.height = "30vh"
+            recommentReportModal.style.width = "70%"
+            // recommentReportModal.style.height = "30%"
             recommentReportModal.style.display = "none"
             recommentReportModal.style.borderRadius = "25px"
             recommentReportModal.style.boxShadow = "4px 4px 4px rgb(199,199,199)"
-            recommentReportModal.style.left = "50%"
-            recommentReportModal.style.marginLeft = "-15vw"
-            recommentReportModal.style.top = "50%"
-            recommentReportModal.style.marginTop = "-15vh"
+            recommentReportModal.style.left = "0"
+            recommentReportModal.style.right = "0"
+            recommentReportModal.style.margin = "0 auto"
+            // recommentReportModal.style.marginLeft = "-15vw"
+            recommentReportModal.style.top = "30%"
+            // recommentReportModal.style.marginTop = "-15vh"
             recommentReportModal.style.zIndex = "1"
             recommentReportModal.innerHTML = `<select style="border-radius:10px;width : 88%;margin:3vh auto;display:block" id="recomment-report-category${recmt.id}" >
                 <option value="욕설이 들어갔어요.">욕설이 들어갔어요.</option>

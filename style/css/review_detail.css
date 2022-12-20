@@ -518,15 +518,17 @@ body {
 #report-modal {
     position: absolute;
     background-color: white;
-    width: 30vw;
-    height: 30vh;
+    width: 70%;
+    /* height: 30%; */
     display: none;
     border-radius: 25px;
     box-shadow: 4px 4px 4px rgb(199, 199, 199);
-    left: 50%;
-    margin-left: -15vw;
-    top: 50%;
-    margin-top: -15vh;
+    left: 0;
+    right: 0;
+    /* margin-left: -15vw; */
+    margin: 0 auto;
+    top: 30%;
+    /* margin-top: -15vh; */
     z-index: 1;
 }
 
