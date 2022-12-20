@@ -1,5 +1,5 @@
-const backendBaseUrl = "https://www.back-gaggamagga.tk"
-// const backendBaseUrl = "http://127.0.0.1:8000"
+// const backendBaseUrl = "https://www.back-gaggamagga.tk"
+const backendBaseUrl = "http://127.0.0.1:8000"
 const frontendBaseUrl = "http://127.0.0.1:5500"
 
 if (localStorage.getItem("payload") || localStorage.getItem("kakao")) {

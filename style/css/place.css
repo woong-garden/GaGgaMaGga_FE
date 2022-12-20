@@ -342,7 +342,7 @@ td {
     left: 0;
     right: 0;
     transform:translate(0%,0%);
-    width:70%;
+    width:80%;
     height:55%;
     background:#fff;
     border-radius: 15px;
@@ -371,8 +371,8 @@ td {
 .modal_map {
     width:90%;
     height:150px;
-    border-style: solid;
-    margin:10px auto;
+    border: solid 1px #DBDBDB;
+    margin:20px auto;
 }
 .modal_contents {
     width:100%;

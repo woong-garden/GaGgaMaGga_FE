@@ -76,14 +76,6 @@ async function getData(place_id, review_id) {
         const starFive = document.querySelector('#rate5')
 
         // 경고문
-        const overImageAlert = document.querySelector('#over-image-alert')
-        const contentAlert = document.querySelector('#content-alert')
-        const starAlert = document.querySelector('#star-alert')
-
-        overImageAlert.style.display = "none"
-        contentAlert.style.display = "none"
-        starAlert.style.display = "none"
-
         if (starOne.checked) {
             content.classList.add('1');
             content.classList.remove("2", "3", "4", "5");
@@ -108,15 +100,8 @@ async function getData(place_id, review_id) {
         }
 
         let cls = content.getAttribute("class");
-
-        if (cls) {
-            cls = cls.toString()
-        } else {
-            starAlert.style.display = "block"
-        }
-
         const images = document.querySelector('.real-upload');
-    if (content.value) {
+
         var formData = new FormData()
         formData.append("rating_cnt", cls)
         formData.append("content", content.value)
@@ -125,27 +110,39 @@ async function getData(place_id, review_id) {
         }
         if (images.files[1]) {
             formData.append("review_image_two", images.files[1])
+            
         } if (images.files[2]) {
             formData.append("review_image_three", images.files[2])
-        }
-
-        const editResponse = await fetch(`${backendBaseUrl}/reviews/details/${place_id}/${review_id}/`, {
-            headers: {
-                "authorization": "Bearer " + localStorage.getItem("access")
-            },
-            method: 'PUT',
-            body: formData
-        })
-        const editResponseJson = await editResponse.json()
-
-        if (editResponse.status == 200) {
-            alert("리뷰 수정 되었습니다.")
-            location.href = `review_detail.html?id=${review_id}&place=${place_id}&author=${response.author_id}`
-   
-        }
-         }
-    else {
-        contentAlert.style.display = "block"}
-}
-
-}
+        } 
+        if (images.files[3]){
+            alert("사진은 3장까지만 업로드 해주세요.")
+            window.location.reload()}
+    
+            const editResponse = await fetch(`${backendBaseUrl}/reviews/details/${place_id}/${review_id}/`, {
+                headers: {
+                    "authorization": "Bearer " + localStorage.getItem("access")
+                },
+                method: 'PUT',
+                body: formData
+            })
+            const editResponseJson = await editResponse.json()
+            if (editResponse.status == 200) {
+                alert("리뷰 수정 되었습니다.")
+                location.href = `review_detail.html?id=${review_id}&place=${place_id}&author=${response.author_id}`
+    
+            }  else if(editResponse.status==400 && editResponseJson['rating_cnt']){
+                document.getElementById('alert-danger').style.display ="block"
+                const alert_danger = document.getElementById('alert-danger')
+                alert_danger.innerText = `별점을 입력해주세요`
+    
+            } else if (editResponse.status==400 && editResponseJson['content']){
+                document.getElementById('alert-danger').style.display ="block"
+                const alert_danger = document.getElementById('alert-danger')
+                alert_danger.innerText = `${editResponseJson['content']}`
+        
+            } else if (editResponse.status==400 && editResponseJson['error']){
+                document.getElementById('alert-danger').style.display ="block"
+                const alert_danger = document.getElementById('alert-danger')
+                alert_danger.innerText = `${editResponseJson['error']}`
+            }
+        }}
