@@ -215,13 +215,7 @@ body {
     height: 100%;
     display: flex;
 }
-#star-alert,#content-alert{
-    text-align: center;
-    margin-top: 25px;
-    font-size: 13px;
-    color:red;
-    display: none;
-}
+
 /* .slide * {display: inline-block;} */
 .toleft,
 .toright {
@@ -363,4 +357,19 @@ body {
 
 .section [id="slide03"]:checked~.slidewrap .control03 {
     display: block;
+}
+
+.alert-danger {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 13px;
+    color:#FF7878;
+    display: none;
+}
+
+.alert-image {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 13px;
+    color:#000000;
 }

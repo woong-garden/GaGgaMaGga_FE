@@ -62,12 +62,6 @@ async function createReview() {
 
 
     // 경고문
-    const contentAlert = document.querySelector('#content-alert')
-    const starAlert = document.querySelector('#star-alert')
-
-    contentAlert.style.display = "none"
-    starAlert.style.display = "none"
-
     if (starOne.checked) {
         content.classList.add('1');
         content.classList.remove("2", "3", "4", "5");
@@ -94,36 +88,51 @@ async function createReview() {
 
 
     let cls = content.getAttribute("class");
-
-    if (cls) {
-        cls = cls.toString()
-    } else {
-        starAlert.style.display = "block"
-    }
-
     const images = document.querySelector('.real-upload');
 
+    var formData = new FormData()
+    formData.append("rating_cnt", cls)
+    formData.append("content", content.value)
 
-    if (content.value) {
-            var formData = new FormData()
-            formData.append("rating_cnt", cls)
-            formData.append("content", content.value)
-            formData.append("review_image_one", images.files[0])
-            formData.append("review_image_two", images.files[1])
-            formData.append("review_image_three", images.files[2])
+    if (images.files[0]) {
+        formData.append("review_image_one", images.files[0])
+    }
+    if (images.files[1]) {
+        formData.append("review_image_two", images.files[1])
+    } 
+    if (images.files[2]) {
+        formData.append("review_image_three", images.files[2])
+    }
+    if (images.files[3]){
+        alert("사진은 3장까지만 업로드 해주세요.")
+        window.location.reload()}
 
-            await fetch(`${backendBaseUrl}/reviews/${place_id}/`, {
-                headers: {
-                    "authorization": "Bearer " + localStorage.getItem("access")
-                },
-                method: 'POST',
-                cache: 'no-cache',
-                body: formData
-            })
-            alert("리뷰 생성 완료했습니다.")
-            window.history.back()
+    const response = await fetch(`${backendBaseUrl}/reviews/${place_id}/`, {
+        headers: {
+            "authorization": "Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+        cache: 'no-cache',
+        body: formData
+    })
+    response_json = await response.json()
+
+    if(response.status===201){
+        alert("리뷰 생성되었습니다.")
+        window.history.back()
+    } else if(response.status==400 && response_json['rating_cnt']){
+        document.getElementById('alert-danger').style.display ="block"
+        const alert_danger = document.getElementById('alert-danger')
+        alert_danger.innerText = `별점을 입력해주세요`
+
+    } else if (response.status==400 && response_json['content']){
+        document.getElementById('alert-danger').style.display ="block"
+        const alert_danger = document.getElementById('alert-danger')
+        alert_danger.innerText = `${response_json['content']}`
+
+    } else if (response.status==400 && response_json['error']){
+        document.getElementById('alert-danger').style.display ="block"
+        const alert_danger = document.getElementById('alert-danger')
+        alert_danger.innerText = `${response_json['error']}`
     }
-    else {
-        contentAlert.style.display = "block"
-    }
-}
+    } 
