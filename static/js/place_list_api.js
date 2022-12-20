@@ -399,7 +399,7 @@ async function NewUserPlaceListView(place_id, category, page) {
             $('#place-list').append(
                 `
                 <table cellpadding="0" cellspacing="0" border="0">
-                    <td width="30%"><img src="${item.place_img}" class="place-item-img"></td>
+                    <a href="#" onclick="move_place_detail_page(${item.id})"><td width="30%"><img src="${item.place_img}" class="place-item-img"></td></a>
                     <td width="70%">
                     <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                         <div>${item.place_address}</div>
@@ -454,7 +454,7 @@ async function NewUserPlaceListView(place_id, category, page) {
             $('#place-list').append(
             `
             <table cellpadding="0" cellspacing="0" border="0">
-                <td width="30%"><img src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg" class="place-item-img"></td>
+            <a href="#" onclick="move_place_detail_page(${item.id})"><td width="30%"><img src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg" class="place-item-img"></td></a>
                 <td width="70%">
                 <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                     <div>${item.place_address}</div>
@@ -611,7 +611,7 @@ async function UserPlaceListView(cate_id, page) {
             $('#place-list').append(
                 `
                 <table cellpadding="0" cellspacing="0" border="0">
-                <td width="30%"><img class="place-item-img" src="${item.place_img}"></td>
+                <a href="#" onclick="move_place_detail_page(${item.id})"><td width="30%"><img class="place-item-img" src="${item.place_img}"></td></a>
                 <td width="70%">
                     <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                     <div>${item.place_address}</div>
@@ -658,7 +658,7 @@ async function UserPlaceListView(cate_id, page) {
         }else{
             $('#place-list').append(
             `<table cellpadding="0" cellspacing="0" border="0">
-            <td width="30%"><img class="place-item-img" src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg"></td>
+            <a href="#" onclick="move_place_detail_page(${item.id})"><td width="30%"><img class="place-item-img" src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg"></td></a>
             <td width="70%">
                 <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                 <div>${item.place_address}</div>
