@@ -133,16 +133,16 @@ async function getData(review_id, place_id) {
 
     const likeCount = document.querySelector('#like-count')
     likeCount.innerText = response.review_like.length
-    
+
     // 이미지 null 값일때 default이미지 설정
-    if(response.review_image_one){
+    if (response.review_image_one) {
         const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
         firstImage.src = backendBaseUrl + response.review_image_one
         const secondImage = document.querySelector('.slidelist li:nth-child(2) img')
         secondImage.src = backendBaseUrl + response.review_image_two
         const thirdImage = document.querySelector('.slidelist li:nth-child(3) img')
         thirdImage.src = backendBaseUrl + response.review_image_three
-    }else{
+    } else {
         const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
         firstImage.src = 'https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg'
         const secondImage = document.querySelector('.slidelist li:nth-child(2) img')
@@ -273,7 +273,7 @@ async function getData(review_id, place_id) {
             recommentBox.style.flexDirection = "column"
             recommentBox.style.width = "100%"
             recommentContent.appendChild(recommentBox)
-            
+
             const recmtContentBox = document.createElement('div')
             recmtContentBox.style.display = "flex"
             recmtContentBox.style.justifyContent = "space-between"
@@ -368,7 +368,6 @@ async function getData(review_id, place_id) {
             // 대댓글 수정 삭제 버튼 박스
             const recommentEditBox = document.createElement('div')
             recommentEditBox.style.display = "flex"
-            recommentEditBox.style.justifyContent = "space-between"
             recommentEditBox.style.width = "30%"
             recommentEditBox.style.marginLeft = "1vw"
             recommentBox.appendChild(recommentEditBox)
@@ -391,9 +390,11 @@ async function getData(review_id, place_id) {
             const recommentLikeCount = document.createElement('p')
             recommentLikeCount.innerText = recmt.recomment_like.length
             recommentLikeCount.style.fontSize = "11px"
-            recommentLikeCount.style.margin = "0"
             recommentEditBox.appendChild(recommentLikeCount)
             if (recmt.user_id == payload_parse.user_id) {
+
+                recommentEditBox.style.justifyContent = "space-between"
+
                 // 대댓글 수정 버튼 생성
                 const editRecomment = document.createElement('button')
                 const editRecommentText = document.createTextNode('수정')
@@ -459,6 +460,9 @@ async function getData(review_id, place_id) {
                         getData(review_id, place_id)
                     }
                 }
+            }
+            else{
+                recommentLikeCount.style.margin = "0 0 0 2.1vw"
             }
         })
         const recomment = document.createElement("div")
@@ -609,105 +613,105 @@ async function writeComment() {
     content.value = null
 }
 
-// // 알람 
-// const notificationSocket = new WebSocket(
-//     'ws://'
-//     + "127.0.0.1:8000"
-//     + '/ws/notification/'
-//     + author_id
-//     + '/'
-// );
+// 알람 
+const notificationSocket = new WebSocket(
+    'wss://'
+    + backendBaseUrl
+    + '/ws/notification/'
+    + author_id
+    + '/'
+);
 
-// notificationSocket.onmessage = async function (e) {
-//     const data = JSON.parse(e.data);
-//     const alarmBox = document.querySelector('.alarm')
-//     if (payload_parse.user_id == author_id) {
-//         const alarmContent = document.createElement('div')
-//         alarmContent.style.display = "flex"
-//         alarmContent.style.height = "10vh"
-//         alarmContent.innerHTML = data.message
-//         alarmBox.appendChild(alarmContent)
+notificationSocket.onmessage = async function (e) {
+    const data = JSON.parse(e.data);
+    const alarmBox = document.querySelector('.alarm')
+    if (payload_parse.user_id == author_id) {
+        const alarmContent = document.createElement('div')
+        alarmContent.style.display = "flex"
+        alarmContent.style.height = "10vh"
+        alarmContent.innerHTML = data.message
+        alarmBox.appendChild(alarmContent)
 
-//         const response = await fetch(`${backendBaseUrl}/notification/${payload_parse.user_id}/`, {
-//             headers: {
-//                 "authorization": "Bearer " + localStorage.getItem("access")
-//             },
-//             method: 'GET'
-//         })
-//             .then(response => response.json())
-//         const notificationButton = document.createElement('button')
-//         const notificationButtonText = document.createTextNode('확인')
-//         notificationButton.appendChild(notificationButtonText)
-//         notificationButton.onclick = async function () {
-//             await fetch(`${backendBaseUrl}/notification/alarm/${response[0].id}/`, {
-//                 headers: {
-//                     'content-type': 'application/json',
-//                     "authorization": "Bearer " + localStorage.getItem("access")
-//                 },
-//                 method: 'PUT',
-//                 body: ''
-//             })
-//             alarmBox.innerHTML = ""
-//             getNotification()
-//         }
-//         alarmContent.appendChild(notificationButton)
-//     }
-// };
-// notificationSocket.onclose = function (e) {
-//     console.error('소켓이 닫혔어요 ㅜㅜ');
-// };
-// function alarm() {
-//     if (payload_parse.user_id != author_id) {
-//         const message = `<img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon"><a style="cursor:pointer;margin:auto; text-decoration:none;" href="review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}">
-//         <p class="alarm-content">후기에 덧글이 달렸습니다.</p></a>`
-//         notificationSocket.send(JSON.stringify({
-//             'message': message,
-//             "author": author_id,
-//             "user_id": payload_parse.user_id
-//         }))
-//     }
-// }
+        const response = await fetch(`${backendBaseUrl}/notification/${payload_parse.user_id}/`, {
+            headers: {
+                "authorization": "Bearer " + localStorage.getItem("access")
+            },
+            method: 'GET'
+        })
+            .then(response => response.json())
+        const notificationButton = document.createElement('button')
+        const notificationButtonText = document.createTextNode('확인')
+        notificationButton.appendChild(notificationButtonText)
+        notificationButton.onclick = async function () {
+            await fetch(`${backendBaseUrl}/notification/alarm/${response[0].id}/`, {
+                headers: {
+                    'content-type': 'application/json',
+                    "authorization": "Bearer " + localStorage.getItem("access")
+                },
+                method: 'PUT',
+                body: ''
+            })
+            alarmBox.innerHTML = ""
+            getNotification()
+        }
+        alarmContent.appendChild(notificationButton)
+    }
+};
+notificationSocket.onclose = function (e) {
+    console.error('소켓이 닫혔어요 ㅜㅜ');
+};
+function alarm() {
+    if (payload_parse.user_id != author_id) {
+        const message = `<img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon"><a style="cursor:pointer;margin:auto; text-decoration:none;" href="review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}">
+        <p class="alarm-content">후기에 덧글이 달렸습니다.</p></a>`
+        notificationSocket.send(JSON.stringify({
+            'message': message,
+            "author": author_id,
+            "user_id": payload_parse.user_id
+        }))
+    }
+}
 
-// async function getNotification() {
+async function getNotification() {
 
-//     const response = await fetch(`${backendBaseUrl}/notification/${ payload_parse.user_id}/`, {
-//         headers: {
-//             "authorization": "Bearer " + localStorage.getItem("access")
-//         },
-//         method: 'GET'
-//     })
-//     .then(response => response.json())
-//     response.forEach(notification => {
-//         const alarmBox = document.querySelector('.alarm')
+    const response = await fetch(`${backendBaseUrl}/notification/${payload_parse.user_id}/`, {
+        headers: {
+            "authorization": "Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET'
+    })
+        .then(response => response.json())
+    response.forEach(notification => {
+        const alarmBox = document.querySelector('.alarm')
 
 
-//         let alarmContent = document.createElement('div')
-//         alarmContent.setAttribute("id", `alarm${notification.id}`)
-//         alarmContent.innerHTML = notification.content
-//         alarmContent.style.display = "flex"
-//         alarmContent.style.height = "10vh"
-//         alarmBox.appendChild(alarmContent)
+        let alarmContent = document.createElement('div')
+        alarmContent.setAttribute("id", `alarm${notification.id}`)
+        alarmContent.innerHTML = notification.content
+        alarmContent.style.display = "flex"
+        alarmContent.style.height = "10vh"
+        alarmBox.appendChild(alarmContent)
 
-//         const notificationButton = document.createElement('button')
-//         const notificationButtonText = document.createTextNode('확인')
-//         notificationButton.appendChild(notificationButtonText)
-//         notificationButton.onclick = async function () {
-//             await fetch(`${backendBaseUrl}/notification/alarm/${notification.id}/`, {
-//                 headers: {
-//                     'content-type': 'application/json',
-//                     "authorization": "Bearer " + localStorage.getItem("access")
-//                 },
-//                 method: 'PUT',
-//                 body: ''
-//             })
-//             alarmBox.innerHTML = ""
-//             getNotification()
+        const notificationButton = document.createElement('button')
+        const notificationButtonText = document.createTextNode('확인')
+        notificationButton.appendChild(notificationButtonText)
+        notificationButton.onclick = async function () {
+            await fetch(`${backendBaseUrl}/notification/alarm/${notification.id}/`, {
+                headers: {
+                    'content-type': 'application/json',
+                    "authorization": "Bearer " + localStorage.getItem("access")
+                },
+                method: 'PUT',
+                body: ''
+            })
+            alarmBox.innerHTML = ""
+            getNotification()
 
-//         }
+        }
 
-//         alarmContent.appendChild(notificationButton)
-//     })
-// }
+        alarmContent.appendChild(notificationButton)
+    })
+}
 
 
 
