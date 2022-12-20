@@ -1,6 +1,19 @@
-// const backendBaseUrl = "https://www.back-gaggamagga.tk"
-const backendBaseUrl = "http://127.0.0.1:8000"
+const backendBaseUrl = "https://www.back-gaggamagga.tk"
+// const backendBaseUrl = "http://127.0.0.1:8000"
 const frontendBaseUrl = "http://127.0.0.1:5500"
+
+if (localStorage.getItem("payload") || localStorage.getItem("kakao")) {
+    if (localStorage.getItem("payload")){
+        const exp = new Date(JSON.parse(localStorage.getItem("payload")).exp * 1000);
+        if (exp < new Date()){
+            localStorage.clear()
+        }
+    } else if(localStorage.getItem("kakao")){
+        const exp = new Date(JSON.parse(localStorage.getItem("kakao")).exp * 1000);
+        if (exp < new Date()){
+            localStorage.clear()
+        }
+}}
 
 async function move_profile_page(){
     const response = await fetch(`${backendBaseUrl}/users/profiles/`, {

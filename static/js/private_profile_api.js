@@ -90,12 +90,14 @@ function Report(){
     if (localStorage.getItem("access")){
         if (localStorage.getItem("payload")){
             if(JSON.parse(localStorage.getItem("payload")).is_confirmed == true){
-            //구글 폼 주소
+                google_inquiry = document.getElementById("google_inquiry")
+                google_inquiry.href = "https://docs.google.com/forms/d/1Q8tbNOfQ_5UJn4exL7YJ8n7LfbwAC8tNcTYaGq9cad8/edit"
             } else{
                 alert("문의를 작성하시려면 이메일 인증을 해야합니다.")
             }
         } else if (localStorage.getItem("kakao")) {
-            //구글 폼 주소
+            google_inquiry = document.getElementById("google_inquiry")
+            google_inquiry.href = "https://docs.google.com/forms/d/1Q8tbNOfQ_5UJn4exL7YJ8n7LfbwAC8tNcTYaGq9cad8/edit"
         }
 }}
 

@@ -28,6 +28,7 @@ async function follow() {
         headers: {
             Accept: "application/json",
             "Content-type": "application/json",
+            "Access-Control-Allow-Origin": "*",
             "Authorization": "Bearer " + localStorage.getItem("access"),
         }})
 
