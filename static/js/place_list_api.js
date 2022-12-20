@@ -666,7 +666,7 @@ async function UserPlaceListView(cate_id, page) {
                 <td width="70%">
                     <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                     <div>${item.place_address}</div>
-                    <div style="display:inline-block;">☎${item.place_number}</div>
+                    <div style="display:inline-block;"><img style="fill:#9e9e9e; width:12px; height:12px;" src="/images/icon/phone.svg">${item.place_number}</div>
                     <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
                     <a href="#" class="btn-open" onClick="javascript:DltPopOpen(${item.id});"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
                 <td class="item-rating" width="10%">${item.rating}</td>
