@@ -1,4 +1,3 @@
-
 window.onload = function () {
     const storage = localStorage.getItem("payload");
     const kakao = localStorage.getItem("kakao");
@@ -71,6 +70,8 @@ function DltPopClose(id) {
     $(modalPop).hide();
     $(modalBg).hide();
 }
+
+
 
 function pagenation_new(page_no, last_page_no, place_id, category) {
     if ((page_no==1)&(last_page_no == 1)){
@@ -209,7 +210,7 @@ function pagenation_new(page_no, last_page_no, place_id, category) {
 }
 
 
-function pagenation(page_no, last_page_no, cate_id) {
+function pagenation_user(page_no, last_page_no, cate_id) {
     if ((page_no==1)&(last_page_no == 1)){
         $('#pagenation').empty()
         $('#pagenation').append(
@@ -270,7 +271,7 @@ function pagenation(page_no, last_page_no, cate_id) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <div class="no_page"style="display:none;></div>
+            <div class="no_page"style="display:none;"></div>
             <
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
@@ -340,8 +341,7 @@ function pagenation(page_no, last_page_no, cate_id) {
             <div>...</div>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
             >
-        `
-    )
+        `)
     }
 }
 
@@ -578,26 +578,26 @@ async function UserPlaceListView(cate_id, page) {
             if (response_json.count <= 10) {
                 const page_no = 1
                 const last_page_no = 1
-                pagenation(page_no, last_page_no, cate_id)
+                pagenation_user(page_no, last_page_no, cate_id)
             } else {
                 const last_page_no = parseInt(response_json.count/10)+1
                 const page_no = last_page_no
-                pagenation(page_no, last_page_no, cate_id)
+                pagenation_user(page_no, last_page_no, cate_id)
             }
         } else {
             const page_no = parseInt(response_json.count/10)
             const last_page_no = parseInt(response_json.count/10)
-            pagenation(page_no, last_page_no, cate_id)
+            pagenation_user(page_no, last_page_no, cate_id)
         }        
     } else {
         if (parseInt(response_json.count%10) !== 0){
             const page_no = response_json.next.split('=')[1].split('/')[0]-1
             const last_page_no = parseInt(response_json.count/10)+1
-            pagenation(page_no, last_page_no, cate_id)
+            pagenation_user(page_no, last_page_no, cate_id)
         }else{
             const page_no = response_json.next.split('=')[1].split('/')[0]-1
             const last_page_no = parseInt(response_json.count/10)
-            pagenation(page_no, last_page_no, cate_id)
+            pagenation_user(page_no, last_page_no, cate_id)
         }
         
     }
