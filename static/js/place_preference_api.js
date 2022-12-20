@@ -23,6 +23,7 @@ async function PlaceSelectView(choice_no){
     response_json = await response.json()
     if (choice_no > 12) {
         $('#select-box').empty()
+        $("select_button_reload").empty()
         response_json.forEach(item => {
             $('#select-box').append(
                 `
@@ -34,7 +35,11 @@ async function PlaceSelectView(choice_no){
         });
     } else {
         $('#select-box').empty()
+        $("select_button_reload").empty()
         response_json.forEach(item => {
+            $("select_button_reload").append(
+                `<div class="select_button" onclick="reload_page()"><a href="#" style="text-decoration:none;color:#000;">다시 검색하기</a></div>`
+            )
             $('#select-box').append(
                 `
                 <a href="#"><div class="select_box" style="background-image:url(${item.place_img});" onclick=move_list_page("${item.category}",${item.id})>
