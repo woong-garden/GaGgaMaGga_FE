@@ -37,10 +37,23 @@ async function private_profile(){
     h6_profile_email.innerText = `이메일: ${response_json.email}`
     document.getElementById("porfile-img").src = `${backendBaseUrl}${response_json.profile_image}`
 
-    google_inquiry = document.getElementById("google_inquiry")
-    google_inquiry.onclick = Report(response_json.is_confirmed)
-}
+    let google_inquiry = document.getElementById("google_inquiry")
 
+    //1:1문의
+    google_inquiry.onclick = async function() {
+        console.log(response_json.is_confirmed)
+        if (localStorage.getItem("access")){
+            if (localStorage.getItem("payload")){
+                if(response_json.is_confirmed == true){
+                    google_inquiry = document.getElementById("google_inquiry")
+                    google_inquiry.href = "https://docs.google.com/forms/d/1Q8tbNOfQ_5UJn4exL7YJ8n7LfbwAC8tNcTYaGq9cad8/edit"
+                } else if(response_json.is_confirmed == false){
+                    alert("문의를 작성하시려면 이메일 인증을 해야합니다.")
+                }
+            } else if (localStorage.getItem("kakao")) {
+                google_inquiry = document.getElementById("google_inquiry")
+                google_inquiry.href = "https://docs.google.com/forms/d/1Q8tbNOfQ_5UJn4exL7YJ8n7LfbwAC8tNcTYaGq9cad8/edit"
+            }}}}
 
 
 // 내 프로필
@@ -90,21 +103,6 @@ if (localStorage.getItem("kakao")){
     alert(response_json["message"])
 }}}}
 
-// 1:1 문의
-function Report(is_confirmed){
-    if (localStorage.getItem("access")){
-        if (localStorage.getItem("payload")){
-            if(is_confirmed == true){
-                google_inquiry = document.getElementById("google_inquiry")
-                google_inquiry.href = "https://docs.google.com/forms/d/1Q8tbNOfQ_5UJn4exL7YJ8n7LfbwAC8tNcTYaGq9cad8/edit"
-            } else if(is_confirmed == false){
-                alert("문의를 작성하시려면 이메일 인증을 해야합니다.")
-            }
-        } else if (localStorage.getItem("kakao")) {
-            google_inquiry = document.getElementById("google_inquiry")
-            google_inquiry.href = "https://docs.google.com/forms/d/1Q8tbNOfQ_5UJn4exL7YJ8n7LfbwAC8tNcTYaGq9cad8/edit"
-        }
-}}
 
 // 계정 비활성화
 async function withdrawal() {
