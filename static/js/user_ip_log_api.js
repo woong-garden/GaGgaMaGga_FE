@@ -1,5 +1,3 @@
-
-
 if(localStorage.getItem("access")){} 
 else{
     alert("접근이 불가능합니다.")
