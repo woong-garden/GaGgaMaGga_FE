@@ -115,13 +115,13 @@ async function public_profile() {
             if(item.review_image_one){
                 $('#my-review').append(
                 `
-                <div class="review-box">
+                <div class="review-box" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">
                     <div>
                         <img class="review-content-img" 
-                        onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
+                         alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
                     </div>
                     <div class="review-content-info">
-                        <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>
+                        <div style="color:#ffbf60">${item.place_name}</div>
                         <div class="star-wrap">
                             <img class="star-icon" src="/images/icon/star.svg">
                             <div class="star-num">${item.rating_cnt}</div>
@@ -134,13 +134,13 @@ async function public_profile() {
             else{
                 $('#my-review').append(
                     `
-                    <div class="review-box">
+                    <div class="review-box" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">
                         <div>
                             <img class="review-content-img" 
-                            onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg">
+                             alt="후기 사진" src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg">
                         </div>
-                        <div class="review-content-info">
-                            <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>
+                        <div class="review-content-info" >
+                            <div style="color:#ffbf60">${item.place_name}</div>
                             <div class="star-wrap">
                                 <img class="star-icon" src="/images/icon/star.svg">
                                 <div class="star-num">${item.rating_cnt}</div>
