@@ -119,7 +119,7 @@ async function createReview() {
 
     if(response.status===201){
         alert("리뷰 생성되었습니다.")
-        window.history.back()
+        location.href = document.referrer;
     } else if(response.status==400 && response_json['rating_cnt']){
         document.getElementById('alert-danger').style.display ="block"
         const alert_danger = document.getElementById('alert-danger')
