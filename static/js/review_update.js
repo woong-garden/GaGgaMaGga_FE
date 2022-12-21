@@ -53,6 +53,8 @@ async function getData(place_id, review_id) {
     })
         .then(response => response.json())
 
+    console.log(response)
+
 
     const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
     firstImage.src = backendBaseUrl + response.review_image_one
@@ -64,16 +66,26 @@ async function getData(place_id, review_id) {
     const textarea = document.querySelector('textarea')
     textarea.value = response.content
 
+    const content = document.querySelector("textarea")
+    const starOne = document.querySelector('#rate1')
+    const starTwo = document.querySelector('#rate2')
+    const starThree = document.querySelector('#rate3')
+    const starFour = document.querySelector('#rate4')
+    const starFive = document.querySelector('#rate5')
+    if (response.rating_cnt == 1) {
+        starOne.checked = true
+    } else if (response.rating_cnt == 2) {
+        starTwo.checked = true
+    } else if (response.rating_cnt == 3) {
+        starThree.checked = true
+    } else if (response.rating_cnt == 4) {
+        starFour.checked = true
+    }else if (response.rating_cnt == 5) {
+        starFive.checked = true
+    }
 
     const updateReview = document.querySelector('#update-review')
     updateReview.onclick = async function () {
-
-        const content = document.querySelector("textarea")
-        const starOne = document.querySelector('#rate1')
-        const starTwo = document.querySelector('#rate2')
-        const starThree = document.querySelector('#rate3')
-        const starFour = document.querySelector('#rate4')
-        const starFive = document.querySelector('#rate5')
 
         // 경고문
         if (starOne.checked) {
@@ -110,35 +122,37 @@ async function getData(place_id, review_id) {
         }
         if (images.files[1]) {
             formData.append("review_image_two", images.files[1])
-            
+
         } if (images.files[2]) {
             formData.append("review_image_three", images.files[2])
-        } 
-        if (images.files[3]){
+        }
+        if (images.files[3]) {
             alert("사진은 3장까지만 업로드 해주세요.")
-            window.location.reload()}
-    
-            const editResponse = await fetch(`${backendBaseUrl}/reviews/details/${place_id}/${review_id}/`, {
-                headers: {
-                    "authorization": "Bearer " + localStorage.getItem("access")
-                },
-                method: 'PUT',
-                body: formData
-            })
-            const editResponseJson = await editResponse.json()
-            if (editResponse.status == 200) {
-                alert("리뷰 수정 되었습니다.")
-                location.href = `review_detail.html?id=${review_id}&place=${place_id}&author=${response.author_id}`
-    
-            }  else if(editResponse.status==400 && editResponseJson['rating_cnt']){
-                document.getElementById('alert-danger').style.display ="block"
-                const alert_danger = document.getElementById('alert-danger')
-                alert_danger.innerText = `별점을 입력해주세요`
-    
-            } else if (editResponse.status==400 && editResponseJson['content']){
-                document.getElementById('alert-danger').style.display ="block"
-                const alert_danger = document.getElementById('alert-danger')
-                alert_danger.innerText = `${editResponseJson['content']}`
-        
-            }
-        }}
+            window.location.reload()
+        }
+
+        const editResponse = await fetch(`${backendBaseUrl}/reviews/details/${place_id}/${review_id}/`, {
+            headers: {
+                "authorization": "Bearer " + localStorage.getItem("access")
+            },
+            method: 'PUT',
+            body: formData
+        })
+        const editResponseJson = await editResponse.json()
+        if (editResponse.status == 200) {
+            alert("리뷰 수정 되었습니다.")
+            location.href = `review_detail.html?id=${review_id}&place=${place_id}&author=${response.author_id}`
+
+        } else if (editResponse.status == 400 && editResponseJson['rating_cnt']) {
+            document.getElementById('alert-danger').style.display = "block"
+            const alert_danger = document.getElementById('alert-danger')
+            alert_danger.innerText = `별점을 입력해주세요`
+
+        } else if (editResponse.status == 400 && editResponseJson['content']) {
+            document.getElementById('alert-danger').style.display = "block"
+            const alert_danger = document.getElementById('alert-danger')
+            alert_danger.innerText = `${editResponseJson['content']}`
+
+        }
+    }
+}
