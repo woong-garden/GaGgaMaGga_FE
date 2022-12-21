@@ -235,18 +235,37 @@ body {
     display: block;
 }
 
-
 .cmt-btn {
     border: 0;
     margin-right: 2vw;
     background-color: transparent;
     color: gray;
     cursor: pointer;
+    font-size: 12px;
+}
+
+.recmt-btn{
+    border: 0;
+    background-color: transparent;
+    color: gray;
+    cursor: pointer;
+    font-size: 12px;
+
+}
+
+.recmt-edit-btn{
+    border: 0;
+    background-color: transparent;
+    color: gray;
+    cursor: pointer;
+    font-size: 12px;
 }
 
 .review-time p {
     width: 100%;
     text-align: right;
+    font-size: 11px;
+    color : gray
 }
 
 .review-detail-box>p {
@@ -263,12 +282,24 @@ body {
     font-size: 13px;
 }
 
-.nickname,
 .time {
     font-size: 14px;
     margin: auto 1vw;
+    font-size: 11px;
+    color : gray;
 }
 
+.nickname{
+    font-size: 14px;
+    margin: auto 1vw;
+    cursor: pointer;
+    color : #FDA171;
+}
+.comments{
+    height:100%;
+    width : 92%;
+    margin: auto;
+}
 .each-comment {
     display: flex;
     justify-content: center;
@@ -288,22 +319,13 @@ body {
 .comment-like-img {
     aspect-ratio: 1/1;
     object-fit: contain;
-    content: url(https://cdn-icons-png.flaticon.com/512/2107/2107952.png);
     width: 4%;
-}
-.comment-liked-img {
-    aspect-ratio: 1/1;
-    object-fit: contain;
-    content: url(https://cdn-icons-png.flaticon.com/512/2107/2107845.png);
-    width: 4%;
-}
-.comment-like-img:hover {
-    content: url(https://cdn-icons-png.flaticon.com/512/2107/2107845.png);
-}
-.comment-liked-img:hover {
-    content: url(https://cdn-icons-png.flaticon.com/512/2107/2107952.png);
 }
 
+.comment-like-img:hover{
+    content: url(https://cdn-icons-png.flaticon.com/512/2107/2107845.png);
+
+}
 .comment-content>p {
     margin-left: 1vw;
     font-size: 13px;
@@ -316,7 +338,7 @@ body {
 
 .comment-under p {
     font-size: 12px;
-    margin: auto 2vw auto 0.3vw;
+    margin: auto 1.5vw auto 1.5vw;
 }
 
 .comment-cnt {
@@ -415,7 +437,7 @@ body {
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 0 20px;
 }
 
 .nav-input-wrap>input {
@@ -446,15 +468,21 @@ body {
     background-color: #fcdbab;
     color: black;
 }
-
-.recomment-content {
-    display: none;
+.comment-edit-box{
+    display: flex;
+    width: 100%;
+}
+.recomment-edit-box{
+    display: flex;
+    width: 30%;
+    margin-left: 1vw;
+    justify-content: space-between;
 }
 
 .recomment {
     display: flex;
     justify-content: space-between;
-    display: none;
+    /* display: none; */
 }
 
 .recomment img {
@@ -462,11 +490,13 @@ body {
     object-fit: cover;
     aspect-ratio: 1/1;
     border-radius: 30px;
+    height: 7%;
+    border-radius: 50%;
+    margin : auto 0;
 }
 
 .recomment input {
     margin: auto 1vw;
-    padding-top: 1.5vh;
     width: 70%;
     border-left-width: 0;
     border-right-width: 0;
@@ -474,7 +504,14 @@ body {
     border-bottom-width: 1;
     outline: 0;
 }
-
+.recomment-content, .edit-recomment-input{
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0.2vh;
+    outline: 0;
+    margin: 1vh 1vw;
+}
 .recomment button:hover {
     background-color: #fcdbab;
     color: black;
@@ -543,6 +580,7 @@ body {
 #report-button-text {
     color: rgb(237, 155, 83);
     margin-right: 1vw;
+    cursor: pointer;
 }
 
 #review_report_category {
@@ -576,4 +614,25 @@ textarea {
 .report-buttons button {
     width: 42%;
     margin: 3vh 0.5vw;
+}
+
+#comment-report, #recomment-report{
+    position: absolute;
+    background-color: white;
+    width : 70%;
+    left : 50%;
+    margin-left: -35%;;
+    display: none;
+    border-radius: 25px;
+    box-shadow: 4px 4px 4px rgb(199,199,199);
+    top : 30%;
+    z-index: 1;
+
+}
+
+.recomment-report-button{
+    font-size: 11px;
+    color : rgb(237, 155, 83);
+    margin: auto 0 auto 2vw;
+    cursor: pointer;
 }
