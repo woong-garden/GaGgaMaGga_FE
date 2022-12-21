@@ -197,18 +197,11 @@ async function getComments() {
         time.classList.add('time')
         time.innerText = time2str(cmt.updated_at)
         commentHead.appendChild(time)
-
-        if(payload_parse.user_id != cmt.user_id){
-        // 코멘트 신고 버튼
-        const dots = document.createElement('span')
-        dots.innerText = "신고"
-        dots.classList.add('recomment-report-button')
+        // cmt 신고 모달창 trigger
+        const dots = document.createElement('img')
+        dots.src = "/images/icon/dot.svg"
+        dots.setAttribute("id", `dot${cmt.id}`)
         dots.style.cursor = "pointer"
-        dots.onclick = function () {
-            document.querySelector('#comment-report').style.display = "block"
-            document.querySelector('#comment-report').removeAttribute('class')
-            document.querySelector('#comment-report').classList.add(`${cmt.id}`)
-        }
         commentHead.appendChild(dots)
     }
 

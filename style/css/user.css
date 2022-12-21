@@ -81,6 +81,21 @@ body{
     outline: none;
 }
 
+#input-box select{
+    width:90%;
+    height : 7vh;
+    background: 0 0;
+    background-color: white;
+    border: 1px solid #efefef;
+    border-radius: 40px;
+    box-sizing: border-box;
+    color: #262626;
+    font-size: 14px;
+    padding: 7px 20px;
+    margin : 10px 10px;
+    outline: none;
+}
+
 #buttons{
     display: flex;
     flex-direction: column;

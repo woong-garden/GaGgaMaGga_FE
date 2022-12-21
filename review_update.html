@@ -26,7 +26,7 @@
     <div class="header">
         <div>
             <div>
-                <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
+                <a href="javascript:location.href = document.referrer;"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
             </div>
             <div>
                 <a><img style="margin-left:8px;" src="/images/icon/bell.svg"></a>
@@ -78,7 +78,7 @@
         </div>
         <!--슬라이드 끝-->
         <!-- 후기 내용 -->
-        <div>
+        <div class="review-content-box">
             <div class="alert-danger" style="font-size:15px; " id="alert-danger"></div>
             <!-- 별점 시작 -->
             <div id="star">

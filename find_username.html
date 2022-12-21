@@ -8,15 +8,14 @@
     <link rel="stylesheet" href="style/css/user.css">
     <!--타이틀 로고-->
     <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
-    <title>가까? 마까?
-         | 프로필 편집</title>
+    <title>가까? 마까? | 아이디 찾기</title>
 </head>
 <body>
     <!--헤더 시작-->
     <div class="header">
         <div>
             <div>
-                <a href="javascript:history.back();"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
+                <a href="javascript:location.href = document.referrer;"><img style="width:38px; height:38px; margin-top:2%;" src="/images/icon/back.svg"></a>
             </div> 
             <div>
                 <h3>아이디 찾기</h3>
@@ -33,7 +32,7 @@
         <div class="root_block"></div>
         <div id="input-box">
             <div id="authentication">
-                <input type="text" id="phone_number" placeholder="-를 제외한 번호를 입력해주세요">
+                <input type="text" id="phone_number" placeholder="-를 제외한 휴대폰번호를 입력해주세요">
                 <button onclick="phone_number_send()" class="button">인증번호 발송</button>
             </div>
             <div class="alert alert-danger" style="font-size:15px" id="alert-danger_1"></div>

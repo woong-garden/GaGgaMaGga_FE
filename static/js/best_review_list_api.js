@@ -47,55 +47,46 @@ async function BestLikeSort(page){
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div class="current_page">${page_no-1}</div></a>
             <a href="#"><div onclick="BestLikeSort(${page_no})">${page_no}</div></a>
             <div>...</div>
             <a href="#"><div onclick="BestLikeSort(${last_page_no})">${last_page_no}</div></a>
-            >
         `
     )
     } else if (page_no-1 == 2)  {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="BestLikeSort(1)">1</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
             <a href="#"><div onclick="BestLikeSort(${page_no})">${page_no}</div></a>
             <div>...</div>
             <a href="#"><div onclick="BestLikeSort(${last_page_no})">${last_page_no}</div></a>
-            >
         `)
     }else if (page_no-1 == last_page_no) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="BestLikeSort(1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="BestLikeSort(${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
-            >
         `
     )
     } else if (page_no-1 == last_page_no-1) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="BestLikeSort(1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="BestLikeSort(${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
             <a href="#"><div onclick="BestLikeSort(${last_page_no})">${last_page_no}</div></a>
-            >
         `)
     }else {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="BestLikeSort(1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="BestLikeSort(${page_no-2})">${page_no-2}</div></a>
@@ -103,7 +94,6 @@ async function BestLikeSort(page){
             <a href="#"><div onclick="BestLikeSort(${page_no})">${page_no}</div></a>
             <div>...</div>
             <a href="#"><div onclick="BestLikeSort(${last_page_no})">${last_page_no}</div></a>
-            >
         `
     )
     }
@@ -113,9 +103,9 @@ async function BestLikeSort(page){
             $('#like-rank').append(
                 `
                 <div class="review-list">
-                    <div class="place-item">
+                    <div class="place-item" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">
                         <div>
-                            <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src="${backendBaseUrl}${item.review_image_one}">
+                            <img class="place-item-img" src="${backendBaseUrl}${item.review_image_one}">
                         </div>
                         <div class="place-item-content">
                             <div>${item.place_name}</div>
@@ -144,9 +134,9 @@ async function BestLikeSort(page){
             $('#like-rank').append(
             `
             <div class="review-list">
-                <div class="place-item">
+                <div class="place-item" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">
                     <div>
-                        <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src='https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg'>
+                        <img class="place-item-img" src='https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif'>
                     </div>
                     <div class="place-item-content">
                         <div>${item.place_name}</div>
@@ -204,55 +194,46 @@ async function recentSort(page){
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div class="current_page">${page_no-1}</div></a>
             <a href="#"><div onclick="recentSort(${page_no})">${page_no}</div></a>
             <div>...</div>
             <a href="#"><div onclick="recentSort(${last_page_no})">${last_page_no}</div></a>
-            >
         `
     )
     } else if (page_no-1 == 2)  {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="recentSort(1)">1</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
             <a href="#"><div onclick="recentSort(${page_no})">${page_no}</div></a>
             <div>...</div>
             <a href="#"><div onclick="recentSort(${last_page_no})">${last_page_no}</div></a>
-            >
         `)
     }else if (page_no-1 == last_page_no) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="recentSort(1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="recentSort(${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
-            >
         `
     )
     } else if (page_no-1 == last_page_no-1) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="recentSort(1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="recentSort(${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div class="current_page">${page_no-1}</div></a>
             <a href="#"><div onclick="recentSort(${last_page_no})">${last_page_no}</div></a>
-            >
         `)
     }else {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="recentSort(1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="recentSort(${page_no-2})">${page_no-2}</div></a>
@@ -260,7 +241,6 @@ async function recentSort(page){
             <a href="#"><div onclick="recentSort(${page_no})">${page_no}</div></a>
             <div>...</div>
             <a href="#"><div onclick="recentSort(${last_page_no})">${last_page_no}</div></a>
-            >
         `
     )
     }
@@ -304,8 +284,7 @@ async function recentSort(page){
             <div class="review-list">
                 <div class="place-item">
                     <div>
-                        <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src='https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg'>
-
+                        <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src='https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif'>
                     </div>
                     <div class="place-item-content">
                         <div>${item.place_name}</div>
