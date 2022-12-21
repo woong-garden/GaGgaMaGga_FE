@@ -32,18 +32,27 @@
     <div class="root">
         <div class="root_block"></div>
         <div id="input-box" style="padding-top: 20px;">
-            <h5>아이디</h5>
+            <h5>* 아이디</h5>
             <input style="margin:4px 10px 10px 10px;" type="text" id="username" placeholder="6자이상 20자이하의 영문 대/소문자, 숫자">
 
-            <h5>이메일</h5>
+            <h5 >* 이메일</h5>
             <input style="margin:4px 10px 10px 10px;" type="email" id="email" placeholder="이메일를 입력해주세요.">
 
-            <h5>비밀번호</h5>
+            <h5>* 비밀번호</h5>
             <input style="margin:4px 10px 10px 10px;" type="password" id="password" placeholder="8자이상 16이하의 영문 대/소문자, 숫자, 특수문자">
             <input style="margin:4px 10px 10px 10px;" type="password" id="repassword" placeholder="비밀번호 재확인을 입력해주세요.">
 
             <h5>휴대폰 번호 (선택사항)</h5>
-            <div><input style="margin:4px 10px 10px 10px;" type="tel" id="phone_number" placeholder="-를 제외한 휴대폰 번호 입력해주세요."></div>
+            <div style="display:flex;">
+            <select id="phone_number_front" style="margin:4px 10px 10px 10px;">
+                <option value="010">010</option>
+                <option value="011">011</option>
+                <option value="016">016</option>
+                <option value="017">017</option>
+                <option value="019">019</option>
+            </select>
+                <input style="margin:4px 10px 10px 10px;" type="tel" maxlength="4" id="phone_number_1" placeholder="3~4자리">
+                <input style="margin:4px 10px 10px 10px;" type="tel" maxlength="4" id="phone_number_2" placeholder="4자리"></div>
             
 
                 <div style="display: flex;justify-content: center;align-items: center;">

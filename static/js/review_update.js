@@ -140,9 +140,5 @@ async function getData(place_id, review_id) {
                 const alert_danger = document.getElementById('alert-danger')
                 alert_danger.innerText = `${editResponseJson['content']}`
         
-            } else if (editResponse.status==400 && editResponseJson['error']){
-                document.getElementById('alert-danger').style.display ="block"
-                const alert_danger = document.getElementById('alert-danger')
-                alert_danger.innerText = `${editResponseJson['error']}`
             }
         }}

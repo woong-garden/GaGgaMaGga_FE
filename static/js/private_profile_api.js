@@ -36,7 +36,12 @@ async function private_profile(){
     h6_profile_username.innerText = `아이디: ${response_json.username}`
     h6_profile_email.innerText = `이메일: ${response_json.email}`
     document.getElementById("porfile-img").src = `${backendBaseUrl}${response_json.profile_image}`
+
+    google_inquiry = document.getElementById("google_inquiry")
+    google_inquiry.onclick = Report(response_json.is_confirmed)
 }
+
+
 
 // 내 프로필
 function move_profile_page(){
@@ -65,7 +70,7 @@ function confirm_kakao_change_password() {
 
 // 이메일 재인증
 async function resend_email() {
-    if (localStorage.getItem("kakao")){
+if (localStorage.getItem("kakao")){
         alert("카카오 회원은 이메일 인증을 할 수 없습니다. ")
 } else {    
     var delConfirm = confirm("이메일을 발송하시겠습니까? ")
@@ -85,14 +90,14 @@ async function resend_email() {
     alert(response_json["message"])
 }}}}
 
-//1:1 문의
-function Report(){
+// 1:1 문의
+function Report(is_confirmed){
     if (localStorage.getItem("access")){
         if (localStorage.getItem("payload")){
-            if(JSON.parse(localStorage.getItem("payload")).is_confirmed == true){
+            if(is_confirmed == true){
                 google_inquiry = document.getElementById("google_inquiry")
                 google_inquiry.href = "https://docs.google.com/forms/d/1Q8tbNOfQ_5UJn4exL7YJ8n7LfbwAC8tNcTYaGq9cad8/edit"
-            } else{
+            } else if(is_confirmed == false){
                 alert("문의를 작성하시려면 이메일 인증을 해야합니다.")
             }
         } else if (localStorage.getItem("kakao")) {

@@ -109,7 +109,7 @@ async function createReview() {
 
     const response = await fetch(`${backendBaseUrl}/reviews/${place_id}/`, {
         headers: {
-            "authorization": "Bearer " + localStorage.getItem("access")
+            "authorization": "Bearer " + localStorage.getItem("access"),
         },
         method: 'POST',
         cache: 'no-cache',
@@ -130,9 +130,5 @@ async function createReview() {
         const alert_danger = document.getElementById('alert-danger')
         alert_danger.innerText = `${response_json['content']}`
 
-    } else if (response.status==400 && response_json['error']){
-        document.getElementById('alert-danger').style.display ="block"
-        const alert_danger = document.getElementById('alert-danger')
-        alert_danger.innerText = `${response_json['error']}`
     }
     } 

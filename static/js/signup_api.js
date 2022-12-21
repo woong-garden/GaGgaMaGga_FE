@@ -11,13 +11,18 @@ async function Sign_Up() {
     } else{
         input_check = false
     }
-
+    
+    const phone_number_front = document.getElementById("phone_number_front")
+    const phone_number_front_value = (phone_number_front.options[phone_number_front.selectedIndex].value)  
+    const phone_number_1 = document.getElementById("phone_number_1").value
+    const phone_number_2 = document.getElementById("phone_number_2").value
+    
     const signupData = {
         username: document.getElementById("username").value,
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
         repassword: document.getElementById("repassword").value,
-        phone_number: document.getElementById("phone_number").value,
+        phone_number: phone_number_front_value + phone_number_1 + phone_number_2,
         term_check :input_check,
     }
     const response = await fetch(`${backendBaseUrl}/users/`,{

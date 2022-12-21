@@ -25,8 +25,9 @@ async function profile_edit() {
     },
     body: formData
     })
-
+    
     const result = await response.json()
+    console.log(result)
     if (response.status === 200) {
         alert("회원정보 수정이 완료되었습니다.")
         window.location.replace(`private_profile.html`)
@@ -41,10 +42,6 @@ async function profile_edit() {
         const alert_danger = document.getElementById('alert-danger')
         alert_danger.innerText = `이미지를 넣어주세요. `
         
-    }  else if(response.status === 400 && result['error']){
-        document.getElementById('alert-danger').style.display ="block"
-        const alert_danger = document.getElementById('alert-danger')
-        alert_danger.innerText = `${result['error']}`
     }
     else if(response.status == 403) {
         alert("접근이 불가능합니다.")

@@ -28,7 +28,6 @@ async function follow() {
         headers: {
             Accept: "application/json",
             "Content-type": "application/json",
-            "Access-Control-Allow-Origin": "*",
             "Authorization": "Bearer " + localStorage.getItem("access"),
         }})
 
@@ -58,7 +57,7 @@ async function follow() {
             `
         )
     });
- 
+
     // 팔로잉
     response_json.followings.forEach(item => {
         $('#following').append(
