@@ -113,9 +113,9 @@ async function BestLikeSort(page){
             $('#like-rank').append(
                 `
                 <div class="review-list">
-                    <div class="place-item">
+                    <div class="place-item" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">
                         <div>
-                            <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src="${backendBaseUrl}${item.review_image_one}">
+                            <img class="place-item-img" src="${backendBaseUrl}${item.review_image_one}">
                         </div>
                         <div class="place-item-content">
                             <div>${item.place_name}</div>
@@ -144,9 +144,9 @@ async function BestLikeSort(page){
             $('#like-rank').append(
             `
             <div class="review-list">
-                <div class="place-item">
+                <div class="place-item" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">
                     <div>
-                        <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src='https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg'>
+                        <img class="place-item-img" src='https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg'>
                     </div>
                     <div class="place-item-content">
                         <div>${item.place_name}</div>
