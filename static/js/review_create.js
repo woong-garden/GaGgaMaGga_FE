@@ -118,6 +118,9 @@ async function createReview() {
     response_json = await response.json()
 
     if(response.status===201){
+        review_cnt = localStorage.getItem('review_cnt')
+        review_cnt = review_cnt + 1
+        localStorage.setItem('review_cnt', review_cnt)
         alert("리뷰 생성되었습니다.")
         window.history.back()
     } else if(response.status==400 && response_json['rating_cnt']){
