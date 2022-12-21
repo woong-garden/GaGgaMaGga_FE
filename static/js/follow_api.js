@@ -13,10 +13,42 @@ const follow_value = decodeURI(getvalue)
 function followershow(){
     $('#follower').show();
     $('#following').hide();
+    $('.btn-follow').css({width:"100%",
+        padding: "14px",
+        cursor: "pointer",
+        border: "none",
+        backgroundColor: "transparent",
+        borderTop: "solid 2px #000",
+        borderRight: "solid 1px #F1F1F1",
+        fontWeight: "700"
+    });
+    $('.btn-follow2').css({width:"100%",
+        padding: "14px",
+        cursor: "pointer",
+        border: "none",
+        backgroundColor: "transparent",
+        borderBottom: "solid 1px #F1F1F1"
+    });
 }
 function followingshow(){
     $('#follower').hide();
     $('#following').show();
+    $('.btn-follow2').css({width:"100%",
+        padding: "14px",
+        cursor: "pointer",
+        border: "none",
+        backgroundColor: "transparent",
+        borderTop: "solid 2px #000",
+        borderLeft: "solid 1px #F1F1F1",
+        fontWeight: "700"
+    });
+    $('.btn-follow').css({width:"100%",
+        padding: "14px",
+        cursor: "pointer",
+        border: "none",
+        backgroundColor: "transparent",
+        borderBottom: "solid 1px #F1F1F1"
+    });
 }
 
 follow()
@@ -28,7 +60,6 @@ async function follow() {
         headers: {
             Accept: "application/json",
             "Content-type": "application/json",
-            "Access-Control-Allow-Origin": "*",
             "Authorization": "Bearer " + localStorage.getItem("access"),
         }})
 
