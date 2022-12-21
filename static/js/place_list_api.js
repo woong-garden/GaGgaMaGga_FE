@@ -666,7 +666,7 @@ async function UserPlaceListView(cate_id, page) {
                 <td width="70%">
                     <a href="#" onclick="move_place_detail_page(${item.id})" style="text-decoration:none; color:#000"><div style="font-size:15px;font-weight:bold;">[${item.category}] ${item.place_name}</div></a>
                     <div>${item.place_address}</div>
-                    <div style="display:inline-block;">☎${item.place_number}</div>
+                    <div style="display:inline-block;"><img style="fill:#9e9e9e; width:12px; height:12px;" src="/images/icon/phone.svg">${item.place_number}</div>
                     <a href="#" class="btn-open" onClick="javascript:popOpen(${item.id});"><div class="market_detail_button btn-box">지도보기</div></a>
                     <a href="#" class="btn-open" onClick="javascript:DltPopOpen(${item.id});"><div class="market_detail_button btn-box" id="delete_place${item.id}" style="display:none;">장소삭제</div>
                 <td class="item-rating" width="10%">${item.rating}</td>
@@ -675,13 +675,17 @@ async function UserPlaceListView(cate_id, page) {
         <div class="modal-bg" id="modal-bg${item.id}"onClick="javascript:popClose(${item.id});"></div>
         <div class="modal-wrap" id="modal-wrap${item.id}">
             <div class="modal_contents">
-                    <div style="font-size:20px;display:inline-block;">[${item.category}] ${item.place_name}</div>
-                    <a href="#">
-                        <div class="modal_close" onClick="javascript:popClose(${item.id});">
-                            Close
-                    </a>
-                </div>
-                <hr>
+                    <div style="display:flex;justify-content: space-between; align-items:center; padding: 10px 10px 10px 10px;">
+                        <div style="font-size:16px;display:inline-block;">
+                            [${item.category}] ${item.place_name}
+                        </div>
+                        <a href="#">
+                            <div class="modal_close" onClick="javascript:popClose(${item.id});">
+                                Close
+                            </div>
+                        </a>
+                    </div>
+                    
                 <img src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg" style='object-fit:cover; width:100%;height:180px;'>
                         <div style="font-size:15px; display:flex; align-items:center; margin: 4px 15px 0px 15px;"><img style="padding-right:6px; fill:#9e9e9e; width:16px; height:16px;" src="/images/icon/area.svg"><div>${item.place_address}</div></div>
                         <div style="font-size:15px; display:flex; align-items:center; margin: 4px 15px 0px 15px;"><img style="padding-right:6px; fill:#9e9e9e; width:16px; height:16px;" src="/images/icon/phone.svg"><div><a style="text-decoration:none; color:#000;" href="tel:${item.place_number}">${item.place_number}</a></div></div>

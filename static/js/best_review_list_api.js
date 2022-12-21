@@ -130,7 +130,7 @@ async function BestLikeSort(page){
                         </div>
                     </div>
                     <a class="place-item-user" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
-                        <div>
+                        <div style="text-align:center">
                             <img class="place-item-user-img" src="${backendBaseUrl}${item.profile_image}">
                         </div>
                         <div>
@@ -161,7 +161,7 @@ async function BestLikeSort(page){
                     </div>
                 </div>
                 <a class="place-item-user" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
-                    <div>
+                    <div style="text-align:center">
                         <img class="place-item-user-img" src="${backendBaseUrl}${item.profile_image}">
                     </div>
                     <div>
@@ -288,7 +288,7 @@ async function recentSort(page){
                         </div>
                     </div>
                     <a class="place-item-user" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
-                        <div>
+                        <div style="text-align:center">
                             <img class="place-item-user-img" src="${backendBaseUrl}${item.profile_image}">
                         </div>
                         <div>
@@ -320,7 +320,7 @@ async function recentSort(page){
                     </div>
                 </div>
                 <a class="place-item-user" onclick="move_public_profile_page('${item.nickname}')" class="review-item-user">
-                    <div>
+                    <div style="text-align:center">
                         <img class="place-item-user-img" src="${backendBaseUrl}${item.profile_image}">
                     </div>
                     <div>
