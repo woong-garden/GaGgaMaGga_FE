@@ -190,10 +190,12 @@ async function getData(review_id, place_id) {
         time.style.color = "gray"
         commentHead.appendChild(time)
         // cmt 신고 모달창 trigger
-        const dots = document.createElement('img')
-        dots.src = "/images/icon/dot.svg"
+        const dots = document.createElement('span')
+        dots.innerText = "신고"
         dots.setAttribute("id", `dot${cmt.id}`)
+        dots.style.fontSize = "11px"
         dots.style.cursor = "pointer"
+        dots.style.color = "rgb(237, 155, 83)"
         commentHead.appendChild(dots)
         const commentReportModal = document.createElement('div')
         commentReportModal.classList.add(`cmt-report${cmt.id}`)
@@ -240,18 +242,25 @@ async function getData(review_id, place_id) {
         const commentUnder = document.createElement("div")
         commentUnder.classList.add("comment-under")
         commentContent.appendChild(commentUnder)
+
+
         const commentLike = document.createElement("img")
         commentLike.classList.add('comment-like-img')
-        commentLike.src = "https://cdn-icons-png.flaticon.com/512/2107/2107845.png"
-        // if (cmt.comment_like.includes(payload_parse.user_id)) {
-        //     commentLike.src = "https://cdn-icons-png.flaticon.com/512/2107/2107845.png"
-        // }
-        // else {
-        //     commentLike.src = "https://cdn-icons-png.flaticon.com/512/2107/2107952.png"
-        // }
+        commentLike.src = "https://cdn-icons-png.flaticon.com/512/2107/2107952.png"
+        commentLike.alt = "좋아요하트";
         commentLike.style.cursor = "pointer"
-        commentUnder.appendChild(commentLike)
-        // 덧글 좋아요 기능
+        const commentLiked = document.createElement("img")
+        commentLiked.classList.add('comment-liked-img')
+        commentLiked.src = "https://cdn-icons-png.flaticon.com/512/2107/2107845.png"
+        commentLiked.alt = "좋아요된하트";
+        commentLiked.style.cursor = "pointer"
+        if (cmt.comment_like.includes(payload_parse.user_id)) {
+            commentUnder.appendChild(commentLiked)
+        }
+        else {
+            commentUnder.appendChild(commentLike)
+        }
+        // 댓글 좋아요 기능
         commentLike.onclick = async function () {
             await fetch(`${backendBaseUrl}/reviews/comments/${cmt.id}/likes/`, {
                 headers: {
@@ -261,7 +270,21 @@ async function getData(review_id, place_id) {
                 method: 'POST',
             })
             getData(review_id, place_id)
+            commentUnder.appendChild(commentLike)
         }
+        commentLiked.onclick = async function () {
+            await fetch(`${backendBaseUrl}/reviews/comments/${cmt.id}/likes/`, {
+                headers: {
+                    'content-type': 'application/json',
+                    "authorization": "Bearer " + localStorage.getItem("access")
+                },
+                method: 'POST',
+            })
+            getData(review_id, place_id)
+            commentUnder.appendChild(commentLiked)
+        }
+
+
         const commentLikeCount = document.createElement("p")
         commentLikeCount.innerText = cmt.comment_like_count
         commentUnder.appendChild(commentLikeCount)

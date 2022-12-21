@@ -7,7 +7,7 @@ html{
 }
 body{
     position: relative;
-    background-color: #FFFAE7;
+    background-color: #FFFAE7 !important;
     margin:auto;
 }
 .root {

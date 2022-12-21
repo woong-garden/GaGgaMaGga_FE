@@ -20,6 +20,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!--타이틀 로고-->
     <link href="/images/icon/logo.png" rel="shortcut icon" type="image/x-icon">
+
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <title>가까? 마까? | 메인 페이지</title>
 
 </head>
@@ -53,11 +58,41 @@
         <div>
             <section>
                 <div class="home-ad">
-                    <a>
+                    <!-- <a>
                         <div style="width: 100%; height:358px;">
                             <img class="img-test" src="/images/icon/제주도축제.PNG">
                         </div>
-                    </a>
+                    </a> -->
+
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <a href="https://www.sunrisefestival.kr/" target="_blank"><img style="height:358px" src="/images/icon/제주도축제2.PNG" class="d-block w-100" alt="..."></a>
+                          </div>
+                          <div class="carousel-item">
+                            <a href="https://korean.visitkorea.or.kr/detail/fes_detail.do?cotid=764ce8dc-0560-4b77-846f-8ee77b469d64&big_category=undefined&mid_category=undefined&big_area=undefined&referrer=https://search.naver.com/search.naver?where=nexearch&sm=top_sug.pre&fbm=1&acr=1&acq=%EB%88%84%EC%9B%A8%EB%A7%88%EB%A3%A8+&qdt=0&ie=utf8&query=%EB%88%84%EC%9B%A8%EB%A7%88%EB%A3%A8+%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C" target="_blank"><img style="height:358px" src="/images/icon/제주도축제.PNG" class="d-block w-100" alt="..."></a>
+                          </div>
+                          <div class="carousel-item">
+                            <a href="https://korean.visitkorea.or.kr/detail/fes_detail.do?cotid=be0491b6-1bdb-49fd-bc19-d21a3277ff1f&big_category=undefined&mid_category=undefined&big_area=undefined&referrer=https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bk00&pkid=110&os=9040102&qvt=0&query=%ED%9C%B4%EC%95%A0%EB%A6%AC%20%EB%8F%99%EB%B0%B1%EC%B6%95%EC%A0%9C" target="_blank"><img style="height:358px" src="/images/icon/제주축제3.PNG" class="d-block w-100" alt="..."></a>
+                          </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+
+
+
                 </div>
             </section>
             <div id="index-selectbox"></div>
