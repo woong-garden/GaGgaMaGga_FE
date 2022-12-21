@@ -162,9 +162,9 @@ async function public_profile() {
             if(item.place_img){
                 $('#my-bookmark').append(
                 `
-                <div class="bookmark-box">
+                <div class="bookmark-box" onclick="move_place_detail_page(${item.id})">
                     <div>
-                        <img class="bookmark-content-img" onclick="move_place_detail_page(${item.id})" alt="장소 사진" src="${item.place_img}">
+                        <img class="bookmark-content-img"  alt="장소 사진" src="${item.place_img}">
                     </div>
                     <div class="review-content-info" onclick="move_place_detail_page(${item.id})">
                         <div style="color:#ffbf60">${item.place_name}</div>
