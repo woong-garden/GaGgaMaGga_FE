@@ -190,10 +190,12 @@ async function getData(review_id, place_id) {
         time.style.color = "gray"
         commentHead.appendChild(time)
         // cmt 신고 모달창 trigger
-        const dots = document.createElement('img')
-        dots.src = "/images/icon/dot.svg"
+        const dots = document.createElement('span')
+        dots.innerText = "신고"
         dots.setAttribute("id", `dot${cmt.id}`)
+        dots.style.fontSize = "11px"
         dots.style.cursor = "pointer"
+        dots.style.color = "rgb(237, 155, 83)"
         commentHead.appendChild(dots)
         const commentReportModal = document.createElement('div')
         commentReportModal.classList.add(`cmt-report${cmt.id}`)
