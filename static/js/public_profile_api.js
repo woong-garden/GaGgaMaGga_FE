@@ -114,22 +114,22 @@ async function public_profile() {
         }else{
             if(item.review_image_one){
                 $('#my-review').append(
-                `
-                <div class="review-box" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">
-                    <div>
-                        <img class="review-content-img" 
-                         alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
-                    </div>
-                    <div class="review-content-info">
-                        <div style="color:#ffbf60">${item.place_name}</div>
-                        <div class="star-wrap">
-                            <img class="star-icon" src="/images/icon/star.svg">
-                            <div class="star-num">${item.rating_cnt}</div>
+                    `
+                    <div class="review-box" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">
+                        <div>
+                            <img class="review-content-img" 
+                            alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
+                        </div>
+                        <div class="review-content-info">
+                            <div style="color:#ffbf60">${item.place_name}</div>
+                            <div class="star-wrap">
+                                <img class="star-icon" src="/images/icon/star.svg">
+                                <div class="star-num">${item.rating_cnt}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                `
-            )
+                    `
+                )
             }
             else{
                 $('#my-review').append(
@@ -161,20 +161,20 @@ async function public_profile() {
         response_json.bookmark_place.forEach(item => {
             if(item.place_img){
                 $('#my-bookmark').append(
-                `
-                <div class="bookmark-box" onclick="move_place_detail_page(${item.id})">
-                    <div>
-                        <img class="bookmark-content-img"  alt="장소 사진" src="${item.place_img}">
-                    </div>
-                    <div class="review-content-info" onclick="move_place_detail_page(${item.id})">
-                        <div style="color:#ffbf60">${item.place_name}</div>
-                        <div class="star-wrap">
-                            <img class="star-icon" src="/images/icon/star.svg">
-                            <div class="star-num">${item.rating}</div>
+                    `
+                    <div class="bookmark-box" onclick="move_place_detail_page(${item.id})">
+                        <div>
+                            <img class="bookmark-content-img"  alt="장소 사진" src="${item.place_img}">
+                        </div>
+                        <div class="review-content-info" onclick="move_place_detail_page(${item.id})">
+                            <div style="color:#ffbf60">${item.place_name}</div>
+                            <div class="star-wrap">
+                                <img class="star-icon" src="/images/icon/star.svg">
+                                <div class="star-num">${item.rating}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                `
+                    `
                 )
             }
             else{
@@ -193,7 +193,7 @@ async function public_profile() {
                         </div>
                     </div>
                     `
-                    )
+                )
             }
             
         });

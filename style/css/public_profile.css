@@ -122,6 +122,7 @@ box-shadow: 0 0 20px rgb(0 0 0 / 5%);
     border-radius: 8px; 
     color:#fff; 
     border:none;
+    cursor: pointer;
 }
 
 
@@ -174,12 +175,14 @@ box-shadow: 0 0 20px rgb(0 0 0 / 5%);
     border:none; 
     background-color:transparent; 
     font-size:16px;
+    cursor: pointer;
 }
 
 #following_move{
     border:none; 
     background-color:transparent; 
     font-size:16px;
+    cursor: pointer;
 }
 
 #user_follow{
@@ -249,6 +252,7 @@ box-shadow: 0 0 20px rgb(0 0 0 / 5%);
 
 .review-content-info{
     padding: 20px;
+    cursor: pointer;
 }
 
 .star-wrap{
