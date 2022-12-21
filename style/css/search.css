@@ -141,6 +141,7 @@ body{
     padding:20px 0 24px; 
     border-bottom: 1px solid #DBDBDB;
     justify-content: space-between;
+    cursor: pointer;
 }
 .place-item{
     display:flex; 
