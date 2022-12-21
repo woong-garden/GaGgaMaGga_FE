@@ -78,110 +78,88 @@ function pagenation_new(page_no, last_page_no, place_id, category) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div class="current_page">${page_no}</div></a>
-            >
         `)
     }else if ((page_no == 1)&(last_page_no == 2)) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
-            >
         `)
     }else if ((page_no == 2)&(last_page_no == 2)) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
-            >
         `)
     } else if ((page_no == 1)&(last_page_no == 3)) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
-            >
         `)
     } else if ((page_no == 2)&(last_page_no == 3)) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
-            >
         `)
     } else if ((page_no == 3)&(last_page_no == 3)) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
-            >
         `)
     } else if (page_no == 1) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <div class="no_page" style="display:none;"></div>
-            <
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
-            >
         `)
     } else if (page_no == 2) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
-            >
         `)
     }else if (page_no == last_page_no) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
-            >
         `)
     }else if (page_no == last_page_no-1) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
-            >
         `)
     }else if (page_no == last_page_no-2) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
@@ -189,13 +167,11 @@ function pagenation_new(page_no, last_page_no, place_id, category) {
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+2})">${page_no+2}</div></a>
-            >
         `)
     } else {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', 1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no-1})">${page_no-1}</div></a>
@@ -203,7 +179,6 @@ function pagenation_new(page_no, last_page_no, place_id, category) {
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${page_no+1})">${page_no+1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="NewUserPlaceListView(${place_id}, '${category}', ${last_page_no})">${last_page_no}</div></a>
-            >
         `
     )
     }
@@ -215,110 +190,89 @@ function pagenation_user(page_no, last_page_no, cate_id) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div class="current_page">${page_no}</div></a>
-            >
         `)
     }else if ((page_no == 1)&(last_page_no == 2)) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
-            >
         `)
     }else if ((page_no == 2)&(last_page_no == 2)) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
-            >
         `)
     } else if ((page_no == 1)&(last_page_no == 3)) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
-            >
         `)
     } else if ((page_no == 2)&(last_page_no == 3)) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
-            >
         `)
     } else if ((page_no == 3)&(last_page_no == 3)) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-2})">${page_no-2}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
-            >
         `)
     } else if (page_no == 1) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
             <div class="no_page"style="display:none;"></div>
-            <
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
-            >
         `)
     } else if (page_no == 2) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
-            >
         `)
     }else if (page_no == last_page_no) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
-            >
         `)
     }else if (page_no == last_page_no-1) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
             <a href="#"><div class="current_page">${page_no}</div></a>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
-            >
         `)
     }else if (page_no == last_page_no-2) {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
@@ -326,13 +280,11 @@ function pagenation_user(page_no, last_page_no, cate_id) {
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+2})">${page_no+2}</div></a>
-            >
         `)
     } else {
         $('#pagenation').empty()
         $('#pagenation').append(
         `
-            <
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, 1)">1</div></a>
             <div>...</div>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no-1})">${page_no-1}</div></a>
@@ -340,7 +292,6 @@ function pagenation_user(page_no, last_page_no, cate_id) {
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${page_no+1})">${page_no+1}</div></a>
             <div>...</div>
             <a href="#"><div onclick="UserPlaceListView(${cate_id}, ${last_page_no})">${last_page_no}</div></a>
-            >
         `)
     }
 }
