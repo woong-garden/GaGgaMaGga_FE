@@ -30,8 +30,8 @@ async function searchParam(){
                     if(item.place_img==null){
                         $('#search-list').append(
                             `
-                            <div class="review-list">
-                                <a onclick="move_place_detail_page(${item.objectID})" class="place-item">
+                            <div class="review-list" onclick="move_place_detail_page(${item.objectID})">
+                                <a class="place-item">
                                     <div>
                                         <div style="width:100px;height:100px;">
                                             <img style="width:100%;height:100%;" src='https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg'>
@@ -54,8 +54,8 @@ async function searchParam(){
                     }else{
                     $('#search-list').append(
                         `
-                        <div class="review-list">
-                            <a onclick="move_place_detail_page(${item.objectID})" class="place-item">
+                        <div class="review-list" onclick="move_place_detail_page(${item.objectID})">
+                            <a class="place-item">
                                 <div>
                                     <div style="width:100px;height:100px;">
                                         <img style="width:100%;height:100%;" src='${item.place_img}'>
