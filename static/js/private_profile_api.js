@@ -119,7 +119,7 @@ async function withdrawal() {
 
     withdrawal_json = await response.json()
     if (response.status === 200) {
-    alert(withdrawal_json["message"])
+    alert("60일간 보관되며, 60일 경과된 후 모든 개인정보는 자동삭제되고 로그인 할 시 계정 비활성화가 해제됩니다." )
     localStorage.removeItem("kakao")
     localStorage.removeItem("nickname")
     localStorage.removeItem("review_cnt")

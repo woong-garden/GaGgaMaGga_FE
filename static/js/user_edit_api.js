@@ -8,9 +8,14 @@ if(localStorage.getItem("payload")){} else if (localStorage.getItem("kakao")){
     
 //회원정보 수정
 async function user_edit() {
+    const phone_number_front = document.getElementById("phone_number_front")
+    const phone_number_front_value = (phone_number_front.options[phone_number_front.selectedIndex].value)  
+    const phone_number_1 = document.getElementById("phone_number_1").value
+    const phone_number_2 = document.getElementById("phone_number_2").value
+
     const user_edit_data = {
         email: document.getElementById("email").value,
-        phone_number: document.getElementById("phone_number").value,
+        phone_number: phone_number_front_value + phone_number_1 + phone_number_2,
     }
 
     const response = await fetch(`${backendBaseUrl}/users/`,{
@@ -54,10 +59,13 @@ async function private_profile(){
     response_json = await response.json()
     
     const email = document.getElementById("email")
-    const phone_number = document.getElementById("phone_number")
+    const phone_number_1 = document.getElementById("phone_number_1")
+    const phone_number_2 = document.getElementById("phone_number_2")
 
     email.value = response_json.email
     if (response_json.phone_number == null) {} 
-    else{phone_number.value = response_json.phone_number }
+    else{
+        phone_number_1.value =response_json.phone_number.slice(3, 7)
+        phone_number_2.value =response_json.phone_number.slice(7, 11)}
 }
 
