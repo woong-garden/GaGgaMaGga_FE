@@ -58,7 +58,7 @@ async function PlaceDetail(){
     }
 
     
-    div_place_name.innerText = `${response_json[0].place_name}(${response_json[0].hit})`
+    div_place_name.innerText = `${response_json[0].place_name}(조회수(${response_json[0].hit}))`
     div_place_address.innerText = `주소: ${response_json[0].place_address}`
     div_place_number.innerText = `전화번호: ${response_json[0].place_number}`
     div_place_time.innerText = `영업시간: ${response_json[0].place_time}`

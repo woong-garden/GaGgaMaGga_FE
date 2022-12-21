@@ -38,7 +38,16 @@
             <h5>이메일</h5>
             <input type="text" id="email" placeholder="이메일을 입력해주세요.">
             <h5>휴대폰 번호</h5>
-            <input type="text" id="phone_number" placeholder="-를 제외한 휴대폰 번호 입력해주세요.">
+            <div style="display:flex;">
+                <select id="phone_number_front" style="margin:4px 10px 10px 10px;">
+                    <option value="010">010</option>
+                    <option value="011">011</option>
+                    <option value="016">016</option>
+                    <option value="017">017</option>
+                    <option value="019">019</option>
+                </select>
+                    <input style="margin:4px 10px 10px 10px;" type="tel" maxlength="4" id="phone_number_1" placeholder="3~4자리">
+                    <input style="margin:4px 10px 10px 10px;" type="tel" maxlength="4" id="phone_number_2" placeholder="4자리"></div>
             <div class="alert alert-danger" style="font-size:15px" id="alert-danger"></div>
 
             <div id="buttons">                

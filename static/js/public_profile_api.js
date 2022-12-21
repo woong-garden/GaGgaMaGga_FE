@@ -64,34 +64,56 @@ async function public_profile() {
             document.getElementById("profile_followers").value = "0"
         }
     }
-
+    
     // 후기
     if(response_json.review_set.length){
         response_json.review_set.forEach(item => {
-
         if(my_id == profile_id){
-            $('#my-review').append(
-                `
-                <div class="review-box">
-                    <div>
-                        <img class="review-content-img" 
-                        onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
-                    </div>
-                    <div class="review-content-info">
-                        <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>
-                        <div class="star-wrap">
-                            <img class="star-icon" src="/images/icon/star.svg">
-                            <div class="star-num">${item.rating_cnt}</div>
+            if(item.review_image_one){
+                $('#my-review').append(
+                    `
+                    <div class="review-box">
+                        <div>
+                            <img class="review-content-img" 
+                            onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
                         </div>
-                        <button class="update-review" onclick="move_to_edit_page(${item.place_id},${item.id})">리뷰 수정</button> 
-                        <button class="update-review" onclick="delete_review(${item.place_id}, ${item.id})">리뷰 삭제</button>
+                        <div class="review-content-info">
+                            <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>
+                            <div class="star-wrap">
+                                <img class="star-icon" src="/images/icon/star.svg">
+                                <div class="star-num">${item.rating_cnt}</div>
+                            </div>
+                            <button class="update-review" onclick="move_to_edit_page(${item.place_id},${item.id})">리뷰 수정</button> 
+                            <button class="update-review" onclick="delete_review(${item.place_id}, ${item.id})">리뷰 삭제</button>
+                        </div>
                     </div>
-                </div>
-                `
-            )
+                    `
+                )
+            }else{
+                $('#my-review').append(
+                    `
+                    <div class="review-box">
+                        <div>
+                            <img class="review-content-img" 
+                            onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" alt="후기 사진" src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg">
+                        </div>
+                        <div class="review-content-info">
+                            <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>
+                            <div class="star-wrap">
+                                <img class="star-icon" src="/images/icon/star.svg">
+                                <div class="star-num">${item.rating_cnt}</div>
+                            </div>
+                            <button class="update-review" onclick="move_to_edit_page(${item.place_id},${item.id})">리뷰 수정</button> 
+                            <button class="update-review" onclick="delete_review(${item.place_id}, ${item.id})">리뷰 삭제</button>
+                        </div>
+                    </div>
+                    `
+                )
+            }
 
         }else{
-            $('#my-review').append(
+            if(item.review_image_one){
+                $('#my-review').append(
                 `
                 <div class="review-box">
                     <div>
@@ -108,6 +130,27 @@ async function public_profile() {
                 </div>
                 `
             )
+            }
+            else{
+                $('#my-review').append(
+                    `
+                    <div class="review-box">
+                        <div>
+                            <img class="review-content-img" 
+                            onclick="move_review_detail_page(${item.id},${item.place.id})" alt="후기 사진" src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg">
+                        </div>
+                        <div class="review-content-info">
+                            <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>
+                            <div class="star-wrap">
+                                <img class="star-icon" src="/images/icon/star.svg">
+                                <div class="star-num">${item.rating_cnt}</div>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                )
+            }
+            
         }
         
     });
@@ -116,7 +159,8 @@ async function public_profile() {
     // 북마크
     if(response_json.bookmark_place.length){
         response_json.bookmark_place.forEach(item => {
-            $('#my-bookmark').append(
+            if(item.place_img){
+                $('#my-bookmark').append(
                 `
                 <div class="bookmark-box" onclick="move_place_detail_page(${item.id})">
                     <div>
@@ -131,7 +175,27 @@ async function public_profile() {
                     </div>
                 </div>
                 `
-            )
+                )
+            }
+            else{
+                $('#my-bookmark').append(
+                    `
+                    <div class="bookmark-box">
+                        <div>
+                            <img class="bookmark-content-img" onclick="move_place_detail_page(${item.id})" alt="장소 사진" src="https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg">
+                        </div>
+                        <div class="review-content-info" onclick="move_place_detail_page(${item.id})">
+                            <div style="color:#ffbf60">${item.place_name}</div>
+                            <div class="star-wrap">
+                                <img class="star-icon" src="/images/icon/star.svg">
+                                <div class="star-num">${item.rating}</div>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                    )
+            }
+            
         });
     }
     
