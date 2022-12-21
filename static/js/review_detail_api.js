@@ -116,18 +116,81 @@ async function getData(review_id, place_id) {
         },
         method: 'GET'
     })
-        .then(response => response.json())
+    .then(response => response.json())
+
+    console.log(response)
+
+    // 사진 개수만큼 사진 띄우기
+    let total = 0
+    let exampleImage
+    let imageContent = document.querySelector('#image-content')
+    if (response.review_image_one == null){
+        document.querySelector('#author').style.borderBottom = "1px solid rgba(0, 0, 0, 0.192)"
+        document.querySelector('#image-content').style.display = "none"
+        document.querySelector('#image-buttons').style.display = "none"
+    } else{
+        exampleImage = [backendBaseUrl + response.review_image_one]
+        imageContent.src = backendBaseUrl + response.review_image_one
+        document.querySelector('#prev').style.display = "none"
+        document.querySelector('#next').style.display = "none"
+        total += 1
+        document.querySelector('#curr').innerText = 1
+    }
+
+    if (response.review_image_two){
+        exampleImage.push(backendBaseUrl + response.review_image_two)
+        document.querySelector('#prev').style.display = "block"
+        document.querySelector('#next').style.display = "block"
+        document.querySelector('#image-buttons').style.width = "100%"
+        total += 1
+    }
+    if (response.review_image_three){
+        exampleImage.push(backendBaseUrl + response.review_image_three)
+        total += 1
+    }
+
+    document.querySelector('#total').innerText = total
+    let i = 0;
+    console.log(total)
+
+    function prevImage() {
+        i--;
+        imageContent.src = exampleImage[i];
+        if (i<0){
+            i = exampleImage.length-1;
+            imageContent.src = exampleImage[i];
+        }
+        document.querySelector('#curr').innerText = i+1;
+    }
+
+    function nextImage() {
+        i ++;
+        imageContent.src = exampleImage[i];
+        if (i >= exampleImage.length){
+            i = 0;
+            imageContent.src = exampleImage[i];
+        }
+        document.querySelector('#curr').innerText = i+1;
+    }
+
+    document.querySelector('#prev').addEventListener('click',() => {
+        prevImage()
+    })
+    document.querySelector('#next').addEventListener('click',() => {
+        nextImage()
+    })
+    
 
     // 이미지 null 값일때 디폴트 이미지 설정
-    const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
-    const secondImage = document.querySelector('.slidelist li:nth-child(2) img')
-    const thirdImage = document.querySelector('.slidelist li:nth-child(3) img')
-    if (response.review_image_one) { firstImage.src = backendBaseUrl + response.review_image_one }
-    else { firstImage.src = 'https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg' }
-    if (response.review_image_two) { secondImage.src = backendBaseUrl + response.review_image_two }
-    else { secondImage.src = 'https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg' }
-    if (response.review_image_three) { thirdImage.src = backendBaseUrl + response.review_image_three }
-    else { thirdImage.src = 'https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg' }
+    // const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
+    // const secondImage = document.querySelector('.slidelist li:nth-child(2) img')
+    // const thirdImage = document.querySelector('.slidelist li:nth-child(3) img')
+    // if (response.review_image_one) { firstImage.src = backendBaseUrl + response.review_image_one }
+    // else { firstImage.src = 'https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg' }
+    // if (response.review_image_two) { secondImage.src = backendBaseUrl + response.review_image_two }
+    // else { secondImage.src = 'https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg' }
+    // if (response.review_image_three) { thirdImage.src = backendBaseUrl + response.review_image_three }
+    // else { thirdImage.src = 'https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg' }
 
     // 좋아요 여부에 따른 하트 모양 바꾸기
     if (response.review_like.includes(payload_parse.user_id)) {

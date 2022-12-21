@@ -40,6 +40,27 @@ body {
     margin-top: 2%;
     cursor: pointer;
 }
+#image-buttons{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width : 50%;
+}
+#image-buttons button {
+    margin : 10px 5%;
+    border-radius: 20px;
+    width: 20%;
+    min-width: 50px;
+    height: 24px;
+    border: none;
+    color: #fff;
+    background: #c8c8c8;
+}
+
+#image-buttons p{
+    display: block;
+    margin: auto;
+}
 
 .root {
     position: relative;
@@ -53,6 +74,12 @@ body {
     transform: translate(-50%, 0%);
     overflow: auto;
     box-shadow: 0 0 20px rgb(0 0 0 / 5%);
+}
+
+#image-content{
+    width : 100%;
+    aspect-ratio: 5/2.7;
+    object-fit: cover;
 }
 
 /*스크롤 스타일*/
@@ -144,96 +171,6 @@ body {
     padding: 0;
 }
 
-/* INPUT 가리기 */
-.section [id*="slide"] {
-    display: none;
-}
-
-/* 슬라이드 영역 - max-width 크기를 조절해주면 됩니다*/
-.section .slidewrap {
-    max-width: 1200px;
-    max-height: 260px;
-    margin: 0 auto;
-    overflow: hidden;
-    position: relative;
-}
-
-.section .slidelist {
-    white-space: nowrap;
-    font-size: 0;
-}
-
-.section .slidelist>li {
-    display: inline-block;
-    vertical-align: top;
-    width: 100%;
-    height: 32vh;
-    transition: all .5s;
-}
-
-.section .slidelist>li>a {
-    display: block;
-    position: relative;
-}
-
-/* 좌우로 넘기는 LABEL버튼에 대한 스타일 */
-.section .slide-control {
-    position: absolute;
-    top: 0;
-    left: 0;
-    /* z-index: 10; */
-    width: 100%;
-    height: 100%;
-}
-
-.section .slide-control label {
-    position: absolute;
-    /* z-index: 1; */
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 50px;
-    cursor: pointer;
-}
-
-.section .slide-control .left {
-    left: -20px;
-    background: url('/images/icon/left.png') center center / 50% no-repeat;
-}
-
-.section .slide-control .right {
-    right: -20px;
-    background: url('/images/icon/right.png') center center / 50% no-repeat;
-}
-
-.section .slide-control [class*="control"] {
-    display: none;
-}
-
-/* INPUT이 체크되면 변화값이 li까지 전달되는 스타일 */
-.section [id="slide01"]:checked~.slidewrap .slidelist>li {
-    transform: translateX(0%);
-}
-
-.section [id="slide02"]:checked~.slidewrap .slidelist>li {
-    transform: translateX(-100%);
-}
-
-.section [id="slide03"]:checked~.slidewrap .slidelist>li {
-    transform: translateX(-200%);
-}
-
-/*  INPUT이 체크되면 변화값이 좌우 슬라이드 버튼을 담고 있는 div 까지 전달되는 스타일 */
-.section [id="slide01"]:checked~.slidewrap .control01 {
-    display: block;
-}
-
-.section [id="slide02"]:checked~.slidewrap .control02 {
-    display: block;
-}
-
-.section [id="slide03"]:checked~.slidewrap .control03 {
-    display: block;
-}
 
 .cmt-btn {
     border: 0;
@@ -402,8 +339,7 @@ body {
     margin: auto 0;
 }
 
-.edit-button:hover {
-
+.edit-button:hover, #image-buttons button:hover {
     background-color: #fcdbab;
     color: black;
     cursor: pointer;
@@ -549,11 +485,7 @@ body {
     display: block;
 }
 
-.slide-image {
-    width: 100%;
-    height: 32vh;
-    object-fit: cover;
-}
+
 
 #alarm-modal {
     margin-left: 8px;
