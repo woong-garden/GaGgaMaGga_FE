@@ -23,7 +23,6 @@ async function Login() {
     if (response.status === 200) {
         localStorage.setItem("access", response_json.access); 
         localStorage.setItem("refresh", response_json.refresh);
-        console.log(response_json.review_cnt)
         localStorage.setItem('review_cnt', response_json.review_cnt);
 
         const base64Url = response_json.access.split('.')[1];
@@ -65,6 +64,8 @@ function to_signup(){
 
 function to_index(){
     location.href = "index.html"
+    localStorage.clear()
+    localStorage.setItem("confirm", false)
 }
 
 function to_find_username(){

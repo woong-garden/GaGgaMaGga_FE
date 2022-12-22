@@ -53,9 +53,6 @@ async function getData(place_id, review_id) {
     })
         .then(response => response.json())
 
-    console.log(response)
-
-
     const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
     firstImage.src = backendBaseUrl + response.review_image_one
     const secondImage = document.querySelector('.slidelist li:nth-child(2) img')
