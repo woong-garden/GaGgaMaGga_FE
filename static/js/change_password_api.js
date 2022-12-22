@@ -8,6 +8,7 @@ if(localStorage.getItem("access")){
 //비밀번호 변경
 async function password_change() {
     const password_change_data = {
+        confirm_password: document.getElementById("confirm_password").value,
         repassword: document.getElementById("repassword").value,
         password: document.getElementById("password").value,
     }

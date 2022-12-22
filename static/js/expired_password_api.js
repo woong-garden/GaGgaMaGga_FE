@@ -1,12 +1,13 @@
-if (JSON.parse(localStorage.getItem("payload")).password_expired == true){
+// if (JSON.parse(localStorage.getItem("payload")).password_expired == true){
 
-} else {
-    window.location.replace("index.html")
-}
+// } else {
+//     window.location.replace("index.html")
+// }
 
 //비밀번호 인증 만료시 변경
 async function expired_password_change() {
     const expired_password_change_data = {
+        confirm_password: document.getElementById("confirm_password").value,
         repassword: document.getElementById("repassword").value,
         password: document.getElementById("password").value,
     }
