@@ -17,7 +17,7 @@ else if (localStorage.getItem("kakao")) {
 }
 
 window.onload = () => {
-    // getNotification() //알람
+    getNotification() //알람
 
     // 엔터로만 덧글 등록
     document.querySelector(".nav-input-wrap input").focus();
@@ -179,18 +179,6 @@ async function getData(review_id, place_id) {
     document.querySelector('#next').addEventListener('click',() => {
         nextImage()
     })
-    
-
-    // 이미지 null 값일때 디폴트 이미지 설정
-    // const firstImage = document.querySelector('.slidelist li:nth-child(1) img')
-    // const secondImage = document.querySelector('.slidelist li:nth-child(2) img')
-    // const thirdImage = document.querySelector('.slidelist li:nth-child(3) img')
-    // if (response.review_image_one) { firstImage.src = backendBaseUrl + response.review_image_one }
-    // else { firstImage.src = 'https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg' }
-    // if (response.review_image_two) { secondImage.src = backendBaseUrl + response.review_image_two }
-    // else { secondImage.src = 'https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg' }
-    // if (response.review_image_three) { thirdImage.src = backendBaseUrl + response.review_image_three }
-    // else { thirdImage.src = 'https://www.anyang.go.kr/DATA/board/2018/6/30/4d583737-fac7-4b97-a481-a4ade1a3fe8e.jpg' }
 
     // 좋아요 여부에 따른 하트 모양 바꾸기
     if (response.review_like.includes(payload_parse.user_id)) {
@@ -881,116 +869,104 @@ async function post_recomment_report(comment_id) {
 }
 
 
+// 알람 
+const notificationSocket = new WebSocket(
+    'wss://'
+    + "www.back-gaggamagga.tk"
+    + '/ws/notification/'
+    + author_id
+    + '/'
+);
+
+notificationSocket.onmessage = async function (e) {
+    const data = JSON.parse(e.data);
+    const alarmBox = document.querySelector('.alarm')
+    if (payload_parse.user_id == author_id) {
+        const alarmContent = document.createElement('div')
+        alarmContent.style.display = "flex"
+        alarmContent.style.height = "10vh"
+        alarmContent.innerHTML = data.message
+        alarmBox.appendChild(alarmContent)
+
+        const response = await fetch(`${backendBaseUrl}/notification/${payload_parse.user_id}/`, {
+            headers: {
+                "authorization": "Bearer " + localStorage.getItem("access")
+            },
+            method: 'GET'
+        })
+        .then(response => response.json())
+        const notificationButton = document.createElement('button')
+        const notificationButtonText = document.createTextNode('확인')
+        notificationButton.appendChild(notificationButtonText)
+        notificationButton.onclick = async function () {
+            await fetch(`${backendBaseUrl}/notification/alarm/${response[0].id}/`, {
+                headers: {
+                    'content-type': 'application/json',
+                    "authorization": "Bearer " + localStorage.getItem("access")
+                },
+                method: 'PUT',
+                body: ''
+            })
+            alarmBox.innerHTML = ""
+            getNotification()
+        }
+        alarmContent.appendChild(notificationButton)
+    }
+};
+
+notificationSocket.onclose = function (e) {
+    console.error('소켓이 닫혔어요 ㅜㅜ');
+};
+
+function alarm() {
+    if (payload_parse.user_id != author_id) {
+        const message = `<img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon"><a style="cursor:pointer;margin:auto; text-decoration:none;" href="review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}">
+        <p class="alarm-content">후기에 덧글이 달렸습니다.</p></a>`
+        notificationSocket.send(JSON.stringify({
+            'message': message,
+            "author": author_id,
+            "user_id": payload_parse.user_id
+        }))
+    }
+}
+
+async function getNotification() {
+
+    const response = await fetch(`${backendBaseUrl}/notification/${payload_parse.user_id}/`, {
+        headers: {
+            "authorization": "Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET'
+    })
+        .then(response => response.json())
+    response.forEach(notification => {
+        const alarmBox = document.querySelector('.alarm')
 
 
+        let alarmContent = document.createElement('div')
+        alarmContent.setAttribute("id", `alarm${notification.id}`)
+        alarmContent.innerHTML = notification.content
+        alarmContent.style.display = "flex"
+        alarmContent.style.height = "10vh"
+        alarmBox.appendChild(alarmContent)
 
+        const notificationButton = document.createElement('button')
+        const notificationButtonText = document.createTextNode('확인')
+        notificationButton.appendChild(notificationButtonText)
+        notificationButton.onclick = async function () {
+            await fetch(`${backendBaseUrl}/notification/alarm/${notification.id}/`, {
+                headers: {
+                    'content-type': 'application/json',
+                    "authorization": "Bearer " + localStorage.getItem("access")
+                },
+                method: 'PUT',
+                body: ''
+            })
+            alarmBox.innerHTML = ""
+            getNotification()
 
+        }
 
-
-
-
-
-
-
-
-
-
-// // 알람 
-// const notificationSocket = new WebSocket(
-//     'wss://'
-//     + "www.back-gaggamagga.tk"
-//     + '/ws/notification/'
-//     + author_id
-//     + '/'
-// );
-
-// notificationSocket.onmessage = async function (e) {
-//     const data = JSON.parse(e.data);
-//     const alarmBox = document.querySelector('.alarm')
-//     if (payload_parse.user_id == author_id) {
-//         const alarmContent = document.createElement('div')
-//         alarmContent.style.display = "flex"
-//         alarmContent.style.height = "10vh"
-//         alarmContent.innerHTML = data.message
-//         alarmBox.appendChild(alarmContent)
-
-//         const response = await fetch(`${backendBaseUrl}/notification/${payload_parse.user_id}/`, {
-//             headers: {
-//                 "authorization": "Bearer " + localStorage.getItem("access")
-//             },
-//             method: 'GET'
-//         })
-//         .then(response => response.json())
-//         const notificationButton = document.createElement('button')
-//         const notificationButtonText = document.createTextNode('확인')
-//         notificationButton.appendChild(notificationButtonText)
-//         notificationButton.onclick = async function () {
-//             await fetch(`${backendBaseUrl}/notification/alarm/${response[0].id}/`, {
-//                 headers: {
-//                     'content-type': 'application/json',
-//                     "authorization": "Bearer " + localStorage.getItem("access")
-//                 },
-//                 method: 'PUT',
-//                 body: ''
-//             })
-//             alarmBox.innerHTML = ""
-//             getNotification()
-//         }
-//         alarmContent.appendChild(notificationButton)
-//     }
-// };
-// notificationSocket.onclose = function (e) {
-//     console.error('소켓이 닫혔어요 ㅜㅜ');
-// };
-// function alarm() {
-//     if (payload_parse.user_id != author_id) {
-//         const message = `<img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon"><a style="cursor:pointer;margin:auto; text-decoration:none;" href="review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}">
-//         <p class="alarm-content">후기에 덧글이 달렸습니다.</p></a>`
-//         notificationSocket.send(JSON.stringify({
-//             'message': message,
-//             "author": author_id,
-//             "user_id": payload_parse.user_id
-//         }))
-//     }
-// }
-
-// async function getNotification() {
-
-//     const response = await fetch(`${backendBaseUrl}/notification/${payload_parse.user_id}/`, {
-//         headers: {
-//             "authorization": "Bearer " + localStorage.getItem("access")
-//         },
-//         method: 'GET'
-//     })
-//         .then(response => response.json())
-//     response.forEach(notification => {
-//         const alarmBox = document.querySelector('.alarm')
-
-
-//         let alarmContent = document.createElement('div')
-//         alarmContent.setAttribute("id", `alarm${notification.id}`)
-//         alarmContent.innerHTML = notification.content
-//         alarmContent.style.display = "flex"
-//         alarmContent.style.height = "10vh"
-//         alarmBox.appendChild(alarmContent)
-
-//         const notificationButton = document.createElement('button')
-//         const notificationButtonText = document.createTextNode('확인')
-//         notificationButton.appendChild(notificationButtonText)
-//         notificationButton.onclick = async function () {
-//             await fetch(`${backendBaseUrl}/notification/alarm/${notification.id}/`, {
-//                 headers: {
-//                     'content-type': 'application/json',
-//                     "authorization": "Bearer " + localStorage.getItem("access")
-//                 },
-//                 method: 'PUT',
-//                 body: ''
-//             })
-//             alarmBox.innerHTML = ""
-//             getNotification()
-
-//         }
-
-//         alarmContent.appendChild(notificationButton)
-//     })
-// }
+        alarmContent.appendChild(notificationButton)
+    })
+}
