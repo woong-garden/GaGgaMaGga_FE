@@ -16,12 +16,6 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
 
-      - name: Is in client
-        run: ls -al
-
-      - name: pwd in build
-        run: pwd
-
       - name: S3 Deploy
         run: |
               aws s3 cp \
