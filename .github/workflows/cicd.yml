@@ -15,15 +15,6 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
-        
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Create package.json 
-        run: yarn init
-
-      - name: Build
-        run: yarn build
 
       - name: S3 Deploy
         run: aws s3 sync ./build s3://gaggamagga.shop/ --acl bucket-owner-full-control
