@@ -17,7 +17,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: S3 Deploy
-        run: aws s3 sync ./build s3://gaggamagga.shop/ --acl bucket-owner-full-control
+        run: |
+              aws s3 cp \
+              --recursive \
+              --region ap-northeast-2 \
+              build s3://gaggamagga.shop
         env: 
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
