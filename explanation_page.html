@@ -71,7 +71,7 @@
                 <div class="carousel-item" style="height:100%;">
                     <div class="third-slide-wrap">
                         <img class="third-slide-img" src="/images/icon/캐릭터2.png">
-                        <div style="padding:0 60px;"><button class="start-login" href="login.html">시작하기</button></div>
+                        <div style="padding:0 60px;"><button class="start-login" onclick="move_login()">시작하기</button></div>
                     </div>
 
 
@@ -93,5 +93,10 @@
     <!--메인 끝-->
 
 </body>
+<script>
+    function move_login(){
+        window.location.href = "login.html"
+    }
+</script>
 <script src="static/js/base_api.js"></script>
 </html>
