@@ -99,7 +99,7 @@ async function IsUserOrNot(){
                 `<section class="select-place-wrap">
                 <div>
                     <div>
-                        <div>음식으로 선택하기</div>
+                        <div>어떤 음식을 드시고 싶으신가요?</div>
                     </div>
                     <div>
                         <a href="#"><div class="select_box2" onclick="move_rcm_list_page(3)">
@@ -122,9 +122,10 @@ async function IsUserOrNot(){
                         </div></a>
                     </div>
                 </div>
+                <div class="horizon"></div>
                 <div>
                     <div>
-                        <div>장소로 선택하기</div>
+                        <div>어디로 가시나요?</div>
                     </div>
                     <div>
                         <a href="#"><div class="select_box2" onclick="move_rcm_list_page(13)">
@@ -142,7 +143,7 @@ async function IsUserOrNot(){
                 `<section class="select-place-wrap">
                 <div>
                     <div>
-                        <div>음식으로 검색하기</div>
+                        <div>어떤 음식을 드시고 싶으신가요?</div>
                     </div>
                     <div>
                     <a href="#"><div class="select_box2" onclick="move_select_page(3)">
@@ -165,9 +166,10 @@ async function IsUserOrNot(){
                         </div></a>
                     </div>
                 </div>
+                <div class="horizon"></div>
                 <div>
                     <div>
-                        <div>장소로 선택하기</div>
+                        <div>어디로 가시나요?</div>
                     </div>
                     <div>
                         <a href="#"><div class="select_box2" onclick="move_select_page(13)">
@@ -189,7 +191,7 @@ async function IsUserOrNot(){
                 `<section class="select-place-wrap">
                 <div>
                     <div>
-                        <div>음식으로 선택하기</div>
+                        <div>어떤 음식을 드시고 싶으신가요?</div>
                     </div>
                     <div>
                         <a href="#"><div class="select_box2" onclick="move_rcm_list_page(3)">
@@ -212,9 +214,10 @@ async function IsUserOrNot(){
                         </div></a>
                     </div>
                 </div>
+                <div class="horizon"></div>
                 <div>
                     <div>
-                        <div>장소로 선택하기</div>
+                        <div>어디로 가시나요?</div>
                     </div>
                     <div>
                         <a href="#"><div class="select_box2" onclick="move_rcm_list_page(13)">
@@ -232,7 +235,7 @@ async function IsUserOrNot(){
                 `<section class="select-place-wrap">
                 <div>
                     <div>
-                        <div>음식으로 검색하기</div>
+                        <div>어떤 음식을 드시고 싶으신가요?</div>
                     </div>
                     <div>
                     <a href="#"><div class="select_box2" onclick="move_select_page(3)">
@@ -255,9 +258,10 @@ async function IsUserOrNot(){
                         </div></a>
                     </div>
                 </div>
+                <div class="horizon"></div>
                 <div>
                     <div>
-                        <div>장소로 선택하기</div>
+                        <div>어디로 가시나요?</div>
                     </div>
                     <div>
                         <a href="#"><div class="select_box2" onclick="move_select_page(13)">
@@ -277,7 +281,7 @@ async function IsUserOrNot(){
             `<section class="select-place-wrap">
             <div>
                 <div>
-                    <div>음식으로 검색하기</div>
+                    <div>어떤 음식을 드시고 싶으신가요?</div>
                 </div>
                 <div>
                 <a href="#"><div class="select_box2" onclick="move_select_page(3)">
@@ -300,9 +304,10 @@ async function IsUserOrNot(){
             </div></a>
                 </div>
             </div>
+            <div class="horizon"></div>
             <div>
                 <div>
-                    <div>장소로 선택하기</div>
+                    <div>어디로 가시나요?</div>
                 </div>
                 <div>
                     <a href="#"><div class="select_box2" onclick="move_select_page(13)">
