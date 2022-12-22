@@ -250,9 +250,9 @@ async function recentSort(page){
             $('#recent-rank').append(
                 `
                 <div class="review-list">
-                    <div class="place-item">
+                    <div class="place-item"  onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">
                         <div>
-                            <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src="${backendBaseUrl}${item.review_image_one}">
+                            <img class="place-item-img" src="${backendBaseUrl}${item.review_image_one}">
     
                         </div>
                         <div class="place-item-content">
@@ -282,9 +282,9 @@ async function recentSort(page){
             $('#recent-rank').append(
             `
             <div class="review-list">
-                <div class="place-item">
+                <div class="place-item" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">
                     <div>
-                        <img class="place-item-img" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" src='https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif'>
+                        <img class="place-item-img" src='https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif'>
                     </div>
                     <div class="place-item-content">
                         <div>${item.place_name}</div>
