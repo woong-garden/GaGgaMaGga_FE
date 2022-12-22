@@ -118,8 +118,6 @@ async function getData(review_id, place_id) {
     })
     .then(response => response.json())
 
-    console.log(response)
-
     // 사진 개수만큼 사진 띄우기
     let total = 0
     let exampleImage
@@ -151,7 +149,6 @@ async function getData(review_id, place_id) {
 
     document.querySelector('#total').innerText = total
     let i = 0;
-    console.log(total)
 
     function prevImage() {
         i--;
