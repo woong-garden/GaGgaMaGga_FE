@@ -41,7 +41,6 @@ async function private_profile(){
 
     //1:1문의
     google_inquiry.onclick = async function() {
-        console.log(response_json.is_confirmed)
         if (localStorage.getItem("access")){
             if (localStorage.getItem("payload")){
                 if(response_json.is_confirmed == true){
