@@ -10,6 +10,9 @@
         background-color: #FFFAE7;
         margin:auto;
     }
+    .header-logo{
+        margin-right: 10px;
+    }
     
     .root {
         position:relative;
@@ -52,7 +55,7 @@
         align-items: center;
         height: 48px;
         background-color: white;
-        padding: 0px 14px 0px 2px;
+        padding: 0px 14px 0px 14px;
         box-sizing: border-box;
     }
     .header-logo{

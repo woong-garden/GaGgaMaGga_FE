@@ -48,7 +48,7 @@ box-shadow: 0 0 20px rgb(0 0 0 / 5%);
     align-items: center;
     height: 48px;
     background-color: #fff;
-    padding: 0px 14px 0px 2px;
+    padding: 0px 14px 0px 14px;
     box-sizing: border-box;
 }
 .header > div > div {

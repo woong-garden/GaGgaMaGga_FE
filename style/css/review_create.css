@@ -129,7 +129,7 @@ body {
     align-items: center;
     height: 48px;
     background-color: white;
-    padding: 0px 14px 0px 2px;
+    padding: 0px 14px 0px 14px;
     box-sizing: border-box;
 }
 
