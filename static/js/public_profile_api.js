@@ -75,7 +75,7 @@ async function public_profile() {
                     <div class="review-box">
                         <div>
                             <img class="review-content-img" 
-                            onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
+                            onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" alt="리뷰 사진" src="${backendBaseUrl}${item.review_image_one}">
                         </div>
                         <div class="review-content-info">
                             <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>
@@ -95,7 +95,7 @@ async function public_profile() {
                     <div class="review-box">
                         <div>
                             <img class="review-content-img" 
-                            onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" alt="후기 사진" src="https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif">
+                            onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})" alt="리뷰 사진" src="https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif">
                         </div>
                         <div class="review-content-info">
                             <div style="color:#ffbf60" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">${item.place_name}</div>
@@ -118,7 +118,7 @@ async function public_profile() {
                     <div class="review-box" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">
                         <div>
                             <img class="review-content-img" 
-                            alt="후기 사진" src="${backendBaseUrl}${item.review_image_one}">
+                            alt="리뷰 사진" src="${backendBaseUrl}${item.review_image_one}">
                         </div>
                         <div class="review-content-info">
                             <div style="color:#ffbf60">${item.place_name}</div>
@@ -137,7 +137,7 @@ async function public_profile() {
                     <div class="review-box" onclick="move_review_detail_page(${item.id},${item.place.id},${item.author_id})">
                         <div>
                             <img class="review-content-img" 
-                             alt="후기 사진" src="https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif">
+                             alt="리뷰 사진" src="https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif">
                         </div>
                         <div class="review-content-info" >
                             <div style="color:#ffbf60">${item.place_name}</div>
