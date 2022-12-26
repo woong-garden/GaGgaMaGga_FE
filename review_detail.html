@@ -83,14 +83,28 @@
         </div>
 
         <!-- 리뷰 사진 시작 -->
-        <img id="image-content" src="#">
+        <div style="position: relative;">
+            <img id="image-content" src="#">
+            <div>
+                <button id="prev" style="border:none; background-color:transparent; z-index: 1; display: flex; top:38%; position: absolute;" id="prev"><img style="height:40px; width:40px;" src="/images/icon/left.png"></button>
+                
+            </div>
+            <div>
+                <button id="next" style="border:none; background-color:transparent; z-index: 1; display: flex; justify-content: space-between; top:38%; position: absolute; right: 0;" id="next"><img style="height:40px; width:40px;" src="/images/icon/right.png"></button>
+            </div>
+            
+        </div>
+        
         <div id="image-buttons">
-        <button id="prev">이전</button>
-        <p id="curr">현재 위치</p>
-        <p>/</p>
-        <p id="total">사진 총개수</p>
-        <button id="next">다음</button>
-    </div>
+            <!-- <button id="prev">이전</button> -->
+            <div style="display:flex;">
+                <p id="curr">현재 위치</p>
+                <p>/</p>
+                <p id="total">사진 총개수</p>
+            </div>
+            
+            <!-- <button id="next">다음</button> -->
+        </div>
         <!-- 리뷰 사진 끝 -->
 
         <!--내용시작-->
@@ -102,6 +116,7 @@
             <div class="comment-cnt"><span id="report-button-text">신고하기</span> 댓글 <sapn id="comment-count"></sapn> <img
                  onclick="reviewLike()"   src="https://cdn-icons-png.flaticon.com/512/2107/2107952.png"> <span id="like-count"></span></div>
         </div>
+        <div class="horizon"></div>
         <!--내용 끝-->
         <!--댓글시작-->
         <div class="comments">
