@@ -123,9 +123,11 @@ async function getData(review_id, place_id) {
     let exampleImage
     let imageContent = document.querySelector('#image-content')
     if (response.review_image_one == null){
-        document.querySelector('#author').style.borderBottom = "1px solid rgba(0, 0, 0, 0.192)"
+        // document.querySelector('#author').style.borderBottom = "1px solid rgba(0, 0, 0, 0.192)"
         document.querySelector('#image-content').style.display = "none"
         document.querySelector('#image-buttons').style.display = "none"
+        document.querySelector('#prev').style.display = "none"
+        document.querySelector('#next').style.display = "none"
     } else{
         exampleImage = [backendBaseUrl + response.review_image_one]
         imageContent.src = backendBaseUrl + response.review_image_one

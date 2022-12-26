@@ -16,7 +16,12 @@
     object-fit: cover;
     cursor : pointer;
 }
-
+.horizon{
+    height: 10px;
+    width: 100%;
+    background-color: #F9F9F9;
+    margin-top:14px;
+    }
 #author p {
     line-height: 100%;
     display: block;
