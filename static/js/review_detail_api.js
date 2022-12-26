@@ -919,11 +919,12 @@ function alarm() {
     if (payload_parse.user_id != author_id) {
         const message = `<img src="https://cdn-icons-png.flaticon.com/512/1827/1827422.png" class="modal-icon"><a style="cursor:pointer;margin:auto; text-decoration:none;" href="review_detail.html?id=${review_id}&place=${place_id}&author=${author_id}">
         <p class="alarm-content">후기에 덧글이 달렸습니다.</p></a>`
-        notificationSocket.send(JSON.stringify({
+        notificationSocket.onopen = () => notificationSocket.send(JSON.stringify({
             'message': message,
             "author": author_id,
             "user_id": payload_parse.user_id
-        }))
+        }
+        ))
     }
 }
 

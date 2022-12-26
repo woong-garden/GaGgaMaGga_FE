@@ -15,7 +15,7 @@ function closeModal() {
 // 알람 
 const notificationSocket = new WebSocket(
     'ws://'
-    + "127.0.0.1:8000"
+    + "www.back-gaggamagga.tk"
     + '/ws/notification/'
     +  JSON.parse(localStorage.getItem("payload")).user_id
     + '/'
