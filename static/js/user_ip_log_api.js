@@ -31,7 +31,7 @@ async function login_log(){
             <div class="row">
                 <div class="col-md-6" style="flex-basis:66.6666666%; max-width: 100%;">
                     <div class="card-body">
-                        <h6 style="font-size:15px">접속 지역: ${item.country}</h6></h6> 
+                        <h6 style="font-size:15px">접속 국가: ${item.country}</h6></h6> 
                         <h6 style="font-size:15px">접속 ip: ${item.updated_ip}</h6></h6> 
                         <h6 style="font-size:15px">접속 시간: ${time_format}</h6></h6>
                     </div>

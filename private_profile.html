@@ -34,14 +34,9 @@
             <div class="header-logo-wrap">
                 <a href="index.html"><h2 class="header-logo"><img style="margin-top: 8px; width: 40px; height: 40px;" src="./images/icon/logo.png"></h2></a>
             </div>
-            <!-- <div>
-                <a href="javascript:location.href = document.referrer;"><img class="header-back-icon" src="/images/icon/back.svg"></a>
-            </div> -->
-        
-            <div> 
+            <div>
                 <a><img style="margin-left:8px; cursor: pointer;" onclick="openModal()" src="/images/icon/bell.svg"></a>
-
-            </div> 
+            </div>
         </div>          
     </div>
     <!--헤더 끝-->
@@ -101,6 +96,10 @@
                         <a onclick="withdrawal()" class="private-list-item">
                             <div class="private-list-font-style">계정 비활성화</div>
                             <img src="/images/icon/small_arrow.svg">
+                        </a>
+                        <a href="user_block_ip.html" class="private-list-item">
+                            <div class="private-list-font-style">해외 IP 차단</div>
+                            <img src="/images/icon/small_arrow.svg">
                         </a>  
                     </div>
                 </div>
@@ -108,6 +107,10 @@
                 <div class="user-logout-wrap">
                     <a class="private-list-item" onclick="logout()">
                         <div class="private-list-font-style">로그아웃</div>
+                        <img src="/images/icon/small_arrow.svg">
+                    </a>
+                    <a class="private-list-item" onclick="bulk_logout()">
+                        <div class="private-list-font-style">다른기기에서도 로그아웃 하기</div>
                         <img src="/images/icon/small_arrow.svg">
                     </a>
                 </div>

@@ -162,3 +162,37 @@ async function logout(){
         alert("접근 권한이 없습니다.")
         }
 }}
+
+// 일괄 로그아웃
+async function bulk_logout(){
+    var delConfirm = confirm("일괄 로그아웃을 하시겠습니까?")
+    if (delConfirm) {
+        const response = await fetch(`${backendBaseUrl}/users/bulk-logout/`, {
+
+        method: 'POST',
+        headers: {
+            Accept: "application/json",
+            "Content-type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("access")
+        },
+    })
+    response_json = await response.json
+        if (response.status === 200) {
+            localStorage.removeItem("access")
+            localStorage.removeItem("refresh")
+            localStorage.removeItem("payload")
+            localStorage.removeItem("kakao")
+            localStorage.removeItem("nickname")
+            localStorage.removeItem("review_cnt")
+            alert("일괄 로그아웃 완료")
+            window.location.replace('login.html')
+
+        } else if (response.status === 400) {
+
+        alert("토큰이 유효하지 않습니다.")
+
+        } else if (response.status === 403) {
+        alert("접근 권한이 없습니다.")
+        }
+}}
+
