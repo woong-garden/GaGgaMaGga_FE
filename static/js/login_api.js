@@ -53,7 +53,7 @@ async function Login() {
 //카카오로그인
 function kakao_login_code(){
     const kakao_id ='d7803b6c144bfb2dc3ce3e1dc7028d8a'
-    const redirect_uri = 'http://127.0.0.1:5500/index.html'
+    const redirect_uri = 'https://www.gaggamagga.shop/index.html'
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao_id}&redirect_uri=${redirect_uri}&response_type=code`
 }
 
