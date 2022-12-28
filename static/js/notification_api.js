@@ -14,8 +14,8 @@ function closeModal() {
 
 // 알람 
 const notificationSocket = new WebSocket(
-    'ws://'
-    + "www.back-gaggamagga.tk"
+    'wss://'
+    + "www.gaggamagga.tk"
     + '/ws/notification/'
     +  JSON.parse(localStorage.getItem("payload")).user_id
     + '/'
@@ -108,5 +108,3 @@ async function getNotification() {
         alarmContent.appendChild(notificationButton)
     })
 }
-
-
