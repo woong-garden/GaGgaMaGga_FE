@@ -59,7 +59,7 @@ async function public_profile() {
     // 팔로우 되어있을 때 버튼
     let follow_list = response_json.followers
     for (var item of follow_list){
-        if (my_id == item.id){
+        if ((my_id-1) == item.id){
             document.getElementById("user_follow").innerHTML = "팔로우취소"
             document.getElementById("profile_followers").value = "0"
         }
